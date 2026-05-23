@@ -1,0 +1,150 @@
+{
+  "yard": "Oklahoma City, OK",
+  "updated": "Updated live",
+  "listings": [
+    {
+      "id": "CT-2287",
+      "status": "INSPECTED",
+      "year": 2021,
+      "make": "FREIGHTLINER",
+      "model": "Cascadia 126",
+      "type": "Tractor - sleeper",
+      "engine": "DD15 - 14.8L",
+      "mileage": 312400,
+      "transmission": "Auto",
+      "price": 78500,
+      "monthly": 1820,
+      "term": 60,
+      "vin": "1FUJGLDR8MLAA2207",
+      "sleeper": "72\" raised roof",
+      "axle": "6x4",
+      "photos": 8,
+      "video": true,
+      "financing": [
+        {"label": "$0 down",  "monthly": 2002},
+        {"label": "10% down", "monthly": 1820},
+        {"label": "20% down", "monthly": 1682}
+      ]
+    },
+    {
+      "id": "CT-2288",
+      "status": "FRESH",
+      "year": 2020,
+      "make": "WABASH",
+      "model": "DuraPlate 53'",
+      "type": "Dry van trailer",
+      "engine": "Air-ride · Swing",
+      "mileage": null,
+      "transmission": null,
+      "price": 24950,
+      "monthly": 620,
+      "term": 60,
+      "vin": "1JJV532D8LM123456",
+      "sleeper": null,
+      "axle": null,
+      "photos": 5,
+      "video": false,
+      "financing": [
+        {"label": "$0 down",  "monthly": 688},
+        {"label": "10% down", "monthly": 620},
+        {"label": "20% down", "monthly": 560}
+      ]
+    },
+    {
+      "id": "CT-2289",
+      "status": "FRESH",
+      "year": 2022,
+      "make": "KENWORTH",
+      "model": "T680 Next-Gen",
+      "type": "Tractor - sleeper",
+      "engine": "PACCAR MX-13",
+      "mileage": 184200,
+      "transmission": "Auto",
+      "price": 96400,
+      "monthly": 2240,
+      "term": 60,
+      "vin": "1XKWDB0X3NJ123789",
+      "sleeper": "76\" mid-roof",
+      "axle": "6x4",
+      "photos": 10,
+      "video": true,
+      "financing": [
+        {"label": "$0 down",  "monthly": 2468},
+        {"label": "10% down", "monthly": 2240},
+        {"label": "20% down", "monthly": 2014}
+      ]
+    },
+    {
+      "id": "CT-2210",
+      "status": "FRESH",
+      "year": 2019,
+      "make": "PETERBILT",
+      "model": "579 Day Cab",
+      "type": "Tractor - day cab",
+      "engine": "Cummins X15",
+      "mileage": 421800,
+      "transmission": "Manual",
+      "price": 52200,
+      "monthly": 1280,
+      "term": 60,
+      "vin": "1XPBD49X8KD123001",
+      "sleeper": null,
+      "axle": "6x4",
+      "photos": 6,
+      "video": false,
+      "financing": [
+        {"label": "$0 down",  "monthly": 1408},
+        {"label": "10% down", "monthly": 1280},
+        {"label": "20% down", "monthly": 1150}
+      ]
+    },
+    {
+      "id": "CT-2211",
+      "status": "INSPECTED",
+      "year": 2020,
+      "make": "INTERNATIONAL",
+      "model": "LT625",
+      "type": "Tractor - sleeper",
+      "engine": "Cummins X15",
+      "mileage": 287000,
+      "transmission": "Auto",
+      "price": 67900,
+      "monthly": 1580,
+      "term": 60,
+      "vin": "3HSDJAPR0LN123555",
+      "sleeper": "72\" flat roof",
+      "axle": "6x4",
+      "photos": 7,
+      "video": false,
+      "financing": [
+        {"label": "$0 down",  "monthly": 1740},
+        {"label": "10% down", "monthly": 1580},
+        {"label": "20% down", "monthly": 1420}
+      ]
+    },
+    {
+      "id": "CT-2212",
+      "status": "FRESH",
+      "year": 2021,
+      "make": "VOLVO",
+      "model": "VNL 760",
+      "type": "Tractor - sleeper",
+      "engine": "Volvo D13",
+      "mileage": 334100,
+      "transmission": "Auto",
+      "price": 72500,
+      "monthly": 1690,
+      "term": 60,
+      "vin": "4V4NC9EJ5MN123422",
+      "sleeper": "70\" mid-roof",
+      "axle": "6x4",
+      "photos": 9,
+      "video": true,
+      "financing": [
+        {"label": "$0 down",  "monthly": 1864},
+        {"label": "10% down", "monthly": 1690},
+        {"label": "20% down", "monthly": 1520}
+      ]
+    }
+  ]
+}
