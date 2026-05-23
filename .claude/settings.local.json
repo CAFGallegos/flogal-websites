@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(curl -s \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\")",
+      "Bash(curl -s --compressed \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\")",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\" -UseBasicParsing; $response.Content.Substring\\(0, [Math]::Min\\(50000, $response.Content.Length\\)\\))",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\" -UseBasicParsing; $text = [System.Text.Encoding]::UTF8.GetString\\($response.Content\\); $text.Substring\\(0, [Math]::Min\\(80000, $text.Length\\)\\))",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\" -UseBasicParsing; $response.Headers['Content-Type']; $response.Headers['Content-Encoding']; $response.RawContentLength)",
+      "PowerShell($response = Invoke-WebRequest -Uri \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\" -UseBasicParsing; [System.IO.File]::WriteAllBytes\\(\"$env:TEMP\\\\design.tar.gz\", $response.Content\\); Write-Output \"Saved $\\($response.Content.Length\\) bytes\")"
+    ]
+  }
+}
