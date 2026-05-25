@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLOGAL Carrier Operations — Partner Access</title>
+<style>
+/* ---- Fonts ---- */
+@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap;}
+
+:root{
+  --op-bg:#050A12;
+  --op-surface:#0B1D2D;
+  --op-surface-2:#102538;
+  --op-rule:#25344A;
+  --op-rule-soft:rgba(255,255,255,.06);
+  --op-fg:#E8EEF6;
+  --op-fg-dim:#94A6BD;
+  --op-fg-faint:#5F7491;
+  --op-blue:#2D7DD2;
+  --op-blue-strong:#4A93E1;
+  --op-blue-soft:rgba(45,125,210,.16);
+  --op-blue-line:rgba(45,125,210,.40);
+  --font-sans:'Satoshi',system-ui,-apple-system,sans-serif;
+  --font-display:'Satoshi',system-ui,sans-serif;
+  --font-mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  background:var(--op-bg);
+  color:var(--op-fg);
+  font-family:var(--font-sans);
+  -webkit-font-smoothing:antialiased;
+  font-size:15px;
+  line-height:1.55;
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none;}
+
+/* ---- Two-column page ---- */
+.lg-page{
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  min-height:100vh;
+  background:
+    radial-gradient(80% 60% at 90% 10%,rgba(45,125,210,.16) 0%,transparent 60%),
+    radial-gradient(60% 50% at 10% 90%,rgba(45,125,210,.10) 0%,transparent 60%),
+    linear-gradient(180deg,#07111c 0%,#050a12 100%);
+}
+
+/* ---- Brand panel (left) ---- */
+.lg-brand-panel{
+  position:relative;
+  padding:56px;
+  display:flex;
+  flex-direction:column;
+  border-right:1px solid var(--op-rule);
+  overflow:hidden;
+}
+.lg-brand-panel::after{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(80% 70% at 50% 30%,black 0%,transparent 90%);
+  -webkit-mask-image:radial-gradient(80% 70% at 50% 30%,black 0%,transparent 90%);
+  pointer-events:none;
+}
+
+.lg-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:white;z-index:2;position:relative;}
+.lg-brand-mark{height:34px;width:auto;display:block;flex:none;}
+.lg-brand-wm{font-family:var(--font-display);font-weight:900;font-size:19px;letter-spacing:.06em;color:white;line-height:1;}
+.lg-brand-divider{width:1.5px;height:26px;background:var(--op-blue);opacity:.85;}
+.lg-brand-division{font-family:var(--font-sans);font-weight:700;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--op-blue-strong);line-height:1;white-space:nowrap;}
+
+.lg-pitch{
+  margin-top:auto;
+  position:relative;z-index:2;
+  max-width:520px;
+}
+.lg-pitch-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--op-blue-strong);
+}
+.lg-pitch-eyebrow::before{content:'';width:22px;height:1px;background:var(--op-blue);display:inline-block;}
+.lg-pitch-h{
+  margin:20px 0 16px;
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(40px,4.4vw,60px);
+  letter-spacing:-.025em;line-height:1.02;color:white;
+}
+.lg-pitch-h .op-dot{color:var(--op-blue);}
+.lg-pitch-p{margin:0 0 32px;font-size:16px;color:var(--op-fg-dim);max-width:460px;}
+.lg-pitch-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;}
+.lg-pitch-list li{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--op-fg);}
+.lg-pitch-list li::before{
+  content:'';flex:none;
+  width:18px;height:18px;
+  border:1.5px solid var(--op-blue);border-radius:4px;
+  background:linear-gradient(135deg,transparent 50%,var(--op-blue) 50%);
+  margin-top:1px;
+}
+.lg-pitch-meta{
+  margin-top:40px;padding-top:24px;
+  border-top:1px solid var(--op-rule-soft);
+  display:flex;gap:24px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:11px;
+  letter-spacing:.16em;color:var(--op-fg-faint);text-transform:uppercase;
+}
+.lg-pitch-meta span{display:inline-flex;align-items:center;gap:8px;}
+.lg-pitch-meta span::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--op-blue);}
+
+/* ---- Form panel (right) ---- */
+.lg-form-panel{display:flex;align-items:center;justify-content:center;padding:56px;}
+.lg-card{
+  width:100%;max-width:440px;
+  background:var(--op-surface-2);
+  border:1px solid var(--op-blue-line);
+  border-radius:14px;
+  padding:40px 36px;
+}
+.lg-eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--op-blue-strong);}
+.lg-h{margin:8px 0 8px;font-family:var(--font-display);font-weight:700;font-size:36px;letter-spacing:-.02em;line-height:1.1;color:white;}
+.lg-sub{margin:0 0 28px;font-size:14.5px;color:var(--op-fg-dim);line-height:1.55;}
+
+.lg-form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.lg-form-lab{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-fg-faint);}
+.lg-form-input{
+  background:var(--op-bg);
+  border:1px solid var(--op-rule);
+  color:white;border-radius:6px;
+  padding:12px 14px;
+  font-family:inherit;font-size:14.5px;
+  outline:none;
+  transition:border-color 160ms,box-shadow 160ms;
+  width:100%;
+}
+.lg-form-input::placeholder{color:var(--op-fg-faint);}
+.lg-form-input:focus{border-color:var(--op-blue);box-shadow:0 0 0 3px rgba(45,125,210,.20);}
+
+.lg-form-row{display:flex;align-items:center;justify-content:space-between;margin:18px 0 24px;font-size:12px;}
+.lg-form-check{display:inline-flex;align-items:center;gap:8px;color:var(--op-fg-dim);cursor:pointer;}
+.lg-form-check input{width:14px;height:14px;accent-color:var(--op-blue);}
+.lg-form-link{color:var(--op-blue-strong);font-weight:600;border-bottom:1px solid transparent;transition:border-color 160ms;}
+.lg-form-link:hover{border-bottom-color:currentColor;}
+
+.lg-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px 22px;border-radius:6px;
+  font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.04em;
+  cursor:pointer;border:1px solid var(--op-blue);
+  background:var(--op-blue);color:white;
+  transition:background 160ms,border-color 160ms;
+}
+.lg-btn:hover{background:var(--op-blue-strong);border-color:var(--op-blue-strong);}
+
+.lg-foot{
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--op-rule);
+  font-size:12.5px;color:var(--op-fg-dim);text-align:center;
+}
+.lg-foot a{color:var(--op-blue-strong);font-weight:600;border-bottom:1px solid transparent;}
+.lg-foot a:hover{border-bottom-color:currentColor;}
+
+/* ---- Responsive ---- */
+@media(max-width:960px){
+  .lg-page{grid-template-columns:1fr;}
+  .lg-brand-panel{padding:32px 28px;border-right:0;border-bottom:1px solid var(--op-rule);}
+  .lg-pitch{margin-top:32px;}
+  .lg-pitch-h{font-size:38px;}
+  .lg-form-panel{padding:36px 28px;}
+  .lg-card{padding:32px 28px;}
+}
+</style>
+</head>
+<body>
+<div class="lg-page" data-screen-label="FLOGAL Carrier Operations · Login">
+
+  <!-- BRAND PANEL -->
+  <aside class="lg-brand-panel">
+    <a class="lg-brand" href="../index.html">
+      <img class="lg-brand-mark" src="../../../shared/logos/flogal-symbol-color.png" alt="">
+      <span class="lg-brand-wm">FLOGAL</span>
+      <span class="lg-brand-divider" aria-hidden="true"></span>
+      <span class="lg-brand-division">Carrier Operations</span>
+    </a>
+
+    <div class="lg-pitch">
+      <span class="lg-pitch-eyebrow">Partner network</span>
+      <h2 class="lg-pitch-h">
+        Direct dispatch<span class="op-dot">.</span><br>
+        One accountability chain<span class="op-dot">.</span>
+      </h2>
+      <p class="lg-pitch-p">
+        Signed in, you'll land on the dispatch portal — live load board, BOL and POD
+        uploads, settlement statements, and your compliance binder kept current.
+      </p>
+      <ul class="lg-pitch-list">
+        <li>Real-time load board with assigned lanes and rates</li>
+        <li>Drag-and-drop BOL, POD, and rate-confirmation uploads</li>
+        <li>Compliance documents on file — W9, COI, MC authority, ELD</li>
+        <li>Settlement history and detention claims, line-by-line</li>
+      </ul>
+      <div class="lg-pitch-meta">
+        <span>USDOT 3142077</span>
+        <span>MC 945-126</span>
+        <span>SOC 2 · TLS 1.3</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- FORM PANEL -->
+  <main class="lg-form-panel">
+    <div class="lg-card">
+      <span class="lg-eyebrow">Sign In</span>
+      <h1 class="lg-h">Partner Access</h1>
+      <p class="lg-sub">Access your dispatch portal, load board, and compliance documents.</p>
+
+      <form action="index.html" method="get">
+        <div class="lg-form-field">
+          <label class="lg-form-lab" for="lg-email">Email</label>
+          <input id="lg-email" name="email" type="email" class="lg-form-input" placeholder="dispatch@yourfleet.com" autocomplete="username">
+        </div>
+        <div class="lg-form-field">
+          <label class="lg-form-lab" for="lg-pass">Password</label>
+          <input id="lg-pass" name="password" type="password" class="lg-form-input" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" autocomplete="current-password">
+        </div>
+        <div class="lg-form-row">
+          <label class="lg-form-check">
+            <input type="checkbox" name="remember"> Keep me signed in
+          </label>
+          <a href="#reset" class="lg-form-link">Forgot password?</a>
+        </div>
+        <button type="submit" class="lg-btn">Sign In &#8594;</button>
+      </form>
+
+      <div class="lg-foot">
+        New partner? <a href="../index.html#partners">Request access</a> &middot;
+        <a href="../index.html#contact">Talk to ops</a>
+      </div>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>
