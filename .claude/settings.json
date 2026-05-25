@@ -7,7 +7,14 @@
       "Read(//c/Users/Carlos/Desktop/**)",
       "PowerShell(git -C \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" log --oneline -5)",
       "PowerShell(Get-ChildItem \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" | ForEach-Object { if \\($_.PSIsContainer\\) { \"DIR  $\\($_.Name\\)\" } else { \"FILE $\\($_.Name\\)\" } })",
-      "PowerShell(Move-Item \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\about.html\" \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\flogalhq\\\\about.html\" -Force)"
+      "PowerShell(Move-Item \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\about.html\" \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\flogalhq\\\\about.html\" -Force)",
+      "Bash(curl -s -L \"https://api.anthropic.com/v1/design/h/Qp7HabgxTmcu56W5ao0lng\" -o /tmp/sales-design.tar.gz)",
+      "Bash(mkdir -p /tmp/sales-design)",
+      "Bash(tar -xzf /tmp/sales-design.tar.gz -C /tmp/sales-design)",
+      "Read(//tmp/**)",
+      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/login.html /tmp/sales-admin-login.html)",
+      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/dashboard.html /tmp/sales-admin-dashboard.html)",
+      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/styles.css /tmp/sales-admin-styles.css)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Carlos\\Desktop\\flogal-websites\\_archive\\2026-05-25_Flogal_Websites"

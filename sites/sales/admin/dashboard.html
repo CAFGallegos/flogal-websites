@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLOGAL Sales Admin — Inventory Dashboard</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="ad-shell" data-screen-label="FLOGAL Sales Admin · Dashboard">
+
+  <!-- ---------- SIDEBAR ---------- -->
+  <aside class="ad-side">
+    <div class="ad-side-brand">
+      <img class="ad-side-mark" src="../../../shared/logos/flogal-symbol-color.png" alt="">
+      <div>
+        <div class="ad-side-wm">FLOGAL</div>
+        <div class="ad-side-sub">Sales Admin</div>
+      </div>
+    </div>
+    <nav class="ad-side-nav">
+      <span class="ad-side-h">Manage</span>
+      <button class="ad-side-item is-active" data-tab="inventory">
+        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+        Inventory
+        <span class="ad-side-count" id="navCountInventory">12</span>
+      </button>
+      <button class="ad-side-item" data-tab="inquiries">
+        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+        Inquiries
+        <span class="ad-side-count" id="navCountInquiries">5</span>
+      </button>
+      <span class="ad-side-h">Reports</span>
+      <button class="ad-side-item" disabled style="opacity:.5;cursor:default;">
+        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+        Sales · Analytics
+      </button>
+      <button class="ad-side-item" disabled style="opacity:.5;cursor:default;">
+        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Lease Activity
+      </button>
+    </nav>
+    <div class="ad-side-foot">
+      <div class="ad-user">
+        <span class="ad-user-avatar">FA</span>
+        <span class="ad-user-meta">
+          <span class="ad-user-name">Flogal Admin</span>
+          <span class="ad-user-role">Sales · Inventory</span>
+        </span>
+        <a class="ad-user-out" href="login.html" title="Sign out">↗</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ---------- MAIN ---------- -->
+  <main class="ad-main">
+
+    <!-- Topbar -->
+    <div class="ad-top">
+      <div class="ad-top-left">
+        <span class="ad-top-eyebrow" id="topEyebrow">Manage · Inventory</span>
+        <span class="ad-top-title" id="topTitle">Equipment Inventory</span>
+      </div>
+      <div class="ad-top-actions">
+        <button class="ad-btn ad-btn-ghost" type="button">Export CSV</button>
+        <button class="ad-btn ad-btn-gold" type="button" id="btnAddUnit">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Add New Unit
+        </button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="ad-kpis">
+      <div class="ad-kpi"><div class="ad-kpi-lab">Active Listings</div><div class="ad-kpi-val">9</div><div class="ad-kpi-meta">2 lease-eligible · 7 sale-only</div></div>
+      <div class="ad-kpi"><div class="ad-kpi-lab">Pending</div><div class="ad-kpi-val">2</div><div class="ad-kpi-meta">Awaiting inspection / photos</div></div>
+      <div class="ad-kpi"><div class="ad-kpi-lab">Sold MTD</div><div class="ad-kpi-val">3</div><div class="ad-kpi-meta">$284,500 total · avg 11 days on lot</div></div>
+      <div class="ad-kpi"><div class="ad-kpi-lab">Open Inquiries</div><div class="ad-kpi-val">5</div><div class="ad-kpi-meta">2 today · 3 awaiting reply</div></div>
+    </div>
+
+    <div class="ad-content">
+
+      <!-- ============= INVENTORY TAB ============= -->
+      <section class="ad-tab is-active" id="tab-inventory">
+        <div class="ad-toolbar">
+          <div class="ad-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input placeholder="Search stock # · VIN · make · model" />
+          </div>
+          <select class="ad-select">
+            <option>All equipment types</option>
+            <option>Truck — Day Cab</option>
+            <option>Truck — Sleeper</option>
+            <option>Dry Van Trailer</option>
+            <option>Reefer Trailer</option>
+            <option>Flatbed</option>
+            <option>Heavy Machinery</option>
+            <option>Industrial Equipment</option>
+          </select>
+          <select class="ad-select">
+            <option>All statuses</option>
+            <option>Active</option>
+            <option>Pending</option>
+            <option>Inquired</option>
+            <option>Sold</option>
+          </select>
+        </div>
+
+        <div class="ad-table-wrap">
+          <table class="ad-table">
+            <thead>
+              <tr>
+                <th>Stock #</th>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th class="right">Price</th>
+                <th>Status</th>
+                <th class="right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============= INQUIRIES TAB ============= -->
+      <section class="ad-tab" id="tab-inquiries">
+        <div class="ad-toolbar">
+          <div class="ad-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input placeholder="Search by name · company · email" />
+          </div>
+          <select class="ad-select">
+            <option>All status</option>
+            <option>New</option>
+            <option>Responded</option>
+            <option>Closed</option>
+          </select>
+        </div>
+
+        <div class="ad-table-wrap">
+          <table class="ad-table">
+            <thead>
+              <tr>
+                <th>Submitted</th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Equipment Interest</th>
+                <th>Status</th>
+                <th class="right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inquiriesBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ---------- ADD-UNIT DRAWER ---------- -->
+<div class="ad-overlay" id="drawerOverlay"></div>
+<aside class="ad-drawer" id="drawerAddUnit" aria-hidden="true">
+  <header class="ad-drawer-head">
+    <div>
+      <div class="ad-drawer-sub">New listing</div>
+      <div class="ad-drawer-h">Add Equipment Unit</div>
+    </div>
+    <button class="ad-drawer-close" id="drawerClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </header>
+  <div class="ad-drawer-body">
+    <form class="ad-form-grid" id="addUnitForm" onsubmit="event.preventDefault(); closeDrawer();">
+
+      <div class="ad-form-section">
+        <span class="ad-form-section-h">Identification</span>
+        <span class="ad-form-section-rule"></span>
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab ad-fld-req" for="f-stock">Stock Number</label>
+        <input id="f-stock" class="ad-fld-input" placeholder="CT-2208">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab ad-fld-req" for="f-type">Equipment Type</label>
+        <select id="f-type" class="ad-fld-select">
+          <option value="">Select type…</option>
+          <option>Truck — Day Cab</option>
+          <option>Truck — Sleeper</option>
+          <option>Dry Van Trailer</option>
+          <option>Reefer Trailer</option>
+          <option>Flatbed</option>
+          <option>Heavy Machinery</option>
+          <option>Industrial Equipment</option>
+        </select>
+      </div>
+
+      <div class="ad-form-section">
+        <span class="ad-form-section-h">Vehicle specs</span>
+        <span class="ad-form-section-rule"></span>
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-year">Year</label>
+        <input id="f-year" class="ad-fld-input" placeholder="2023">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-make">Make</label>
+        <input id="f-make" class="ad-fld-input" placeholder="Freightliner">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-model">Model</label>
+        <input id="f-model" class="ad-fld-input" placeholder="Cascadia 126">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-engine">Engine</label>
+        <input id="f-engine" class="ad-fld-input" placeholder="Detroit DD15 · 505 hp">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-trans">Transmission</label>
+        <input id="f-trans" class="ad-fld-input" placeholder="DT12 · 12-speed AMT">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-miles">Mileage</label>
+        <input id="f-miles" class="ad-fld-input" placeholder="342,108">
+      </div>
+
+      <div class="ad-form-section">
+        <span class="ad-form-section-h">Pricing</span>
+        <span class="ad-form-section-rule"></span>
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab ad-fld-req" for="f-price">Price (USD)</label>
+        <input id="f-price" class="ad-fld-input" placeholder="$78,500">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-mopay">Monthly Payment (lease)</label>
+        <input id="f-mopay" class="ad-fld-input" placeholder="$1,840 · 48 mo">
+      </div>
+      <div class="ad-fld col-span-2">
+        <label class="ad-fld-check">
+          <input type="checkbox" id="f-lease" checked>
+          Lease-eligible · show "Lease-to-own" badge on public site
+        </label>
+      </div>
+
+      <div class="ad-form-section">
+        <span class="ad-form-section-h">Condition &amp; legal</span>
+        <span class="ad-form-section-rule"></span>
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-cond">Condition</label>
+        <select id="f-cond" class="ad-fld-select">
+          <option>Inspected</option>
+          <option>Fresh</option>
+        </select>
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-loc">Location</label>
+        <input id="f-loc" class="ad-fld-input" placeholder="Dallas, TX — Mountain Creek yard">
+      </div>
+      <div class="ad-fld col-span-2">
+        <label class="ad-fld-lab" for="f-vin">VIN</label>
+        <input id="f-vin" class="ad-fld-input" placeholder="1FUJGLDR9GLGW3217">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-axle">Axle Configuration</label>
+        <input id="f-axle" class="ad-fld-input" placeholder="6x4 · 40k rears">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-wb">Wheelbase</label>
+        <input id="f-wb" class="ad-fld-input" placeholder="228 in">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-dot">DOT Inspection</label>
+        <input id="f-dot" class="ad-fld-input" type="date">
+      </div>
+      <div class="ad-fld">
+        <label class="ad-fld-lab" for="f-title">Title Status</label>
+        <select id="f-title" class="ad-fld-select">
+          <option>Clean · in hand</option>
+          <option>Clean · pending</option>
+          <option>Salvage</option>
+          <option>Rebuilt</option>
+        </select>
+      </div>
+
+      <div class="ad-form-section">
+        <span class="ad-form-section-h">Photos</span>
+        <span class="ad-form-section-rule"></span>
+      </div>
+      <div class="ad-fld col-span-2">
+        <label class="ad-drop" for="f-photos">
+          <input id="f-photos" type="file" multiple accept="image/*" hidden>
+          <div class="ad-drop-icn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+          </div>
+          <div class="ad-drop-h">Drop photos here, or click to browse</div>
+          <div class="ad-drop-p">Hero shot · 3/4 front · 3/4 rear · interior · spec sheet</div>
+          <div class="ad-drop-meta">JPG / PNG / WEBP · up to 12 MB each</div>
+        </label>
+      </div>
+    </form>
+  </div>
+  <footer class="ad-drawer-foot">
+    <span class="ad-spacer">Draft saved · will publish on Submit</span>
+    <button type="button" class="ad-btn ad-btn-ghost" id="drawerCancel">Cancel</button>
+    <button type="submit" form="addUnitForm" class="ad-btn ad-btn-gold">Add to Inventory</button>
+  </footer>
+</aside>
+
+<script>
+const INVENTORY = [
+  { stock:'CT-2207', year:2022, make:'Freightliner',  model:'Cascadia 126',        type:'Truck — Sleeper',       price:'$92,500',  status:'active'   },
+  { stock:'CT-2212', year:2021, make:'Kenworth',      model:'T680 76" Sleeper',    type:'Truck — Sleeper',       price:'$78,400',  status:'active'   },
+  { stock:'CT-2218', year:2020, make:'Peterbilt',     model:'579 Day Cab',         type:'Truck — Day Cab',       price:'$62,000',  status:'inquired' },
+  { stock:'TR-1141', year:2023, make:'Wabash',        model:"DuraPlate 53'",       type:'Dry Van Trailer',       price:'$38,900',  status:'active'   },
+  { stock:'TR-1145', year:2022, make:'Utility',       model:'3000R Reefer',        type:'Reefer Trailer',        price:'$74,200',  status:'active'   },
+  { stock:'FB-0908', year:2019, make:'Reitnouer',     model:"BigBubba 48'",        type:'Flatbed',               price:'$31,500',  status:'sold'     },
+  { stock:'HM-0044', year:2021, make:'Caterpillar',   model:'D6 Dozer',            type:'Heavy Machinery',       price:'$184,000', status:'active'   },
+  { stock:'HM-0049', year:2020, make:'Komatsu',       model:'PC210 Excavator',     type:'Heavy Machinery',       price:'$118,500', status:'pending'  },
+  { stock:'IN-0021', year:2022, make:'Atlas Copco',   model:'XAS 1800 Compressor', type:'Industrial Equipment',  price:'$46,000',  status:'active'   },
+  { stock:'IN-0024', year:2023, make:'Genie',         model:'S-85 XC Boom Lift',   type:'Industrial Equipment',  price:'$98,000',  status:'active'   },
+  { stock:'CT-2104', year:2018, make:'Volvo',         model:'VNL 670',             type:'Truck — Sleeper',       price:'$48,900',  status:'sold'     },
+  { stock:'CT-2199', year:2023, make:'International', model:'LT 625',              type:'Truck — Sleeper',       price:'$104,000', status:'pending'  },
+];
+
+const INQUIRIES = [
+  { date:'Tue · May 26 · 09:14', name:'Renata Marsh',     company:'Continental Reefer Co.',  email:'renata@continental-reefer.co', interest:'Reefer Trailer · TR-1145',   status:'inquired' },
+  { date:'Tue · May 26 · 07:42', name:'Jorge Aguilar',    company:'Brazos Aggregate',         email:'j.aguilar@brazos.co',          interest:'Heavy Machinery · D6 Dozer', status:'inquired' },
+  { date:'Mon · May 25 · 16:08', name:'Sandra Whitfield', company:'White Oak Logistics',      email:'s.whitfield@whiteoak.us',      interest:'Sleeper · CT-2212',          status:'inquired' },
+  { date:'Mon · May 25 · 11:22', name:'Daniel Keene',     company:'Keene Earthworks',         email:'dan@keene-eq.com',             interest:'Day Cab tractor · any',      status:'active'   },
+  { date:'Fri · May 22 · 14:30', name:'Marcus Holt',      company:'Owner-operator',           email:'mholt903@gmail.com',           interest:'Sleeper · lease-to-own',     status:'inquired' },
+];
+
+const STATUS_LABEL = {
+  active:   { lbl:'Active',   cls:'ad-pill-active'   },
+  pending:  { lbl:'Pending',  cls:'ad-pill-pending'  },
+  inquired: { lbl:'Inquired', cls:'ad-pill-inquired' },
+  sold:     { lbl:'Sold',     cls:'ad-pill-sold'     },
+};
+
+function renderInventory(){
+  document.getElementById('inventoryBody').innerHTML = INVENTORY.map(r => {
+    const s = STATUS_LABEL[r.status] || STATUS_LABEL.active;
+    return `<tr>
+      <td><span class="stock">${r.stock}</span></td>
+      <td class="num">${r.year}</td>
+      <td>${r.make}</td>
+      <td>${r.model}</td>
+      <td>${r.type}</td>
+      <td class="right price">${r.price}</td>
+      <td><span class="ad-pill ${s.cls}">${s.lbl}</span></td>
+      <td class="right"><div class="actions">
+        <button class="ad-btn ad-btn-ghost ad-btn-sm" type="button">Edit</button>
+        ${r.status==='sold'
+          ? '<button class="ad-btn ad-btn-ghost ad-btn-sm" type="button" disabled style="opacity:.45;cursor:default;">Sold</button>'
+          : '<button class="ad-btn ad-btn-ghost ad-btn-sm" type="button">Mark Sold</button>'}
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderInquiries(){
+  document.getElementById('inquiriesBody').innerHTML = INQUIRIES.map(r => {
+    const cls = r.status==='active' ? 'ad-pill-active' : 'ad-pill-inquired';
+    const lbl = r.status==='active' ? 'Responded' : 'New';
+    return `<tr>
+      <td class="num" style="color:var(--ad-fg-dim);">${r.date}</td>
+      <td style="color:white;font-weight:600;">${r.name}</td>
+      <td>${r.company}</td>
+      <td><a href="mailto:${r.email}" style="color:var(--ad-blue-strong);">${r.email}</a></td>
+      <td>${r.interest}</td>
+      <td><span class="ad-pill ${cls}">${lbl}</span></td>
+      <td class="right"><div class="actions">
+        <button class="ad-btn ad-btn-ghost ad-btn-sm" type="button">View</button>
+        <button class="ad-btn ad-btn-blue ad-btn-sm" type="button">Reply</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+const TABS = {
+  inventory: { eyebrow:'Manage · Inventory', title:'Equipment Inventory' },
+  inquiries: { eyebrow:'Manage · Inquiries', title:'Customer Inquiries' },
+};
+function switchTab(tab){
+  document.querySelectorAll('.ad-side-item[data-tab]').forEach(el => el.classList.toggle('is-active', el.dataset.tab===tab));
+  document.querySelectorAll('.ad-tab').forEach(el => el.classList.toggle('is-active', el.id==='tab-'+tab));
+  document.getElementById('topEyebrow').textContent = TABS[tab].eyebrow;
+  document.getElementById('topTitle').textContent   = TABS[tab].title;
+}
+document.querySelectorAll('.ad-side-item[data-tab]').forEach(el => el.addEventListener('click', () => switchTab(el.dataset.tab)));
+
+const overlay = document.getElementById('drawerOverlay');
+const drawer  = document.getElementById('drawerAddUnit');
+function openDrawer()  { overlay.classList.add('is-open'); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); }
+function closeDrawer() { overlay.classList.remove('is-open'); drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); }
+document.getElementById('btnAddUnit').addEventListener('click', openDrawer);
+document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+document.getElementById('drawerCancel').addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+window.addEventListener('keydown', e => { if(e.key==='Escape') closeDrawer(); });
+document.querySelector('.ad-drop').addEventListener('click', () => document.getElementById('f-photos').click());
+
+document.getElementById('navCountInventory').textContent = INVENTORY.length;
+document.getElementById('navCountInquiries').textContent = INQUIRIES.length;
+renderInventory();
+renderInquiries();
+</script>
+</body>
+</html>

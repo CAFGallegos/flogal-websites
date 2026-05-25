@@ -3,491 +3,522 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FLOGAL Equipment · Sales — Inventory</title>
-<link rel="stylesheet" href="https://www.flogalhq.com/css/brand.css">
+<title>FLOGAL Equipment — Inventory</title>
 <style>
+/* ---- Fonts --------------------------------------------------------- */
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap;}
+
+/* ---- Design tokens ------------------------------------------------- */
+:root{
+  --flogal-navy:#0B1D2D;
+  --flogal-gold:#C79A2B;
+  --flogal-green:#165E3A;
+  --flogal-blue:#1E4B8F;
+  --flogal-graphite:#5A6470;
+  --navy-700:#122A3F;
+  --gold-400:#DDB452;
+  --gold-700:#8E6B14;
+  --green-500:#165E3A;
+  --blue-500:#1E4B8F;
+  --paper:#F6F7F9;
+  --paper-warm:#FAF8F4;
+  --surface-0:#FFFFFF;
+  --surface-1:#F2F4F7;
+  --surface-2:#E6EAF0;
+  --hairline:#C6CFDA;
+  --rule:#E1E6EE;
+  --ink-300:#B7C0CC;
+  --ink-400:#94A3B8;
+  --ink-500:#64748B;
+  --ink-600:#475569;
+  --ink-900:#0B1320;
+  --night-0:#050A12;
+  --night-1:#0B1421;
+  --night-2:#111E2E;
+  --night-rule:#25344A;
+  --status-on-time:#1F8A5B;
+  --fg:var(--ink-900);
+  --fg-muted:var(--ink-600);
+  --fg-subtle:var(--ink-500);
+  --fg-faint:var(--ink-400);
+  --border:var(--hairline);
+  --divider:var(--rule);
+  --font-sans:'Satoshi',system-ui,-apple-system,sans-serif;
+  --font-display:'Satoshi',system-ui,sans-serif;
+  --font-mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --shadow-md:0 4px 12px rgba(11,29,45,.08),0 1px 2px rgba(11,29,45,.06);
+  --shadow-lg:0 12px 28px rgba(11,29,45,.10),0 2px 6px rgba(11,29,45,.06);
+}
+
 *,*::before,*::after{box-sizing:border-box;}
-html,body{margin:0;padding:0;height:100%;}
-body{font-family:var(--font-sans);background:var(--paper);color:var(--fg);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;}
+html,body{margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--paper);color:var(--fg);-webkit-font-smoothing:antialiased;font-size:14px;display:flex;flex-direction:column;min-height:100vh;}
+a{color:inherit;text-decoration:none;}
+button{font-family:var(--font-sans);}
 
-/* NAV */
-.s-nav{
-  background:var(--night-0);
-  border-bottom:3px solid var(--flogal-gold);
-  padding:0 32px;height:64px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;flex-shrink:0;
-}
-.s-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:white;}
-.s-mark{height:24px;width:auto;}
-.s-wordmark-wrap{display:flex;flex-direction:column;gap:1px;}
-.s-wordmark{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:0.04em;color:white;line-height:1;}
-.s-wordmark-sub{font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--flogal-gold);}
-.s-nav-links{display:flex;gap:24px;list-style:none;margin:0;padding:0;}
-.s-nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 140ms;}
-.s-nav-links a:hover{color:white;}
-.s-nav-cta{
-  background:var(--flogal-gold);color:var(--flogal-navy);
-  border:none;padding:9px 18px;border-radius:6px;
-  font-family:var(--font-sans);font-size:13px;font-weight:700;
-  cursor:pointer;text-decoration:none;white-space:nowrap;
-  transition:background 140ms;display:inline-flex;align-items:center;gap:6px;
-}
-.s-nav-cta:hover{background:#d6a83a;}
+/* ---- Nav ----------------------------------------------------------- */
+.sl-nav{background:var(--flogal-navy);border-bottom:4px solid var(--flogal-gold);position:sticky;top:0;z-index:100;}
+.sl-nav-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:36px;padding:14px 32px;}
+.sl-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white;}
+.sl-mark-img{height:24px;width:auto;display:block;flex:none;}
+.sl-brand-text{display:flex;flex-direction:column;line-height:1.05;gap:3px;}
+.sl-fl{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:0.04em;}
+.sl-sub{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--flogal-gold);}
+.sl-nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;}
+.sl-nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.78);transition:color 150ms;}
+.sl-nav-links a:hover{color:white;}
+.sl-cta{background:var(--flogal-gold);color:var(--flogal-navy);padding:9px 18px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.01em;transition:filter 150ms;white-space:nowrap;}
+.sl-cta:hover{filter:brightness(1.05);}
 
-/* LAYOUT */
-.s-body{display:flex;flex:1;overflow:hidden;}
+/* ---- Subtitle bar -------------------------------------------------- */
+.sl-subtitle{background:var(--night-1);border-bottom:1px solid var(--night-rule);}
+.sl-subtitle-inner{max-width:1440px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:12px;font-size:14px;}
+.sl-subtitle-dot{width:7px;height:7px;border-radius:50%;background:var(--flogal-gold);flex:none;}
+.sl-subtitle-text{color:rgba(255,255,255,.82);}
+.sl-subtitle-sep{color:rgba(255,255,255,.4);}
 
-/* SIDEBAR */
-.s-sidebar{
-  width:280px;flex-shrink:0;
-  border-right:1px solid var(--hairline);
-  background:white;
-  overflow-y:auto;
-  padding:24px 20px;
-}
-.s-sidebar-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
-.s-sidebar-title{font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg);}
-.s-sidebar-reset{font-size:12px;font-weight:600;color:var(--flogal-blue);background:none;border:none;cursor:pointer;padding:0;}
-.s-sidebar-reset:hover{text-decoration:underline;}
+/* ---- Three-column layout ------------------------------------------- */
+.sl-page{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:240px 1fr 380px;align-items:start;flex:1;}
 
-.s-filter-group{margin-bottom:24px;}
-.s-filter-label{font-size:13px;font-weight:700;color:var(--fg);margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
-.s-filter-label button{background:none;border:none;cursor:pointer;color:var(--fg-muted);font-size:16px;line-height:1;}
-.s-filter-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.s-filter-check{display:flex;align-items:center;gap:8px;cursor:pointer;}
-.s-filter-check input{width:14px;height:14px;accent-color:var(--flogal-blue);cursor:pointer;}
-.s-filter-check span{font-size:13px;color:var(--fg);}
-.s-filter-count{font-size:12px;color:var(--fg-muted);font-variant-numeric:tabular-nums;}
-.s-range-row{display:flex;align-items:center;gap:8px;}
-.s-range-input{
-  flex:1;border:1px solid var(--hairline);border-radius:4px;
-  padding:6px 10px;font-size:13px;font-family:var(--font-sans);
-  color:var(--fg);outline:none;
-  transition:border-color 140ms;
-}
-.s-range-input:focus{border-color:var(--flogal-blue);}
-.s-range-sep{font-size:12px;color:var(--fg-muted);}
+/* ---- Filter rail --------------------------------------------------- */
+.sl-fil{position:sticky;top:0;padding:24px 20px;border-right:1px solid var(--border);background:white;min-height:100vh;}
+.sl-fil-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.sl-fil-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--fg-muted);}
+.sl-fil-reset{background:transparent;border:0;cursor:pointer;font:inherit;font-size:11px;font-weight:700;color:var(--flogal-blue);padding:0;}
+.sl-fil-section{border-top:1px solid var(--divider);padding:12px 0;}
+.sl-fil-section:first-of-type{border-top:0;padding-top:0;}
+.sl-fil-h{width:100%;background:transparent;border:0;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:var(--flogal-navy);padding:6px 0;display:flex;align-items:center;justify-content:space-between;}
+.sl-fil-chev{color:var(--fg-muted);font-size:14px;font-weight:400;}
+.sl-fil-body{padding-top:6px;display:flex;flex-direction:column;gap:4px;}
+.sl-fil-body.is-hidden{display:none;}
+.sl-fil-check{display:flex;align-items:center;gap:8px;padding:5px 0;cursor:pointer;font-size:12px;}
+.sl-fil-check input{display:none;}
+.sl-fil-box{width:14px;height:14px;flex:none;border:1.5px solid var(--ink-300);border-radius:3px;background:white;position:relative;}
+.sl-fil-check input:checked+.sl-fil-box{background:var(--flogal-navy);border-color:var(--flogal-navy);}
+.sl-fil-check input:checked+.sl-fil-box::after{content:'';position:absolute;left:3px;top:0px;width:4px;height:8px;border:solid white;border-width:0 2px 2px 0;transform:rotate(45deg);}
+.sl-fil-label{flex:1;color:var(--fg);}
+.sl-fil-count{font-family:var(--font-mono);font-size:10px;color:var(--fg-faint);}
+.sl-fil-range{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.sl-fil-range span{color:var(--fg-faint);font-size:11px;}
+.sl-fil-input{flex:1;min-width:0;background:var(--surface-1);border:1px solid var(--border);border-radius:4px;padding:6px 8px;font:inherit;font-size:12px;color:var(--fg);}
 
-/* MAIN */
-.s-main{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
-.s-main-head{
-  padding:16px 24px;
-  border-bottom:1px solid var(--hairline);
-  display:flex;align-items:center;justify-content:space-between;
-  background:white;position:sticky;top:0;z-index:10;
-}
-.s-count{font-size:15px;font-weight:700;color:var(--fg);}
-.s-count span{color:var(--fg-muted);font-weight:400;font-size:13px;margin-left:6px;}
-.s-head-right{display:flex;align-items:center;gap:16px;}
-.s-sort{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-muted);}
-.s-sort select{
-  border:1px solid var(--hairline);border-radius:4px;
-  padding:6px 28px 6px 10px;font-size:13px;font-family:var(--font-sans);
-  color:var(--fg);background:white;cursor:pointer;outline:none;
-}
-.s-view-btns{display:flex;gap:2px;}
-.s-view-btn{
-  width:32px;height:32px;border:1px solid var(--hairline);
-  background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  color:var(--fg-muted);transition:all 140ms;
-}
-.s-view-btn:first-child{border-radius:4px 0 0 4px;}
-.s-view-btn:last-child{border-radius:0 4px 4px 0;}
-.s-view-btn.active{background:var(--flogal-navy);color:white;border-color:var(--flogal-navy);}
+/* ---- Inventory grid ------------------------------------------------ */
+.sl-grid-wrap{padding:24px;}
+.sl-grid-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.sl-grid-count{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--flogal-navy);}
+.sl-grid-meta{font-size:12px;color:var(--fg-muted);margin-left:6px;}
+.sl-grid-tools{display:flex;gap:10px;align-items:center;}
+.sl-grid-sort{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--fg-muted);font-weight:700;letter-spacing:0.04em;}
+.sl-grid-sort select{background:white;border:1px solid var(--border);border-radius:4px;padding:6px 10px;font:inherit;font-size:12px;font-weight:500;color:var(--fg);}
+.sl-grid-view{display:flex;background:white;border:1px solid var(--border);border-radius:4px;}
+.sl-grid-view button{background:transparent;border:0;cursor:pointer;width:30px;height:28px;font-size:14px;color:var(--fg-muted);}
+.sl-grid-view button.is-active{background:var(--flogal-navy);color:white;border-radius:3px;}
 
-.s-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--hairline);padding:1px;flex:1;}
-.s-card{
-  background:var(--night-1);cursor:pointer;
-  transition:opacity 140ms;position:relative;
-}
-.s-card:hover{opacity:0.88;}
-.s-card.active{outline:2px solid var(--flogal-gold);}
-.s-card-img{
-  aspect-ratio:16/9;background:var(--night-0);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
-.s-card-img svg{opacity:0.18;}
-.s-card-badges{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;}
-.s-badge-id{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.06em;}
-.s-badge-status{
-  font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-  padding:3px 8px;border-radius:4px;
-}
-.s-badge-INSPECTED{background:#165E3A;color:white;}
-.s-badge-FRESH{background:var(--flogal-gold);color:var(--flogal-navy);}
-.s-card-body{padding:16px 16px 18px;}
-.s-card-meta{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--flogal-gold);margin-bottom:4px;}
-.s-card-model{font-family:var(--font-display);font-weight:700;font-size:20px;color:white;line-height:1.1;margin-bottom:6px;}
-.s-card-specs{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:14px;}
-.s-card-price{font-family:var(--font-display);font-variant-numeric:tabular-nums;font-weight:700;font-size:22px;color:white;margin-bottom:2px;}
-.s-card-monthly{font-size:11px;color:rgba(255,255,255,0.4);}
+.sl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.sl-tile{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;padding:0;display:flex;flex-direction:column;transition:box-shadow 200ms,border-color 200ms;width:100%;}
+.sl-tile:hover{box-shadow:var(--shadow-md);}
+.sl-tile.is-selected{border-color:var(--flogal-gold);box-shadow:0 0 0 2px rgba(199,154,43,.3);}
+.sl-tile-photo{position:relative;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.32);}
+.sl-tile-emoji{font-size:56px;filter:grayscale(.6) brightness(.8);}
+.sl-tile-id{position:absolute;left:12px;top:12px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:rgba(255,255,255,.7);background:rgba(0,0,0,.32);padding:3px 7px;border-radius:3px;}
+.sl-tile-tag{position:absolute;right:12px;top:12px;font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:3px 8px;border-radius:999px;}
+.sl-tag-fresh{background:var(--flogal-gold);color:var(--flogal-navy);}
+.sl-tag-insp{background:var(--status-on-time);color:white;}
+.sl-tile-info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;}
+.sl-tile-yr{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-700);}
+.sl-tile-name{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:-0.01em;color:var(--flogal-navy);}
+.sl-tile-specs{font-size:12px;color:var(--fg-muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.sl-dot{color:var(--ink-300);}
+.sl-tile-price{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:8px;padding-top:10px;border-top:1px solid var(--divider);}
+.sl-tile-amt{font-family:var(--font-display);font-variant-numeric:tabular-nums;font-weight:700;font-size:20px;letter-spacing:-0.01em;color:var(--flogal-navy);}
+.sl-tile-lease{font-size:11px;color:var(--fg-muted);}
 
-/* DETAIL PANEL */
-.s-detail{
-  width:340px;flex-shrink:0;
-  border-left:1px solid var(--hairline);
-  background:white;
-  overflow-y:auto;
-  display:none;
-}
-.s-detail.open{display:flex;flex-direction:column;}
-.s-detail-head{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 18px;border-bottom:1px solid var(--hairline);
-  position:sticky;top:0;background:white;z-index:5;
-}
-.s-detail-id{font-family:var(--font-mono);font-size:12px;color:var(--fg-muted);letter-spacing:0.06em;}
-.s-detail-close{
-  background:none;border:none;cursor:pointer;
-  color:var(--fg-muted);font-size:18px;line-height:1;padding:4px;
-}
-.s-detail-close:hover{color:var(--fg);}
-.s-detail-gallery{
-  aspect-ratio:16/9;background:var(--night-0);
-  display:flex;align-items:center;justify-content:center;position:relative;
-}
-.s-detail-gallery svg{opacity:0.14;}
-.s-gallery-meta{
-  position:absolute;bottom:10px;left:12px;
-  font-size:11px;color:rgba(255,255,255,0.55);
-}
-.s-detail-body{padding:20px 18px;}
-.s-detail-year-make{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--flogal-gold);margin-bottom:6px;}
-.s-detail-model{font-family:var(--font-display);font-weight:700;font-size:28px;letter-spacing:-0.01em;color:var(--flogal-navy);line-height:1.1;margin-bottom:16px;}
-.s-detail-price{font-family:var(--font-display);font-variant-numeric:tabular-nums;font-weight:700;font-size:30px;color:var(--flogal-navy);margin-bottom:2px;}
-.s-detail-monthly{font-size:12px;color:var(--fg-muted);margin-bottom:20px;}
-.s-detail-actions{display:flex;gap:8px;margin-bottom:24px;}
-.s-btn-primary{
-  flex:1;background:var(--flogal-gold);color:var(--flogal-navy);
-  border:none;padding:10px;border-radius:6px;
-  font-family:var(--font-sans);font-size:13px;font-weight:700;
-  cursor:pointer;transition:background 140ms;
-}
-.s-btn-primary:hover{background:#d6a83a;}
-.s-btn-secondary{
-  flex:1;background:white;color:var(--flogal-navy);
-  border:1px solid var(--hairline);padding:10px;border-radius:6px;
-  font-family:var(--font-sans);font-size:13px;font-weight:600;
-  cursor:pointer;transition:border-color 140ms;
-}
-.s-btn-secondary:hover{border-color:var(--flogal-navy);}
+/* ---- Detail drawer ------------------------------------------------- */
+.sl-drawer{position:sticky;top:0;border-left:1px solid var(--border);background:white;min-height:100vh;display:flex;flex-direction:column;}
+.sl-drawer-photo{position:relative;aspect-ratio:1.6/1;display:flex;align-items:center;justify-content:center;flex:none;}
+.sl-drawer-close{position:absolute;right:12px;top:12px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.45);border:0;cursor:pointer;color:white;font-size:20px;display:flex;align-items:center;justify-content:center;line-height:1;}
+.sl-drawer-id{position:absolute;left:16px;top:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,.78);background:rgba(0,0,0,.32);padding:4px 9px;border-radius:3px;}
+.sl-drawer-emoji{font-size:80px;filter:grayscale(.4) brightness(.85);}
+.sl-drawer-photo-meta{position:absolute;left:0;right:0;bottom:0;padding:18px 16px 10px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:rgba(255,255,255,.78);background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));}
+.sl-drawer-body{padding:20px 22px 28px;display:flex;flex-direction:column;gap:22px;overflow-y:auto;}
+.sl-drawer-yr{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-700);}
+.sl-drawer-name{margin:4px 0 0;font-family:var(--font-display);font-weight:700;font-size:26px;letter-spacing:-0.02em;line-height:1.1;color:var(--flogal-navy);}
+.sl-drawer-price{display:flex;flex-direction:column;gap:12px;padding:14px 0;border-top:1px solid var(--divider);border-bottom:1px solid var(--divider);margin-top:4px;}
+.sl-drawer-amt{font-family:var(--font-display);font-variant-numeric:tabular-nums;font-weight:700;font-size:32px;letter-spacing:-0.02em;color:var(--flogal-navy);}
+.sl-drawer-lease{font-size:12px;color:var(--fg-muted);margin-left:8px;}
+.sl-drawer-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.sl-btn{border:0;cursor:pointer;font:inherit;font-weight:700;font-size:13px;letter-spacing:0.01em;padding:10px 16px;border-radius:6px;}
+.sl-btn-gold{background:var(--flogal-gold);color:var(--flogal-navy);}
+.sl-btn-gold:hover{filter:brightness(1.05);}
+.sl-btn-ghost{background:white;color:var(--flogal-navy);border:1px solid var(--ink-300);}
+.sl-btn-ghost:hover{background:var(--surface-1);}
+.sl-btn-sm{padding:6px 10px;font-size:11px;}
+.sl-drawer-section{display:flex;flex-direction:column;gap:8px;}
+.sl-drawer-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--fg-muted);}
+.sl-spec{display:flex;flex-direction:column;}
+.sl-spec-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--divider);font-size:12px;}
+.sl-spec-row:last-child{border-bottom:0;}
+.sl-spec-k{color:var(--fg-muted);}
+.sl-spec-v{color:var(--fg);font-weight:500;font-variant-numeric:tabular-nums;}
+.sl-finance{background:var(--paper);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;}
+.sl-finance-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;}
+.sl-mono{font-family:var(--font-mono);font-weight:700;color:var(--flogal-navy);}
+.sl-finance-foot{font-size:10px;color:var(--fg-subtle);margin-top:6px;padding-top:8px;border-top:1px solid var(--divider);}
+.sl-contact{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--divider);}
+.sl-contact-avatar{width:40px;height:40px;border-radius:50%;background:var(--flogal-blue);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none;}
+.sl-contact-name{font-size:13px;font-weight:700;color:var(--fg);}
+.sl-contact-meta{font-size:11px;color:var(--fg-muted);}
+.sl-contact button{margin-left:auto;}
 
-.s-section-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:10px;}
-.s-financing{border:1px solid var(--hairline);border-radius:8px;overflow:hidden;margin-bottom:24px;}
-.s-fin-row{display:flex;justify-content:space-between;padding:10px 14px;font-size:13px;border-bottom:1px solid var(--hairline);}
-.s-fin-row:last-child{border-bottom:none;}
-.s-fin-row span:last-child{font-weight:700;font-variant-numeric:tabular-nums;}
-.s-fin-note{font-size:11px;color:var(--fg-muted);line-height:1.5;padding:10px 14px;background:var(--surface-1);border-top:1px solid var(--hairline);}
+/* ---- Sourcing request ---------------------------------------------- */
+.sl-source{background:linear-gradient(180deg,var(--paper-warm) 0%,var(--surface-1) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.sl-source-inner{max-width:1440px;margin:0 auto;padding:56px 32px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.sl-source-copy{max-width:720px;}
+.sl-source-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--flogal-gold);}
+.sl-source-h{margin:10px 0;font-family:var(--font-display);font-weight:700;font-size:30px;letter-spacing:-0.015em;line-height:1.15;color:var(--flogal-navy);}
+.sl-source-p{margin:0;font-size:14px;line-height:1.62;color:var(--fg-muted);}
+.sl-source-btn{display:inline-flex;align-items:center;gap:8px;background:var(--flogal-gold);color:var(--flogal-navy);padding:14px 24px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:0.02em;white-space:nowrap;transition:background 160ms;}
+.sl-source-btn:hover{background:var(--gold-400);}
 
-.s-specs{border:1px solid var(--hairline);border-radius:8px;overflow:hidden;margin-bottom:24px;}
-.s-spec-row{display:flex;justify-content:space-between;padding:9px 14px;font-size:12px;border-bottom:1px solid var(--hairline);}
-.s-spec-row:last-child{border-bottom:none;}
-.s-spec-key{color:var(--fg-muted);}
-.s-spec-val{font-weight:600;font-variant-numeric:tabular-nums;text-align:right;max-width:180px;}
-.s-spec-val.mono{font-family:var(--font-mono);font-size:11px;}
+/* ---- Footer -------------------------------------------------------- */
+.sl-footer{background:var(--night-0);padding:40px 0 24px;margin-top:auto;}
+.sl-footer-inner{max-width:1440px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;}
+.sl-footer-brand{display:flex;align-items:center;gap:10px;}
+.sl-footer-brand img{height:30px;width:auto;opacity:.85;}
+.sl-footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:0.06em;}
+
+/* ---- Responsive ---------------------------------------------------- */
+@media(max-width:1100px){
+  .sl-page{grid-template-columns:200px 1fr;}
+  .sl-drawer{display:none;}
+}
+@media(max-width:768px){
+  .sl-nav-links,.sl-cta{display:none;}
+  .sl-nav-inner{padding:14px 20px;}
+  .sl-subtitle-inner{padding:14px 20px;}
+  .sl-page{grid-template-columns:1fr;display:block;}
+  .sl-fil{display:none;}
+  .sl-grid-wrap{padding:16px;}
+  .sl-grid{grid-template-columns:1fr;}
+  .sl-source-inner{grid-template-columns:1fr;gap:24px;}
+  .sl-footer-inner{flex-direction:column;align-items:flex-start;gap:12px;}
+}
 </style>
 </head>
 <body>
 
-<header class="s-nav">
-  <a class="s-brand" href="https://www.flogalhq.com">
-    <img class="s-mark" src="https://www.flogalhq.com/logos/flogal-symbol-white.png" alt="">
-    <div class="s-wordmark-wrap">
-      <span class="s-wordmark">FLOGAL</span>
-      <span class="s-wordmark-sub">Equipment · Sales</span>
-    </div>
-  </a>
-  <ul class="s-nav-links">
-    <li><a href="https://www.flogalhq.com">Home</a></li>
-    <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
-    <li><a href="https://properties.flogalhq.com">Properties</a></li>
-    <li><a href="https://www.flogalhq.com/about">About</a></li>
-  </ul>
-  <a href="mailto:equipment@flogalhq.com" class="s-nav-cta">Request a quote →</a>
+<!-- NAV -->
+<header class="sl-nav">
+  <div class="sl-nav-inner">
+    <a class="sl-brand" href="https://www.flogalhq.com">
+      <img class="sl-mark-img" src="../../shared/logos/flogal-symbol-gold.png" alt="">
+      <div class="sl-brand-text">
+        <span class="sl-fl">FLOGAL</span>
+        <span class="sl-sub">Equipment · Sales</span>
+      </div>
+    </a>
+    <ul class="sl-nav-links">
+      <li><a href="#inventory">Inventory</a></li>
+      <li><a href="#types">Equipment Types</a></li>
+      <li><a href="#financing">Financing</a></li>
+      <li><a href="#tradein">Trade-In</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="sl-cta" href="#contact">Request a Quote →</a>
+  </div>
 </header>
 
-<div class="s-body">
-
-  <!-- SIDEBAR FILTERS -->
-  <aside class="s-sidebar">
-    <div class="s-sidebar-head">
-      <span class="s-sidebar-title">Filters</span>
-      <button class="s-sidebar-reset" onclick="resetFilters()">Reset</button>
-    </div>
-
-    <div class="s-filter-group">
-      <div class="s-filter-label">Equipment type <button onclick="this.closest('.s-filter-group').querySelector('.s-filter-opts').style.display=this.closest('.s-filter-group').querySelector('.s-filter-opts').style.display==='none'?'block':'none'">−</button></div>
-      <div class="s-filter-opts">
-        <div class="s-filter-row"><label class="s-filter-check"><input type="checkbox" name="type" value="Tractor - day cab" onchange="applyFilters()"><span>Tractor - day cab</span></label><span class="s-filter-count" id="cnt-day-cab">—</span></div>
-        <div class="s-filter-row"><label class="s-filter-check"><input type="checkbox" name="type" value="Tractor - sleeper" onchange="applyFilters()"><span>Tractor - sleeper</span></label><span class="s-filter-count" id="cnt-sleeper">—</span></div>
-        <div class="s-filter-row"><label class="s-filter-check"><input type="checkbox" name="type" value="Dry van trailer" onchange="applyFilters()"><span>Dry van trailer</span></label><span class="s-filter-count" id="cnt-dry-van">—</span></div>
-        <div class="s-filter-row"><label class="s-filter-check"><input type="checkbox" name="type" value="Reefer trailer" onchange="applyFilters()"><span>Reefer trailer</span></label><span class="s-filter-count" id="cnt-reefer">—</span></div>
-        <div class="s-filter-row"><label class="s-filter-check"><input type="checkbox" name="type" value="Flatbed" onchange="applyFilters()"><span>Flatbed</span></label><span class="s-filter-count" id="cnt-flatbed">—</span></div>
-      </div>
-    </div>
-
-    <div class="s-filter-group">
-      <div class="s-filter-label">Year</div>
-      <div class="s-range-row">
-        <input class="s-range-input" type="number" id="year-min" placeholder="2018" min="2000" max="2026" onchange="applyFilters()">
-        <span class="s-range-sep">—</span>
-        <input class="s-range-input" type="number" id="year-max" placeholder="2024" min="2000" max="2026" onchange="applyFilters()">
-      </div>
-    </div>
-
-    <div class="s-filter-group">
-      <div class="s-filter-label">Price</div>
-      <div class="s-range-row">
-        <input class="s-range-input" type="number" id="price-min" placeholder="$20,000" onchange="applyFilters()">
-        <span class="s-range-sep">—</span>
-        <input class="s-range-input" type="number" id="price-max" placeholder="$120,000" onchange="applyFilters()">
-      </div>
-      <label class="s-filter-check" style="margin-top:10px"><input type="checkbox" id="lease-eligible" onchange="applyFilters()"><span style="font-size:13px">Lease eligible</span></label>
-    </div>
-
-    <div class="s-filter-group">
-      <div class="s-filter-label">Make</div>
-      <div class="s-filter-opts" id="make-filters"></div>
-    </div>
-
-    <div class="s-filter-group">
-      <div class="s-filter-label">Condition</div>
-      <div class="s-filter-row"><label class="s-filter-check"><input type="checkbox" name="status" value="INSPECTED" onchange="applyFilters()"><span>Inspected</span></label></div>
-      <div class="s-filter-row"><label class="s-filter-check"><input type="checkbox" name="status" value="FRESH" onchange="applyFilters()"><span>Fresh</span></label></div>
-    </div>
-  </aside>
-
-  <!-- INVENTORY MAIN -->
-  <main class="s-main" id="inventory">
-    <div class="s-main-head">
-      <div class="s-count" id="count-label">Loading...</div>
-      <div class="s-head-right">
-        <div class="s-sort">
-          Sort
-          <select id="sort-select" onchange="applyFilters()">
-            <option value="recent">Recently added</option>
-            <option value="price-asc">Price: Low to high</option>
-            <option value="price-desc">Price: High to low</option>
-            <option value="year-desc">Year: Newest</option>
-            <option value="miles-asc">Miles: Lowest</option>
-          </select>
-        </div>
-        <div class="s-view-btns">
-          <button class="s-view-btn active" title="Grid view">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
-          </button>
-          <button class="s-view-btn" title="List view">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="s-grid" id="inventory-grid"></div>
-  </main>
-
-  <!-- DETAIL PANEL -->
-  <aside class="s-detail" id="detail-panel">
-    <div class="s-detail-head">
-      <span class="s-detail-id" id="d-id"></span>
-      <button class="s-detail-close" onclick="closeDetail()">✕</button>
-    </div>
-    <div class="s-detail-gallery">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <div class="s-gallery-meta" id="d-gallery-meta"></div>
-    </div>
-    <div class="s-detail-body">
-      <div class="s-detail-year-make" id="d-year-make"></div>
-      <div class="s-detail-model" id="d-model"></div>
-      <div class="s-detail-price" id="d-price"></div>
-      <div class="s-detail-monthly" id="d-monthly"></div>
-      <div class="s-detail-actions">
-        <button class="s-btn-primary" onclick="requestQuote()">Request quote</button>
-        <button class="s-btn-secondary">Schedule walk-around</button>
-      </div>
-
-      <div class="s-section-label">Financing</div>
-      <div class="s-financing">
-        <div id="d-financing-rows"></div>
-        <div class="s-fin-note">Through Flogal Capital · Tier-1 credit assumed · Rates as of <span id="d-rate-date"></span></div>
-      </div>
-
-      <div class="s-section-label">Specifications</div>
-      <div class="s-specs" id="d-specs"></div>
-    </div>
-  </aside>
-
+<!-- SUBTITLE BAR -->
+<div class="sl-subtitle">
+  <div class="sl-subtitle-inner">
+    <span class="sl-subtitle-dot" aria-hidden="true"></span>
+    <span class="sl-subtitle-text">
+      Trucks, trailers, heavy machinery, and industrial equipment
+      <span class="sl-subtitle-sep"> — </span>
+      available for purchase or lease.
+    </span>
+  </div>
 </div>
 
-<script>
-let allListings = [];
-let activeId = null;
+<!-- THREE-COLUMN LAYOUT -->
+<div class="sl-page" id="inventory">
 
-async function loadInventory() {
-  try {
-    const res = await fetch('inventory.json');
-    const data = await res.json();
-    allListings = data.listings;
-    document.getElementById('count-label').innerHTML = 
-      `<span style="font-variant-numeric:tabular-nums">${allListings.length} units</span> <span>· ${data.yard}</span>`;
-    buildMakeFilters();
-    updateCounts();
-    renderGrid(allListings);
-    // Set today's date for financing note
-    document.getElementById('d-rate-date').textContent = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  } catch(e) {
-    // Fallback if fetch fails (file:// protocol)
-    document.getElementById('count-label').innerHTML = '<span style="color:var(--fg-muted);font-size:13px">Open via a local server or Vercel to load inventory</span>';
-  }
-}
+  <!-- FILTER RAIL -->
+  <aside class="sl-fil">
+    <div class="sl-fil-top">
+      <span class="sl-fil-eyebrow">Filters</span>
+      <button class="sl-fil-reset" onclick="resetFilters()">Reset</button>
+    </div>
 
-function buildMakeFilters() {
-  const makes = [...new Set(allListings.map(l => l.make))].sort();
-  const counts = {};
-  allListings.forEach(l => { counts[l.make] = (counts[l.make]||0)+1; });
-  const el = document.getElementById('make-filters');
-  el.innerHTML = makes.map(m => `
-    <div class="s-filter-row">
-      <label class="s-filter-check">
-        <input type="checkbox" name="make" value="${m}" onchange="applyFilters()">
-        <span>${m.charAt(0)+m.slice(1).toLowerCase()}</span>
-      </label>
-      <span class="s-filter-count">${counts[m]}</span>
-    </div>`).join('');
-}
+    <div class="sl-fil-section">
+      <button class="sl-fil-h" onclick="toggleSection(this)">
+        <span>Equipment type</span><span class="sl-fil-chev">−</span>
+      </button>
+      <div class="sl-fil-body">
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="tractor"><span class="sl-fil-box"></span><span class="sl-fil-label">Tractor · day cab</span><span class="sl-fil-count">18</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="sleeper" checked><span class="sl-fil-box"></span><span class="sl-fil-label">Tractor · sleeper</span><span class="sl-fil-count">24</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="dryvan"><span class="sl-fil-box"></span><span class="sl-fil-label">Dry van trailer</span><span class="sl-fil-count">31</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="reefer"><span class="sl-fil-box"></span><span class="sl-fil-label">Reefer trailer</span><span class="sl-fil-count">12</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="flatbed"><span class="sl-fil-box"></span><span class="sl-fil-label">Flatbed</span><span class="sl-fil-count">8</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="heavy"><span class="sl-fil-box"></span><span class="sl-fil-label">Heavy machinery</span><span class="sl-fil-count">14</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="indust"><span class="sl-fil-box"></span><span class="sl-fil-label">Industrial equipment</span><span class="sl-fil-count">9</span></label>
+      </div>
+    </div>
 
-function updateCounts() {
-  const typeCounts = {};
-  allListings.forEach(l => { typeCounts[l.type] = (typeCounts[l.type]||0)+1; });
-  const map = {
-    'cnt-day-cab':'Tractor - day cab','cnt-sleeper':'Tractor - sleeper',
-    'cnt-dry-van':'Dry van trailer','cnt-reefer':'Reefer trailer','cnt-flatbed':'Flatbed'
-  };
-  Object.entries(map).forEach(([id,type]) => {
-    const el = document.getElementById(id);
-    if(el) el.textContent = typeCounts[type]||0;
-  });
-}
-
-function getFilters() {
-  const types = [...document.querySelectorAll('[name="type"]:checked')].map(e=>e.value);
-  const makes = [...document.querySelectorAll('[name="make"]:checked')].map(e=>e.value);
-  const statuses = [...document.querySelectorAll('[name="status"]:checked')].map(e=>e.value);
-  const yearMin = parseInt(document.getElementById('year-min').value)||0;
-  const yearMax = parseInt(document.getElementById('year-max').value)||9999;
-  const priceMin = parseInt(document.getElementById('price-min').value)||0;
-  const priceMax = parseInt(document.getElementById('price-max').value)||99999999;
-  return {types,makes,statuses,yearMin,yearMax,priceMin,priceMax};
-}
-
-function applyFilters() {
-  const f = getFilters();
-  const sort = document.getElementById('sort-select').value;
-  let filtered = allListings.filter(l => {
-    if(f.types.length && !f.types.includes(l.type)) return false;
-    if(f.makes.length && !f.makes.includes(l.make)) return false;
-    if(f.statuses.length && !f.statuses.includes(l.status)) return false;
-    if(l.year < f.yearMin || l.year > f.yearMax) return false;
-    if(l.price < f.priceMin || l.price > f.priceMax) return false;
-    return true;
-  });
-  if(sort==='price-asc') filtered.sort((a,b)=>a.price-b.price);
-  if(sort==='price-desc') filtered.sort((a,b)=>b.price-a.price);
-  if(sort==='year-desc') filtered.sort((a,b)=>b.year-a.year);
-  if(sort==='miles-asc') filtered.sort((a,b)=>(a.mileage||0)-(b.mileage||0));
-  renderGrid(filtered);
-}
-
-function resetFilters() {
-  document.querySelectorAll('input[type="checkbox"]').forEach(e=>e.checked=false);
-  document.getElementById('year-min').value='';
-  document.getElementById('year-max').value='';
-  document.getElementById('price-min').value='';
-  document.getElementById('price-max').value='';
-  renderGrid(allListings);
-}
-
-function fmt(n){ return n ? '$'+n.toLocaleString() : '—'; }
-function fmtMi(n){ return n ? n.toLocaleString()+' mi' : '—'; }
-
-function renderGrid(listings) {
-  const grid = document.getElementById('inventory-grid');
-  grid.innerHTML = listings.map(l => `
-    <div class="s-card${l.id===activeId?' active':''}" onclick="openDetail('${l.id}')">
-      <div class="s-card-img">
-        <svg width="48" height="48" viewBox="0 0 64 64" fill="none" stroke="white" stroke-width="1.5">
-          <path d="M4 42 L4 32 L20 16 L52 16 L60 24 L60 42 Z"/>
-          <circle cx="16" cy="48" r="8"/><circle cx="48" cy="48" r="8"/>
-          <line x1="4" y1="28" x2="60" y2="28"/>
-        </svg>
-        <div class="s-card-badges">
-          <span class="s-badge-id">${l.id}</span>
-          <span class="s-badge-status s-badge-${l.status}">${l.status}</span>
+    <div class="sl-fil-section">
+      <button class="sl-fil-h" onclick="toggleSection(this)">
+        <span>Year</span><span class="sl-fil-chev">−</span>
+      </button>
+      <div class="sl-fil-body">
+        <div class="sl-fil-range">
+          <input class="sl-fil-input" value="2018" aria-label="Year min">
+          <span>—</span>
+          <input class="sl-fil-input" value="2024" aria-label="Year max">
         </div>
       </div>
-      <div class="s-card-body">
-        <div class="s-card-meta">${l.year} · ${l.make}</div>
-        <div class="s-card-model">${l.model}</div>
-        <div class="s-card-specs">${[l.engine, l.mileage?fmtMi(l.mileage):null, l.transmission].filter(Boolean).join(' · ')}</div>
-        <div class="s-card-price">${fmt(l.price)}</div>
-        <div class="s-card-monthly">or ${fmt(l.monthly)}/mo · ${l.term}mo · OAC</div>
+    </div>
+
+    <div class="sl-fil-section">
+      <button class="sl-fil-h" onclick="toggleSection(this)">
+        <span>Price</span><span class="sl-fil-chev">−</span>
+      </button>
+      <div class="sl-fil-body">
+        <div class="sl-fil-range">
+          <input class="sl-fil-input" value="$20,000" aria-label="Price min">
+          <span>—</span>
+          <input class="sl-fil-input" value="$120,000" aria-label="Price max">
+        </div>
+        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Lease eligible</span></label>
       </div>
-    </div>`).join('');
+    </div>
+
+    <div class="sl-fil-section">
+      <button class="sl-fil-h" onclick="toggleSection(this)">
+        <span>Make</span><span class="sl-fil-chev">−</span>
+      </button>
+      <div class="sl-fil-body">
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="frt"><span class="sl-fil-box"></span><span class="sl-fil-label">Freightliner</span><span class="sl-fil-count">14</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="ken"><span class="sl-fil-box"></span><span class="sl-fil-label">Kenworth</span><span class="sl-fil-count">8</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="pet"><span class="sl-fil-box"></span><span class="sl-fil-label">Peterbilt</span><span class="sl-fil-count">6</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="vol"><span class="sl-fil-box"></span><span class="sl-fil-label">Volvo</span><span class="sl-fil-count">5</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="int"><span class="sl-fil-box"></span><span class="sl-fil-label">International</span><span class="sl-fil-count">4</span></label>
+      </div>
+    </div>
+
+    <div class="sl-fil-section">
+      <button class="sl-fil-h" onclick="toggleSection(this)">
+        <span>Condition</span><span class="sl-fil-chev">+</span>
+      </button>
+      <div class="sl-fil-body is-hidden">
+        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Excellent</span><span class="sl-fil-count">8</span></label>
+        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Good</span><span class="sl-fil-count">24</span></label>
+        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Fair</span><span class="sl-fil-count">11</span></label>
+      </div>
+    </div>
+  </aside>
+
+  <!-- INVENTORY GRID -->
+  <section class="sl-grid-wrap">
+    <div class="sl-grid-head">
+      <div>
+        <span class="sl-grid-count">73 units</span>
+        <span class="sl-grid-meta">· Updated 14 min ago · Houston, TX yard</span>
+      </div>
+      <div class="sl-grid-tools">
+        <label class="sl-grid-sort">
+          <span>Sort</span>
+          <select>
+            <option value="fresh">Recently added</option>
+            <option value="price-low">Price · low to high</option>
+            <option value="price-high">Price · high to low</option>
+            <option value="year">Year · newest first</option>
+            <option value="miles">Miles · lowest first</option>
+          </select>
+        </label>
+        <div class="sl-grid-view">
+          <button class="is-active" title="Grid">▦</button>
+          <button title="List">≡</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl-grid" id="inventoryGrid"></div>
+  </section>
+
+  <!-- DETAIL DRAWER -->
+  <aside class="sl-drawer" id="detailDrawer">
+    <!-- populated by JS -->
+  </aside>
+</div>
+
+<!-- SOURCING REQUEST -->
+<section class="sl-source">
+  <div class="sl-source-inner">
+    <div class="sl-source-copy">
+      <span class="sl-source-eyebrow">Equipment desk</span>
+      <h3 class="sl-source-h">Don't see what you need? We source it.</h3>
+      <p class="sl-source-p">Tell us the spec — make, year, mileage, attachments, condition. Our equipment desk works carrier auctions, OEM allocations, and lease-end returns daily. Most requests come back inside a week, available for purchase or lease.</p>
+    </div>
+    <a class="sl-source-btn" href="mailto:equipment@flogalhq.com">Submit a Request →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sl-footer">
+  <div class="sl-footer-inner">
+    <div class="sl-footer-brand">
+      <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+    </div>
+    <span class="sl-footer-copy">© 2026 Flogal Holdings LLC · equipment@flogalhq.com</span>
+  </div>
+</footer>
+
+<script>
+const INVENTORY = [
+  { id:'CT-2207', yr:2021, mk:'Freightliner', mdl:'Cascadia 126',    type:'sleeper', mi:312400, eng:'DD15 · 14.8L',   trans:'Auto',    price:78500,  lease:1820, hue:'#1a2a3f', emoji:'🚛', tag:'inspected' },
+  { id:'CT-2208', yr:2020, mk:'Wabash',       mdl:"DuraPlate 53'",   type:'dryvan',  mi:null,   eng:'Air-ride',       trans:'Swing',   price:24950,  lease:620,  hue:'#23282f', emoji:'🚚', tag:null },
+  { id:'CT-2209', yr:2022, mk:'Kenworth',     mdl:'T680 Next-Gen',   type:'sleeper', mi:184200, eng:'PACCAR MX-13',   trans:'Auto',    price:96400,  lease:2240, hue:'#1f1f24', emoji:'🛻', tag:'fresh' },
+  { id:'CT-2210', yr:2019, mk:'Peterbilt',    mdl:'579 Day Cab',     type:'tractor', mi:421800, eng:'Cummins X15',    trans:'Manual',  price:52200,  lease:1280, hue:'#2a1c1c', emoji:'🚚', tag:null },
+  { id:'CT-2211', yr:2023, mk:'Utility',      mdl:"3000R Reefer 53'", type:'reefer', mi:null,   eng:'Carrier X4',    trans:'TK',      price:64800,  lease:1480, hue:'#1e2b2a', emoji:'❄️', tag:'fresh' },
+  { id:'CT-2212', yr:2020, mk:'Volvo',        mdl:'VNL 760',         type:'sleeper', mi:388500, eng:'D13',            trans:'I-Shift', price:68900,  lease:1610, hue:'#1c2538', emoji:'🛻', tag:null },
+];
+
+const TAGS = {
+  fresh:     { label:'Fresh',     cls:'sl-tag-fresh' },
+  inspected: { label:'Inspected', cls:'sl-tag-insp'  },
+};
+
+let selectedId = 'CT-2207';
+
+function fmt(n){ return '$' + n.toLocaleString(); }
+
+function renderGrid(){
+  const grid = document.getElementById('inventoryGrid');
+  grid.innerHTML = INVENTORY.map(u => `
+    <button class="sl-tile${u.id===selectedId?' is-selected':''}" onclick="selectUnit('${u.id}')" data-id="${u.id}">
+      <div class="sl-tile-photo" style="background:linear-gradient(135deg,${u.hue},#050a12)">
+        <span class="sl-tile-emoji">${u.emoji}</span>
+        <span class="sl-tile-id">${u.id}</span>
+        ${u.tag ? `<span class="sl-tile-tag ${TAGS[u.tag].cls}">${TAGS[u.tag].label}</span>` : ''}
+      </div>
+      <div class="sl-tile-info">
+        <div class="sl-tile-yr">${u.yr} · ${u.mk}</div>
+        <div class="sl-tile-name">${u.mdl}</div>
+        <div class="sl-tile-specs">
+          <span>${u.eng}</span>
+          ${u.mi!==null ? `<span class="sl-dot">·</span><span>${u.mi.toLocaleString()} mi</span>` : ''}
+          <span class="sl-dot">·</span>
+          <span>${u.trans}</span>
+        </div>
+        <div class="sl-tile-price">
+          <span class="sl-tile-amt">${fmt(u.price)}</span>
+          <span class="sl-tile-lease">or ${fmt(u.lease)}/mo · 60mo</span>
+        </div>
+      </div>
+    </button>
+  `).join('');
 }
 
-function openDetail(id) {
-  activeId = id;
-  const l = allListings.find(x=>x.id===id);
-  if(!l) return;
-
-  // Highlight card
-  document.querySelectorAll('.s-card').forEach(c=>c.classList.remove('active'));
-  document.querySelectorAll('.s-card').forEach(c=>{
-    if(c.getAttribute('onclick')===`openDetail('${id}')`) c.classList.add('active');
-  });
-
-  document.getElementById('d-id').textContent = l.id;
-  document.getElementById('d-year-make').textContent = `${l.year} · ${l.make}`;
-  document.getElementById('d-model').textContent = l.model;
-  document.getElementById('d-price').textContent = `${fmt(l.price)}`;
-  document.getElementById('d-monthly').textContent = `or ${fmt(l.monthly)}/mo · ${l.term}mo · OAC`;
-  document.getElementById('d-gallery-meta').textContent = l.photos ? `${l.photos} photos${l.video?' · 1 video walkaround':''}` : '';
-
-  // Financing
-  document.getElementById('d-financing-rows').innerHTML = l.financing.map(f=>`
-    <div class="s-fin-row"><span>${f.label}</span><span>${fmt(f.monthly)}/mo</span></div>`).join('');
-
-  // Specs
+function renderDrawer(id){
+  const u = INVENTORY.find(i=>i.id===id) || INVENTORY[0];
   const specs = [
-    ['VIN', `<span class="s-spec-val mono">${l.vin||'—'}</span>`],
-    ['Year', l.year],
-    ['Make / Model', `${l.make.charAt(0)+l.make.slice(1).toLowerCase()} ${l.model}`],
-    ['Engine', l.engine||'—'],
-    ['Transmission', l.transmission||'—'],
-    ['Mileage', fmtMi(l.mileage)],
-    ['Sleeper', l.sleeper||'—'],
-    ['Axle config', l.axle||'—'],
+    ['VIN',           '1FUJGLDR8MLAA' + u.id.replace('CT-','')],
+    ['Year',          u.yr],
+    ['Make / Model',  u.mk + ' ' + u.mdl],
+    ['Engine',        u.eng],
+    ['Transmission',  u.trans],
+    ['Mileage',       u.mi!==null ? u.mi.toLocaleString()+' mi' : '—'],
+    ['Sleeper',       u.type==='sleeper' ? '72″ raised roof' : 'Day cab'],
+    ['Axle config',   '6×4'],
+    ['Wheelbase',     '224″'],
+    ['DOT inspection','Current · expires 03/2027'],
+    ['Title',         'Clean · Texas'],
+    ['Location',      'Flogal Houston yard'],
   ];
-  document.getElementById('d-specs').innerHTML = specs.map(([k,v])=>
-    `<div class="s-spec-row"><span class="s-spec-key">${k}</span>${typeof v==='string'&&v.includes('class=')? v :`<span class="s-spec-val">${v}</span>`}</div>`
-  ).join('');
-
-  document.getElementById('detail-panel').classList.add('open');
+  document.getElementById('detailDrawer').innerHTML = `
+    <div class="sl-drawer-photo" style="background:linear-gradient(135deg,${u.hue},#050a12)">
+      <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">×</button>
+      <span class="sl-drawer-id">${u.id}</span>
+      <span class="sl-drawer-emoji">${u.emoji}</span>
+      <div class="sl-drawer-photo-meta">8 photos · 1 video walkaround</div>
+    </div>
+    <div class="sl-drawer-body">
+      <div>
+        <div class="sl-drawer-yr">${u.yr} · ${u.mk}</div>
+        <h2 class="sl-drawer-name">${u.mdl}</h2>
+      </div>
+      <div class="sl-drawer-price">
+        <div>
+          <span class="sl-drawer-amt">${fmt(u.price)}</span>
+          <span class="sl-drawer-lease">or ${fmt(u.lease)}/mo · 60mo · OAC</span>
+        </div>
+        <div class="sl-drawer-actions">
+          <button class="sl-btn sl-btn-gold" onclick="alert('Quote request submitted for ${u.id}')">Request quote</button>
+          <button class="sl-btn sl-btn-ghost">Schedule walk-around</button>
+        </div>
+      </div>
+      <div class="sl-drawer-section">
+        <span class="sl-drawer-eyebrow">Financing</span>
+        <div class="sl-finance">
+          <div class="sl-finance-row"><span>$0 down</span><span class="sl-mono">${fmt(Math.round(u.lease*1.1))}/mo</span></div>
+          <div class="sl-finance-row"><span>10% down</span><span class="sl-mono">${fmt(u.lease)}/mo</span></div>
+          <div class="sl-finance-row"><span>20% down</span><span class="sl-mono">${fmt(Math.round(u.lease*0.88))}/mo</span></div>
+          <div class="sl-finance-foot">Through Flogal Capital · Tier-1 credit assumed · Rates as of May 2026</div>
+        </div>
+      </div>
+      <div class="sl-drawer-section">
+        <span class="sl-drawer-eyebrow">Specifications</span>
+        <div class="sl-spec">
+          ${specs.map(([k,v])=>`<div class="sl-spec-row"><span class="sl-spec-k">${k}</span><span class="sl-spec-v">${v}</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="sl-drawer-section">
+        <span class="sl-drawer-eyebrow">Sales contact</span>
+        <div class="sl-contact">
+          <span class="sl-contact-avatar">EM</span>
+          <div>
+            <div class="sl-contact-name">Elena Marrero</div>
+            <div class="sl-contact-meta">Equipment desk · +1 (713) 555-0199</div>
+          </div>
+          <button class="sl-btn sl-btn-ghost sl-btn-sm">Message</button>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
-function closeDetail() {
-  activeId = null;
-  document.getElementById('detail-panel').classList.remove('open');
-  document.querySelectorAll('.s-card').forEach(c=>c.classList.remove('active'));
+function selectUnit(id){
+  selectedId = id;
+  document.querySelectorAll('.sl-tile').forEach(t=>{
+    t.classList.toggle('is-selected', t.dataset.id===id);
+  });
+  renderDrawer(id);
 }
 
-function requestQuote() {
-  const l = allListings.find(x=>x.id===activeId);
-  if(l) window.location.href = `mailto:equipment@flogalhq.com?subject=Quote Request: ${l.id} ${l.year} ${l.make} ${l.model}&body=Unit ID: ${l.id}%0AModel: ${l.year} ${l.make} ${l.model}%0AAsking: ${fmt(l.price)}%0A%0APlease send me more information about this unit.`;
+function closeDrawer(){
+  selectedId = null;
+  document.querySelectorAll('.sl-tile').forEach(t=>t.classList.remove('is-selected'));
+  document.getElementById('detailDrawer').innerHTML = '';
 }
 
-loadInventory();
+function toggleSection(btn){
+  const body = btn.nextElementSibling;
+  const chev = btn.querySelector('.sl-fil-chev');
+  const hidden = body.classList.toggle('is-hidden');
+  chev.textContent = hidden ? '+' : '−';
+}
+
+function resetFilters(){
+  document.querySelectorAll('.sl-fil input[type="checkbox"]').forEach(c=>c.checked=false);
+}
+
+// Init
+renderGrid();
+renderDrawer(selectedId);
 </script>
 </body>
 </html>
