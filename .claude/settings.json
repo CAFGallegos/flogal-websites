@@ -14,7 +14,11 @@
       "Read(//tmp/**)",
       "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/login.html /tmp/sales-admin-login.html)",
       "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/dashboard.html /tmp/sales-admin-dashboard.html)",
-      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/styles.css /tmp/sales-admin-styles.css)"
+      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/styles.css /tmp/sales-admin-styles.css)",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\sales\" -Recurse | ForEach-Object { $_.FullName.Replace\\(\"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\sales\\\\\", \"\"\\) })",
+      "Bash(curl -s -L \"https://api.anthropic.com/v1/design/h/4Ai5AHzetzhcRsFZSVlcsw\" -o /tmp/operations-design.tar.gz)",
+      "Bash(mkdir -p /tmp/ops-design)",
+      "Bash(tar -xzf /tmp/operations-design.tar.gz -C /tmp/ops-design)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Carlos\\Desktop\\flogal-websites\\_archive\\2026-05-25_Flogal_Websites"
