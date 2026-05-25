@@ -185,11 +185,20 @@ button{font-family:var(--font-sans);}
 .sl-source-btn:hover{background:var(--gold-400);}
 
 /* ---- Footer -------------------------------------------------------- */
-.sl-footer{background:var(--night-0);padding:40px 0 24px;margin-top:auto;}
-.sl-footer-inner{max-width:1440px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;}
-.sl-footer-brand{display:flex;align-items:center;gap:10px;}
-.sl-footer-brand img{height:30px;width:auto;opacity:.85;}
-.sl-footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.35);letter-spacing:0.06em;}
+.sl-footer{background:var(--night-0);padding:48px 0 0;margin-top:auto;}
+.sl-footer-inner{max-width:1440px;margin:0 auto;padding:0 32px;}
+.sl-footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sl-footer-brand img{height:32px;width:auto;opacity:.85;display:block;}
+.sl-footer-nav{display:flex;gap:48px;flex-wrap:wrap;}
+.sl-footer-col{display:flex;flex-direction:column;gap:10px;}
+.sl-footer-col-h{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
+.sl-footer-col a{font-size:13px;color:rgba(255,255,255,.55);transition:color 140ms;}
+.sl-footer-col a:hover{color:rgba(255,255,255,.9);}
+.sl-footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;flex-wrap:wrap;position:relative;}
+.sl-footer-domains{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.25);letter-spacing:0.06em;}
+.sl-footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.25);letter-spacing:0.04em;}
+.sl-staff-link{font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,.14);transition:color 200ms;padding:4px 6px;}
+.sl-staff-link:hover{color:rgba(255,255,255,.5);}
 
 /* ---- Responsive ---------------------------------------------------- */
 @media(max-width:1100px){
@@ -205,7 +214,9 @@ button{font-family:var(--font-sans);}
   .sl-grid-wrap{padding:16px;}
   .sl-grid{grid-template-columns:1fr;}
   .sl-source-inner{grid-template-columns:1fr;gap:24px;}
-  .sl-footer-inner{flex-direction:column;align-items:flex-start;gap:12px;}
+  .sl-footer-top{flex-direction:column;gap:32px;}
+  .sl-footer-nav{gap:32px;}
+  .sl-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 }
 </style>
 </head>
@@ -370,10 +381,42 @@ button{font-family:var(--font-sans);}
 <!-- FOOTER -->
 <footer class="sl-footer">
   <div class="sl-footer-inner">
-    <div class="sl-footer-brand">
-      <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+    <div class="sl-footer-top">
+      <div class="sl-footer-brand">
+        <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+      </div>
+      <nav class="sl-footer-nav">
+        <div class="sl-footer-col">
+          <span class="sl-footer-col-h">Carriers</span>
+          <a href="https://carriers.flogalhq.com">Load Board</a>
+          <a href="https://carriers.flogalhq.com">Active Lanes</a>
+          <a href="https://carriers.flogalhq.com">Partner Portal</a>
+        </div>
+        <div class="sl-footer-col">
+          <span class="sl-footer-col-h">Sales</span>
+          <a href="#inventory">Inventory</a>
+          <a href="#financing">Financing</a>
+          <a href="#tradein">Trade-In</a>
+        </div>
+        <div class="sl-footer-col">
+          <span class="sl-footer-col-h">Properties</span>
+          <a href="https://properties.flogalhq.com">Listings</a>
+          <a href="https://properties.flogalhq.com">Yard Leasing</a>
+          <a href="https://properties.flogalhq.com">Contact</a>
+        </div>
+        <div class="sl-footer-col">
+          <span class="sl-footer-col-h">Company</span>
+          <a href="https://www.flogalhq.com">About</a>
+          <a href="mailto:info@flogalhq.com">Contact</a>
+          <a href="https://www.flogalhq.com">flogalhq.com</a>
+        </div>
+      </nav>
     </div>
-    <span class="sl-footer-copy">© 2026 Flogal Holdings LLC · equipment@flogalhq.com</span>
+    <div class="sl-footer-bottom">
+      <span class="sl-footer-domains">flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com</span>
+      <span class="sl-footer-copy">© 2026 Flogal Holdings LLC. All rights reserved.</span>
+      <a class="sl-staff-link" href="admin/login.html">Staff Login</a>
+    </div>
   </div>
 </footer>
 
