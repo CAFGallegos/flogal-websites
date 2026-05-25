@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FLOGAL — Brand. Routing. Trust.</title>
+<style>
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap;}
+:root{
+  --navy:#0B1D2D;
+  --gold:#C79A2B;
+  --green:#165E3A;
+  --blue:#1E4B8F;
+  --night:#050A12;
+  --paper:#F6F7F9;
+  --fg:#0B1D2D;
+  --fg-muted:#4A5563;
+  --hairline:#C6CFDA;
+  --navy-700:#122A3F;
+  --navy-050:#EEF2F6;
+  --silver:#A8B8C8;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Satoshi',system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--fg);-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+
+/* ---- NAV ---------------------------------------------------------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,29,45,.94);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06);}
+.nav-inner{max-width:1320px;margin:0 auto;padding:13px 40px;display:flex;align-items:center;gap:48px;color:white;}
+.nav-brand{display:flex;align-items:center;}
+.nav-brand img{height:38px;width:auto;display:block;}
+.nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;}
+.nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.78);transition:color 150ms;}
+.nav-links a:hover{color:white;}
+.nav-phone{font-size:13px;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap;}
+.nav-cta{display:inline-flex;align-items:center;padding:9px 20px;border-radius:6px;font-weight:700;font-size:13px;color:white;border:1px solid rgba(255,255,255,.42);transition:all 150ms;white-space:nowrap;}
+.nav-cta:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
+
+/* ---- HERO (parallax) --------------------------------------------- */
+.hero{position:relative;background:var(--night);color:white;overflow:hidden;min-height:740px;}
+.hero-bg{position:absolute;inset:0;z-index:0;will-change:transform;}
+.hero-bg img{width:100%;height:120%;object-fit:cover;object-position:60% 55%;display:block;}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,10,18,.95) 0%,rgba(5,10,18,.85) 30%,rgba(5,10,18,.5) 55%,rgba(5,10,18,.15) 78%,rgba(5,10,18,0) 100%),
+             linear-gradient(180deg,rgba(5,10,18,.2) 0%,rgba(5,10,18,.55) 100%);}
+.hero-inner{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:128px 40px 80px;}
+.hero-copy{max-width:640px;}
+.hero-title{margin:0 0 22px;font-weight:700;font-size:72px;line-height:1.02;letter-spacing:-.025em;color:white;}
+.hero-sub{font-size:16px;line-height:1.6;max-width:480px;color:rgba(255,255,255,.74);margin:0 0 32px;}
+.hero-actions{display:flex;gap:12px;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:6px;font-size:14px;font-weight:600;color:white;border:1px solid rgba(168,184,200,.4);background:rgba(168,184,200,.1);backdrop-filter:blur(10px);transition:all 150ms;}
+.btn-outline:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
+
+/* ---- HERO STATS (sits above tri-band) ---------------------------- */
+.hero-stats{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:0 40px 56px;
+  display:flex;gap:64px;flex-wrap:wrap;}
+.hero-stat-val{font-weight:700;font-size:34px;line-height:1;letter-spacing:-.02em;color:white;font-variant-numeric:tabular-nums;}
+.hero-stat-lbl{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:8px;}
+
+/* ---- TRI-BAND CTA ------------------------------------------------ */
+.tri-wrap{background:var(--night);padding:0 0 64px;}
+.tri-band{max-width:1320px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.tb{display:flex;align-items:center;gap:16px;padding:22px 28px;min-height:88px;color:white;transition:filter 180ms,transform 180ms;border-radius:8px;}
+.tb:hover{filter:brightness(1.10);transform:translateY(-2px);}
+.tb-blue{background:var(--blue);}
+.tb-gold{background:var(--gold);color:var(--navy);}
+.tb-green{background:var(--green);}
+.tb-mark{height:26px;width:auto;flex:none;}
+.tb-text{display:flex;flex-direction:column;gap:4px;}
+.tb-name{font-weight:700;font-size:20px;letter-spacing:-.01em;}
+.tb-sub{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.85;}
+.tb-arrow{margin-left:auto;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);font-size:15px;}
+.tb-gold .tb-arrow{background:rgba(11,29,45,.18);}
+
+/* ---- OPERATING DIVISIONS ----------------------------------------- */
+.svc-section{max-width:1320px;margin:0 auto;padding:96px 40px 96px;}
+.svc-head{margin-bottom:48px;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--silver);}
+.h2{font-weight:700;font-size:42px;letter-spacing:-.02em;line-height:1.1;color:var(--navy);margin:14px 0 0;}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.svc-card{background:white;border:1px solid var(--hairline);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:box-shadow 180ms,transform 180ms,border-color 180ms;}
+.svc-card:hover{box-shadow:0 8px 24px rgba(11,29,45,.1);transform:translateY(-2px);border-color:rgba(168,184,200,.8);}
+.svc-tag{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);}
+.svc-title{font-weight:700;font-size:22px;letter-spacing:-.01em;line-height:1.2;color:var(--navy);margin:0;}
+.svc-body{font-size:14px;line-height:1.6;color:var(--fg-muted);margin:0;}
+.svc-link{font-size:13px;font-weight:700;color:var(--silver);margin-top:8px;}
+.svc-link:hover{text-decoration:underline;}
+
+/* ---- BUILT FOR THE LONG GAME (dark) ------------------------------ */
+.about{background:var(--night);padding:96px 40px;}
+.about-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-left .eyebrow{color:var(--silver);}
+.about-left .h2{color:white;margin-top:14px;}
+.about-left .lead{margin-top:24px;font-size:15px;line-height:1.7;color:rgba(255,255,255,.65);max-width:440px;}
+.pillars{display:flex;flex-direction:column;}
+.pillar{padding:24px 0;border-bottom:1px solid rgba(168,184,200,.10);display:flex;gap:24px;}
+.pillar:first-child{border-top:1px solid rgba(168,184,200,.10);}
+.pn{font-family:'Satoshi',sans-serif;font-feature-settings:'tnum' 1;font-size:11px;font-weight:700;color:var(--silver);min-width:24px;margin-top:2px;letter-spacing:.06em;}
+.pt{font-size:15px;font-weight:700;color:white;margin-bottom:5px;}
+.pb{font-size:13px;line-height:1.6;color:rgba(255,255,255,.5);}
+
+/* ---- CONTACT ----------------------------------------------------- */
+.contact{background:var(--paper);padding:96px 40px;}
+.contact-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact .h2{margin-bottom:18px;}
+.contact-lead{font-size:15px;line-height:1.7;color:var(--fg-muted);max-width:400px;margin-bottom:40px;}
+.cd-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);margin-bottom:4px;}
+.cd-val{font-size:15px;color:var(--navy);margin-bottom:24px;}
+.form{display:flex;flex-direction:column;gap:14px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-muted);}
+.field input,.field select,.field textarea{background:white;border:1px solid var(--hairline);border-radius:4px;padding:10px 14px;font-family:'Satoshi',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color 140ms;width:100%;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--silver);}
+.field textarea{resize:vertical;min-height:110px;}
+.form-btn{background:var(--navy);color:white;border:none;padding:12px 28px;font-family:'Satoshi',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;align-self:flex-start;transition:background 150ms;}
+.form-btn:hover{background:var(--navy-700);}
+
+/* ---- FOOTER ------------------------------------------------------ */
+.footer{background:var(--night);color:rgba(255,255,255,.7);padding:64px 0 32px;}
+.footer-inner{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-family:monospace;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.06em;}
+.footer-inner span{color:rgba(255,255,255,.55);}
+
+/* ---- RESPONSIVE -------------------------------------------------- */
+@media(max-width:900px){
+  .nav-links,.nav-cta,.nav-phone{display:none;}
+  .nav-inner{padding:16px 24px;}
+  .hero-title{font-size:42px;}
+  .hero-inner{padding:72px 24px 56px;}
+  .hero-stats{padding:0 24px 40px;gap:32px;}
+  .tri-band{grid-template-columns:1fr;padding:0 24px;}
+  .tri-wrap{padding-bottom:48px;}
+  .svc-section,.about,.contact{padding:64px 24px;}
+  .svc-grid,.about-inner,.contact-inner{grid-template-columns:1fr;gap:40px;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+    </a>
+    <ul class="nav-links">
+      <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
+      <li><a href="https://sales.flogalhq.com">Sales</a></li>
+      <li><a href="https://properties.flogalhq.com">Properties</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:+12147021336" class="nav-phone">(214) 702-1336</a>
+    <a href="#contact" class="nav-cta">Request a Quote</a>
+  </div>
+</header>
+
+<!-- HERO with parallax -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg" aria-hidden="true">
+    <img src="../../shared/photos/hero-truck-sunset.jpg" alt="">
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <h1 class="hero-title">We move freight<br>on the lanes<br>that matter to you<span style="color:rgba(168,184,200,.55);">.</span></h1>
+      <p class="hero-sub">Flogal operates across hauling, equipment, real estate, and industrial solutions to keep your business moving forward.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-outline">Get in Touch →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats — sits inside hero, above tri-band -->
+  <div class="hero-stats">
+    <div><div class="hero-stat-val">50+</div><div class="hero-stat-lbl">Power Units</div></div>
+    <div><div class="hero-stat-val">20</div><div class="hero-stat-lbl">Dedicated Lanes</div></div>
+    <div><div class="hero-stat-val">99.2%</div><div class="hero-stat-lbl">On-Time</div></div>
+    <div><div class="hero-stat-val">24/7</div><div class="hero-stat-lbl">Dispatch Support</div></div>
+  </div>
+</section>
+
+<!-- TRI-BAND CTAs -->
+<div class="tri-wrap">
+  <div class="tri-band">
+    <a href="https://carriers.flogalhq.com" class="tb tb-blue">
+      <img class="tb-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
+      <div class="tb-text"><span class="tb-name">Move Freight</span><span class="tb-sub">Carriers</span></div>
+      <span class="tb-arrow">→</span>
+    </a>
+    <a href="https://sales.flogalhq.com" class="tb tb-gold">
+      <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+      <div class="tb-text"><span class="tb-name">Buy Equipment</span><span class="tb-sub">Sales Inventory</span></div>
+      <span class="tb-arrow">→</span>
+    </a>
+    <a href="https://properties.flogalhq.com" class="tb tb-green">
+      <img class="tb-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
+      <div class="tb-text"><span class="tb-name">Real Estate</span><span class="tb-sub">Properties</span></div>
+      <span class="tb-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- OPERATING DIVISIONS -->
+<section class="svc-section">
+  <div class="svc-head">
+    <span class="eyebrow">Operating Divisions</span>
+    <h2 class="h2">Asset-backed across the freight stack.</h2>
+  </div>
+  <div class="svc-grid">
+    <article class="svc-card">
+      <span class="svc-tag">HAULING</span>
+      <h3 class="svc-title">Dedicated &amp; spot freight, OTR coverage</h3>
+      <p class="svc-body">Fleet operations running dedicated lanes across the continental U.S. with industry-leading on-time delivery and full compliance documentation.</p>
+      <a class="svc-link" href="https://carriers.flogalhq.com">Go to Carriers →</a>
+    </article>
+    <article class="svc-card">
+      <span class="svc-tag">EQUIPMENT</span>
+      <h3 class="svc-title">Used Class 8 tractors &amp; trailers</h3>
+      <p class="svc-body">Inspected, financed inventory — dry vans, reefers, flatbeds, and day cabs. Buy, lease-to-own, or trade. Hard work, real specs, real prices.</p>
+      <a class="svc-link" href="https://sales.flogalhq.com">Go to Inventory →</a>
+    </article>
+    <article class="svc-card">
+      <span class="svc-tag">REALTY</span>
+      <h3 class="svc-title">Industrial yards &amp; terminals</h3>
+      <p class="svc-body">Properties built around freight: drop yards, terminals, and last-mile staging in growth corridors. Direct buyer — no agents, last close.</p>
+      <a class="svc-link" href="https://properties.flogalhq.com">Go to Listings →</a>
+    </article>
+    <article class="svc-card">
+      <span class="svc-tag">INDUSTRIAL</span>
+      <h3 class="svc-title">Infrastructure operations</h3>
+      <p class="svc-body">Long-term industrial services supporting logistics infrastructure, site operations, and asset-backed growth across regional markets.</p>
+      <a class="svc-link" href="#contact">Learn More →</a>
+    </article>
+  </div>
+</section>
+
+<!-- BUILT FOR THE LONG GAME -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <span class="eyebrow">About Flogal</span>
+      <h2 class="h2">Built for the long game.</h2>
+      <p class="lead">We build and operate logistics and asset businesses with institutional discipline. Structured for banks, insurance carriers, and corporate partners from day one.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pn">01</span>
+        <div>
+          <div class="pt">Institutional Structure</div>
+          <div class="pb">Entity design and operations built to meet bank, insurance, and corporate standards.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pn">02</span>
+        <div>
+          <div class="pt">Vertical Integration</div>
+          <div class="pb">Equipment, real estate, and industrial assets under a holding structure.</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pn">03</span>
+        <div>
+          <div class="pt">Operator Model</div>
+          <div class="pb">Every entity run by operators — not appointees.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <span class="eyebrow">Contact</span>
+      <h2 class="h2">Request an Introduction</h2>
+      <p class="contact-lead">For partnership inquiries, carrier relations, financing discussions, or general business development.</p>
+      <div><div class="cd-label">General</div><div class="cd-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
+      <div><div class="cd-label">Carriers</div><div class="cd-val"><a href="mailto:carriers@flogalhq.com">carriers@flogalhq.com</a></div></div>
+      <div><div class="cd-label">Equipment</div><div class="cd-val"><a href="mailto:equipment@flogalhq.com">equipment@flogalhq.com</a></div></div>
+    </div>
+    <form class="form" onsubmit="event.preventDefault();">
+      <div class="form-row">
+        <div class="field"><label for="fn">First Name</label><input id="fn" placeholder="John"></div>
+        <div class="field"><label for="ln">Last Name</label><input id="ln" placeholder="Smith"></div>
+      </div>
+      <div class="field"><label for="co">Company</label><input id="co" placeholder="Company Name"></div>
+      <div class="field"><label for="em">Email</label><input id="em" type="email" placeholder="john@companyname.com"></div>
+      <div class="field"><label for="iq">Inquiry Type</label>
+        <select id="iq">
+          <option value="">Select…</option>
+          <option>Carrier / Freight</option>
+          <option>Equipment</option>
+          <option>Real Estate</option>
+          <option>Partnership / Business Development</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label for="ms">Message</label><textarea id="ms" placeholder="Brief description of your inquiry…"></textarea></div>
+      <button class="form-btn" type="submit">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Flogal Holdings LLC. All rights reserved.</span>
+    <span>flogalhq.com</span>
+  </div>
+</footer>
+
+<!-- PARALLAX SCRIPT -->
+<script>
+(function(){
+  var bg = document.getElementById('heroBg');
+  if (!bg) return;
+  var hero = bg.parentElement;
+  function update() {
+    var rect = hero.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    var y = -rect.top * 0.4;
+    bg.style.transform = 'translate3d(0,' + y + 'px,0)';
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (!ticking) {
+      window.requestAnimationFrame(function(){ update(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>

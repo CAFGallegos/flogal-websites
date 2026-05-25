@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(curl -v \"https://api.anthropic.com/v1/design/h/SIT9bvVDtT7NGTftxwfV0Q?open_file=ui_kits%2Fflogalhq%2Findex.html\")",
+      "Bash(ls \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\\" 2>&1 | head -30)",
+      "Read(//c/Users/Carlos/Desktop/**)",
+      "PowerShell(git -C \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" log --oneline -5)",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" | ForEach-Object { if \\($_.PSIsContainer\\) { \"DIR  $\\($_.Name\\)\" } else { \"FILE $\\($_.Name\\)\" } })",
+      "PowerShell(Move-Item \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\about.html\" \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\flogalhq\\\\about.html\" -Force)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Carlos\\Desktop\\flogal-websites\\_archive\\2026-05-25_Flogal_Websites"
     ]
   }
 }
