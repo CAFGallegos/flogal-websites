@@ -18,7 +18,13 @@
       "PowerShell(Get-ChildItem \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\sales\" -Recurse | ForEach-Object { $_.FullName.Replace\\(\"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\sales\\\\\", \"\"\\) })",
       "Bash(curl -s -L \"https://api.anthropic.com/v1/design/h/4Ai5AHzetzhcRsFZSVlcsw\" -o /tmp/operations-design.tar.gz)",
       "Bash(mkdir -p /tmp/ops-design)",
-      "Bash(tar -xzf /tmp/operations-design.tar.gz -C /tmp/ops-design)"
+      "Bash(tar -xzf /tmp/operations-design.tar.gz -C /tmp/ops-design)",
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\Carlos\\\\.claude\\\\projects\\\\c--Users-Carlos-Desktop-flogal-websites\\\\\" -ErrorAction SilentlyContinue)",
+      "Read(//c/Users/Carlos/.claude/projects/c--Users-Carlos-Desktop-flogal-websites/memory/**)",
+      "Read(//c/Users/Carlos/.claude/projects/c--Users-Carlos-Desktop-flogal-websites/**)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" status)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" diff sites/properties/index.html)",
+      "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" add sites/properties/index.html)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Carlos\\Desktop\\flogal-websites\\_archive\\2026-05-25_Flogal_Websites"
