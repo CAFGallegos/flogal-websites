@@ -25,7 +25,8 @@
       "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" status)",
       "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" diff sites/properties/index.html)",
       "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" add sites/properties/index.html)",
-      "Bash(node c:/Users/Carlos/Desktop/flogal-websites/_transform-about.js)"
+      "Bash(node c:/Users/Carlos/Desktop/flogal-websites/_transform-about.js)",
+      "Bash(node \"c:/Users/Carlos/Desktop/flogal-websites/_unify-nav-footer.js\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\Carlos\\Desktop\\flogal-websites\\_archive\\2026-05-25_Flogal_Websites"
