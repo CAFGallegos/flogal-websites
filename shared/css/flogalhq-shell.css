@@ -1,0 +1,26 @@
+/* FLOGAL HQ — Shared nav + footer shell (flogalhq.com pages)
+   Matches sites/flogalhq/index.html exactly.
+   Link with: <link rel="stylesheet" href="../../shared/css/flogalhq-shell.css"> */
+
+/* ---- NAV ---- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,29,45,.94);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06);}
+.nav-inner{max-width:1320px;margin:0 auto;padding:13px 40px;display:flex;align-items:center;gap:48px;color:white;}
+.nav-brand{display:flex;align-items:center;}
+.nav-brand img{height:38px;width:auto;display:block;}
+.nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;}
+.nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.78);transition:color 150ms;}
+.nav-links a:hover{color:white;}
+.nav-phone{font-size:13px;font-weight:700;color:rgba(255,255,255,.6);white-space:nowrap;}
+.nav-cta{display:inline-flex;align-items:center;padding:9px 20px;border-radius:6px;font-weight:700;font-size:13px;color:white;border:1px solid rgba(255,255,255,.42);transition:all 150ms;white-space:nowrap;}
+.nav-cta:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
+
+/* ---- FOOTER ---- */
+.footer{background:var(--night);color:rgba(255,255,255,.7);padding:64px 0 32px;}
+.footer-inner{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-family:monospace;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.06em;}
+.footer-inner span{color:rgba(255,255,255,.55);}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:900px){
+  .nav-links,.nav-cta,.nav-phone{display:none;}
+  .nav-inner{padding:16px 24px;}
+}

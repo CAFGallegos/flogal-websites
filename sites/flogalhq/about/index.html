@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — Flogal Holdings</title>
+<link rel="stylesheet" href="../../shared/css/flogalhq-shell.css">
+<style>
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap;}
+
+:root{
+  --navy:#0B1D2D; --blue:#1E4B8F; --gold:#C79A2B; --green:#165E3A; --gray:#3A3F46;
+  --night:#050A12; --night-1:#0B1421; --paper:#F6F7F9; --white:#fff;
+  --fg:#0B1D2D; --muted:#4A5563; --hair:#C6CFDA; --s1:#F2F4F7; --navy-050:#EEF2F6;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Satoshi',system-ui,sans-serif;background:var(--paper);color:var(--fg);-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+img{display:block;}
+
+/* nav styles in ../../shared/css/flogalhq-shell.css */
+/* HERO — full bleed, dark, cinematic */
+.hero{position:relative;background:var(--night);color:white;overflow:hidden;min-height:640px;}
+.hero-photo{position:absolute;right:0;bottom:0;width:70%;height:95%;z-index:0;
+  -webkit-mask-image:linear-gradient(to top left,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 30%,rgba(0,0,0,.5) 58%,rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(to top left,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 30%,rgba(0,0,0,.5) 58%,rgba(0,0,0,0) 100%);}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;}
+.hero-protect{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(5,10,18,1) 0%,rgba(5,10,18,.95) 20%,rgba(5,10,18,.4) 50%,rgba(5,10,18,.06) 72%,transparent 100%);}
+.hero-inner{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:100px 40px 120px;}
+.hero-label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+.hero-label::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero-title{font-weight:900;font-size:72px;line-height:.95;letter-spacing:-.03em;color:white;margin:0 0 24px;max-width:680px;}
+.hero-title span{color:var(--gold);}
+.hero-sub{font-size:17px;line-height:1.6;color:rgba(255,255,255,.6);max-width:500px;margin:0 0 40px;}
+.hero-scroll{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.hero-scroll-line{width:40px;height:1px;background:rgba(255,255,255,.2);}
+
+/* OVERVIEW BAND */
+.overview{background:var(--navy);padding:64px 40px;}
+.overview-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.06);}
+.ov-item{padding:40px 36px;background:var(--navy);}
+.ov-num{font-weight:900;font-size:52px;letter-spacing:-.04em;color:white;line-height:1;font-variant-numeric:tabular-nums;}
+.ov-num sup{font-size:24px;vertical-align:top;margin-top:8px;}
+.ov-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:8px;}
+.ov-bar{height:2px;width:40px;background:var(--gold);margin-top:16px;}
+
+/* WHAT WE ARE */
+.what{padding:96px 40px;background:var(--paper);}
+.what-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:96px;align-items:start;}
+.what-left{}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);}
+.h2{font-weight:700;font-size:44px;letter-spacing:-.025em;line-height:1.05;margin:16px 0 0;}
+.what-body{font-size:17px;line-height:1.75;color:var(--muted);}
+.what-body p{margin:0 0 20px;}
+.what-body p:last-child{margin-bottom:0;}
+.what-pull{font-size:22px;line-height:1.45;font-weight:500;color:var(--navy);letter-spacing:-.01em;border-left:3px solid var(--gold);padding-left:24px;margin:40px 0;}
+
+/* ENTITY MAP */
+.entities{padding:0 40px 96px;background:var(--paper);}
+.entities-inner{max-width:1320px;margin:0 auto;}
+.entities-head{margin-bottom:48px;}
+.ent-tree{display:flex;flex-direction:column;gap:0;}
+
+/* Holdco row */
+.holdco-row{display:flex;justify-content:center;margin-bottom:0;}
+.holdco-card{
+  background:var(--navy);color:white;
+  border-radius:10px;padding:28px 40px;
+  display:flex;align-items:center;gap:20px;
+  width:100%;max-width:560px;
+  position:relative;
+}
+.holdco-card::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:2px;height:32px;background:var(--hair);}
+.holdco-mark{height:36px;width:auto;}
+.holdco-name{font-weight:700;font-size:20px;letter-spacing:-.01em;}
+.holdco-sub{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.14em;text-transform:uppercase;margin-top:3px;}
+
+/* connector */
+.tree-connector{display:flex;justify-content:center;position:relative;height:32px;margin:0;}
+.tree-connector::before{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:var(--hair);}
+.tree-connector::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--hair);}
+
+/* Entity cards grid */
+.ent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--hair);}
+.ent-card{background:white;padding:28px 20px 24px;position:relative;display:flex;flex-direction:column;gap:12px;}
+.ent-color-bar{position:absolute;top:0;left:0;right:0;height:4px;}
+.ent-mark{height:28px;width:auto;margin-bottom:4px;}
+.ent-name{font-weight:700;font-size:15px;color:var(--navy);letter-spacing:-.01em;line-height:1.2;}
+.ent-type{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:2px;}
+.ent-desc{font-size:12px;line-height:1.6;color:var(--muted);flex:1;}
+.ent-link{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:auto;display:inline-flex;align-items:center;gap:5px;}
+.ent-link:hover{opacity:.75;}
+
+/* THESIS */
+.thesis{background:var(--night);padding:96px 40px;}
+.thesis-inner{max-width:1320px;margin:0 auto;}
+.thesis-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:72px;}
+.thesis-intro{font-size:16px;line-height:1.75;color:rgba(255,255,255,.5);max-width:460px;}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.05);}
+.pillar{background:var(--night-1);padding:36px 28px;}
+.p-num{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:20px;}
+.p-title{font-weight:700;font-size:18px;color:white;margin-bottom:10px;letter-spacing:-.01em;}
+.p-body{font-size:14px;line-height:1.65;color:rgba(255,255,255,.45);}
+
+/* WHO WE BUILD FOR */
+.for{padding:80px 40px;background:var(--paper);}
+.for-inner{max-width:1320px;margin:0 auto;}
+.for-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px;}
+.for-card{background:white;border:1px solid var(--hair);border-radius:10px;padding:32px 24px;}
+.for-icon{width:48px;height:48px;border-radius:10px;background:var(--navy-050);display:flex;align-items:center;justify-content:center;color:var(--navy);margin-bottom:20px;}
+.for-title{font-weight:700;font-size:16px;color:var(--navy);margin-bottom:8px;}
+.for-body{font-size:13px;line-height:1.65;color:var(--muted);}
+
+/* STRUCTURE */
+.structure{background:var(--navy);padding:80px 40px;}
+.structure-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.str-list{display:flex;flex-direction:column;margin-top:32px;}
+.str-row{padding:20px 0;border-bottom:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.str-row:first-child{border-top:1px solid rgba(255,255,255,.07);}
+.str-key{font-size:13px;color:rgba(255,255,255,.45);}
+.str-val{font-size:14px;font-weight:700;color:white;text-align:right;}
+.str-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(22,94,58,.3);color:#4caf82;}
+
+/* CONTACT */
+.contact{padding:96px 40px;background:var(--paper);}
+.contact-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-info{}
+.ci-block{margin-bottom:32px;}
+.ci-label{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.ci-val{font-size:15px;color:var(--navy);}
+.ci-val a{color:var(--navy);}
+.ci-val a:hover{color:var(--blue);}
+.form{display:flex;flex-direction:column;gap:14px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+.field input,.field select,.field textarea{background:white;border:1px solid var(--hair);border-radius:4px;padding:10px 14px;font-family:'Satoshi',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color 140ms;width:100%;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);}
+.field textarea{resize:vertical;min-height:110px;}
+.form-btn{background:var(--navy);color:white;border:none;padding:12px 28px;font-family:'Satoshi',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:6px;transition:background 140ms;align-self:flex-start;}
+.form-btn:hover{background:#122A3F;}
+
+/* footer styles in ../../shared/css/flogalhq-shell.css */
+@media(max-width:1100px){.ent-grid{grid-template-columns:repeat(3,1fr);}.pillars{grid-template-columns:1fr 1fr;}.for-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:900px){
+  .nav-links,.nav-cta,.nav-phone{display:none;}.nav-inner{padding:16px 24px;}
+  .hero-title{font-size:46px;}.hero-inner{padding:80px 24px 100px;}
+  .hero-photo{width:100%;}.overview-inner{grid-template-columns:1fr;gap:0;}
+  .what{padding:64px 24px;}.what-inner{grid-template-columns:1fr;gap:40px;}
+  .entities{padding:0 24px 64px;}.ent-grid{grid-template-columns:1fr 1fr;}
+  .thesis{padding:64px 24px;}.thesis-head{grid-template-columns:1fr;gap:24px;}.pillars{grid-template-columns:1fr;}
+  .for{padding:64px 24px;}.for-grid{grid-template-columns:1fr 1fr;}
+  .structure{padding:64px 24px;}.structure-inner{grid-template-columns:1fr;gap:40px;}
+  .contact{padding:64px 24px;}.contact-inner{grid-template-columns:1fr;gap:40px;}
+  .frow{grid-template-columns:1fr;}.holdco-row{padding:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+    </a>
+    <ul class="nav-links">
+      <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
+      <li><a href="https://sales.flogalhq.com">Sales</a></li>
+      <li><a href="https://properties.flogalhq.com">Properties</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:+12147021336" class="nav-phone">(214) 702-1336</a>
+    <a href="#contact" class="nav-cta">Request a Quote</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo"><img src="../../shared/photos/hero-truck-sunset.jpg" alt="Flogal fleet"></div>
+  <div class="hero-protect"></div>
+  <div class="hero-inner">
+    <div class="hero-label">Flogal Holdings</div>
+    <h1 class="hero-title">One platform.<br><span>Five operators.</span><br>Built to scale.</h1>
+    <p class="hero-sub">Flogal Holdings is a privately held logistics and asset platform operating across hauling, equipment, real estate, and industrial services — structured for institutional-grade relationships.</p>
+    <div class="hero-scroll"><span class="hero-scroll-line"></span>Scroll to explore</div>
+  </div>
+</section>
+
+<!-- OVERVIEW NUMBERS -->
+<div class="overview">
+  <div class="overview-inner">
+    <div class="ov-item">
+      <div class="ov-num">5<sup>+</sup></div>
+      <div class="ov-label">Operating Entities</div>
+      <div class="ov-bar"></div>
+    </div>
+    <div class="ov-item">
+      <div class="ov-num">4</div>
+      <div class="ov-label">Industry Verticals</div>
+      <div class="ov-bar"></div>
+    </div>
+    <div class="ov-item">
+      <div class="ov-num">1</div>
+      <div class="ov-label">Holding Structure</div>
+      <div class="ov-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE ARE -->
+<section class="what" id="platform">
+  <div class="what-inner">
+    <div class="what-left">
+      <span class="eyebrow">Who We Are</span>
+      <h2 class="h2" style="color:var(--navy)">A logistics platform built from the ground up.</h2>
+    </div>
+    <div class="what-body">
+      <p>Flogal Holdings is the parent company of a vertically integrated group of operating businesses built around logistics infrastructure, asset ownership, and long-term value creation. We are not a startup. We are not a broker. We are operators who own physical assets, run real businesses, and build institutional relationships.</p>
+      <div class="what-pull">"We build companies the way infrastructure should be built — documented, structured, and designed to outlast the people who started them."</div>
+      <p>Every entity under Flogal Holdings operates with its own leadership, its own market, and its own growth trajectory — but shares a common financial and operational discipline that makes the platform stronger than any single company alone.</p>
+      <p>Our goal is to be the kind of operator that banks want to lend to, insurers want to underwrite, and corporate partners want to depend on. That standard drives every decision we make — from how we structure our entities to how we answer the phone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ENTITY MAP -->
+<section class="entities" id="entities">
+  <div class="entities-inner">
+    <div class="entities-head">
+      <span class="eyebrow">Platform Structure</span>
+      <h2 class="h2" style="color:var(--navy)">The full entity map.</h2>
+    </div>
+
+    <div class="ent-tree">
+      <!-- HoldCo -->
+      <div class="holdco-row">
+        <div class="holdco-card">
+          <img class="holdco-mark" src="../../shared/logos/flogal-wordmark.png" alt="">
+          <div>
+            <div class="holdco-name">Flogal Holdings</div>
+            <div class="holdco-sub">Parent Company · Private</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connector -->
+      <div style="display:flex;justify-content:center;padding:28px 0 0;margin-bottom:-1px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0;position:relative;width:100%;">
+          <div style="width:2px;height:28px;background:var(--hair);"></div>
+          <div style="position:absolute;top:28px;left:10%;right:10%;height:1px;background:var(--hair);"></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-around;padding:0 10%;margin-bottom:0;">
+        <div style="width:2px;height:24px;background:var(--hair);"></div>
+        <div style="width:2px;height:24px;background:var(--hair);"></div>
+        <div style="width:2px;height:24px;background:var(--hair);"></div>
+        <div style="width:2px;height:24px;background:var(--hair);"></div>
+        <div style="width:2px;height:24px;background:var(--hair);"></div>
+      </div>
+
+      <!-- Entities -->
+      <div class="ent-grid">
+        <div class="ent-card">
+          <div class="ent-color-bar" style="background:var(--blue);"></div>
+          <img class="ent-mark" src="../../shared/logos/flogal-symbol-blue.png" alt="">
+          <div class="ent-type" style="color:var(--blue);">Operating</div>
+          <div class="ent-name">J&amp;D Hauling</div>
+          <div class="ent-desc">Commercial carrier operating DOT-compliant fleet across dedicated and spot freight lanes.</div>
+          <a class="ent-link" style="color:var(--blue);" href="https://carriers.flogalhq.com">Carriers →</a>
+        </div>
+        <div class="ent-card">
+          <div class="ent-color-bar" style="background:var(--blue);"></div>
+          <img class="ent-mark" src="../../shared/logos/flogal-symbol-blue.png" alt="">
+          <div class="ent-type" style="color:var(--blue);">Operating</div>
+          <div class="ent-name">RRTL</div>
+          <div class="ent-desc">Regional transport and logistics operations supporting supply chain execution across key corridors.</div>
+          <a class="ent-link" style="color:var(--blue);" href="https://carriers.flogalhq.com">Carriers →</a>
+        </div>
+        <div class="ent-card">
+          <div class="ent-color-bar" style="background:var(--gold);"></div>
+          <img class="ent-mark" src="../../shared/logos/flogal-symbol-gold.png" alt="">
+          <div class="ent-type" style="color:var(--gold);">Equipment</div>
+          <div class="ent-name">Flogal Equipment</div>
+          <div class="ent-desc">Heavy equipment and commercial vehicle sales, leasing, and fleet solutions for operators and contractors.</div>
+          <a class="ent-link" style="color:var(--gold);" href="https://sales.flogalhq.com">Inventory →</a>
+        </div>
+        <div class="ent-card">
+          <div class="ent-color-bar" style="background:var(--green);"></div>
+          <img class="ent-mark" src="../../shared/logos/flogal-symbol-green.png" alt="">
+          <div class="ent-type" style="color:var(--green);">Real Estate</div>
+          <div class="ent-name">Flogal Properties</div>
+          <div class="ent-desc">Industrial and commercial real estate acquisition, management, and value-add repositioning.</div>
+          <a class="ent-link" style="color:var(--green);" href="https://properties.flogalhq.com">Properties →</a>
+        </div>
+        <div class="ent-card">
+          <div class="ent-color-bar" style="background:var(--gray);"></div>
+          <img class="ent-mark" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+          <div class="ent-type" style="color:var(--gray);">Industrial</div>
+          <div class="ent-name">Flogal Industrial</div>
+          <div class="ent-desc">Site operations, facility services, and industrial support for logistics and construction clients.</div>
+          <a class="ent-link" style="color:var(--gray);" href="#">Industrial →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THESIS -->
+<section class="thesis" id="thesis">
+  <div class="thesis-inner">
+    <div class="thesis-head">
+      <div>
+        <span class="eyebrow" style="color:var(--gold)">Operating Thesis</span>
+        <h2 style="font-weight:700;font-size:44px;letter-spacing:-.025em;line-height:1.05;color:white;margin:16px 0 0;">Why we build<br>this way.</h2>
+      </div>
+      <p class="thesis-intro">The freight and logistics industry is fragmented, undercapitalized, and poorly structured at the ownership level. Flogal is being built to be the exception — a multi-entity platform that operates like an institution from day one.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="p-num">01</div>
+        <div class="p-title">Institutional Structure First</div>
+        <div class="p-body">Every entity is formed, documented, and capitalized to meet the standards of banks, insurers, and corporate partners. Not after we grow — from the start.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-num">02</div>
+        <div class="p-title">Vertical Integration Creates Leverage</div>
+        <div class="p-body">When you own the truck, the equipment, the yard, and the financing — you control margin at every level. That's the Flogal model.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-num">03</div>
+        <div class="p-title">Assets Over Revenue</div>
+        <div class="p-body">We build asset-backed businesses, not revenue-dependent service companies. Physical assets create permanence, collateral, and compounding value.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-num">04</div>
+        <div class="p-title">Operators, Not Consultants</div>
+        <div class="p-body">Every dollar we earn is from moving freight, selling equipment, or collecting rent — not from advisory fees or management contracts.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-num">05</div>
+        <div class="p-title">Scalable by Design</div>
+        <div class="p-body">The holding structure is built to absorb new entities without restructuring. We can add a business the way you add a division — cleanly.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-num">06</div>
+        <div class="p-title">Long Time Horizon</div>
+        <div class="p-body">We are not building to flip. We are building to compound. Every decision is made through the lens of what the business looks like in ten years.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE BUILD FOR -->
+<section class="for">
+  <div class="for-inner">
+    <span class="eyebrow">Who We Serve</span>
+    <h2 class="h2" style="color:var(--navy);margin-bottom:0;">Built for partners who<br>require institutional quality.</h2>
+    <div class="for-grid">
+      <div class="for-card">
+        <div class="for-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="3" y1="8" x2="21" y2="8"/><line x1="9" y1="2" x2="9" y2="8"/></svg>
+        </div>
+        <div class="for-title">Shippers &amp; Freight Partners</div>
+        <div class="for-body">Reliable capacity, full compliance documentation, and dedicated account management. The kind of operator partners want to depend on for the long haul.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="for-title">Insurance Carriers</div>
+        <div class="for-body">DOT-compliant operations, documented safety programs, and full authority records across all fleet entities. Audit-ready at all times.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </div>
+        <div class="for-title">Corporate Shippers</div>
+        <div class="for-body">Reliable capacity, documented compliance, and dedicated account structure. The kind of carrier partner that shows up and shows documentation.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="for-title">Sellers &amp; Partners</div>
+        <div class="for-body">Whether you're selling a property, equipment, or a business — we are a direct buyer with the structure to close, not just the intention to.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section class="structure" id="structure">
+  <div class="structure-inner">
+    <div>
+      <span class="eyebrow" style="color:var(--gold)">Corporate Structure</span>
+      <h2 style="font-weight:700;font-size:40px;letter-spacing:-.025em;line-height:1.05;color:white;margin:16px 0 18px;">What's under the hood.</h2>
+      <p style="font-size:15px;line-height:1.7;color:rgba(255,255,255,.45);max-width:400px;">Flogal is structured as a holding company with operating subsidiaries in each business vertical. This gives us the flexibility to grow each entity independently while maintaining unified financial oversight.</p>
+    </div>
+    <div class="str-list">
+      <div class="str-row">
+        <span class="str-key">Entity Type</span>
+        <span class="str-val">Private Holding Company</span>
+      </div>
+      <div class="str-row">
+        <span class="str-key">Headquarters</span>
+        <span class="str-val">Oklahoma City, OK</span>
+      </div>
+      <div class="str-row">
+        <span class="str-key">Operating Entities</span>
+        <span class="str-val">5 Active</span>
+      </div>
+      <div class="str-row">
+        <span class="str-key">Industry Verticals</span>
+        <span class="str-val">Logistics · Equipment · Real Estate · Industrial</span>
+      </div>
+      <div class="str-row">
+        <span class="str-key">Primary Website</span>
+        <span class="str-val">flogalhq.com</span>
+      </div>
+      <div class="str-row"><span class="str-key">Status</span><span class="str-val"><span class="str-badge">Actively Operating</span></span></div>
+      <div class="str-row"><span class="str-key">Funding Model</span><span class="str-val" style="font-size:13px;text-align:right;">Self-Funded · Full Decision Capacity</span></div>
+      <div class="str-row">
+        <span class="str-key">Carrier Authority</span>
+        <span class="str-val"><span class="str-badge">DOT + MC Active</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <span class="eyebrow">Contact</span>
+      <h2 class="h2" style="color:var(--navy);margin-bottom:20px;">Get in touch.</h2>
+      <p style="font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:40px;max-width:380px;">For banking relationships, insurance discussions, business development, or general inquiries about the Flogal platform.</p>
+      <div class="ci-block"><div class="ci-label">General Inquiries</div><div class="ci-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
+      <div class="ci-block"><div class="ci-label">Carrier Operations</div><div class="ci-val"><a href="mailto:carriers@flogalhq.com">carriers@flogalhq.com</a></div></div>
+      <div class="ci-block"><div class="ci-label">Equipment</div><div class="ci-val"><a href="mailto:equipment@flogalhq.com">equipment@flogalhq.com</a></div></div>
+      <div class="ci-block"><div class="ci-label">Properties</div><div class="ci-val"><a href="mailto:properties@flogalhq.com">properties@flogalhq.com</a></div></div>
+      <div class="ci-block"><div class="ci-label">Headquarters</div><div class="ci-val">Oklahoma City, Oklahoma</div></div>
+    </div>
+    <form class="form" onsubmit="sub(event)">
+      <div class="frow">
+        <div class="field"><label>First Name</label><input type="text" placeholder="John"></div>
+        <div class="field"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+      </div>
+      <div class="field"><label>Company</label><input type="text" placeholder="Company or Institution"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="john@institution.com"></div>
+      <div class="field">
+        <label>Inquiry Type</label>
+        <select>
+          <option value="">Select...</option>
+          <option>Equipment Purchase or Lease</option>
+          <option>Insurance</option>
+          <option>Partnership / Business Development</option>
+          <option>Carrier / Freight</option>
+          <option>Equipment</option>
+          <option>Real Estate</option>
+          <option>Acquisition / Investment</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Message</label><textarea placeholder="Tell us about your inquiry..."></textarea></div>
+      <button type="submit" class="form-btn">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span>&#169; 2026 Flogal Holdings LLC. All rights reserved.</span>
+    <span>flogalhq.com</span>
+  </div>
+</footer>
+
+<script>
+function sub(e){
+  e.preventDefault();
+  const b=e.target.querySelector('.form-btn');
+  b.textContent='Sent ✓';b.style.background='#165E3A';b.disabled=true;
+}
+</script>
+</body>
+</html>
