@@ -9,7 +9,12 @@
       "PowerShell($response = Invoke-WebRequest -Uri \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\" -UseBasicParsing; $response.Headers['Content-Type']; $response.Headers['Content-Encoding']; $response.RawContentLength)",
       "PowerShell($response = Invoke-WebRequest -Uri \"https://api.anthropic.com/v1/design/h/wvIld9igkIF6U_8rBusTZg?open_file=ui_kits%2Fflogalhq%2Findex.html\" -UseBasicParsing; [System.IO.File]::WriteAllBytes\\(\"$env:TEMP\\\\design.tar.gz\", $response.Content\\); Write-Output \"Saved $\\($response.Content.Length\\) bytes\")",
       "Bash(python3 -c ' *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(python3 -c \"from PIL import Image; print\\('Pillow OK'\\)\")",
+      "PowerShell(python --version 2>&1)",
+      "PowerShell(python -c \"from PIL import Image; print\\('Pillow OK'\\)\" 2>&1)",
+      "PowerShell(Get-Command py -ErrorAction SilentlyContinue)",
+      "PowerShell(& py --version 2>&1)"
     ]
   }
 }
