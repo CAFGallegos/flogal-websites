@@ -64,8 +64,10 @@ button{font-family:var(--font-sans);}
 .sl-nav{background:var(--flogal-navy);border-bottom:4px solid var(--flogal-gold);position:sticky;top:0;z-index:100;}
 .sl-nav-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:36px;padding:14px 32px;}
 .sl-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white;}
-.sl-mark-img{height:24px;width:auto;display:block;flex:none;}
-.sl-brand-text{display:flex;flex-direction:column;line-height:1.05;gap:3px;}
+.sl-symbol{height:30px;width:auto;display:block;flex:none;}
+.sl-wm{height:20px;width:auto;display:block;flex:none;}
+.sl-brand-divider{width:1px;height:20px;background:rgba(255,255,255,.25);flex:none;}
+.sl-brand-division{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);white-space:nowrap;}
 .sl-fl{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:0.04em;}
 .sl-sub{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--flogal-gold);}
 .sl-nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;}
@@ -188,7 +190,8 @@ button{font-family:var(--font-sans);}
 .sl-footer{background:var(--night-0);padding:48px 0 0;margin-top:auto;}
 .sl-footer-inner{max-width:1440px;margin:0 auto;padding:0 32px;}
 .sl-footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
-.sl-footer-brand img{height:32px;width:auto;opacity:.85;display:block;}
+.sl-footer-symbol{height:32px;width:auto;display:block;flex:none;}
+.sl-footer-wm{height:20px;width:auto;display:block;flex:none;opacity:.9;}
 .sl-footer-nav{display:flex;gap:48px;flex-wrap:wrap;}
 .sl-footer-col{display:flex;flex-direction:column;gap:10px;}
 .sl-footer-col-h{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
@@ -226,11 +229,10 @@ button{font-family:var(--font-sans);}
 <header class="sl-nav">
   <div class="sl-nav-inner">
     <a class="sl-brand" href="https://www.flogalhq.com">
-      <img class="sl-mark-img" src="../../shared/logos/flogal-symbol-gold.png" alt="">
-      <div class="sl-brand-text">
-        <span class="sl-fl">FLOGAL</span>
-        <span class="sl-sub">Equipment · Sales</span>
-      </div>
+      <img class="sl-symbol" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+      <img class="sl-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
+      <span class="sl-brand-divider" aria-hidden="true"></span>
+      <span class="sl-brand-division">Equipment &middot; Sales</span>
     </a>
     <ul class="sl-nav-links">
       <li><a href="#inventory">Inventory</a></li>
@@ -383,7 +385,8 @@ button{font-family:var(--font-sans);}
   <div class="sl-footer-inner">
     <div class="sl-footer-top">
       <div class="sl-footer-brand">
-        <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+        <img class="sl-footer-symbol" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+        <img class="sl-footer-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
       </div>
       <nav class="sl-footer-nav">
         <div class="sl-footer-col">
@@ -414,7 +417,7 @@ button{font-family:var(--font-sans);}
     </div>
     <div class="sl-footer-bottom">
       <span class="sl-footer-domains">flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com</span>
-      <span class="sl-footer-copy">© 2026 Flogal Holdings LLC. All rights reserved.</span>
+      <span class="sl-footer-copy">© 2026 FLOGAL Holdings, LLC</span>
       <a class="sl-staff-link" href="admin/login.html">Staff Login</a>
     </div>
   </div>

@@ -145,7 +145,7 @@ img{display:block;}
 .form-btn{background:var(--navy);color:white;border:none;padding:12px 28px;font-family:'Satoshi',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:6px;transition:background 140ms;align-self:flex-start;}
 .form-btn:hover{background:#122A3F;}
 
-/* footer styles in ../../shared/css/flogalhq-shell.css */
+
 @media(max-width:1100px){.ent-grid{grid-template-columns:repeat(3,1fr);}.pillars{grid-template-columns:1fr 1fr;}.for-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:900px){
   .nav-links,.nav-cta,.nav-phone{display:none;}.nav-inner{padding:16px 24px;}
@@ -167,7 +167,8 @@ img{display:block;}
 <header class="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="/">
-      <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+      <img class="nav-symbol" src="../../shared/logos/flogal-symbol-tricolor.png" alt="">
+      <img class="nav-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
     </a>
     <ul class="nav-links">
       <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
@@ -477,8 +478,45 @@ img{display:block;}
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
-    <span>&#169; 2026 Flogal Holdings LLC. All rights reserved.</span>
-    <span>flogalhq.com</span>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-lockup">
+          <img class="footer-symbol" src="../../shared/logos/flogal-symbol-tricolor.png" alt="">
+          <img class="footer-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
+        </div>
+        <p class="footer-tagline">Asset-backed across the freight stack.</p>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-col">
+          <span class="footer-col-h">Hauling</span>
+          <a href="https://carriers.flogalhq.com">Load Board</a>
+          <a href="https://carriers.flogalhq.com">Request a Quote</a>
+          <a href="https://carriers.flogalhq.com">Partner Login</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-h">Equipment</span>
+          <a href="https://sales.flogalhq.com">Inventory</a>
+          <a href="https://sales.flogalhq.com">Financing</a>
+          <a href="https://sales.flogalhq.com">Trade-In</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-h">Realty</span>
+          <a href="https://properties.flogalhq.com">Listings</a>
+          <a href="https://properties.flogalhq.com">Yard Leasing</a>
+          <a href="https://properties.flogalhq.com">Contact</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-h">Company</span>
+          <a href="/about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-domains">flogalhq.com &middot; carriers.flogalhq.com &middot; sales.flogalhq.com &middot; properties.flogalhq.com</span>
+      <span class="footer-copy">&#169; 2026 FLOGAL Holdings, LLC</span>
+      <a class="footer-staff" href="#">Staff Login</a>
+    </div>
   </div>
 </footer>
 

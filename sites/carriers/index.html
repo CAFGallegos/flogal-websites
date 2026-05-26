@@ -67,8 +67,10 @@ a{color:inherit;text-decoration:none;}
 .op-nav{position:sticky;top:0;z-index:100;background:rgba(5,10,18,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--op-rule);}
 .op-nav-inner{max-width:var(--op-max);margin:0 auto;padding:14px 40px;display:flex;align-items:center;gap:40px;}
 .op-nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white;}
-.op-nav-mark{height:26px;width:auto;display:block;flex:none;}
-.op-nav-brand-text{display:flex;flex-direction:column;line-height:1.1;gap:2px;}
+.op-nav-symbol{height:30px;width:auto;display:block;flex:none;}
+.op-nav-wm{height:20px;width:auto;display:block;flex:none;}
+.op-brand-divider{width:1px;height:20px;background:rgba(255,255,255,.25);flex:none;}
+.op-brand-division{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);white-space:nowrap;}
 .op-nav-fl{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:.04em;}
 .op-nav-sub{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--op-blue-strong);}
 .op-nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;}
@@ -236,7 +238,8 @@ a{color:inherit;text-decoration:none;}
 /* ---- Footer -------------------------------------------------------- */
 .op-footer{background:var(--op-bg);padding:48px 0 0;border-top:1px solid var(--op-rule);}
 .op-footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
-.op-footer-brand img{height:32px;width:auto;opacity:.85;display:block;}
+.op-footer-symbol{height:32px;width:auto;display:block;flex:none;}
+.op-footer-wm{height:20px;width:auto;display:block;flex:none;opacity:.9;}
 .op-footer-nav{display:flex;gap:48px;flex-wrap:wrap;}
 .op-footer-col{display:flex;flex-direction:column;gap:10px;}
 .op-footer-col-h{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
@@ -245,7 +248,7 @@ a{color:inherit;text-decoration:none;}
 .op-footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;flex-wrap:wrap;}
 .op-footer-domains{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.06em;}
 .op-footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.25);letter-spacing:.04em;}
-.op-partner-link{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.14);transition:color 200ms;padding:4px 6px;}
+.op-staff-link{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.14);transition:color 200ms;padding:4px 6px;}
 .op-partner-link:hover{color:rgba(255,255,255,.5);}
 
 /* ---- Responsive --------------------------------------------------- */
@@ -273,11 +276,10 @@ a{color:inherit;text-decoration:none;}
 <header class="op-nav">
   <div class="op-nav-inner">
     <a class="op-nav-brand" href="https://www.flogalhq.com">
-      <img class="op-nav-mark" src="../../shared/logos/flogal-symbol-color.png" alt="">
-      <div class="op-nav-brand-text">
-        <span class="op-nav-fl">FLOGAL</span>
-        <span class="op-nav-sub">Carrier Operations</span>
-      </div>
+      <img class="op-nav-symbol" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+      <img class="op-nav-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
+      <span class="op-brand-divider" aria-hidden="true"></span>
+      <span class="op-brand-division">Carrier Operations</span>
     </a>
     <ul class="op-nav-links">
       <li><a href="https://www.flogalhq.com">Home</a></li>
@@ -813,7 +815,8 @@ a{color:inherit;text-decoration:none;}
   <div class="op-wrap">
     <div class="op-footer-top">
       <div class="op-footer-brand">
-        <img src="../../shared/logos/flogal-wordmark.png" alt="Flogal">
+        <img class="op-footer-symbol" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+        <img class="op-footer-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
       </div>
       <nav class="op-footer-nav">
         <div class="op-footer-col">
@@ -844,8 +847,8 @@ a{color:inherit;text-decoration:none;}
     </div>
     <div class="op-footer-bottom">
       <span class="op-footer-domains">flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com</span>
-      <span class="op-footer-copy">© 2026 Flogal Holdings LLC. All rights reserved.</span>
-      <a class="op-partner-link" href="portal/login.html">Partner Login</a>
+      <span class="op-footer-copy">© 2026 FLOGAL Holdings, LLC</span>
+      <a class="op-staff-link" href="portal/login.html">Staff Login</a>
     </div>
   </div>
 </footer>
