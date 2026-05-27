@@ -1,5 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/shared/:path*", "destination": "../../shared/:path*" }
-  ]
+  "buildCommand": "node ../../copy-shared.js"
 }

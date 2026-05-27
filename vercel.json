@@ -1,4 +1,5 @@
 {
+  "buildCommand": "node copy-shared.js",
   "rewrites": [
     { "source": "/(.*)", "destination": "/sites/flogalhq/$1" }
   ]
