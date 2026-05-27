@@ -1,3 +1,4 @@
 {
-  "buildCommand": "node ../../copy-shared.js"
+  "buildCommand": "node ../../copy-shared.js",
+  "outputDirectory": "."
 }
