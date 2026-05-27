@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/shared/:path*", "destination": "../../shared/:path*" }
+  ]
+}
