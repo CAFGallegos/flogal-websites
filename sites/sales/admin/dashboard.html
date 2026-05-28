@@ -555,29 +555,35 @@ function openDrawerEdit(id) {
   openDrawer();
 }
 
+function toInt(val) {
+  const m = String(val).match(/\d[\d,]*/);
+  if (!m) return null;
+  const n = parseInt(m[0].replace(/,/g, ''), 10);
+  return isNaN(n) ? null : n;
+}
+
 async function submitUnitForm() {
   const btn = document.getElementById('drawerSubmitBtn');
   btn.disabled = true;
   btn.textContent = editingId ? 'Saving…' : 'Adding…';
 
-  const rawPrice = String(document.getElementById('f-price').value).replace(/[^0-9.]/g, '');
   const payload = {
     stock_number:    document.getElementById('f-stock').value.trim(),
     type:            document.getElementById('f-type').value,
-    year:            parseInt(document.getElementById('f-year').value)  || null,
+    year:            toInt(document.getElementById('f-year').value),
     make:            document.getElementById('f-make').value.trim(),
     model:           document.getElementById('f-model').value.trim(),
     engine:          document.getElementById('f-engine').value.trim(),
     transmission:    document.getElementById('f-trans').value.trim(),
-    mileage:         document.getElementById('f-miles').value.trim(),
-    price:           rawPrice ? parseFloat(rawPrice) : null,
-    monthly_payment: document.getElementById('f-mopay').value.trim(),
+    mileage:         toInt(document.getElementById('f-miles').value),
+    price:           toInt(document.getElementById('f-price').value),
+    monthly_payment: toInt(document.getElementById('f-mopay').value),
     lease_eligible:  document.getElementById('f-lease').checked,
     condition:       document.getElementById('f-cond').value,
     location:        document.getElementById('f-loc').value.trim(),
     vin:             document.getElementById('f-vin').value.trim(),
     axle_config:     document.getElementById('f-axle').value.trim(),
-    wheelbase:       document.getElementById('f-wb').value.trim(),
+    wheelbase:       toInt(document.getElementById('f-wb').value),
     dot_inspection:  document.getElementById('f-dot').value || null,
     title_status:    document.getElementById('f-title').value,
   };
