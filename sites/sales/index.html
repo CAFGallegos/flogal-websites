@@ -568,6 +568,14 @@ function fmt(n) {
   return '$' + Number(n).toLocaleString();
 }
 
+function parsePhotos(val) {
+  if (Array.isArray(val)) return val;
+  if (typeof val === 'string' && val) {
+    try { return JSON.parse(val); } catch { return []; }
+  }
+  return [];
+}
+
 function renderGrid() {
   const rows = getFiltered();
   document.getElementById('gridCount').textContent = rows.length + ' unit' + (rows.length === 1 ? '' : 's');
@@ -582,9 +590,11 @@ function renderGrid() {
     const viz = TYPE_VIZ[u.type] || { hue:'#1a2a3f', emoji:'📦' };
     const tag = COND_TAG[u.condition];
     const uid = String(u.id);
+    const photos = parsePhotos(u.photos);
+    const heroUrl = photos[0] || null;
     return `<button class="sl-tile${uid === selectedId ? ' is-selected' : ''}" onclick="selectUnit('${uid}')" data-id="${uid}">
       <div class="sl-tile-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
-        <span class="sl-tile-emoji">${viz.emoji}</span>
+        ${heroUrl ? `<img src="${heroUrl}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">` : `<span class="sl-tile-emoji">${viz.emoji}</span>`}
         <span class="sl-tile-id">${u.stock_number || uid}</span>
         ${tag ? `<span class="sl-tile-tag ${tag.cls}">${tag.label}</span>` : ''}
       </div>
@@ -628,11 +638,13 @@ function renderDrawer(id) {
     ['Location',      u.location],
   ].filter(([, v]) => v != null && v !== '');
 
+  const drawerPhotos = parsePhotos(u.photos);
+  const drawerHeroUrl = drawerPhotos[0] || null;
   document.getElementById('detailDrawer').innerHTML = `
     <div class="sl-drawer-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
+      ${drawerHeroUrl ? `<img src="${drawerHeroUrl}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">` : `<span class="sl-drawer-emoji">${viz.emoji}</span>`}
       <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">&times;</button>
       <span class="sl-drawer-id">${u.stock_number || uid}</span>
-      <span class="sl-drawer-emoji">${viz.emoji}</span>
       <div class="sl-drawer-photo-meta">${u.type || ''}</div>
     </div>
     <div class="sl-drawer-body">

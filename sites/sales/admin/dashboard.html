@@ -13,6 +13,8 @@
 .ad-photo-remove:hover{background:#e05a5a;}
 .ad-photo-badge{position:absolute;bottom:3px;left:3px;font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#C79A2B;color:#0B1D2D;padding:1px 5px;border-radius:3px;}
 .ad-photo-upload-status{font-size:11px;color:var(--ad-fg-dim,#6b7f94);margin-top:6px;min-height:16px;}
+.ad-drop.is-drag-over{border-color:#C79A2B !important;background:rgba(199,154,43,.06);}
+.ad-drop > *{pointer-events:none;}
 </style>
 </head>
 <body>
@@ -545,7 +547,12 @@ document.getElementById('drawerClose').addEventListener('click', closeDrawer);
 document.getElementById('drawerCancel').addEventListener('click', closeDrawer);
 overlay.addEventListener('click', closeDrawer);
 window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-document.querySelector('.ad-drop').addEventListener('click', () => document.getElementById('f-photos').click());
+(function () {
+  const dz = document.querySelector('.ad-drop');
+  dz.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); dz.classList.add('is-drag-over'); });
+  dz.addEventListener('dragleave', e => { if (!dz.contains(e.relatedTarget)) dz.classList.remove('is-drag-over'); });
+  dz.addEventListener('drop', e => { e.preventDefault(); e.stopPropagation(); dz.classList.remove('is-drag-over'); handleFiles(e.dataTransfer.files); });
+})();
 
 function openDrawerEdit(id) {
   const unit = inventory.find(u => u.id === id);
@@ -631,10 +638,16 @@ function removePendingFile(index) {
   renderPhotoPreview();
 }
 
-document.getElementById('f-photos').addEventListener('change', function () {
-  pendingFiles = [...pendingFiles, ...Array.from(this.files)];
-  this.value = '';
+function handleFiles(fileList) {
+  const allowed = new Set(['image/jpeg', 'image/png', 'image/webp']);
+  const valid = Array.from(fileList).filter(f => allowed.has(f.type));
+  pendingFiles = [...pendingFiles, ...valid];
   renderPhotoPreview();
+}
+
+document.getElementById('f-photos').addEventListener('change', function () {
+  handleFiles(this.files);
+  this.value = '';
 });
 
 async function submitUnitForm() {
@@ -669,16 +682,19 @@ async function submitUnitForm() {
   const uploadedUrls = [];
   for (let i = 0; i < pendingFiles.length; i++) {
     statusEl.textContent = `Uploading photo ${i + 1} of ${pendingFiles.length}…`;
-    const file  = pendingFiles[i];
-    const ext   = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
-    const fname = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-    const path  = `${stockNum}/${fname}`;
-    const { error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, {
-      cacheControl: '3600',
-      upsert: false,
-      contentType: file.type,
-    });
-    if (upErr) { console.error('photo upload:', upErr); continue; }
+    const file = pendingFiles[i];
+    const mkPath = () => {
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+      return `${stockNum}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    };
+    const opts = { cacheControl: '3600', upsert: false, contentType: file.type };
+    let path = mkPath();
+    let { error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, opts);
+    if (upErr) {
+      path = mkPath();
+      ({ error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, opts));
+    }
+    if (upErr) { console.error(`photo ${i + 1} failed:`, upErr.message); continue; }
     const { data: urlData } = sb.storage.from('inventory-photos').getPublicUrl(path);
     uploadedUrls.push(urlData.publicUrl);
   }
