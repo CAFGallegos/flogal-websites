@@ -341,8 +341,9 @@ let existingPhotos  = [];
 
 // Auth guard — redirect to login if no session
 (async () => {
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session) { window.location.href = 'login.html'; return; }
+  const { data, error: authErr } = await sb.auth.getSession();
+  const session = data?.session;
+  if (authErr || !session) { window.location.href = 'login.html'; return; }
   const email = session.user.email || '';
   document.getElementById('userAvatar').textContent = email.slice(0, 2).toUpperCase();
   document.getElementById('userName').textContent   = email;
@@ -351,7 +352,13 @@ let existingPhotos  = [];
 
 async function loadInventory() {
   const { data, error } = await sb.from('inventory').select('*').order('created_at', { ascending: false });
-  if (error) { console.error('inventory:', error); return; }
+  console.log('[loadInventory]', { rowCount: data?.length, error });
+  if (error) {
+    console.error('inventory:', error);
+    const tbody = document.getElementById('inventoryBody');
+    if (tbody) tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#e05a5a;padding:20px;">Failed to load inventory: ${error.message}</td></tr>`;
+    return;
+  }
   inventory = data || [];
   renderInventory();
   updateKPIs();
@@ -525,7 +532,9 @@ function closeDrawer() {
   overlay.classList.remove('is-open');
   drawer.classList.remove('is-open');
   drawer.setAttribute('aria-hidden', 'true');
-  document.getElementById('f-unit-id').value = '';
+  const _fid = document.getElementById('f-unit-id');
+  _fid.value        = '';
+  _fid.defaultValue = '';
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];
@@ -555,9 +564,11 @@ window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer();
 })();
 
 function openDrawerEdit(id) {
-  const unit = inventory.find(u => u.id === id);
+  const unit = inventory.find(u => String(u.id) === String(id));
   if (!unit) return;
-  document.getElementById('f-unit-id').value = unit.id;
+  const _fid = document.getElementById('f-unit-id');
+  _fid.value        = String(unit.id);
+  _fid.defaultValue = String(unit.id);
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];

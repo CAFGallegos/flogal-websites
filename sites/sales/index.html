@@ -529,6 +529,7 @@ const COND_TAG = {
     .select('*')
     .eq('status', 'active')
     .order('created_at', { ascending: false });
+  console.log('[inventory fetch]', { rowCount: data?.length, error });
   if (error) {
     console.error('inventory load:', error);
     document.getElementById('gridCount').textContent = '0 units';
