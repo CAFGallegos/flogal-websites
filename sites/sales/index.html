@@ -491,9 +491,10 @@ const sb = supabase.createClient(
   'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
 );
 
-let allInventory = [];
-let selectedId   = null;
-let quoteUnitId  = null;
+let allInventory   = [];
+let selectedId     = null;
+let quoteUnitId    = null;
+let drawerPhotoIdx = 0;
 
 const TYPE_MAP = {
   tractor: 'Truck — Day Cab',
@@ -585,6 +586,38 @@ function parsePhotos(val) {
   return [];
 }
 
+function buildPhotoBlock(u, photos, idx) {
+  const viz = TYPE_VIZ[u.type] || { hue:'#1a2a3f', emoji:'📦' };
+  const uid = String(u.id);
+  const url = photos[idx] || null;
+  const multi = photos.length > 1;
+  const arrowSt = 'position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:0;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:22px;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;';
+  const dots = multi
+    ? `<div style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2;">${
+        photos.map((_, i) => `<span style="width:7px;height:7px;border-radius:50%;background:${i===idx?'rgba(255,255,255,.95)':'rgba(255,255,255,.35)'};display:inline-block;flex:none;transition:background 150ms;"></span>`).join('')
+      }</div>`
+    : '';
+  return `<div id="drawerPhotoBlock" class="sl-drawer-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
+    ${url ? `<img src="${url}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;">` : `<span class="sl-drawer-emoji">${viz.emoji}</span>`}
+    <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">&times;</button>
+    <span class="sl-drawer-id">${u.stock_number || uid}</span>
+    <div class="sl-drawer-photo-meta">${u.type || ''}</div>
+    ${multi ? `<button onclick="stepCarousel(-1)" style="${arrowSt}left:10px;">&#8249;</button>` : ''}
+    ${multi ? `<button onclick="stepCarousel(1)" style="${arrowSt}right:10px;">&#8250;</button>` : ''}
+    ${dots}
+  </div>`;
+}
+
+function stepCarousel(delta) {
+  const u = allInventory.find(i => String(i.id) === String(selectedId));
+  if (!u) return;
+  const photos = parsePhotos(u.photos);
+  if (photos.length < 2) return;
+  drawerPhotoIdx = (drawerPhotoIdx + delta + photos.length) % photos.length;
+  const block = document.getElementById('drawerPhotoBlock');
+  if (block) block.outerHTML = buildPhotoBlock(u, photos, drawerPhotoIdx);
+}
+
 function renderGrid() {
   const rows = getFiltered();
   document.getElementById('gridCount').textContent = rows.length + ' unit' + (rows.length === 1 ? '' : 's');
@@ -604,7 +637,7 @@ function renderGrid() {
     const uid = String(u.id);
     const photos = parsePhotos(u.photos);
     const heroUrl = photos[0] || null;
-    return `<button class="sl-tile${uid === selectedId ? ' is-selected' : ''}" onclick="selectUnit('${uid}')" data-id="${uid}">
+    return `<button class="sl-tile${uid === selectedId ? ' is-selected' : ''}" data-id="${uid}">
       <div class="sl-tile-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
         ${heroUrl ? `<img src="${heroUrl}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">` : `<span class="sl-tile-emoji">${viz.emoji}</span>`}
         <span class="sl-tile-id">${u.stock_number || uid}</span>
@@ -628,10 +661,10 @@ function renderGrid() {
 }
 
 function renderDrawer(id) {
+  drawerPhotoIdx = 0;
   const u = allInventory.find(i => String(i.id) === String(id));
   if (!u) { document.getElementById('detailDrawer').innerHTML = ''; return; }
 
-  const viz = TYPE_VIZ[u.type] || { hue:'#1a2a3f', emoji:'📦' };
   const uid = String(u.id);
 
   const specs = [
@@ -651,14 +684,8 @@ function renderDrawer(id) {
   ].filter(([, v]) => v != null && v !== '');
 
   const drawerPhotos = parsePhotos(u.photos);
-  const drawerHeroUrl = drawerPhotos[0] || null;
   document.getElementById('detailDrawer').innerHTML = `
-    <div class="sl-drawer-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
-      ${drawerHeroUrl ? `<img src="${drawerHeroUrl}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">` : `<span class="sl-drawer-emoji">${viz.emoji}</span>`}
-      <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">&times;</button>
-      <span class="sl-drawer-id">${u.stock_number || uid}</span>
-      <div class="sl-drawer-photo-meta">${u.type || ''}</div>
-    </div>
+    ${buildPhotoBlock(u, drawerPhotos, 0)}
     <div class="sl-drawer-body">
       <div>
         <div class="sl-drawer-yr">${u.year || ''} &middot; ${u.make || ''}</div>
@@ -720,6 +747,12 @@ function resetFilters() {
   document.querySelectorAll('.sl-fil input[type="checkbox"]').forEach(c => c.checked = false);
   renderGrid();
 }
+
+// Card click — delegation on grid so re-renders don't break it
+document.getElementById('inventoryGrid').addEventListener('click', e => {
+  const tile = e.target.closest('.sl-tile');
+  if (tile) selectUnit(tile.dataset.id);
+});
 
 // Wire filter + sort listeners
 document.querySelectorAll('input[name="type"], input[name="make"]').forEach(el => {
