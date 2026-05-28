@@ -4,7 +4,7 @@
 
 /* ---- NAV ---- */
 .nav{position:sticky;top:0;z-index:50;background:rgba(11,29,45,.94);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06);}
-.nav-inner{max-width:1320px;margin:0 auto;padding:13px 40px;display:flex;align-items:center;gap:48px;color:white;}
+.nav-inner{max-width:1440px;margin:0 auto;padding:13px 40px;display:flex;align-items:center;gap:48px;color:white;}
 .nav-brand{display:flex;align-items:center;gap:10px;}
 .nav-symbol{height:30px;width:auto;display:block;flex:none;}
 .nav-wm{height:20px;width:auto;display:block;flex:none;}
@@ -17,7 +17,7 @@
 
 /* ---- FOOTER ---- */
 .footer{background:var(--night);padding:56px 0 0;}
-.footer-inner{max-width:1320px;margin:0 auto;padding:0 40px;}
+.footer-inner{max-width:1440px;margin:0 auto;padding:0 40px;}
 .footer-top{display:grid;grid-template-columns:260px 1fr;gap:56px;padding-bottom:48px;}
 .footer-brand{display:flex;flex-direction:column;gap:14px;}
 .footer-lockup{display:flex;align-items:center;gap:10px;}
