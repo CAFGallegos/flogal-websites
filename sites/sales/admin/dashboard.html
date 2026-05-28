@@ -712,6 +712,7 @@ async function submitUnitForm() {
     dot_inspection:  document.getElementById('f-dot').value || null,
     title_status:    document.getElementById('f-title').value,
   };
+  delete payload.created_at;
 
   // Upload pending photos to Storage
   const statusEl = document.getElementById('photoUploadStatus');
