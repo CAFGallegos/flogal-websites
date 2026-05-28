@@ -10,7 +10,7 @@
   <div class="lg-page" data-screen-label="FLOGAL Sales Admin · Login">
     <div class="lg-card">
       <a class="lg-brand" href="../index.html">
-        <img class="lg-brand-mark" src="../../../shared/logos/flogal-symbol-color.png" alt="">
+        <img class="lg-brand-mark" src="../../../shared/logos/flogal-symbol-gold.png" alt="">
         <span class="lg-brand-wm">FLOGAL</span>
         <span class="lg-brand-divider" aria-hidden="true"></span>
         <span class="lg-brand-division">Sales Admin</span>
@@ -19,17 +19,18 @@
       <h1 class="lg-h">Inventory Portal</h1>
       <p class="lg-sub">Sign in to manage equipment listings, lease deals, and customer inquiries.</p>
 
-      <form action="dashboard.html" method="get">
+      <form id="loginForm">
         <div class="lg-field">
           <label class="lg-lab" for="lg-email">Email</label>
-          <input id="lg-email" name="email" type="email" class="lg-input" placeholder="you@flogalhq.com" autocomplete="username">
+          <input id="lg-email" name="email" type="email" class="lg-input" placeholder="you@flogalhq.com" autocomplete="username" required>
         </div>
         <div class="lg-field">
           <label class="lg-lab" for="lg-pass">Password</label>
-          <input id="lg-pass" name="password" type="password" class="lg-input" placeholder="••••••••••••" autocomplete="current-password">
+          <input id="lg-pass" name="password" type="password" class="lg-input" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" autocomplete="current-password" required>
         </div>
+        <p id="loginError" style="display:none;color:#e05a5a;font-size:12.5px;margin:0 0 12px;line-height:1.4;"></p>
         <div class="lg-actions">
-          <button type="submit" class="ad-btn ad-btn-blue">Sign In →</button>
+          <button type="submit" class="ad-btn ad-btn-blue" id="loginBtn">Sign In &#8594;</button>
         </div>
       </form>
 
@@ -38,5 +39,36 @@
       </div>
     </div>
   </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const sb = supabase.createClient(
+  'https://uzbpsppeihazicmngqqq.supabase.co',
+  'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
+);
+
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn   = document.getElementById('loginBtn');
+  const errEl = document.getElementById('loginError');
+  const email    = document.getElementById('lg-email').value.trim();
+  const password = document.getElementById('lg-pass').value;
+
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
+  errEl.style.display = 'none';
+
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    errEl.textContent = error.message;
+    errEl.style.display = 'block';
+    btn.textContent = 'Sign In →';
+    btn.disabled = false;
+  } else {
+    window.location.href = 'dashboard.html';
+  }
+});
+</script>
 </body>
 </html>

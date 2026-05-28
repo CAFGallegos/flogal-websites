@@ -246,7 +246,7 @@ button{font-family:var(--font-sans);}
       <li><a href="#tradein">Trade-In</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="sl-cta" href="#contact">Request a Quote →</a>
+    <a class="sl-cta" href="#" id="btnNavQuote">Request a Quote &#8594;</a>
   </div>
 </header>
 
@@ -274,27 +274,27 @@ button{font-family:var(--font-sans);}
 
     <div class="sl-fil-section">
       <button class="sl-fil-h" onclick="toggleSection(this)">
-        <span>Equipment type</span><span class="sl-fil-chev">−</span>
+        <span>Equipment type</span><span class="sl-fil-chev">&#8722;</span>
       </button>
       <div class="sl-fil-body">
-        <label class="sl-fil-check"><input type="checkbox" name="type" value="tractor"><span class="sl-fil-box"></span><span class="sl-fil-label">Tractor · day cab</span><span class="sl-fil-count">18</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="type" value="sleeper" checked><span class="sl-fil-box"></span><span class="sl-fil-label">Tractor · sleeper</span><span class="sl-fil-count">24</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="type" value="dryvan"><span class="sl-fil-box"></span><span class="sl-fil-label">Dry van trailer</span><span class="sl-fil-count">31</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="type" value="reefer"><span class="sl-fil-box"></span><span class="sl-fil-label">Reefer trailer</span><span class="sl-fil-count">12</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="type" value="flatbed"><span class="sl-fil-box"></span><span class="sl-fil-label">Flatbed</span><span class="sl-fil-count">8</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="type" value="heavy"><span class="sl-fil-box"></span><span class="sl-fil-label">Heavy machinery</span><span class="sl-fil-count">14</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="type" value="indust"><span class="sl-fil-box"></span><span class="sl-fil-label">Industrial equipment</span><span class="sl-fil-count">9</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="tractor"><span class="sl-fil-box"></span><span class="sl-fil-label">Tractor · day cab</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="sleeper"><span class="sl-fil-box"></span><span class="sl-fil-label">Tractor · sleeper</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="dryvan"><span class="sl-fil-box"></span><span class="sl-fil-label">Dry van trailer</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="reefer"><span class="sl-fil-box"></span><span class="sl-fil-label">Reefer trailer</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="flatbed"><span class="sl-fil-box"></span><span class="sl-fil-label">Flatbed</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="heavy"><span class="sl-fil-box"></span><span class="sl-fil-label">Heavy machinery</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="type" value="indust"><span class="sl-fil-box"></span><span class="sl-fil-label">Industrial equipment</span></label>
       </div>
     </div>
 
     <div class="sl-fil-section">
       <button class="sl-fil-h" onclick="toggleSection(this)">
-        <span>Year</span><span class="sl-fil-chev">−</span>
+        <span>Year</span><span class="sl-fil-chev">&#8722;</span>
       </button>
       <div class="sl-fil-body">
         <div class="sl-fil-range">
           <input class="sl-fil-input" value="2018" aria-label="Year min">
-          <span>—</span>
+          <span>&#8212;</span>
           <input class="sl-fil-input" value="2024" aria-label="Year max">
         </div>
       </div>
@@ -302,28 +302,28 @@ button{font-family:var(--font-sans);}
 
     <div class="sl-fil-section">
       <button class="sl-fil-h" onclick="toggleSection(this)">
-        <span>Price</span><span class="sl-fil-chev">−</span>
+        <span>Price</span><span class="sl-fil-chev">&#8722;</span>
       </button>
       <div class="sl-fil-body">
         <div class="sl-fil-range">
           <input class="sl-fil-input" value="$20,000" aria-label="Price min">
-          <span>—</span>
+          <span>&#8212;</span>
           <input class="sl-fil-input" value="$120,000" aria-label="Price max">
         </div>
-        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Lease eligible</span></label>
+        <label class="sl-fil-check"><input type="checkbox" id="filterLeaseEligible"><span class="sl-fil-box"></span><span class="sl-fil-label">Lease eligible</span></label>
       </div>
     </div>
 
     <div class="sl-fil-section">
       <button class="sl-fil-h" onclick="toggleSection(this)">
-        <span>Make</span><span class="sl-fil-chev">−</span>
+        <span>Make</span><span class="sl-fil-chev">&#8722;</span>
       </button>
       <div class="sl-fil-body">
-        <label class="sl-fil-check"><input type="checkbox" name="make" value="frt"><span class="sl-fil-box"></span><span class="sl-fil-label">Freightliner</span><span class="sl-fil-count">14</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="make" value="ken"><span class="sl-fil-box"></span><span class="sl-fil-label">Kenworth</span><span class="sl-fil-count">8</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="make" value="pet"><span class="sl-fil-box"></span><span class="sl-fil-label">Peterbilt</span><span class="sl-fil-count">6</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="make" value="vol"><span class="sl-fil-box"></span><span class="sl-fil-label">Volvo</span><span class="sl-fil-count">5</span></label>
-        <label class="sl-fil-check"><input type="checkbox" name="make" value="int"><span class="sl-fil-box"></span><span class="sl-fil-label">International</span><span class="sl-fil-count">4</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="frt"><span class="sl-fil-box"></span><span class="sl-fil-label">Freightliner</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="ken"><span class="sl-fil-box"></span><span class="sl-fil-label">Kenworth</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="pet"><span class="sl-fil-box"></span><span class="sl-fil-label">Peterbilt</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="vol"><span class="sl-fil-box"></span><span class="sl-fil-label">Volvo</span></label>
+        <label class="sl-fil-check"><input type="checkbox" name="make" value="int"><span class="sl-fil-box"></span><span class="sl-fil-label">International</span></label>
       </div>
     </div>
 
@@ -332,9 +332,8 @@ button{font-family:var(--font-sans);}
         <span>Condition</span><span class="sl-fil-chev">+</span>
       </button>
       <div class="sl-fil-body is-hidden">
-        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Excellent</span><span class="sl-fil-count">8</span></label>
-        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Good</span><span class="sl-fil-count">24</span></label>
-        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Fair</span><span class="sl-fil-count">11</span></label>
+        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Inspected</span></label>
+        <label class="sl-fil-check"><input type="checkbox"><span class="sl-fil-box"></span><span class="sl-fil-label">Fresh</span></label>
       </div>
     </div>
   </aside>
@@ -343,23 +342,22 @@ button{font-family:var(--font-sans);}
   <section class="sl-grid-wrap">
     <div class="sl-grid-head">
       <div>
-        <span class="sl-grid-count">73 units</span>
-        <span class="sl-grid-meta">· Updated 14 min ago · Houston, TX yard</span>
+        <span class="sl-grid-count" id="gridCount">Loading…</span>
+        <span class="sl-grid-meta">· Houston, TX yard</span>
       </div>
       <div class="sl-grid-tools">
         <label class="sl-grid-sort">
           <span>Sort</span>
-          <select>
+          <select id="sortSelect">
             <option value="fresh">Recently added</option>
             <option value="price-low">Price · low to high</option>
             <option value="price-high">Price · high to low</option>
             <option value="year">Year · newest first</option>
-            <option value="miles">Miles · lowest first</option>
           </select>
         </label>
         <div class="sl-grid-view">
-          <button class="is-active" title="Grid">▦</button>
-          <button title="List">≡</button>
+          <button class="is-active" title="Grid">&#9638;</button>
+          <button title="List">&#8801;</button>
         </div>
       </div>
     </div>
@@ -381,7 +379,7 @@ button{font-family:var(--font-sans);}
       <h3 class="sl-source-h">Don't see what you need? We source it.</h3>
       <p class="sl-source-p">Tell us the spec — make, year, mileage, attachments, condition. Our equipment desk works carrier auctions, OEM allocations, and lease-end returns daily. Most requests come back inside a week, available for purchase or lease.</p>
     </div>
-    <a class="sl-source-btn" href="mailto:equipment@flogalhq.com">Submit a Request →</a>
+    <a class="sl-source-btn" href="mailto:equipment@flogalhq.com">Submit a Request &#8594;</a>
   </div>
 </section>
 
@@ -422,154 +420,364 @@ button{font-family:var(--font-sans);}
     </div>
     <div class="sl-footer-bottom">
       <span class="sl-footer-domains">flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com</span>
-      <span class="sl-footer-copy">© 2026 FLOGAL Holdings, LLC</span>
+      <span class="sl-footer-copy">&#169; 2026 FLOGAL Holdings, LLC</span>
       <a class="sl-staff-link" href="admin/login.html">Staff Login</a>
     </div>
   </div>
 </footer>
 
-<script>
-const INVENTORY = [
-  { id:'CT-2207', yr:2021, mk:'Freightliner', mdl:'Cascadia 126',    type:'sleeper', mi:312400, eng:'DD15 · 14.8L',   trans:'Auto',    price:78500,  lease:1820, hue:'#1a2a3f', emoji:'🚛', tag:'inspected' },
-  { id:'CT-2208', yr:2020, mk:'Wabash',       mdl:"DuraPlate 53'",   type:'dryvan',  mi:null,   eng:'Air-ride',       trans:'Swing',   price:24950,  lease:620,  hue:'#23282f', emoji:'🚚', tag:null },
-  { id:'CT-2209', yr:2022, mk:'Kenworth',     mdl:'T680 Next-Gen',   type:'sleeper', mi:184200, eng:'PACCAR MX-13',   trans:'Auto',    price:96400,  lease:2240, hue:'#1f1f24', emoji:'🛻', tag:'fresh' },
-  { id:'CT-2210', yr:2019, mk:'Peterbilt',    mdl:'579 Day Cab',     type:'tractor', mi:421800, eng:'Cummins X15',    trans:'Manual',  price:52200,  lease:1280, hue:'#2a1c1c', emoji:'🚚', tag:null },
-  { id:'CT-2211', yr:2023, mk:'Utility',      mdl:"3000R Reefer 53'", type:'reefer', mi:null,   eng:'Carrier X4',    trans:'TK',      price:64800,  lease:1480, hue:'#1e2b2a', emoji:'❄️', tag:'fresh' },
-  { id:'CT-2212', yr:2020, mk:'Volvo',        mdl:'VNL 760',         type:'sleeper', mi:388500, eng:'D13',            trans:'I-Shift', price:68900,  lease:1610, hue:'#1c2538', emoji:'🛻', tag:null },
-];
+<!-- QUOTE REQUEST MODAL -->
+<div id="quoteOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:12px;width:100%;max-width:520px;margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);">
+    <div style="background:var(--flogal-navy);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--flogal-gold);margin-bottom:4px;">Equipment Sales</div>
+        <div style="color:white;font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-.01em;">Request a Quote</div>
+      </div>
+      <button onclick="closeQuoteModal()" style="background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;">&#215;</button>
+    </div>
+    <form id="quoteForm" onsubmit="submitQuote(event)" style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;">
+      <div id="quoteInterestLine" style="display:none;background:var(--surface-1);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--fg-muted);border-left:3px solid var(--flogal-gold);"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Name *</label>
+          <input id="q-name" required style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="Full name">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Company</label>
+          <input id="q-company" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="Company name">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Email *</label>
+          <input id="q-email" type="email" required style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="you@company.com">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Phone</label>
+          <input id="q-phone" type="tel" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="+1 (555) 000-0000">
+        </div>
+      </div>
+      <div>
+        <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Equipment interest</label>
+        <input id="q-interest" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="e.g. Sleeper truck · 2022+ · under 400k miles">
+      </div>
+      <div>
+        <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Message</label>
+        <textarea id="q-message" rows="3" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);resize:vertical;" placeholder="Specs, financing preferences, trade-in, or questions&#8230;"></textarea>
+      </div>
+      <div id="quoteError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;"></div>
+      <button type="submit" id="quoteSubmitBtn" style="background:var(--flogal-gold);color:var(--flogal-navy);border:0;cursor:pointer;font:inherit;font-weight:700;font-size:14px;padding:12px 20px;border-radius:6px;letter-spacing:.01em;">Send Request &#8594;</button>
+    </form>
+    <div id="quoteSuccess" style="display:none;padding:40px 28px;text-align:center;">
+      <div style="font-size:42px;margin-bottom:14px;">&#10003;</div>
+      <div style="font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--flogal-navy);margin-bottom:8px;">Request sent!</div>
+      <div style="font-size:14px;color:var(--fg-muted);line-height:1.55;">Our equipment desk will follow up within one business day.</div>
+      <button onclick="closeQuoteModal()" style="margin-top:20px;background:var(--flogal-navy);color:white;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:13px;padding:10px 20px;border-radius:6px;">Close</button>
+    </div>
+  </div>
+</div>
 
-const TAGS = {
-  fresh:     { label:'Fresh',     cls:'sl-tag-fresh' },
-  inspected: { label:'Inspected', cls:'sl-tag-insp'  },
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const sb = supabase.createClient(
+  'https://uzbpsppeihazicmngqqq.supabase.co',
+  'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
+);
+
+let allInventory = [];
+let selectedId   = null;
+let quoteUnitId  = null;
+
+const TYPE_MAP = {
+  tractor: 'Truck — Day Cab',
+  sleeper: 'Truck — Sleeper',
+  dryvan:  'Dry Van Trailer',
+  reefer:  'Reefer Trailer',
+  flatbed: 'Flatbed',
+  heavy:   'Heavy Machinery',
+  indust:  'Industrial Equipment',
 };
 
-let selectedId = 'CT-2207';
+const MAKE_MAP = {
+  frt: 'Freightliner',
+  ken: 'Kenworth',
+  pet: 'Peterbilt',
+  vol: 'Volvo',
+  int: 'International',
+};
 
-function fmt(n){ return '$' + n.toLocaleString(); }
+const TYPE_VIZ = {
+  'Truck — Day Cab':      { hue:'#2a1c1c', emoji:'🚚' },
+  'Truck — Sleeper':      { hue:'#1a2a3f', emoji:'🛻' },
+  'Dry Van Trailer':           { hue:'#23282f', emoji:'🚚' },
+  'Reefer Trailer':            { hue:'#1e2b2a', emoji:'❄️' },
+  'Flatbed':                   { hue:'#2a2a1c', emoji:'🏗️' },
+  'Heavy Machinery':           { hue:'#1c2030', emoji:'🚜' },
+  'Industrial Equipment':      { hue:'#1f2420', emoji:'⚙️' },
+};
 
-function renderGrid(){
-  const grid = document.getElementById('inventoryGrid');
-  grid.innerHTML = INVENTORY.map(u => `
-    <button class="sl-tile${u.id===selectedId?' is-selected':''}" onclick="selectUnit('${u.id}')" data-id="${u.id}">
-      <div class="sl-tile-photo" style="background:linear-gradient(135deg,${u.hue},#050a12)">
-        <span class="sl-tile-emoji">${u.emoji}</span>
-        <span class="sl-tile-id">${u.id}</span>
-        ${u.tag ? `<span class="sl-tile-tag ${TAGS[u.tag].cls}">${TAGS[u.tag].label}</span>` : ''}
+const COND_TAG = {
+  'Fresh':     { label:'Fresh',     cls:'sl-tag-fresh' },
+  'Inspected': { label:'Inspected', cls:'sl-tag-insp'  },
+};
+
+// Load active inventory on page load
+(async () => {
+  const { data, error } = await sb
+    .from('inventory')
+    .select('*')
+    .eq('status', 'active')
+    .order('created_at', { ascending: false });
+  if (error) {
+    console.error('inventory load:', error);
+    document.getElementById('gridCount').textContent = '0 units';
+    return;
+  }
+  allInventory = data || [];
+  renderGrid();
+  if (allInventory.length) {
+    selectedId = String(allInventory[0].id);
+    renderDrawer(selectedId);
+  }
+})();
+
+function getFiltered() {
+  const checkedTypes = [...document.querySelectorAll('input[name="type"]:checked')]
+    .map(c => TYPE_MAP[c.value]).filter(Boolean);
+  const checkedMakes = [...document.querySelectorAll('input[name="make"]:checked')]
+    .map(c => MAKE_MAP[c.value]).filter(Boolean);
+  const leaseOnly = document.getElementById('filterLeaseEligible').checked;
+
+  let rows = allInventory.filter(u => {
+    if (checkedTypes.length && !checkedTypes.includes(u.type)) return false;
+    if (checkedMakes.length && !checkedMakes.some(m => (u.make || '').toLowerCase() === m.toLowerCase())) return false;
+    if (leaseOnly && !u.lease_eligible) return false;
+    return true;
+  });
+
+  const sort = document.getElementById('sortSelect').value;
+  if (sort === 'price-low')  rows = [...rows].sort((a, b) => (a.price || 0) - (b.price || 0));
+  if (sort === 'price-high') rows = [...rows].sort((a, b) => (b.price || 0) - (a.price || 0));
+  if (sort === 'year')       rows = [...rows].sort((a, b) => (b.year  || 0) - (a.year  || 0));
+  return rows;
+}
+
+function fmt(n) {
+  if (n == null || n === '') return '—';
+  return '$' + Number(n).toLocaleString();
+}
+
+function renderGrid() {
+  const rows = getFiltered();
+  document.getElementById('gridCount').textContent = rows.length + ' unit' + (rows.length === 1 ? '' : 's');
+
+  if (!rows.length) {
+    document.getElementById('inventoryGrid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--fg-muted);">No units match your filters. <button class="sl-fil-reset" onclick="resetFilters()" style="margin-left:4px;">Reset</button></div>';
+    return;
+  }
+
+  document.getElementById('inventoryGrid').innerHTML = rows.map(u => {
+    const viz = TYPE_VIZ[u.type] || { hue:'#1a2a3f', emoji:'📦' };
+    const tag = COND_TAG[u.condition];
+    const uid = String(u.id);
+    return `<button class="sl-tile${uid === selectedId ? ' is-selected' : ''}" onclick="selectUnit('${uid}')" data-id="${uid}">
+      <div class="sl-tile-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
+        <span class="sl-tile-emoji">${viz.emoji}</span>
+        <span class="sl-tile-id">${u.stock_number || uid}</span>
+        ${tag ? `<span class="sl-tile-tag ${tag.cls}">${tag.label}</span>` : ''}
       </div>
       <div class="sl-tile-info">
-        <div class="sl-tile-yr">${u.yr} · ${u.mk}</div>
-        <div class="sl-tile-name">${u.mdl}</div>
+        <div class="sl-tile-yr">${u.year || '—'} · ${u.make || ''}</div>
+        <div class="sl-tile-name">${u.model || '—'}</div>
         <div class="sl-tile-specs">
-          <span>${u.eng}</span>
-          ${u.mi!==null ? `<span class="sl-dot">·</span><span>${u.mi.toLocaleString()} mi</span>` : ''}
-          <span class="sl-dot">·</span>
-          <span>${u.trans}</span>
+          ${u.engine ? `<span>${u.engine}</span>` : ''}
+          ${u.mileage ? `<span class="sl-dot">·</span><span>${u.mileage} mi</span>` : ''}
+          ${u.transmission ? `<span class="sl-dot">·</span><span>${u.transmission}</span>` : ''}
         </div>
         <div class="sl-tile-price">
           <span class="sl-tile-amt">${fmt(u.price)}</span>
-          <span class="sl-tile-lease">or ${fmt(u.lease)}/mo · 60mo</span>
+          ${u.monthly_payment ? `<span class="sl-tile-lease">or ${u.monthly_payment}</span>` : ''}
         </div>
       </div>
-    </button>
-  `).join('');
+    </button>`;
+  }).join('');
 }
 
-function renderDrawer(id){
-  const u = INVENTORY.find(i=>i.id===id) || INVENTORY[0];
+function renderDrawer(id) {
+  const u = allInventory.find(i => String(i.id) === String(id));
+  if (!u) { document.getElementById('detailDrawer').innerHTML = ''; return; }
+
+  const viz = TYPE_VIZ[u.type] || { hue:'#1a2a3f', emoji:'📦' };
+  const uid = String(u.id);
+
   const specs = [
-    ['VIN',           '1FUJGLDR8MLAA' + u.id.replace('CT-','')],
-    ['Year',          u.yr],
-    ['Make / Model',  u.mk + ' ' + u.mdl],
-    ['Engine',        u.eng],
-    ['Transmission',  u.trans],
-    ['Mileage',       u.mi!==null ? u.mi.toLocaleString()+' mi' : '—'],
-    ['Sleeper',       u.type==='sleeper' ? '72″ raised roof' : 'Day cab'],
-    ['Axle config',   '6×4'],
-    ['Wheelbase',     '224″'],
-    ['DOT inspection','Current · expires 03/2027'],
-    ['Title',         'Clean · Texas'],
-    ['Location',      'Flogal Houston yard'],
-  ];
+    ['Stock #',       u.stock_number],
+    ['VIN',           u.vin],
+    ['Year',          u.year],
+    ['Make / Model',  `${u.make || ''} ${u.model || ''}`.trim()],
+    ['Engine',        u.engine],
+    ['Transmission',  u.transmission],
+    ['Mileage',       u.mileage ? u.mileage + ' mi' : null],
+    ['Axle config',   u.axle_config],
+    ['Wheelbase',     u.wheelbase],
+    ['DOT inspection',u.dot_inspection],
+    ['Title',         u.title_status],
+    ['Condition',     u.condition],
+    ['Location',      u.location],
+  ].filter(([, v]) => v != null && v !== '');
+
   document.getElementById('detailDrawer').innerHTML = `
-    <div class="sl-drawer-photo" style="background:linear-gradient(135deg,${u.hue},#050a12)">
-      <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">×</button>
-      <span class="sl-drawer-id">${u.id}</span>
-      <span class="sl-drawer-emoji">${u.emoji}</span>
-      <div class="sl-drawer-photo-meta">8 photos · 1 video walkaround</div>
+    <div class="sl-drawer-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
+      <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">&times;</button>
+      <span class="sl-drawer-id">${u.stock_number || uid}</span>
+      <span class="sl-drawer-emoji">${viz.emoji}</span>
+      <div class="sl-drawer-photo-meta">${u.type || ''}</div>
     </div>
     <div class="sl-drawer-body">
       <div>
-        <div class="sl-drawer-yr">${u.yr} · ${u.mk}</div>
-        <h2 class="sl-drawer-name">${u.mdl}</h2>
+        <div class="sl-drawer-yr">${u.year || ''} &middot; ${u.make || ''}</div>
+        <h2 class="sl-drawer-name">${u.model || ''}</h2>
       </div>
       <div class="sl-drawer-price">
         <div>
           <span class="sl-drawer-amt">${fmt(u.price)}</span>
-          <span class="sl-drawer-lease">or ${fmt(u.lease)}/mo · 60mo · OAC</span>
+          ${u.monthly_payment ? `<span class="sl-drawer-lease">or ${u.monthly_payment}</span>` : ''}
         </div>
         <div class="sl-drawer-actions">
-          <button class="sl-btn sl-btn-gold" onclick="alert('Quote request submitted for ${u.id}')">Request quote</button>
+          <button class="sl-btn sl-btn-gold" onclick="openQuoteModal('${uid}')">Request quote</button>
           <button class="sl-btn sl-btn-ghost">Schedule walk-around</button>
-        </div>
-      </div>
-      <div class="sl-drawer-section">
-        <span class="sl-drawer-eyebrow">Financing</span>
-        <div class="sl-finance">
-          <div class="sl-finance-row"><span>$0 down</span><span class="sl-mono">${fmt(Math.round(u.lease*1.1))}/mo</span></div>
-          <div class="sl-finance-row"><span>10% down</span><span class="sl-mono">${fmt(u.lease)}/mo</span></div>
-          <div class="sl-finance-row"><span>20% down</span><span class="sl-mono">${fmt(Math.round(u.lease*0.88))}/mo</span></div>
-          <div class="sl-finance-foot">Through Flogal Capital · Tier-1 credit assumed · Rates as of May 2026</div>
         </div>
       </div>
       <div class="sl-drawer-section">
         <span class="sl-drawer-eyebrow">Specifications</span>
         <div class="sl-spec">
-          ${specs.map(([k,v])=>`<div class="sl-spec-row"><span class="sl-spec-k">${k}</span><span class="sl-spec-v">${v}</span></div>`).join('')}
+          ${specs.map(([k, v]) => `<div class="sl-spec-row"><span class="sl-spec-k">${k}</span><span class="sl-spec-v">${v}</span></div>`).join('')}
         </div>
       </div>
       <div class="sl-drawer-section">
         <span class="sl-drawer-eyebrow">Sales contact</span>
         <div class="sl-contact">
-          <span class="sl-contact-avatar">EM</span>
+          <span class="sl-contact-avatar">ED</span>
           <div>
-            <div class="sl-contact-name">Elena Marrero</div>
-            <div class="sl-contact-meta">Equipment desk · +1 (713) 555-0199</div>
+            <div class="sl-contact-name">Equipment desk</div>
+            <div class="sl-contact-meta">equipment@flogalhq.com &middot; +1 (713) 555-0199</div>
           </div>
-          <button class="sl-btn sl-btn-ghost sl-btn-sm">Message</button>
+          <button class="sl-btn sl-btn-ghost sl-btn-sm" onclick="openQuoteModal('${uid}')">Message</button>
         </div>
       </div>
     </div>
   `;
 }
 
-function selectUnit(id){
+function selectUnit(id) {
   selectedId = id;
-  document.querySelectorAll('.sl-tile').forEach(t=>{
-    t.classList.toggle('is-selected', t.dataset.id===id);
+  document.querySelectorAll('.sl-tile').forEach(t => {
+    t.classList.toggle('is-selected', t.dataset.id === id);
   });
   renderDrawer(id);
 }
 
-function closeDrawer(){
+function closeDrawer() {
   selectedId = null;
-  document.querySelectorAll('.sl-tile').forEach(t=>t.classList.remove('is-selected'));
+  document.querySelectorAll('.sl-tile').forEach(t => t.classList.remove('is-selected'));
   document.getElementById('detailDrawer').innerHTML = '';
 }
 
-function toggleSection(btn){
-  const body = btn.nextElementSibling;
-  const chev = btn.querySelector('.sl-fil-chev');
+function toggleSection(btn) {
+  const body   = btn.nextElementSibling;
+  const chev   = btn.querySelector('.sl-fil-chev');
   const hidden = body.classList.toggle('is-hidden');
   chev.textContent = hidden ? '+' : '−';
 }
 
-function resetFilters(){
-  document.querySelectorAll('.sl-fil input[type="checkbox"]').forEach(c=>c.checked=false);
+function resetFilters() {
+  document.querySelectorAll('.sl-fil input[type="checkbox"]').forEach(c => c.checked = false);
+  renderGrid();
 }
 
-// Init
-renderGrid();
-renderDrawer(selectedId);
+// Wire filter + sort listeners
+document.querySelectorAll('input[name="type"], input[name="make"]').forEach(el => {
+  el.addEventListener('change', renderGrid);
+});
+document.getElementById('filterLeaseEligible').addEventListener('change', renderGrid);
+document.getElementById('sortSelect').addEventListener('change', renderGrid);
+
+// Nav CTA
+document.getElementById('btnNavQuote').addEventListener('click', e => {
+  e.preventDefault();
+  openQuoteModal(null);
+});
+
+// Quote modal
+function openQuoteModal(unitId) {
+  quoteUnitId = unitId;
+  const unit  = unitId ? allInventory.find(u => String(u.id) === String(unitId)) : null;
+  const line  = document.getElementById('quoteInterestLine');
+  const input = document.getElementById('q-interest');
+
+  if (unit) {
+    const label = [unit.type, unit.stock_number, unit.year, unit.make, unit.model]
+      .filter(Boolean).join(' · ');
+    line.textContent  = 'Enquiring about: ' + label;
+    line.style.display = 'block';
+    input.value = label;
+  } else {
+    line.style.display = 'none';
+    input.value = '';
+  }
+
+  document.getElementById('quoteForm').style.display    = 'flex';
+  document.getElementById('quoteSuccess').style.display = 'none';
+  document.getElementById('quoteError').style.display   = 'none';
+  document.getElementById('quoteOverlay').style.display = 'flex';
+}
+
+function closeQuoteModal() {
+  document.getElementById('quoteOverlay').style.display = 'none';
+  document.getElementById('quoteForm').reset();
+  quoteUnitId = null;
+}
+
+async function submitQuote(e) {
+  e.preventDefault();
+  const btn = document.getElementById('quoteSubmitBtn');
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
+
+  const payload = {
+    name:     document.getElementById('q-name').value.trim(),
+    company:  document.getElementById('q-company').value.trim(),
+    email:    document.getElementById('q-email').value.trim(),
+    phone:    document.getElementById('q-phone').value.trim(),
+    interest: document.getElementById('q-interest').value.trim(),
+    message:  document.getElementById('q-message').value.trim(),
+    status:   'new',
+  };
+
+  const { error } = await sb.from('inquiries').insert(payload);
+
+  if (error) {
+    const errEl = document.getElementById('quoteError');
+    errEl.textContent    = 'Something went wrong — please email equipment@flogalhq.com directly.';
+    errEl.style.display  = 'block';
+    btn.textContent = 'Send Request →';
+    btn.disabled    = false;
+    return;
+  }
+
+  document.getElementById('quoteForm').style.display    = 'none';
+  document.getElementById('quoteSuccess').style.display = 'block';
+  btn.textContent = 'Send Request →';
+  btn.disabled    = false;
+}
+
+// Close modal on overlay click or Escape
+document.getElementById('quoteOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('quoteOverlay')) closeQuoteModal();
+});
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuoteModal(); });
 </script>
 </body>
 </html>
