@@ -187,6 +187,7 @@
   </header>
   <div class="ad-drawer-body">
     <form class="ad-form-grid" id="addUnitForm" onsubmit="event.preventDefault(); submitUnitForm();">
+      <input type="hidden" id="f-unit-id" value="">
 
       <div class="ad-form-section">
         <span class="ad-form-section-h">Identification</span>
@@ -334,7 +335,6 @@ const sb = supabase.createClient(
 
 let inventory = [];
 let inquiries = [];
-let editingId       = null;
 let pendingFiles    = [];
 let pendingPreviews = [];
 let existingPhotos  = [];
@@ -525,7 +525,7 @@ function closeDrawer() {
   overlay.classList.remove('is-open');
   drawer.classList.remove('is-open');
   drawer.setAttribute('aria-hidden', 'true');
-  editingId = null;
+  document.getElementById('f-unit-id').value = '';
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];
@@ -557,7 +557,7 @@ window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer();
 function openDrawerEdit(id) {
   const unit = inventory.find(u => u.id === id);
   if (!unit) return;
-  editingId = unit.id;
+  document.getElementById('f-unit-id').value = unit.id;
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];
@@ -627,8 +627,9 @@ async function removeExistingPhoto(index) {
     if (error) console.error('remove photo:', error);
   }
   existingPhotos.splice(index, 1);
-  if (editingId) {
-    await sb.from('inventory').update({ photos: existingPhotos }).eq('id', editingId);
+  const _uid = document.getElementById('f-unit-id').value.trim();
+  if (_uid) {
+    await sb.from('inventory').update({ photos: existingPhotos }).eq('id', _uid);
   }
   renderPhotoPreview();
 }
@@ -651,10 +652,10 @@ document.getElementById('f-photos').addEventListener('change', function () {
 });
 
 async function submitUnitForm() {
-  const currentEditId = editingId;
+  const unitId = document.getElementById('f-unit-id').value.trim();
   const btn = document.getElementById('drawerSubmitBtn');
   btn.disabled = true;
-  btn.textContent = currentEditId ? 'Saving…' : 'Adding…';
+  btn.textContent = unitId ? 'Saving…' : 'Adding…';
 
   const payload = {
     stock_number:    document.getElementById('f-stock').value.trim(),
@@ -703,8 +704,8 @@ async function submitUnitForm() {
   payload.photos = [...existingPhotos, ...uploadedUrls];
 
   let error;
-  if (currentEditId) {
-    ({ error } = await sb.from('inventory').update(payload).eq('id', currentEditId));
+  if (unitId) {
+    ({ error } = await sb.from('inventory').update(payload).eq('id', unitId));
   } else {
     payload.status = 'active';
     ({ error } = await sb.from('inventory').insert(payload));
@@ -712,7 +713,7 @@ async function submitUnitForm() {
 
   if (error) {
     alert('Error saving unit: ' + error.message);
-    btn.textContent = currentEditId ? 'Save Changes' : 'Add to Inventory';
+    btn.textContent = unitId ? 'Save Changes' : 'Add to Inventory';
     btn.disabled = false;
     return;
   }
