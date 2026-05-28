@@ -535,7 +535,7 @@ const COND_TAG = {
       .from('inventory')
       .select('*')
       .eq('status', 'active')
-      .order('id', { ascending: false });
+      .order('created_at', { ascending: false });
     console.log('[inventory fetch]', { rowCount: data?.length, error });
     if (error) throw error;
     allInventory = data || [];
