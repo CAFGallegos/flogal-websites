@@ -480,6 +480,12 @@ button{font-family:var(--font-sans);}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+if (typeof supabase === 'undefined') {
+  console.error('[FLOGAL] Supabase CDN failed to load');
+  document.getElementById('gridCount').textContent = 'Unavailable';
+  document.getElementById('inventoryGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--fg-muted);">Inventory service unavailable. Please refresh the page.</div>';
+  throw new Error('Supabase not loaded');
+}
 const sb = supabase.createClient(
   'https://uzbpsppeihazicmngqqq.supabase.co',
   'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
@@ -524,22 +530,24 @@ const COND_TAG = {
 
 // Load active inventory on page load
 (async () => {
-  const { data, error } = await sb
-    .from('inventory')
-    .select('*')
-    .eq('status', 'active')
-    .order('created_at', { ascending: false });
-  console.log('[inventory fetch]', { rowCount: data?.length, error });
-  if (error) {
-    console.error('inventory load:', error);
-    document.getElementById('gridCount').textContent = '0 units';
-    return;
-  }
-  allInventory = data || [];
-  renderGrid();
-  if (allInventory.length) {
-    selectedId = String(allInventory[0].id);
-    renderDrawer(selectedId);
+  try {
+    const { data, error } = await sb
+      .from('inventory')
+      .select('*')
+      .eq('status', 'active')
+      .order('created_at', { ascending: false });
+    console.log('[inventory fetch]', { rowCount: data?.length, error });
+    if (error) throw error;
+    allInventory = data || [];
+    renderGrid();
+    if (allInventory.length) {
+      selectedId = String(allInventory[0].id);
+      renderDrawer(selectedId);
+    }
+  } catch (err) {
+    console.error('[inventory fetch]', err);
+    document.getElementById('gridCount').textContent = 'Unable to load';
+    document.getElementById('inventoryGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--fg-muted);">Unable to load inventory. Please refresh the page.</div>';
   }
 })();
 
@@ -582,8 +590,11 @@ function renderGrid() {
   document.getElementById('gridCount').textContent = rows.length + ' unit' + (rows.length === 1 ? '' : 's');
 
   if (!rows.length) {
+    const msg = allInventory.length === 0
+      ? 'No units currently available.'
+      : 'No units match your filters. <button class="sl-fil-reset" onclick="resetFilters()" style="margin-left:4px;">Reset</button>';
     document.getElementById('inventoryGrid').innerHTML =
-      '<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--fg-muted);">No units match your filters. <button class="sl-fil-reset" onclick="resetFilters()" style="margin-left:4px;">Reset</button></div>';
+      `<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--fg-muted);">${msg}</div>`;
     return;
   }
 

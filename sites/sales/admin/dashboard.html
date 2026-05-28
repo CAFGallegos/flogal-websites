@@ -131,7 +131,7 @@
                 <th class="right">Actions</th>
               </tr>
             </thead>
-            <tbody id="inventoryBody"></tbody>
+            <tbody id="inventoryBody"><tr id="inventoryLoadingRow"><td colspan="8" style="text-align:center;padding:32px;color:var(--ad-fg-dim);">Loading inventory…</td></tr></tbody>
           </table>
         </div>
       </section>
@@ -328,6 +328,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+if (typeof supabase === 'undefined') {
+  console.error('[FLOGAL] Supabase CDN failed to load');
+  document.getElementById('inventoryBody').innerHTML = '<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Failed to load: Supabase library unavailable. Check your connection and refresh.</td></tr>';
+  throw new Error('Supabase not loaded');
+}
 const sb = supabase.createClient(
   'https://uzbpsppeihazicmngqqq.supabase.co',
   'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
@@ -340,36 +345,55 @@ let pendingPreviews = [];
 let existingPhotos  = [];
 
 // Auth guard — redirect to login if no session
+const _loadTimeout = setTimeout(() => {
+  const tbody = document.getElementById('inventoryBody');
+  if (tbody && tbody.querySelector('#inventoryLoadingRow')) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Inventory is taking too long to load. Check your connection and refresh the page.</td></tr>';
+  }
+}, 12000);
 (async () => {
-  const { data, error: authErr } = await sb.auth.getSession();
-  const session = data?.session;
-  if (authErr || !session) { window.location.href = 'login.html'; return; }
-  const email = session.user.email || '';
-  document.getElementById('userAvatar').textContent = email.slice(0, 2).toUpperCase();
-  document.getElementById('userName').textContent   = email;
-  await Promise.all([loadInventory(), loadInquiries()]);
+  try {
+    const { data, error: authErr } = await sb.auth.getSession();
+    const session = data?.session;
+    if (authErr || !session) { window.location.href = 'login.html'; return; }
+    const email = session.user.email || '';
+    document.getElementById('userAvatar').textContent = email.slice(0, 2).toUpperCase();
+    document.getElementById('userName').textContent   = email;
+    await Promise.all([loadInventory(), loadInquiries()]);
+  } catch (err) {
+    console.error('[auth/load]', err);
+    const tbody = document.getElementById('inventoryBody');
+    if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Failed to initialize: ${err.message}</td></tr>`;
+  } finally {
+    clearTimeout(_loadTimeout);
+  }
 })();
 
 async function loadInventory() {
-  const { data, error } = await sb.from('inventory').select('*').order('created_at', { ascending: false });
-  console.log('[loadInventory]', { rowCount: data?.length, error });
-  if (error) {
-    console.error('inventory:', error);
+  try {
+    const { data, error } = await sb.from('inventory').select('*').order('created_at', { ascending: false });
+    console.log('[loadInventory]', { rowCount: data?.length, error });
+    if (error) throw error;
+    inventory = data || [];
+    renderInventory();
+    updateKPIs();
+  } catch (err) {
+    console.error('[loadInventory]', err);
     const tbody = document.getElementById('inventoryBody');
-    if (tbody) tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#e05a5a;padding:20px;">Failed to load inventory: ${error.message}</td></tr>`;
-    return;
+    if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Failed to load inventory: ${err.message}</td></tr>`;
   }
-  inventory = data || [];
-  renderInventory();
-  updateKPIs();
 }
 
 async function loadInquiries() {
-  const { data, error } = await sb.from('inquiries').select('*').order('created_at', { ascending: false });
-  if (error) { console.error('inquiries:', error); return; }
-  inquiries = data || [];
-  renderInquiries();
-  updateKPIs();
+  try {
+    const { data, error } = await sb.from('inquiries').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    inquiries = data || [];
+    renderInquiries();
+    updateKPIs();
+  } catch (err) {
+    console.error('[loadInquiries]', err);
+  }
 }
 
 const STATUS_LABEL = {
@@ -693,7 +717,9 @@ async function submitUnitForm() {
   const statusEl = document.getElementById('photoUploadStatus');
   const stockNum = payload.stock_number || 'unknown';
   const uploadedUrls = [];
+  const failedUploads = [];
   for (let i = 0; i < pendingFiles.length; i++) {
+    statusEl.style.color = '';
     statusEl.textContent = `Uploading photo ${i + 1} of ${pendingFiles.length}…`;
     const file = pendingFiles[i];
     const mkPath = () => {
@@ -707,11 +733,21 @@ async function submitUnitForm() {
       path = mkPath();
       ({ error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, opts));
     }
-    if (upErr) { console.error(`photo ${i + 1} failed:`, upErr.message); continue; }
+    if (upErr) {
+      console.error(`photo ${i + 1} failed:`, upErr.message);
+      failedUploads.push(file.name);
+      continue;
+    }
     const { data: urlData } = sb.storage.from('inventory-photos').getPublicUrl(path);
     uploadedUrls.push(urlData.publicUrl);
   }
-  statusEl.textContent = '';
+  if (failedUploads.length) {
+    statusEl.style.color = '#e05a5a';
+    statusEl.textContent = `Failed to upload: ${failedUploads.join(', ')}`;
+  } else {
+    statusEl.style.color = '';
+    statusEl.textContent = '';
+  }
   payload.photos = [...existingPhotos, ...uploadedUrls];
 
   let error;
