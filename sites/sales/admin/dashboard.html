@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FLOGAL Sales Admin — Inventory Dashboard</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+.ad-photo-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+.ad-photo-thumb{position:relative;width:80px;height:80px;border-radius:6px;overflow:hidden;border:1.5px solid var(--ad-border,#2a3a4f);flex:none;}
+.ad-photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.ad-photo-remove{position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.65);border:0;cursor:pointer;color:white;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;}
+.ad-photo-remove:hover{background:#e05a5a;}
+.ad-photo-badge{position:absolute;bottom:3px;left:3px;font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#C79A2B;color:#0B1D2D;padding:1px 5px;border-radius:3px;}
+.ad-photo-upload-status{font-size:11px;color:var(--ad-fg-dim,#6b7f94);margin-top:6px;min-height:16px;}
+</style>
 </head>
 <body>
 <div class="ad-shell" data-screen-label="FLOGAL Sales Admin · Dashboard">
@@ -293,15 +302,17 @@
         <span class="ad-form-section-rule"></span>
       </div>
       <div class="ad-fld col-span-2">
+        <div id="photoPreview"></div>
         <label class="ad-drop" for="f-photos">
-          <input id="f-photos" type="file" multiple accept="image/*" hidden>
+          <input id="f-photos" type="file" multiple accept="image/jpeg,image/png,image/webp" hidden>
           <div class="ad-drop-icn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
           </div>
           <div class="ad-drop-h">Drop photos here, or click to browse</div>
           <div class="ad-drop-p">Hero shot · 3/4 front · 3/4 rear · interior · spec sheet</div>
-          <div class="ad-drop-meta">JPG / PNG / WEBP · up to 12 MB each</div>
+          <div class="ad-drop-meta">JPG · PNG · WEBP · up to 12 MB each</div>
         </label>
+        <div class="ad-photo-upload-status" id="photoUploadStatus"></div>
       </div>
     </form>
   </div>
@@ -321,7 +332,10 @@ const sb = supabase.createClient(
 
 let inventory = [];
 let inquiries = [];
-let editingId  = null;
+let editingId       = null;
+let pendingFiles    = [];
+let pendingPreviews = [];
+let existingPhotos  = [];
 
 // Auth guard — redirect to login if no session
 (async () => {
@@ -510,7 +524,13 @@ function closeDrawer() {
   drawer.classList.remove('is-open');
   drawer.setAttribute('aria-hidden', 'true');
   editingId = null;
+  pendingFiles = [];
+  pendingPreviews.forEach(u => URL.revokeObjectURL(u));
+  pendingPreviews = [];
+  existingPhotos = [];
   document.getElementById('addUnitForm').reset();
+  document.getElementById('photoPreview').innerHTML       = '';
+  document.getElementById('photoUploadStatus').textContent = '';
   document.getElementById('drawerSub').textContent        = 'New listing';
   document.getElementById('drawerH').textContent          = 'Add Equipment Unit';
   document.getElementById('drawerSubmitBtn').textContent  = 'Add to Inventory';
@@ -531,6 +551,10 @@ function openDrawerEdit(id) {
   const unit = inventory.find(u => u.id === id);
   if (!unit) return;
   editingId = unit.id;
+  pendingFiles = [];
+  pendingPreviews.forEach(u => URL.revokeObjectURL(u));
+  pendingPreviews = [];
+  existingPhotos = Array.isArray(unit.photos) ? [...unit.photos] : [];
   document.getElementById('f-stock').value   = unit.stock_number     || '';
   document.getElementById('f-type').value    = unit.type             || '';
   document.getElementById('f-year').value    = unit.year             || '';
@@ -552,6 +576,7 @@ function openDrawerEdit(id) {
   document.getElementById('drawerSub').textContent       = 'Editing · ' + (unit.stock_number || unit.id);
   document.getElementById('drawerH').textContent         = 'Edit Equipment Unit';
   document.getElementById('drawerSubmitBtn').textContent = 'Save Changes';
+  renderPhotoPreview();
   openDrawer();
 }
 
@@ -561,6 +586,56 @@ function toInt(val) {
   const n = parseInt(m[0].replace(/,/g, ''), 10);
   return isNaN(n) ? null : n;
 }
+
+// --- Photo preview / management ---
+function renderPhotoPreview() {
+  pendingPreviews.forEach(u => URL.revokeObjectURL(u));
+  pendingPreviews = pendingFiles.map(f => URL.createObjectURL(f));
+
+  const items = [];
+  existingPhotos.forEach((url, i) => {
+    items.push(`<div class="ad-photo-thumb">
+      <img src="${url}" alt="" loading="lazy">
+      <button type="button" class="ad-photo-remove" onclick="removeExistingPhoto(${i})" title="Remove">&#215;</button>
+    </div>`);
+  });
+  pendingPreviews.forEach((url, i) => {
+    items.push(`<div class="ad-photo-thumb">
+      <img src="${url}" alt="">
+      <button type="button" class="ad-photo-remove" onclick="removePendingFile(${i})" title="Remove">&#215;</button>
+      <span class="ad-photo-badge">New</span>
+    </div>`);
+  });
+
+  document.getElementById('photoPreview').innerHTML = items.length
+    ? `<div class="ad-photo-grid">${items.join('')}</div>`
+    : '';
+}
+
+async function removeExistingPhoto(index) {
+  const url  = existingPhotos[index];
+  const tail = url.split('/inventory-photos/')[1];
+  if (tail) {
+    const { error } = await sb.storage.from('inventory-photos').remove([decodeURIComponent(tail)]);
+    if (error) console.error('remove photo:', error);
+  }
+  existingPhotos.splice(index, 1);
+  if (editingId) {
+    await sb.from('inventory').update({ photos: existingPhotos }).eq('id', editingId);
+  }
+  renderPhotoPreview();
+}
+
+function removePendingFile(index) {
+  pendingFiles.splice(index, 1);
+  renderPhotoPreview();
+}
+
+document.getElementById('f-photos').addEventListener('change', function () {
+  pendingFiles = [...pendingFiles, ...Array.from(this.files)];
+  this.value = '';
+  renderPhotoPreview();
+});
 
 async function submitUnitForm() {
   const btn = document.getElementById('drawerSubmitBtn');
@@ -587,6 +662,28 @@ async function submitUnitForm() {
     dot_inspection:  document.getElementById('f-dot').value || null,
     title_status:    document.getElementById('f-title').value,
   };
+
+  // Upload pending photos to Storage
+  const statusEl = document.getElementById('photoUploadStatus');
+  const stockNum = payload.stock_number || 'unknown';
+  const uploadedUrls = [];
+  for (let i = 0; i < pendingFiles.length; i++) {
+    statusEl.textContent = `Uploading photo ${i + 1} of ${pendingFiles.length}…`;
+    const file  = pendingFiles[i];
+    const ext   = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const fname = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const path  = `${stockNum}/${fname}`;
+    const { error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: file.type,
+    });
+    if (upErr) { console.error('photo upload:', upErr); continue; }
+    const { data: urlData } = sb.storage.from('inventory-photos').getPublicUrl(path);
+    uploadedUrls.push(urlData.publicUrl);
+  }
+  statusEl.textContent = '';
+  payload.photos = [...existingPhotos, ...uploadedUrls];
 
   let error;
   if (editingId) {
