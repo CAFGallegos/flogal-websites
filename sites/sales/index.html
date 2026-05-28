@@ -121,9 +121,9 @@ button{font-family:var(--font-sans);}
 .sl-grid-view button.is-active{background:var(--flogal-navy);color:white;border-radius:3px;}
 
 .sl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-.sl-tile{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;padding:0;display:flex;flex-direction:column;transition:box-shadow 200ms,border-color 200ms;width:100%;}
-.sl-tile:hover{box-shadow:var(--shadow-md);}
-.sl-tile.is-selected{border-color:var(--flogal-gold);}
+.sl-tile{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;padding:0;display:flex;flex-direction:column;transition:box-shadow 0.2s ease,border-color 0.2s ease,transform 0.2s ease;width:100%;}
+.sl-tile:hover{box-shadow:var(--shadow-md);border-color:var(--flogal-gold);transform:translateY(-3px);}
+.sl-tile.is-selected{border-color:var(--flogal-gold);transform:scale(1.03);box-shadow:0 4px 16px rgba(199,154,43,.2);}
 .sl-tile:focus{outline:none;}
 .sl-tile-photo{position:relative;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.32);}
 .sl-tile-emoji{font-size:56px;filter:grayscale(.6) brightness(.8);}
@@ -555,9 +555,11 @@ const COND_TAG = {
     console.log('[inventory fetch]', { rowCount: data?.length, error });
     if (error) throw error;
     allInventory = data || [];
-    renderGrid();
     if (allInventory.length) {
       selectedId = String(allInventory[0].id);
+    }
+    renderGrid();
+    if (allInventory.length) {
       renderDrawer(selectedId);
     }
   } catch (err) {
@@ -814,9 +816,11 @@ function resetFilters() {
 document.getElementById('inventoryGrid').addEventListener('click', e => {
   const tile = e.target.closest('.sl-tile');
   if (!tile) return;
-  selectUnit(tile.dataset.id);
+  const id = tile.getAttribute('data-id');
+  if (!id) return;
+  selectUnit(id);
   if (e.target.closest('.sl-tile-photo')) {
-    const unit = allInventory.find(i => String(i.id) === tile.dataset.id);
+    const unit = allInventory.find(i => String(i.id) === id);
     if (unit) {
       const photos = parsePhotos(unit.photos);
       if (photos.length > 0) openLightbox(photos, 0);
