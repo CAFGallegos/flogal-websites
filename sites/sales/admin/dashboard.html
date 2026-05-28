@@ -651,9 +651,10 @@ document.getElementById('f-photos').addEventListener('change', function () {
 });
 
 async function submitUnitForm() {
+  const currentEditId = editingId;
   const btn = document.getElementById('drawerSubmitBtn');
   btn.disabled = true;
-  btn.textContent = editingId ? 'Saving…' : 'Adding…';
+  btn.textContent = currentEditId ? 'Saving…' : 'Adding…';
 
   const payload = {
     stock_number:    document.getElementById('f-stock').value.trim(),
@@ -702,8 +703,8 @@ async function submitUnitForm() {
   payload.photos = [...existingPhotos, ...uploadedUrls];
 
   let error;
-  if (editingId) {
-    ({ error } = await sb.from('inventory').update(payload).eq('id', editingId));
+  if (currentEditId) {
+    ({ error } = await sb.from('inventory').update(payload).eq('id', currentEditId));
   } else {
     payload.status = 'active';
     ({ error } = await sb.from('inventory').insert(payload));
@@ -711,7 +712,7 @@ async function submitUnitForm() {
 
   if (error) {
     alert('Error saving unit: ' + error.message);
-    btn.textContent = editingId ? 'Save Changes' : 'Add to Inventory';
+    btn.textContent = currentEditId ? 'Save Changes' : 'Add to Inventory';
     btn.disabled = false;
     return;
   }
