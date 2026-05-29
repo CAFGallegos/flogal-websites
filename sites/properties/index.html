@@ -254,7 +254,7 @@ button{font-family:inherit;}
     </nav>
     <div class="pr-nav-tools">
       <a class="pr-cta-btn pr-cta-ghost" href="#">Sign in</a>
-      <a class="pr-cta-btn pr-cta-green" href="#">List a property</a>
+      <a class="pr-cta-btn pr-cta-green" href="#" onclick="openPropModal('List a property');return false;">List a property</a>
     </div>
   </div>
 </header>
@@ -722,7 +722,7 @@ button{font-family:inherit;}
       </p>
     </div>
     <div class="pr-cta-actions">
-      <a class="pr-cta-btn pr-cta-white" href="#">Schedule a tour &#8594;</a>
+      <a class="pr-cta-btn pr-cta-white" href="#" onclick="openPropModal('Schedule a tour');return false;">Schedule a tour &#8594;</a>
       <a class="pr-cta-btn pr-cta-ghost" href="mailto:properties@flogalhq.com">Email realty</a>
     </div>
   </div>
@@ -788,6 +788,38 @@ button{font-family:inherit;}
   </div>
 </footer>
 
+<!-- CONTACT MODAL -->
+<div id="propOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;">
+  <div style="background:white;border-radius:12px;width:100%;max-width:480px;margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);">
+    <div style="background:#0B2A1A;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4CAF7D;margin-bottom:4px;">Properties</div>
+        <div id="propModalTitle" style="color:white;font-weight:700;font-size:20px;letter-spacing:-.01em;">Get in Touch</div>
+      </div>
+      <button onclick="closePropModal()" style="background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;">&#215;</button>
+    </div>
+    <form id="propForm" onsubmit="submitPropInquiry(event)" style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Name *</label><input id="pr-name" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Full name"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Company</label><input id="pr-company" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Company name"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Email *</label><input id="pr-email" type="email" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="you@company.com"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Phone</label><input id="pr-phone" type="tel" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="+1 (555) 000-0000"></div>
+      </div>
+      <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Message</label><textarea id="pr-message" rows="3" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;resize:vertical;" placeholder="Property interest, questions, or details…"></textarea></div>
+      <div id="propFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;"></div>
+      <button type="submit" id="propSubmitBtn" style="background:#165E3A;color:white;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:14px;padding:12px 20px;border-radius:6px;">Send →</button>
+    </form>
+    <div id="propFormSuccess" style="display:none;padding:40px 28px;text-align:center;">
+      <div style="font-size:42px;margin-bottom:14px;">&#10003;</div>
+      <div style="font-weight:700;font-size:22px;color:#0B2A1A;margin-bottom:8px;">Message received!</div>
+      <div style="font-size:14px;color:#4A5563;line-height:1.55;">Our realty team will follow up within one business day.</div>
+      <button onclick="closePropModal()" style="margin-top:20px;background:#0B2A1A;color:white;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:13px;padding:10px 20px;border-radius:6px;">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
 document.querySelectorAll('.pr-type').forEach(function(btn) {
   btn.addEventListener('click', function() {
@@ -802,6 +834,60 @@ document.getElementById('view-toggle').addEventListener('click', function(e) {
   document.querySelectorAll('#view-toggle .pr-toggle-btn').forEach(function(b) { b.classList.remove('is-active'); });
   btn.classList.add('is-active');
 });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const _sb = supabase.createClient(
+  'https://uzbpsppeihazicmngqqq.supabase.co',
+  'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
+);
+function openPropModal(intent) {
+  document.getElementById('propModalTitle').textContent = intent || 'Get in Touch';
+  document.getElementById('propForm').reset();
+  document.getElementById('propForm').style.display = 'flex';
+  document.getElementById('propFormSuccess').style.display = 'none';
+  document.getElementById('propFormError').style.display = 'none';
+  document.getElementById('propOverlay').style.display = 'flex';
+}
+function closePropModal() {
+  document.getElementById('propOverlay').style.display = 'none';
+}
+document.getElementById('propOverlay').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('propOverlay')) closePropModal();
+});
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePropModal();
+});
+async function submitPropInquiry(e) {
+  e.preventDefault();
+  const btn = document.getElementById('propSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const intent = document.getElementById('propModalTitle').textContent;
+  const msg    = document.getElementById('pr-message').value.trim();
+  const payload = {
+    name:         document.getElementById('pr-name').value.trim() || null,
+    company:      document.getElementById('pr-company').value.trim() || null,
+    email:        document.getElementById('pr-email').value.trim(),
+    phone:        document.getElementById('pr-phone').value.trim() || null,
+    message:      [intent !== 'Get in Touch' ? intent : '', msg].filter(Boolean).join(' — ') || null,
+    status:       'new',
+    source:       'properties',
+    submitted_at: new Date().toISOString(),
+  };
+  const { error } = await _sb.from('inquiries').insert(payload);
+  if (error) {
+    console.error('[FLOGAL] inquiry insert error:', error);
+    const errEl = document.getElementById('propFormError');
+    errEl.textContent = 'Something went wrong — please email properties@flogalhq.com directly.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Send →';
+    btn.disabled = false;
+    return;
+  }
+  document.getElementById('propForm').style.display = 'none';
+  document.getElementById('propFormSuccess').style.display = 'block';
+}
 </script>
 </body>
 </html>

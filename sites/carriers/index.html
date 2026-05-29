@@ -761,23 +761,23 @@ a{color:inherit;text-decoration:none;}
           </div>
         </div>
       </aside>
-      <form class="op-form" onsubmit="event.preventDefault()">
+      <form class="op-form" id="carrierForm" onsubmit="submitCarrierQuote(event)">
         <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">Name</label><input class="op-form-input" placeholder="Pat Hernandez"></div>
-          <div class="op-form-field"><label class="op-form-lab">Company</label><input class="op-form-input" placeholder="Brazos Aggregate Holdings"></div>
+          <div class="op-form-field"><label class="op-form-lab">Name</label><input id="cr-name" class="op-form-input" placeholder="Pat Hernandez"></div>
+          <div class="op-form-field"><label class="op-form-lab">Company</label><input id="cr-company" class="op-form-input" placeholder="Brazos Aggregate Holdings"></div>
         </div>
         <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">Email</label><input type="email" class="op-form-input" placeholder="pat@brazos.co"></div>
-          <div class="op-form-field"><label class="op-form-lab">Phone</label><input class="op-form-input" placeholder="+1 (903) 555-0173"></div>
+          <div class="op-form-field"><label class="op-form-lab">Email</label><input id="cr-email" type="email" class="op-form-input" placeholder="pat@brazos.co"></div>
+          <div class="op-form-field"><label class="op-form-lab">Phone</label><input id="cr-phone" class="op-form-input" placeholder="+1 (903) 555-0173"></div>
         </div>
         <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">Origin</label><input class="op-form-input" placeholder="Dallas, TX 75207"></div>
-          <div class="op-form-field"><label class="op-form-lab">Destination</label><input class="op-form-input" placeholder="Oklahoma City, OK 73108"></div>
+          <div class="op-form-field"><label class="op-form-lab">Origin</label><input id="cr-origin" class="op-form-input" placeholder="Dallas, TX 75207"></div>
+          <div class="op-form-field"><label class="op-form-lab">Destination</label><input id="cr-dest" class="op-form-input" placeholder="Oklahoma City, OK 73108"></div>
         </div>
         <div class="op-form-row">
           <div class="op-form-field">
             <label class="op-form-lab">Equipment</label>
-            <select class="op-form-select">
+            <select id="cr-equip" class="op-form-select">
               <option>Flatbed · 53'</option>
               <option>Dry van · 53'</option>
               <option>Heavy haul · RGN</option>
@@ -787,16 +787,21 @@ a{color:inherit;text-decoration:none;}
               <option>Other / not sure</option>
             </select>
           </div>
-          <div class="op-form-field"><label class="op-form-lab">Pickup window</label><input class="op-form-input" placeholder="Tue 5/26 · 0700–1100 CT"></div>
+          <div class="op-form-field"><label class="op-form-lab">Pickup window</label><input id="cr-pickup" class="op-form-input" placeholder="Tue 5/26 · 0700–1100 CT"></div>
         </div>
         <div class="op-form-row-1">
-          <div class="op-form-field"><label class="op-form-lab">Load details</label><textarea class="op-form-textarea" placeholder="Commodity, weight, dimensions, accessorial needs, delivery window, special instructions."></textarea></div>
+          <div class="op-form-field"><label class="op-form-lab">Load details</label><textarea id="cr-details" class="op-form-textarea" placeholder="Commodity, weight, dimensions, accessorial needs, delivery window, special instructions."></textarea></div>
         </div>
         <div class="op-form-actions">
-          <button type="submit" class="op-btn op-btn-gold">Request a Quote →</button>
+          <button type="submit" id="crSubmitBtn" class="op-btn op-btn-gold">Request a Quote →</button>
           <span class="op-form-disclaimer">Reply inside 4 business hours · No broker markup</span>
         </div>
+        <div id="crFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:8px;"></div>
       </form>
+      <div id="crFormSuccess" style="display:none;padding:32px 0;color:white;">
+        <div style="font-weight:700;font-size:20px;margin-bottom:8px;">Quote request received.</div>
+        <div style="font-size:14px;opacity:.75;line-height:1.55;">Our dispatch team will follow up within 4 business hours.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -858,5 +863,53 @@ a{color:inherit;text-decoration:none;}
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const _sb = supabase.createClient(
+  'https://uzbpsppeihazicmngqqq.supabase.co',
+  'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
+);
+async function submitCarrierQuote(e) {
+  e.preventDefault();
+  const btn = document.getElementById('crSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const origin  = document.getElementById('cr-origin').value.trim();
+  const dest    = document.getElementById('cr-dest').value.trim();
+  const equip   = document.getElementById('cr-equip').value;
+  const pickup  = document.getElementById('cr-pickup').value.trim();
+  const details = document.getElementById('cr-details').value.trim();
+  const msgParts = [
+    origin  ? 'Origin: ' + origin : '',
+    dest    ? 'Destination: ' + dest : '',
+    equip   ? 'Equipment: ' + equip : '',
+    pickup  ? 'Pickup: ' + pickup : '',
+    details || '',
+  ].filter(Boolean);
+  const payload = {
+    name:               document.getElementById('cr-name').value.trim() || null,
+    company:            document.getElementById('cr-company').value.trim() || null,
+    email:              document.getElementById('cr-email').value.trim(),
+    phone:              document.getElementById('cr-phone').value.trim() || null,
+    equipment_interest: equip || null,
+    message:            msgParts.join(' · ') || null,
+    status:             'new',
+    source:             'carriers',
+    submitted_at:       new Date().toISOString(),
+  };
+  const { error } = await _sb.from('inquiries').insert(payload);
+  if (error) {
+    console.error('[FLOGAL] inquiry insert error:', error);
+    const errEl = document.getElementById('crFormError');
+    errEl.textContent = 'Something went wrong — please email carriers@flogalhq.com directly.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Request a Quote →';
+    btn.disabled = false;
+    return;
+  }
+  document.getElementById('carrierForm').style.display = 'none';
+  document.getElementById('crFormSuccess').style.display = 'block';
+}
+</script>
 </body>
 </html>

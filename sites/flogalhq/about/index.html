@@ -455,14 +455,14 @@ img{display:block;}
     </div>
     <form class="form" onsubmit="sub(event)">
       <div class="frow">
-        <div class="field"><label>First Name</label><input type="text" placeholder="John"></div>
-        <div class="field"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+        <div class="field"><label>First Name</label><input id="ab-fn" type="text" placeholder="John"></div>
+        <div class="field"><label>Last Name</label><input id="ab-ln" type="text" placeholder="Smith"></div>
       </div>
-      <div class="field"><label>Company</label><input type="text" placeholder="Company or Institution"></div>
-      <div class="field"><label>Email</label><input type="email" placeholder="john@institution.com"></div>
+      <div class="field"><label>Company</label><input id="ab-co" type="text" placeholder="Company or Institution"></div>
+      <div class="field"><label>Email</label><input id="ab-em" type="email" placeholder="john@institution.com"></div>
       <div class="field">
         <label>Inquiry Type</label>
-        <select>
+        <select id="ab-iq">
           <option value="">Select...</option>
           <option>Equipment Purchase or Lease</option>
           <option>Insurance</option>
@@ -474,9 +474,14 @@ img{display:block;}
           <option>Other</option>
         </select>
       </div>
-      <div class="field"><label>Message</label><textarea placeholder="Tell us about your inquiry..."></textarea></div>
-      <button type="submit" class="form-btn">Send Message →</button>
+      <div class="field"><label>Message</label><textarea id="ab-ms" placeholder="Tell us about your inquiry..."></textarea></div>
+      <button type="submit" class="form-btn" id="abSubmitBtn">Send Message →</button>
+      <div id="abFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:4px;"></div>
     </form>
+    <div id="abFormSuccess" style="display:none;padding:24px 0;">
+      <div style="font-weight:700;font-size:18px;color:var(--navy);margin-bottom:6px;">Message received.</div>
+      <div style="font-size:14px;color:var(--fg-muted);line-height:1.55;">We'll follow up within one business day.</div>
+    </div>
   </div>
 </section>
 
@@ -525,11 +530,41 @@ img{display:block;}
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-function sub(e){
+const _sb = supabase.createClient(
+  'https://uzbpsppeihazicmngqqq.supabase.co',
+  'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
+);
+async function sub(e) {
   e.preventDefault();
-  const b=e.target.querySelector('.form-btn');
-  b.textContent='Sent ✓';b.style.background='#165E3A';b.disabled=true;
+  const btn = document.getElementById('abSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const name = [document.getElementById('ab-fn').value.trim(), document.getElementById('ab-ln').value.trim()].filter(Boolean).join(' ') || null;
+  const iq   = document.getElementById('ab-iq').value;
+  const ms   = document.getElementById('ab-ms').value.trim();
+  const payload = {
+    name:         name,
+    company:      document.getElementById('ab-co').value.trim() || null,
+    email:        document.getElementById('ab-em').value.trim(),
+    message:      [iq, ms].filter(Boolean).join(' — ') || null,
+    status:       'new',
+    source:       'hq',
+    submitted_at: new Date().toISOString(),
+  };
+  const { error } = await _sb.from('inquiries').insert(payload);
+  if (error) {
+    console.error('[FLOGAL] inquiry insert error:', error);
+    const errEl = document.getElementById('abFormError');
+    errEl.textContent = 'Something went wrong — please email info@flogalhq.com directly.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Send Message →';
+    btn.disabled = false;
+    return;
+  }
+  document.querySelector('.form').style.display = 'none';
+  document.getElementById('abFormSuccess').style.display = 'block';
 }
 </script>
 </body>

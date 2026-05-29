@@ -899,19 +899,25 @@ async function submitQuote(e) {
   btn.disabled    = true;
   btn.textContent = 'Sending…';
 
+  const unit = quoteUnitId ? allInventory.find(u => String(u.id) === String(quoteUnitId)) : null;
+
   const payload = {
-    name:     document.getElementById('q-name').value.trim(),
-    company:  document.getElementById('q-company').value.trim(),
-    email:    document.getElementById('q-email').value.trim(),
-    phone:    document.getElementById('q-phone').value.trim(),
-    interest: document.getElementById('q-interest').value.trim(),
-    message:  document.getElementById('q-message').value.trim(),
-    status:   'new',
+    name:               document.getElementById('q-name').value.trim(),
+    company:            document.getElementById('q-company').value.trim() || null,
+    email:              document.getElementById('q-email').value.trim(),
+    phone:              document.getElementById('q-phone').value.trim() || null,
+    equipment_interest: document.getElementById('q-interest').value.trim() || null,
+    stock_number:       unit ? (unit.stock_number || null) : null,
+    message:            document.getElementById('q-message').value.trim() || null,
+    status:             'new',
+    source:             'sales',
+    submitted_at:       new Date().toISOString(),
   };
 
   const { error } = await sb.from('inquiries').insert(payload);
 
   if (error) {
+    console.error('[FLOGAL] inquiry insert error:', error);
     const errEl = document.getElementById('quoteError');
     errEl.textContent    = 'Something went wrong — please email sales@flogalhq.com directly.';
     errEl.style.display  = 'block';
