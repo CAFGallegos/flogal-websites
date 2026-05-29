@@ -763,8 +763,20 @@ a{color:inherit;text-decoration:none;}
       </aside>
       <form class="op-form" id="carrierForm" onsubmit="submitCarrierQuote(event)">
         <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">Name</label><input id="cr-name" class="op-form-input" placeholder="Pat Hernandez"></div>
+          <div class="op-form-field"><label class="op-form-lab">First Name</label><input id="cr-first" class="op-form-input" placeholder="Pat"></div>
+          <div class="op-form-field"><label class="op-form-lab">Last Name</label><input id="cr-last" class="op-form-input" placeholder="Hernandez"></div>
+        </div>
+        <div class="op-form-row">
           <div class="op-form-field"><label class="op-form-lab">Company</label><input id="cr-company" class="op-form-input" placeholder="Brazos Aggregate Holdings"></div>
+          <div class="op-form-field">
+            <label class="op-form-lab">Preferred Contact</label>
+            <select id="cr-preferred" class="op-form-select">
+              <option value="">Select…</option>
+              <option value="email">Email</option>
+              <option value="phone">Phone</option>
+              <option value="text">Text</option>
+            </select>
+          </div>
         </div>
         <div class="op-form-row">
           <div class="op-form-field"><label class="op-form-lab">Email</label><input id="cr-email" type="email" class="op-form-input" placeholder="pat@brazos.co"></div>
@@ -887,12 +899,15 @@ async function submitCarrierQuote(e) {
     details || '',
   ].filter(Boolean);
   const payload = {
-    name:               document.getElementById('cr-name').value.trim() || null,
+    first_name:         document.getElementById('cr-first').value.trim() || null,
+    last_name:          document.getElementById('cr-last').value.trim() || null,
     company:            document.getElementById('cr-company').value.trim() || null,
     email:              document.getElementById('cr-email').value.trim(),
     phone:              document.getElementById('cr-phone').value.trim() || null,
     equipment_interest: equip || null,
     message:            msgParts.join(' · ') || null,
+    preferred_contact:  document.getElementById('cr-preferred').value || null,
+    lead_source:        'website',
     status:             'new',
     source:             'carriers',
     submitted_at:       new Date().toISOString(),

@@ -305,8 +305,8 @@ a{color:inherit;text-decoration:none;}
       <h2 class="h2">Request an Introduction</h2>
       <p class="contact-lead">For partnership inquiries, carrier relations, financing discussions, or general business development.</p>
       <div><div class="cd-label">General</div><div class="cd-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
-      <div><div class="cd-label">Carriers</div><div class="cd-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
-      <div><div class="cd-label">Equipment</div><div class="cd-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
+      <div><div class="cd-label">Carriers</div><div class="cd-val"><a href="mailto:carriers@flogalhq.com">carriers@flogalhq.com</a></div></div>
+      <div><div class="cd-label">Equipment</div><div class="cd-val"><a href="mailto:sales@flogalhq.com">sales@flogalhq.com</a></div></div>
     </div>
     <form class="form" id="hqForm" onsubmit="submitHqInquiry(event)">
       <div class="form-row">
@@ -326,6 +326,14 @@ a{color:inherit;text-decoration:none;}
         </select>
       </div>
       <div class="field"><label for="ms">Message</label><textarea id="ms" placeholder="Brief description of your inquiry…"></textarea></div>
+      <div class="field"><label for="hq-pc">Preferred Contact</label>
+        <select id="hq-pc">
+          <option value="">Select…</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+          <option value="text">Text</option>
+        </select>
+      </div>
       <button class="form-btn" id="hqSubmitBtn" type="submit">Send Inquiry</button>
       <div id="hqFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:4px;"></div>
     </form>
@@ -414,17 +422,18 @@ async function submitHqInquiry(e) {
   const btn = document.getElementById('hqSubmitBtn');
   btn.disabled = true;
   btn.textContent = 'Sending…';
-  const name = [document.getElementById('fn').value.trim(), document.getElementById('ln').value.trim()].filter(Boolean).join(' ') || null;
-  const iq   = document.getElementById('iq').value;
-  const ms   = document.getElementById('ms').value.trim();
   const payload = {
-    name:         name,
-    company:      document.getElementById('co').value.trim() || null,
-    email:        document.getElementById('em').value.trim(),
-    message:      [iq, ms].filter(Boolean).join(' — ') || null,
-    status:       'new',
-    source:       'hq',
-    submitted_at: new Date().toISOString(),
+    first_name:        document.getElementById('fn').value.trim() || null,
+    last_name:         document.getElementById('ln').value.trim() || null,
+    company:           document.getElementById('co').value.trim() || null,
+    email:             document.getElementById('em').value.trim(),
+    inquiry_type:      document.getElementById('iq').value || null,
+    message:           document.getElementById('ms').value.trim() || null,
+    preferred_contact: document.getElementById('hq-pc').value || null,
+    lead_source:       'website',
+    status:            'new',
+    source:            'hq',
+    submitted_at:      new Date().toISOString(),
   };
   const { error } = await _sb.from('inquiries').insert(payload);
   if (error) {

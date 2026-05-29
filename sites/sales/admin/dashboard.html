@@ -205,7 +205,7 @@ body{background:#FFFFFF;}
           </select>
         </div>
         <div class="ad-table-wrap"><table class="ad-table">
-          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <thead><tr><th>Date</th><th>First Name</th><th>Last Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Source</th><th>Inquiry Type</th><th>Message</th><th>Preferred</th><th>Status</th><th class="right">Actions</th></tr></thead>
           <tbody id="inqBodyAll"></tbody>
         </table></div>
       </section>
@@ -222,7 +222,7 @@ body{background:#FFFFFF;}
           </select>
         </div>
         <div class="ad-table-wrap"><table class="ad-table">
-          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <thead><tr><th>Date</th><th>First Name</th><th>Last Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Source</th><th>Inquiry Type</th><th>Message</th><th>Preferred</th><th>Status</th><th class="right">Actions</th></tr></thead>
           <tbody id="inqBodySales"></tbody>
         </table></div>
       </section>
@@ -239,7 +239,7 @@ body{background:#FFFFFF;}
           </select>
         </div>
         <div class="ad-table-wrap"><table class="ad-table">
-          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <thead><tr><th>Date</th><th>First Name</th><th>Last Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Source</th><th>Inquiry Type</th><th>Message</th><th>Preferred</th><th>Status</th><th class="right">Actions</th></tr></thead>
           <tbody id="inqBodyCarriers"></tbody>
         </table></div>
       </section>
@@ -256,7 +256,7 @@ body{background:#FFFFFF;}
           </select>
         </div>
         <div class="ad-table-wrap"><table class="ad-table">
-          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <thead><tr><th>Date</th><th>First Name</th><th>Last Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Source</th><th>Inquiry Type</th><th>Message</th><th>Preferred</th><th>Status</th><th class="right">Actions</th></tr></thead>
           <tbody id="inqBodyProperties"></tbody>
         </table></div>
       </section>
@@ -621,19 +621,53 @@ function inqRow(r) {
   const statusLabel = isNew ? 'New' : r.status === 'replied' ? 'Replied' : esc(r.status || '—');
   const statusCls   = isNew ? 'ad-pill-inquired' : 'ad-pill-active';
   const msg = r.message || r.equipment_interest || '';
-  return `<tr>
+  const rowBorder = isNew ? 'border-left:3px solid #2D7DD2;' : '';
+  const iStyle = 'width:100%;font:inherit;font-size:11px;padding:4px 7px;border:1px solid #E2E8F0;border-radius:4px;color:#0F172A;background:#F8FAFC;';
+  return `<tr style="${rowBorder}">
     <td class="num" style="white-space:nowrap;color:#64748B;">${fmtDate(r.submitted_at || r.created_at)}</td>
-    <td style="font-weight:600;">${esc(r.name || '—')}</td>
+    <td style="font-weight:600;">${esc(r.first_name || '—')}</td>
+    <td>${esc(r.last_name || '—')}</td>
     <td>${esc(r.company || '—')}</td>
     <td><a href="mailto:${esc(r.email || '')}">${esc(r.email || '—')}</a></td>
     <td class="num" style="white-space:nowrap;">${esc(r.phone || '—')}</td>
-    <td class="msg-cell" title="${esc(msg)}">${esc(msg) || '—'}</td>
     <td style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#64748B;">${esc(r.source || '—')}</td>
+    <td style="font-size:12px;">${esc(r.inquiry_type || '—')}</td>
+    <td class="msg-cell" title="${esc(msg)}">${esc(msg) || '—'}</td>
+    <td style="font-size:12px;">${esc(r.preferred_contact || '—')}</td>
     <td><span class="ad-pill ${statusCls}">${statusLabel}</span></td>
-    <td class="right"><div class="actions">
-      ${isNew ? `<button class="ad-btn ad-btn-blue ad-btn-sm" type="button" onclick="markReplied('${r.id}')">Mark Replied</button>` : ''}
-    </div></td>
+    <td class="right">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:160px;">
+        ${isNew ? `<button class="ad-btn ad-btn-blue ad-btn-sm" type="button" onclick="markReplied('${r.id}')">Mark Replied</button>` : ''}
+        <textarea
+          placeholder="Notes…"
+          data-id="${r.id}"
+          onblur="saveInquiryField('${r.id}','notes',this.value)"
+          style="${iStyle}min-height:38px;resize:vertical;"
+        >${esc(r.notes || '')}</textarea>
+        <input
+          type="text"
+          placeholder="Assign to…"
+          value="${esc(r.assigned_to || '')}"
+          onblur="saveInquiryField('${r.id}','assigned_to',this.value)"
+          style="${iStyle}"
+        >
+        <input
+          type="date"
+          title="Follow-up date"
+          value="${r.follow_up_date ? r.follow_up_date.substring(0,10) : ''}"
+          onblur="saveInquiryField('${r.id}','follow_up_date',this.value||null)"
+          style="${iStyle}"
+        >
+      </div>
+    </td>
   </tr>`;
+}
+
+async function saveInquiryField(id, field, value) {
+  const update = {};
+  update[field] = value || null;
+  const { error } = await sb.from('inquiries').update(update).eq('id', id);
+  if (error) console.error('[FLOGAL] saveInquiryField error:', field, error);
 }
 
 function renderInquirySection(tbodyId, source, searchId, filterStatusId) {
@@ -651,7 +685,7 @@ function renderInquirySection(tbodyId, source, searchId, filterStatusId) {
 
   tbody.innerHTML = rows.length
     ? rows.map(inqRow).join('')
-    : `<tr><td colspan="9" style="text-align:center;padding:32px;color:#64748B;">No inquiries found</td></tr>`;
+    : `<tr><td colspan="12" style="text-align:center;padding:32px;color:#64748B;">No inquiries found</td></tr>`;
 }
 
 function renderAllInquiryTabs() {

@@ -800,12 +800,34 @@ button{font-family:inherit;}
     </div>
     <form id="propForm" onsubmit="submitPropInquiry(event)" style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Name *</label><input id="pr-name" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Full name"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">First Name *</label><input id="pr-first" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="First name"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Last Name</label><input id="pr-last" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Last name"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Company</label><input id="pr-company" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Company name"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Inquiry Type</label>
+          <select id="pr-inquiry-type" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
+            <option value="">Select…</option>
+            <option value="Buy">Buy</option>
+            <option value="Lease">Lease</option>
+            <option value="List a property">List a property</option>
+            <option value="Schedule a tour">Schedule a tour</option>
+            <option value="Build-to-suit">Build-to-suit</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Email *</label><input id="pr-email" type="email" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="you@company.com"></div>
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Phone</label><input id="pr-phone" type="tel" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="+1 (555) 000-0000"></div>
+      </div>
+      <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Preferred Contact</label>
+        <select id="pr-preferred" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
+          <option value="">Select…</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+          <option value="text">Text</option>
+        </select>
       </div>
       <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Message</label><textarea id="pr-message" rows="3" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;resize:vertical;" placeholder="Property interest, questions, or details…"></textarea></div>
       <div id="propFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;"></div>
@@ -865,15 +887,20 @@ async function submitPropInquiry(e) {
   btn.textContent = 'Sending…';
   const intent = document.getElementById('propModalTitle').textContent;
   const msg    = document.getElementById('pr-message').value.trim();
+  const selType = document.getElementById('pr-inquiry-type').value;
   const payload = {
-    name:         document.getElementById('pr-name').value.trim() || null,
-    company:      document.getElementById('pr-company').value.trim() || null,
-    email:        document.getElementById('pr-email').value.trim(),
-    phone:        document.getElementById('pr-phone').value.trim() || null,
-    message:      [intent !== 'Get in Touch' ? intent : '', msg].filter(Boolean).join(' — ') || null,
-    status:       'new',
-    source:       'properties',
-    submitted_at: new Date().toISOString(),
+    first_name:        document.getElementById('pr-first').value.trim() || null,
+    last_name:         document.getElementById('pr-last').value.trim() || null,
+    company:           document.getElementById('pr-company').value.trim() || null,
+    email:             document.getElementById('pr-email').value.trim(),
+    phone:             document.getElementById('pr-phone').value.trim() || null,
+    inquiry_type:      selType || (intent !== 'Get in Touch' ? intent : null),
+    message:           msg || null,
+    preferred_contact: document.getElementById('pr-preferred').value || null,
+    lead_source:       'website',
+    status:            'new',
+    source:            'properties',
+    submitted_at:      new Date().toISOString(),
   };
   const { error } = await _sb.from('inquiries').insert(payload);
   if (error) {
