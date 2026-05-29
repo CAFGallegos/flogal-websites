@@ -3,96 +3,160 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FLOGAL Sales Admin — Inventory Dashboard</title>
+<title>FLOGAL Admin — Dashboard</title>
 <link rel="stylesheet" href="styles.css">
 <style>
+body{background:#FFFFFF;}
 .ad-photo-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
-.ad-photo-thumb{position:relative;width:80px;height:80px;border-radius:6px;overflow:hidden;border:1.5px solid var(--ad-border,#2a3a4f);flex:none;}
+.ad-photo-thumb{position:relative;width:80px;height:80px;border-radius:6px;overflow:hidden;border:1.5px solid #2a3a4f;flex:none;}
 .ad-photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .ad-photo-remove{position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.65);border:0;cursor:pointer;color:white;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;}
 .ad-photo-remove:hover{background:#e05a5a;}
 .ad-photo-badge{position:absolute;bottom:3px;left:3px;font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#C79A2B;color:#0B1D2D;padding:1px 5px;border-radius:3px;}
-.ad-photo-upload-status{font-size:11px;color:var(--ad-fg-dim,#6b7f94);margin-top:6px;min-height:16px;}
-.ad-drop.is-drag-over{border-color:#C79A2B !important;background:rgba(199,154,43,.06);}
-.ad-drop > *{pointer-events:none;}
+.ad-photo-upload-status{font-size:11px;color:#6b7f94;margin-top:6px;min-height:16px;}
+.ad-drop.is-drag-over{border-color:#334155!important;background:rgba(51,65,85,.06);}
+.ad-drop>*{pointer-events:none;}
+/* Main area */
+.ad-main{background:#FFFFFF;}
+.ad-top{background:#FFFFFF;border-bottom-color:#E2E8F0;}
+.ad-top-eyebrow{color:#64748B;}
+.ad-top-title{color:#0F172A;}
+.ad-kpi{background:#F8FAFC;border-color:#E2E8F0;}
+.ad-kpi-lab{color:#64748B;}
+.ad-kpi-val{color:#0F172A;}
+.ad-kpi-meta{color:#475569;}
+.ad-search{background:#F8FAFC;border-color:#E2E8F0;}
+.ad-search input{color:#0F172A;}
+.ad-search input::placeholder{color:#94A3B8;}
+.ad-search svg{color:#94A3B8;}
+.ad-select{background:#F8FAFC;border-color:#E2E8F0;color:#0F172A;}
+.ad-table-wrap{background:#FFFFFF;border-color:#E2E8F0;}
+.ad-table th{background:#F8FAFC;color:#64748B;border-bottom-color:#E2E8F0;}
+.ad-table td{color:#0F172A;border-bottom-color:#F1F5F9;}
+.ad-table tr:hover td{background:#F8FAFC;}
+.ad-table .stock{background:#F1F5F9;color:#0F172A;}
+.ad-table .price{color:#0F172A;}
+.ad-table td a{color:#2D7DD2;}
+/* Sidebar */
+.ad-side{background:#0F172A;border-right-color:#1E293B;}
+.ad-side-brand{border-bottom-color:#1E293B;}
+.ad-side-h{color:rgba(255,255,255,.28);}
+.ad-side-item{color:rgba(255,255,255,.55);}
+.ad-side-item:hover:not(:disabled){background:rgba(255,255,255,.06)!important;color:white!important;}
+.ad-side-item.is-active{background:#334155!important;color:white!important;box-shadow:none!important;}
+.ad-side-count{color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);}
+.ad-side-item.is-active .ad-side-count{background:rgba(255,255,255,.14);color:white;}
+.ad-side-foot{border-top-color:#1E293B;}
+.ad-user-name{color:white;}
+.ad-user-role{color:rgba(255,255,255,.4);}
+.ad-user-out{color:rgba(255,255,255,.4);}
+.ad-user-out:hover{color:white;}
+.ad-role-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:#334155;color:rgba(255,255,255,.75);margin-top:2px;}
+/* Primary action button (replaces gold for branding) */
+.ad-btn-primary{background:#334155;color:white;border-color:#334155;}
+.ad-btn-primary:hover{background:#475569;border-color:#475569;}
+.msg-cell{max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* Access denied overlay */
+#accessDenied{display:none;position:fixed;inset:0;background:#0F172A;z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:white;text-align:center;padding:40px;}
+/* All role-gated elements hidden until JS reveals them */
+[data-roles]{display:none;}
 </style>
 </head>
 <body>
-<div class="ad-shell" data-screen-label="FLOGAL Sales Admin · Dashboard">
 
-  <!-- ---------- SIDEBAR ---------- -->
+<!-- ACCESS DENIED -->
+<div id="accessDenied">
+  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  <div style="font-size:22px;font-weight:700;">Access denied</div>
+  <div style="font-size:14px;color:rgba(255,255,255,.5);max-width:300px;line-height:1.6;">Contact your administrator to request access to the admin portal.</div>
+</div>
+
+<div class="ad-shell" data-screen-label="FLOGAL Admin · Dashboard">
+
+  <!-- SIDEBAR -->
   <aside class="ad-side">
     <div class="ad-side-brand">
-      <img class="ad-side-mark" src="../../../shared/logos/flogal-symbol-gold.png" alt="">
+      <img class="ad-side-mark" src="../../../shared/logos/flogal-symbol-tricolor.png" alt="">
       <div>
         <div class="ad-side-wm">FLOGAL</div>
-        <div class="ad-side-sub">Sales Admin</div>
+        <div class="ad-side-sub" id="sideSubLabel">ADMIN</div>
       </div>
     </div>
     <nav class="ad-side-nav">
-      <span class="ad-side-h">Manage</span>
-      <button class="ad-side-item is-active" data-tab="inventory">
+
+      <span class="ad-side-h" data-roles="holdings sales">Inventory</span>
+      <button class="ad-side-item" data-tab="inventory" data-roles="holdings sales">
         <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
         Inventory
         <span class="ad-side-count" id="navCountInventory">—</span>
       </button>
-      <button class="ad-side-item" data-tab="inquiries">
+
+      <span class="ad-side-h" data-roles="holdings sales carriers properties">Inquiries</span>
+      <button class="ad-side-item" data-tab="inquiries-all" data-roles="holdings">
         <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
-        Inquiries
-        <span class="ad-side-count" id="navCountInquiries">—</span>
+        All Inquiries
+        <span class="ad-side-count" id="navCountAll">—</span>
       </button>
-      <span class="ad-side-h">Reports</span>
-      <button class="ad-side-item" disabled style="opacity:.5;cursor:default;">
+      <button class="ad-side-item" data-tab="inquiries-sales" data-roles="holdings sales">
+        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+        Sales Inquiries
+        <span class="ad-side-count" id="navCountSales">—</span>
+      </button>
+      <button class="ad-side-item" data-tab="inquiries-carriers" data-roles="holdings carriers">
+        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+        Carrier Inquiries
+        <span class="ad-side-count" id="navCountCarriers">—</span>
+      </button>
+      <button class="ad-side-item" data-tab="inquiries-properties" data-roles="holdings properties">
+        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+        Property Inquiries
+        <span class="ad-side-count" id="navCountProperties">—</span>
+      </button>
+
+      <span class="ad-side-h" data-roles="holdings">Reports</span>
+      <button class="ad-side-item" data-roles="holdings" disabled style="opacity:.45;cursor:default;">
         <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
-        Sales · Analytics
+        Analytics
       </button>
-      <button class="ad-side-item" disabled style="opacity:.5;cursor:default;">
-        <svg class="ad-side-icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        Lease Activity
-      </button>
+
     </nav>
     <div class="ad-side-foot">
       <div class="ad-user">
         <span class="ad-user-avatar" id="userAvatar">—</span>
         <span class="ad-user-meta">
           <span class="ad-user-name" id="userName">Loading…</span>
-          <span class="ad-user-role" id="userRole">Sales · Inventory</span>
+          <span class="ad-user-role" id="userEmailDisplay"></span>
+          <span class="ad-role-badge" id="userRoleBadge"></span>
         </span>
         <button class="ad-user-out" id="signOutBtn" title="Sign out" type="button">&#x2197;</button>
       </div>
     </div>
   </aside>
 
-  <!-- ---------- MAIN ---------- -->
+  <!-- MAIN -->
   <main class="ad-main">
 
-    <!-- Topbar -->
     <div class="ad-top">
       <div class="ad-top-left">
-        <span class="ad-top-eyebrow" id="topEyebrow">Manage · Inventory</span>
-        <span class="ad-top-title" id="topTitle">Equipment Inventory</span>
+        <span class="ad-top-eyebrow" id="topEyebrow">Dashboard</span>
+        <span class="ad-top-title" id="topTitle">Loading…</span>
       </div>
       <div class="ad-top-actions">
-        <button class="ad-btn ad-btn-ghost" type="button" id="btnExportCSV">Export CSV</button>
-        <button class="ad-btn ad-btn-gold" type="button" id="btnAddUnit">
+        <button class="ad-btn ad-btn-ghost" type="button" id="btnExportCSV" style="display:none;">Export CSV</button>
+        <button class="ad-btn ad-btn-primary" type="button" id="btnAddUnit" style="display:none;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
           Add New Unit
         </button>
       </div>
     </div>
 
-    <!-- KPIs -->
-    <div class="ad-kpis">
-      <div class="ad-kpi"><div class="ad-kpi-lab">Active Listings</div><div class="ad-kpi-val" id="kpiActiveVal">—</div><div class="ad-kpi-meta" id="kpiActiveMeta">Loading…</div></div>
-      <div class="ad-kpi"><div class="ad-kpi-lab">Pending</div><div class="ad-kpi-val" id="kpiPendingVal">—</div><div class="ad-kpi-meta">Awaiting inspection / photos</div></div>
-      <div class="ad-kpi"><div class="ad-kpi-lab">Sold MTD</div><div class="ad-kpi-val" id="kpiSoldVal">—</div><div class="ad-kpi-meta">Units marked sold this month</div></div>
-      <div class="ad-kpi"><div class="ad-kpi-lab">Open Inquiries</div><div class="ad-kpi-val" id="kpiInqVal">—</div><div class="ad-kpi-meta" id="kpiInqMeta">Awaiting reply</div></div>
-    </div>
+    <!-- KPI strip — rendered dynamically by updateKPIs() -->
+    <div class="ad-kpis" id="kpiStrip"></div>
 
     <div class="ad-content">
 
-      <!-- ============= INVENTORY TAB ============= -->
-      <section class="ad-tab is-active" id="tab-inventory">
+      <!-- INVENTORY -->
+      <section class="ad-tab" id="tab-inventory">
         <div class="ad-toolbar">
           <div class="ad-search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -116,64 +180,92 @@
             <option value="sold">Sold</option>
           </select>
         </div>
-
         <div class="ad-table-wrap">
           <table class="ad-table">
-            <thead>
-              <tr>
-                <th>Stock #</th>
-                <th>Year</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Type</th>
-                <th class="right">Price</th>
-                <th>Status</th>
-                <th class="right">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="inventoryBody"><tr id="inventoryLoadingRow"><td colspan="8" style="text-align:center;padding:32px;color:var(--ad-fg-dim);">Loading inventory…</td></tr></tbody>
+            <thead><tr>
+              <th>Stock #</th><th>Year</th><th>Make</th><th>Model</th>
+              <th>Type</th><th class="right">Price</th><th>Status</th><th class="right">Actions</th>
+            </tr></thead>
+            <tbody id="inventoryBody">
+              <tr id="inventoryLoadingRow"><td colspan="8" style="text-align:center;padding:32px;color:#64748B;">Loading inventory…</td></tr>
+            </tbody>
           </table>
         </div>
       </section>
 
-      <!-- ============= INQUIRIES TAB ============= -->
-      <section class="ad-tab" id="tab-inquiries">
+      <!-- ALL INQUIRIES (holdings) -->
+      <section class="ad-tab" id="tab-inquiries-all">
         <div class="ad-toolbar">
           <div class="ad-search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-            <input id="inquiriesSearch" placeholder="Search by name · company · email" />
+            <input id="searchAll" placeholder="Search name · company · email" oninput="renderInquirySection('inqBodyAll',null,'searchAll','filterStatusAll')">
           </div>
-          <select class="ad-select" id="filterInqStatus">
-            <option value="">All status</option>
-            <option value="new">New</option>
-            <option value="responded">Responded</option>
-            <option value="closed">Closed</option>
+          <select class="ad-select" id="filterStatusAll" onchange="renderInquirySection('inqBodyAll',null,'searchAll','filterStatusAll')">
+            <option value="">All status</option><option value="new">New</option><option value="replied">Replied</option>
           </select>
         </div>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <tbody id="inqBodyAll"></tbody>
+        </table></div>
+      </section>
 
-        <div class="ad-table-wrap">
-          <table class="ad-table">
-            <thead>
-              <tr>
-                <th>Submitted</th>
-                <th>Name</th>
-                <th>Company</th>
-                <th>Email</th>
-                <th>Equipment Interest</th>
-                <th>Status</th>
-                <th class="right">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="inquiriesBody"></tbody>
-          </table>
+      <!-- SALES INQUIRIES (holdings + sales) -->
+      <section class="ad-tab" id="tab-inquiries-sales">
+        <div class="ad-toolbar">
+          <div class="ad-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input id="searchSales" placeholder="Search name · company · email" oninput="renderInquirySection('inqBodySales','sales','searchSales','filterStatusSales')">
+          </div>
+          <select class="ad-select" id="filterStatusSales" onchange="renderInquirySection('inqBodySales','sales','searchSales','filterStatusSales')">
+            <option value="">All status</option><option value="new">New</option><option value="replied">Replied</option>
+          </select>
         </div>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <tbody id="inqBodySales"></tbody>
+        </table></div>
+      </section>
+
+      <!-- CARRIER INQUIRIES (holdings + carriers) -->
+      <section class="ad-tab" id="tab-inquiries-carriers">
+        <div class="ad-toolbar">
+          <div class="ad-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input id="searchCarriers" placeholder="Search name · company · email" oninput="renderInquirySection('inqBodyCarriers','carriers','searchCarriers','filterStatusCarriers')">
+          </div>
+          <select class="ad-select" id="filterStatusCarriers" onchange="renderInquirySection('inqBodyCarriers','carriers','searchCarriers','filterStatusCarriers')">
+            <option value="">All status</option><option value="new">New</option><option value="replied">Replied</option>
+          </select>
+        </div>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <tbody id="inqBodyCarriers"></tbody>
+        </table></div>
+      </section>
+
+      <!-- PROPERTY INQUIRIES (holdings + properties) -->
+      <section class="ad-tab" id="tab-inquiries-properties">
+        <div class="ad-toolbar">
+          <div class="ad-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input id="searchProperties" placeholder="Search name · company · email" oninput="renderInquirySection('inqBodyProperties','properties','searchProperties','filterStatusProperties')">
+          </div>
+          <select class="ad-select" id="filterStatusProperties" onchange="renderInquirySection('inqBodyProperties','properties','searchProperties','filterStatusProperties')">
+            <option value="">All status</option><option value="new">New</option><option value="replied">Replied</option>
+          </select>
+        </div>
+        <div class="ad-table-wrap"><table class="ad-table">
+          <thead><tr><th>Date</th><th>Name</th><th>Company</th><th>Email</th><th>Phone</th><th>Message</th><th>Source</th><th>Status</th><th class="right">Actions</th></tr></thead>
+          <tbody id="inqBodyProperties"></tbody>
+        </table></div>
       </section>
 
     </div>
   </main>
 </div>
 
-<!-- ---------- ADD-UNIT DRAWER ---------- -->
+<!-- ADD-UNIT DRAWER (logic unchanged) -->
 <div class="ad-overlay" id="drawerOverlay"></div>
 <aside class="ad-drawer" id="drawerAddUnit" aria-hidden="true">
   <header class="ad-drawer-head">
@@ -322,7 +414,7 @@
   <footer class="ad-drawer-foot">
     <span class="ad-spacer">Draft saved · will publish on Submit</span>
     <button type="button" class="ad-btn ad-btn-ghost" id="drawerCancel">Cancel</button>
-    <button type="submit" form="addUnitForm" class="ad-btn ad-btn-gold" id="drawerSubmitBtn">Add to Inventory</button>
+    <button type="submit" form="addUnitForm" class="ad-btn ad-btn-blue" id="drawerSubmitBtn">Add to Inventory</button>
   </footer>
 </aside>
 
@@ -338,37 +430,98 @@ const sb = supabase.createClient(
   'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
 );
 
-let inventory = [];
-let inquiries = [];
+let inventory    = [];
+let allInquiries = [];
+let currentRole  = null;
 let pendingFiles    = [];
 let pendingPreviews = [];
 let existingPhotos  = [];
 
-// Auth guard — redirect to login if no session
+// Timeout fallback — only relevant while inventory loading row is present
 const _loadTimeout = setTimeout(() => {
   const tbody = document.getElementById('inventoryBody');
   if (tbody && tbody.querySelector('#inventoryLoadingRow')) {
-    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Inventory is taking too long to load. Check your connection and refresh the page.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Loading is taking too long. Check your connection and refresh.</td></tr>';
   }
 }, 12000);
+
+// ── INIT ──────────────────────────────────────────────────────────────────
 (async () => {
   try {
     const { data, error: authErr } = await sb.auth.getSession();
     const session = data?.session;
     if (authErr || !session) { window.location.href = 'login.html'; return; }
-    const email = session.user.email || '';
-    document.getElementById('userAvatar').textContent = email.slice(0, 2).toUpperCase();
-    document.getElementById('userName').textContent   = email;
-    await Promise.all([loadInventory(), loadInquiries()]);
+
+    const { data: roleData, error: roleErr } = await sb
+      .from('admin_roles')
+      .select('role, display_name')
+      .eq('user_id', session.user.id)
+      .single();
+
+    if (roleErr || !roleData || !roleData.role) {
+      console.error('[FLOGAL] role fetch failed:', roleErr);
+      showAccessDenied();
+      return;
+    }
+
+    currentRole = roleData.role;
+    setupUI(currentRole, roleData.display_name, session.user.email);
+
+    const loads = [];
+    if (currentRole === 'holdings' || currentRole === 'sales') {
+      loads.push(loadInventory());
+    } else {
+      clearTimeout(_loadTimeout);
+      document.getElementById('inventoryBody').innerHTML =
+        '<tr><td colspan="8" style="text-align:center;padding:32px;color:#64748B;">Inventory not available for this role.</td></tr>';
+    }
+    loads.push(loadInquiries());
+    await Promise.all(loads);
   } catch (err) {
-    console.error('[auth/load]', err);
-    const tbody = document.getElementById('inventoryBody');
-    if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Failed to initialize: ${err.message}</td></tr>`;
-  } finally {
-    clearTimeout(_loadTimeout);
+    console.error('[FLOGAL] init error:', err);
   }
 })();
 
+function showAccessDenied() {
+  clearTimeout(_loadTimeout);
+  document.getElementById('accessDenied').style.display = 'flex';
+  sb.auth.signOut();
+}
+
+// ── UI SETUP ──────────────────────────────────────────────────────────────
+function setupUI(role, displayName, email) {
+  const LABELS = {
+    holdings:   'HOLDINGS ADMIN',
+    sales:      'SALES ADMIN',
+    carriers:   'CARRIERS ADMIN',
+    properties: 'PROPERTIES ADMIN',
+  };
+  document.getElementById('sideSubLabel').textContent = LABELS[role] || role.toUpperCase() + ' ADMIN';
+
+  // Reveal nav items and headings for this role
+  document.querySelectorAll('[data-roles]').forEach(el => {
+    const roles = el.dataset.roles.split(' ');
+    if (roles.includes(role)) el.style.display = '';
+  });
+
+  // User info
+  const initials = displayName ? displayName.slice(0, 2).toUpperCase() : email.slice(0, 2).toUpperCase();
+  document.getElementById('userAvatar').textContent      = initials;
+  document.getElementById('userName').textContent        = displayName || email;
+  document.getElementById('userEmailDisplay').textContent = email;
+  document.getElementById('userRoleBadge').textContent   = role;
+
+  // Default tab
+  const defaultTab = {
+    holdings:   'inventory',
+    sales:      'inventory',
+    carriers:   'inquiries-carriers',
+    properties: 'inquiries-properties',
+  }[role] || 'inventory';
+  switchTab(defaultTab);
+}
+
+// ── DATA LOADING ──────────────────────────────────────────────────────────
 async function loadInventory() {
   try {
     const { data, error } = await sb.from('inventory').select('*').order('created_at', { ascending: false });
@@ -379,23 +532,28 @@ async function loadInventory() {
     updateKPIs();
   } catch (err) {
     console.error('[loadInventory]', err);
-    const tbody = document.getElementById('inventoryBody');
-    if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Failed to load inventory: ${err.message}</td></tr>`;
+    document.getElementById('inventoryBody').innerHTML =
+      `<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Failed to load inventory: ${err.message}</td></tr>`;
   }
 }
 
 async function loadInquiries() {
   try {
-    const { data, error } = await sb.from('inquiries').select('*').order('created_at', { ascending: false });
+    let q = sb.from('inquiries').select('*').order('created_at', { ascending: false });
+    if (currentRole !== 'holdings') {
+      q = q.eq('source', currentRole);
+    }
+    const { data, error } = await q;
     if (error) throw error;
-    inquiries = data || [];
-    renderInquiries();
+    allInquiries = data || [];
+    renderAllInquiryTabs();
     updateKPIs();
   } catch (err) {
     console.error('[loadInquiries]', err);
   }
 }
 
+// ── INVENTORY RENDERING ───────────────────────────────────────────────────
 const STATUS_LABEL = {
   active:   { lbl:'Active',   cls:'ad-pill-active'   },
   pending:  { lbl:'Pending',  cls:'ad-pill-pending'  },
@@ -413,6 +571,11 @@ function fmtDate(val) {
   const d = new Date(val);
   return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' })
     + ' · ' + d.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+}
+
+function esc(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderInventory() {
@@ -446,175 +609,224 @@ function renderInventory() {
           </div></td>
         </tr>`;
       }).join('')
-    : '<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--ad-fg-dim);">No records found</td></tr>';
+    : '<tr><td colspan="8" style="text-align:center;padding:32px;color:#64748B;">No records found</td></tr>';
 
-  document.getElementById('navCountInventory').textContent = inventory.filter(r => r.status !== 'sold').length;
+  document.getElementById('navCountInventory').textContent =
+    inventory.filter(r => r.status !== 'sold').length || '—';
 }
 
-function renderInquiries() {
-  const search = (document.getElementById('inquiriesSearch').value || '').toLowerCase();
-  const statF  = document.getElementById('filterInqStatus').value;
+// ── INQUIRY RENDERING ─────────────────────────────────────────────────────
+function inqRow(r) {
+  const isNew = r.status === 'new';
+  const statusLabel = isNew ? 'New' : r.status === 'replied' ? 'Replied' : esc(r.status || '—');
+  const statusCls   = isNew ? 'ad-pill-inquired' : 'ad-pill-active';
+  const msg = r.message || r.equipment_interest || '';
+  return `<tr>
+    <td class="num" style="white-space:nowrap;color:#64748B;">${fmtDate(r.submitted_at || r.created_at)}</td>
+    <td style="font-weight:600;">${esc(r.name || '—')}</td>
+    <td>${esc(r.company || '—')}</td>
+    <td><a href="mailto:${esc(r.email || '')}">${esc(r.email || '—')}</a></td>
+    <td class="num" style="white-space:nowrap;">${esc(r.phone || '—')}</td>
+    <td class="msg-cell" title="${esc(msg)}">${esc(msg) || '—'}</td>
+    <td style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#64748B;">${esc(r.source || '—')}</td>
+    <td><span class="ad-pill ${statusCls}">${statusLabel}</span></td>
+    <td class="right"><div class="actions">
+      ${isNew ? `<button class="ad-btn ad-btn-blue ad-btn-sm" type="button" onclick="markReplied('${r.id}')">Mark Replied</button>` : ''}
+    </div></td>
+  </tr>`;
+}
 
-  const rows = inquiries.filter(r => {
+function renderInquirySection(tbodyId, source, searchId, filterStatusId) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  const search = (document.getElementById(searchId)?.value || '').toLowerCase();
+  const statF  = document.getElementById(filterStatusId)?.value || '';
+
+  const rows = allInquiries.filter(r => {
+    if (source && r.source !== source) return false;
     if (search && !`${r.name||''} ${r.company||''} ${r.email||''}`.toLowerCase().includes(search)) return false;
     if (statF && r.status !== statF) return false;
     return true;
   });
 
-  document.getElementById('inquiriesBody').innerHTML = rows.length
-    ? rows.map(r => {
-        const isNew = r.status === 'new';
-        return `<tr>
-          <td class="num" style="color:var(--ad-fg-dim);">${fmtDate(r.created_at)}</td>
-          <td style="color:white;font-weight:600;">${r.name || '—'}</td>
-          <td>${r.company || '—'}</td>
-          <td><a href="mailto:${r.email || ''}" style="color:var(--ad-blue-strong);">${r.email || '—'}</a></td>
-          <td>${r.interest || '—'}</td>
-          <td><span class="ad-pill ${isNew ? 'ad-pill-inquired' : 'ad-pill-active'}">${isNew ? 'New' : 'Responded'}</span></td>
-          <td class="right"><div class="actions">
-            <button class="ad-btn ad-btn-ghost ad-btn-sm" type="button" onclick="viewInquiry('${r.id}')">View</button>
-            <button class="ad-btn ad-btn-blue ad-btn-sm" type="button" onclick="replyInquiry('${r.id}')">Reply</button>
-          </div></td>
-        </tr>`;
-      }).join('')
-    : '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--ad-fg-dim);">No inquiries found</td></tr>';
-
-  document.getElementById('navCountInquiries').textContent = inquiries.filter(r => r.status === 'new').length;
+  tbody.innerHTML = rows.length
+    ? rows.map(inqRow).join('')
+    : `<tr><td colspan="9" style="text-align:center;padding:32px;color:#64748B;">No inquiries found</td></tr>`;
 }
 
+function renderAllInquiryTabs() {
+  renderInquirySection('inqBodyAll',        null,         'searchAll',        'filterStatusAll');
+  renderInquirySection('inqBodySales',      'sales',      'searchSales',      'filterStatusSales');
+  renderInquirySection('inqBodyCarriers',   'carriers',   'searchCarriers',   'filterStatusCarriers');
+  renderInquirySection('inqBodyProperties', 'properties', 'searchProperties', 'filterStatusProperties');
+  updateBadges();
+}
+
+function updateBadges() {
+  const newOf = (src) => allInquiries.filter(i => i.status === 'new' && (src ? i.source === src : true)).length;
+  const set = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = n || '—'; };
+  set('navCountAll',        newOf(null));
+  set('navCountSales',      newOf('sales'));
+  set('navCountCarriers',   newOf('carriers'));
+  set('navCountProperties', newOf('properties'));
+}
+
+// ── KPIs ──────────────────────────────────────────────────────────────────
 function updateKPIs() {
-  const active  = inventory.filter(r => r.status === 'active');
-  const pending = inventory.filter(r => r.status === 'pending');
-  const leaseEl = active.filter(r => r.lease_eligible);
-  const now     = new Date();
-  const soldMTD = inventory.filter(r => {
-    if (r.status !== 'sold') return false;
-    const d = new Date(r.updated_at || r.created_at);
-    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
-  });
-  const openInq = inquiries.filter(r => r.status === 'new');
+  const kpiEl = document.getElementById('kpiStrip');
+  if (!kpiEl || !currentRole) return;
 
-  document.getElementById('kpiActiveVal').textContent   = active.length;
-  document.getElementById('kpiActiveMeta').textContent  = `${leaseEl.length} lease-eligible · ${active.length - leaseEl.length} sale-only`;
-  document.getElementById('kpiPendingVal').textContent  = pending.length;
-  document.getElementById('kpiSoldVal').textContent     = soldMTD.length;
-  document.getElementById('kpiInqVal').textContent      = openInq.length;
-  document.getElementById('kpiInqMeta').textContent     = openInq.length === 1 ? '1 awaiting reply' : `${openInq.length} awaiting reply`;
+  const now = new Date();
+  const thisMonth = d => {
+    if (!d) return false;
+    const dt = new Date(d);
+    return dt.getFullYear() === now.getFullYear() && dt.getMonth() === now.getMonth();
+  };
+
+  let cards = [];
+
+  if (currentRole === 'holdings') {
+    const openInq = allInquiries.filter(i => i.status === 'new').length;
+    cards = [
+      { lab:'Total Inquiries',       val: allInquiries.length,                                             meta:'' },
+      { lab:'Open Inquiries',        val: openInq,                                                          meta:'Awaiting reply' },
+      { lab:'Active Inventory',      val: inventory.filter(i => i.status === 'active').length,             meta:'' },
+      { lab:'Inquiries This Month',  val: allInquiries.filter(i => thisMonth(i.submitted_at || i.created_at)).length, meta:'' },
+    ];
+  } else if (currentRole === 'sales') {
+    const active  = inventory.filter(i => i.status === 'active');
+    const leaseEl = active.filter(i => i.lease_eligible);
+    const soldMTD = inventory.filter(i => i.status === 'sold' && thisMonth(i.updated_at || i.created_at));
+    cards = [
+      { lab:'Active Listings', val: active.length,                                     meta:`${leaseEl.length} lease-eligible` },
+      { lab:'Pending',         val: inventory.filter(i => i.status === 'pending').length, meta:'Awaiting inspection / photos' },
+      { lab:'Sold MTD',        val: soldMTD.length,                                    meta:'Units marked sold this month' },
+      { lab:'Open Inquiries',  val: allInquiries.filter(i => i.status === 'new').length, meta:'Awaiting reply' },
+    ];
+  } else if (currentRole === 'carriers' || currentRole === 'properties') {
+    const replied = allInquiries.filter(i =>
+      i.status === 'replied' && thisMonth(i.replied_at || i.updated_at || i.created_at)
+    ).length;
+    cards = [
+      { lab:'Open Inquiries',       val: allInquiries.filter(i => i.status === 'new').length, meta:'Awaiting reply' },
+      { lab:'Replied This Month',   val: replied,                                              meta:'' },
+    ];
+  }
+
+  kpiEl.style.gridTemplateColumns = `repeat(${cards.length}, 1fr)`;
+  kpiEl.innerHTML = cards.map(c => `
+    <div class="ad-kpi">
+      <div class="ad-kpi-lab">${c.lab}</div>
+      <div class="ad-kpi-val">${c.val}</div>
+      ${c.meta ? `<div class="ad-kpi-meta">${c.meta}</div>` : ''}
+    </div>`).join('');
 }
 
+// ── ACTIONS ───────────────────────────────────────────────────────────────
 async function markSold(id) {
-  await sb.from('inventory').update({ status: 'sold', updated_at: new Date().toISOString() }).eq('id', id);
+  await sb.from('inventory').update({ status:'sold', updated_at: new Date().toISOString() }).eq('id', id);
   await loadInventory();
 }
 
-async function viewInquiry(id) {
-  const inq = inquiries.find(i => i.id === id);
-  if (!inq) return;
-  if (inq.message) {
-    alert(`From: ${inq.name || ''}${inq.company ? ' (' + inq.company + ')' : ''}\nEmail: ${inq.email || ''}\nInterest: ${inq.interest || ''}\n\n${inq.message}`);
-  }
-  if (inq.status === 'new') {
-    await sb.from('inquiries').update({ status: 'responded' }).eq('id', id);
-    await loadInquiries();
-  }
+async function markReplied(id) {
+  const now = new Date().toISOString();
+  await sb.from('inquiries').update({ status:'replied', replied_at: now }).eq('id', id);
+  await loadInquiries();
 }
 
-async function replyInquiry(id) {
-  const inq = inquiries.find(i => i.id === id);
-  if (!inq) return;
-  window.open('mailto:' + (inq.email || ''));
-  if (inq.status === 'new') {
-    await sb.from('inquiries').update({ status: 'responded' }).eq('id', id);
-    await loadInquiries();
-  }
-}
-
-// --- Tab switching ---
+// ── TAB SWITCHING ─────────────────────────────────────────────────────────
 const TABS = {
-  inventory: { eyebrow:'Manage · Inventory', title:'Equipment Inventory' },
-  inquiries: { eyebrow:'Manage · Inquiries', title:'Customer Inquiries'  },
+  'inventory':              { eyebrow:'Manage · Inventory',      title:'Equipment Inventory'   },
+  'inquiries-all':          { eyebrow:'Inquiries · All',         title:'All Inquiries'         },
+  'inquiries-sales':        { eyebrow:'Inquiries · Sales',       title:'Sales Inquiries'       },
+  'inquiries-carriers':     { eyebrow:'Inquiries · Carriers',    title:'Carrier Inquiries'     },
+  'inquiries-properties':   { eyebrow:'Inquiries · Properties',  title:'Property Inquiries'    },
 };
 function switchTab(tab) {
-  document.querySelectorAll('.ad-side-item[data-tab]').forEach(el => el.classList.toggle('is-active', el.dataset.tab === tab));
-  document.querySelectorAll('.ad-tab').forEach(el => el.classList.toggle('is-active', el.id === 'tab-' + tab));
-  document.getElementById('topEyebrow').textContent = TABS[tab].eyebrow;
-  document.getElementById('topTitle').textContent   = TABS[tab].title;
-}
-document.querySelectorAll('.ad-side-item[data-tab]').forEach(el => el.addEventListener('click', () => switchTab(el.dataset.tab)));
+  document.querySelectorAll('.ad-side-item[data-tab]').forEach(el =>
+    el.classList.toggle('is-active', el.dataset.tab === tab));
+  document.querySelectorAll('.ad-tab').forEach(el =>
+    el.classList.toggle('is-active', el.id === 'tab-' + tab));
+  const t = TABS[tab] || {};
+  document.getElementById('topEyebrow').textContent = t.eyebrow || '';
+  document.getElementById('topTitle').textContent   = t.title   || '';
 
-// --- Drawer open / close ---
+  const isInventory  = tab === 'inventory';
+  const canInventory = currentRole === 'holdings' || currentRole === 'sales';
+  document.getElementById('btnAddUnit').style.display   = (isInventory && canInventory) ? '' : 'none';
+  document.getElementById('btnExportCSV').style.display = (isInventory && canInventory) ? '' : 'none';
+}
+document.querySelectorAll('.ad-side-item[data-tab]').forEach(el =>
+  el.addEventListener('click', () => switchTab(el.dataset.tab)));
+
+// ── DRAWER ────────────────────────────────────────────────────────────────
 const overlay = document.getElementById('drawerOverlay');
 const drawer  = document.getElementById('drawerAddUnit');
 
 function openDrawer() {
   overlay.classList.add('is-open');
   drawer.classList.add('is-open');
-  drawer.setAttribute('aria-hidden', 'false');
+  drawer.setAttribute('aria-hidden','false');
 }
-
 function closeDrawer() {
   overlay.classList.remove('is-open');
   drawer.classList.remove('is-open');
-  drawer.setAttribute('aria-hidden', 'true');
+  drawer.setAttribute('aria-hidden','true');
   const _fid = document.getElementById('f-unit-id');
-  _fid.value        = '';
-  _fid.defaultValue = '';
+  _fid.value = ''; _fid.defaultValue = '';
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];
-  existingPhotos = [];
+  existingPhotos  = [];
   document.getElementById('addUnitForm').reset();
-  document.getElementById('photoPreview').innerHTML       = '';
+  document.getElementById('photoPreview').innerHTML        = '';
   document.getElementById('photoUploadStatus').textContent = '';
-  document.getElementById('drawerSub').textContent        = 'New listing';
-  document.getElementById('drawerH').textContent          = 'Add Equipment Unit';
-  document.getElementById('drawerSubmitBtn').textContent  = 'Add to Inventory';
-  document.getElementById('drawerSubmitBtn').disabled     = false;
+  document.getElementById('drawerSub').textContent         = 'New listing';
+  document.getElementById('drawerH').textContent           = 'Add Equipment Unit';
+  document.getElementById('drawerSubmitBtn').textContent   = 'Add to Inventory';
+  document.getElementById('drawerSubmitBtn').disabled      = false;
 }
 
-document.getElementById('btnAddUnit').addEventListener('click', () => {
-  closeDrawer();
-  openDrawer();
-});
+document.getElementById('btnAddUnit').addEventListener('click', () => { closeDrawer(); openDrawer(); });
 document.getElementById('drawerClose').addEventListener('click', closeDrawer);
 document.getElementById('drawerCancel').addEventListener('click', closeDrawer);
 overlay.addEventListener('click', closeDrawer);
 window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-(function () {
+
+(function() {
   const dz = document.querySelector('.ad-drop');
-  dz.addEventListener('dragover', e => { e.preventDefault(); e.stopPropagation(); dz.classList.add('is-drag-over'); });
+  dz.addEventListener('dragover',  e => { e.preventDefault(); e.stopPropagation(); dz.classList.add('is-drag-over'); });
   dz.addEventListener('dragleave', e => { if (!dz.contains(e.relatedTarget)) dz.classList.remove('is-drag-over'); });
-  dz.addEventListener('drop', e => { e.preventDefault(); e.stopPropagation(); dz.classList.remove('is-drag-over'); handleFiles(e.dataTransfer.files); });
+  dz.addEventListener('drop',      e => { e.preventDefault(); e.stopPropagation(); dz.classList.remove('is-drag-over'); handleFiles(e.dataTransfer.files); });
 })();
 
 function openDrawerEdit(id) {
   const unit = inventory.find(u => String(u.id) === String(id));
   if (!unit) return;
   const _fid = document.getElementById('f-unit-id');
-  _fid.value        = String(unit.id);
-  _fid.defaultValue = String(unit.id);
+  _fid.value = String(unit.id); _fid.defaultValue = String(unit.id);
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];
-  existingPhotos = Array.isArray(unit.photos) ? [...unit.photos] : [];
-  document.getElementById('f-stock').value   = unit.stock_number     || '';
-  document.getElementById('f-type').value    = unit.type             || '';
-  document.getElementById('f-year').value    = unit.year             || '';
-  document.getElementById('f-make').value    = unit.make             || '';
-  document.getElementById('f-model').value   = unit.model            || '';
-  document.getElementById('f-engine').value  = unit.engine           || '';
-  document.getElementById('f-trans').value   = unit.transmission     || '';
-  document.getElementById('f-miles').value   = unit.mileage          || '';
-  document.getElementById('f-price').value   = unit.price            || '';
-  document.getElementById('f-mopay').value   = unit.monthly_payment  || '';
+  existingPhotos  = Array.isArray(unit.photos) ? [...unit.photos] : [];
+  document.getElementById('f-stock').value   = unit.stock_number    || '';
+  document.getElementById('f-type').value    = unit.type            || '';
+  document.getElementById('f-year').value    = unit.year            || '';
+  document.getElementById('f-make').value    = unit.make            || '';
+  document.getElementById('f-model').value   = unit.model           || '';
+  document.getElementById('f-engine').value  = unit.engine          || '';
+  document.getElementById('f-trans').value   = unit.transmission    || '';
+  document.getElementById('f-miles').value   = unit.mileage         || '';
+  document.getElementById('f-price').value   = unit.price           || '';
+  document.getElementById('f-mopay').value   = unit.monthly_payment || '';
   document.getElementById('f-lease').checked = !!unit.lease_eligible;
-  document.getElementById('f-cond').value    = unit.condition        || 'Inspected';
-  document.getElementById('f-loc').value     = unit.location         || '';
-  document.getElementById('f-vin').value     = unit.vin              || '';
-  document.getElementById('f-axle').value    = unit.axle_config      || '';
-  document.getElementById('f-wb').value      = unit.wheelbase        || '';
-  document.getElementById('f-dot').value     = unit.dot_inspection   || '';
-  document.getElementById('f-title').value   = unit.title_status     || 'Clean · in hand';
+  document.getElementById('f-cond').value    = unit.condition       || 'Inspected';
+  document.getElementById('f-loc').value     = unit.location        || '';
+  document.getElementById('f-vin').value     = unit.vin             || '';
+  document.getElementById('f-axle').value    = unit.axle_config     || '';
+  document.getElementById('f-wb').value      = unit.wheelbase       || '';
+  document.getElementById('f-dot').value     = unit.dot_inspection  || '';
+  document.getElementById('f-title').value   = unit.title_status    || 'Clean · in hand';
   document.getElementById('drawerSub').textContent       = 'Editing · ' + (unit.stock_number || unit.id);
   document.getElementById('drawerH').textContent         = 'Edit Equipment Unit';
   document.getElementById('drawerSubmitBtn').textContent = 'Save Changes';
@@ -625,15 +837,14 @@ function openDrawerEdit(id) {
 function toInt(val) {
   const m = String(val).match(/\d[\d,]*/);
   if (!m) return null;
-  const n = parseInt(m[0].replace(/,/g, ''), 10);
+  const n = parseInt(m[0].replace(/,/g,''), 10);
   return isNaN(n) ? null : n;
 }
 
-// --- Photo preview / management ---
+// ── PHOTOS ────────────────────────────────────────────────────────────────
 function renderPhotoPreview() {
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = pendingFiles.map(f => URL.createObjectURL(f));
-
   const items = [];
   existingPhotos.forEach((url, i) => {
     items.push(`<div class="ad-photo-thumb">
@@ -648,10 +859,8 @@ function renderPhotoPreview() {
       <span class="ad-photo-badge">New</span>
     </div>`);
   });
-
   document.getElementById('photoPreview').innerHTML = items.length
-    ? `<div class="ad-photo-grid">${items.join('')}</div>`
-    : '';
+    ? `<div class="ad-photo-grid">${items.join('')}</div>` : '';
 }
 
 async function removeExistingPhoto(index) {
@@ -663,9 +872,7 @@ async function removeExistingPhoto(index) {
   }
   existingPhotos.splice(index, 1);
   const _uid = document.getElementById('f-unit-id').value.trim();
-  if (_uid) {
-    await sb.from('inventory').update({ photos: existingPhotos }).eq('id', _uid);
-  }
+  if (_uid) await sb.from('inventory').update({ photos: existingPhotos }).eq('id', _uid);
   renderPhotoPreview();
 }
 
@@ -675,17 +882,16 @@ function removePendingFile(index) {
 }
 
 function handleFiles(fileList) {
-  const allowed = new Set(['image/jpeg', 'image/png', 'image/webp']);
-  const valid = Array.from(fileList).filter(f => allowed.has(f.type));
-  pendingFiles = [...pendingFiles, ...valid];
+  const allowed = new Set(['image/jpeg','image/png','image/webp']);
+  pendingFiles = [...pendingFiles, ...Array.from(fileList).filter(f => allowed.has(f.type))];
   renderPhotoPreview();
 }
 
-document.getElementById('f-photos').addEventListener('change', function () {
-  handleFiles(this.files);
-  this.value = '';
+document.getElementById('f-photos').addEventListener('change', function() {
+  handleFiles(this.files); this.value = '';
 });
 
+// ── SUBMIT UNIT ───────────────────────────────────────────────────────────
 async function submitUnitForm() {
   const unitId = document.getElementById('f-unit-id').value.trim();
   const btn = document.getElementById('drawerSubmitBtn');
@@ -714,31 +920,23 @@ async function submitUnitForm() {
   };
   delete payload.created_at;
 
-  // Upload pending photos to Storage
-  const statusEl = document.getElementById('photoUploadStatus');
-  const stockNum = payload.stock_number || 'unknown';
-  const uploadedUrls = [];
+  const statusEl  = document.getElementById('photoUploadStatus');
+  const stockNum  = payload.stock_number || 'unknown';
+  const uploadedUrls  = [];
   const failedUploads = [];
   for (let i = 0; i < pendingFiles.length; i++) {
     statusEl.style.color = '';
     statusEl.textContent = `Uploading photo ${i + 1} of ${pendingFiles.length}…`;
     const file = pendingFiles[i];
     const mkPath = () => {
-      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '');
-      return `${stockNum}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+      const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+      return `${stockNum}/${Date.now()}-${Math.random().toString(36).slice(2,8)}.${ext}`;
     };
-    const opts = { cacheControl: '3600', upsert: false, contentType: file.type };
+    const opts = { cacheControl:'3600', upsert:false, contentType:file.type };
     let path = mkPath();
     let { error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, opts);
-    if (upErr) {
-      path = mkPath();
-      ({ error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, opts));
-    }
-    if (upErr) {
-      console.error(`photo ${i + 1} failed:`, upErr.message);
-      failedUploads.push(file.name);
-      continue;
-    }
+    if (upErr) { path = mkPath(); ({ error: upErr } = await sb.storage.from('inventory-photos').upload(path, file, opts)); }
+    if (upErr) { console.error(`photo ${i+1} failed:`, upErr.message); failedUploads.push(file.name); continue; }
     const { data: urlData } = sb.storage.from('inventory-photos').getPublicUrl(path);
     uploadedUrls.push(urlData.publicUrl);
   }
@@ -746,8 +944,7 @@ async function submitUnitForm() {
     statusEl.style.color = '#e05a5a';
     statusEl.textContent = `Failed to upload: ${failedUploads.join(', ')}`;
   } else {
-    statusEl.style.color = '';
-    statusEl.textContent = '';
+    statusEl.style.color = ''; statusEl.textContent = '';
   }
   payload.photos = [...existingPhotos, ...uploadedUrls];
 
@@ -765,12 +962,11 @@ async function submitUnitForm() {
     btn.disabled = false;
     return;
   }
-
   closeDrawer();
   await loadInventory();
 }
 
-// --- Export CSV ---
+// ── EXPORT CSV ────────────────────────────────────────────────────────────
 document.getElementById('btnExportCSV').addEventListener('click', () => {
   const cols = ['stock_number','year','make','model','type','price','status','mileage','vin','location','condition','lease_eligible'];
   const header = cols.join(',');
@@ -779,23 +975,19 @@ document.getElementById('btnExportCSV').addEventListener('click', () => {
   const a      = document.createElement('a');
   a.href       = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
   a.download   = 'flogal-inventory.csv';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+  document.body.appendChild(a); a.click(); a.remove();
 });
 
-// --- Sign out ---
+// ── SIGN OUT ──────────────────────────────────────────────────────────────
 document.getElementById('signOutBtn').addEventListener('click', async () => {
   await sb.auth.signOut();
   window.location.href = 'login.html';
 });
 
-// --- Search / filter live listeners ---
+// ── SEARCH / FILTER (inventory) ───────────────────────────────────────────
 document.getElementById('inventorySearch').addEventListener('input', renderInventory);
 document.getElementById('filterType').addEventListener('change', renderInventory);
 document.getElementById('filterStatus').addEventListener('change', renderInventory);
-document.getElementById('inquiriesSearch').addEventListener('input', renderInquiries);
-document.getElementById('filterInqStatus').addEventListener('change', renderInquiries);
 </script>
 </body>
 </html>
