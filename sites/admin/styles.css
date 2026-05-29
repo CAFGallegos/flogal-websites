@@ -1,13 +1,13 @@
-/* =====================================================================
+﻿/* =====================================================================
    FLOGAL Sales Admin — Internal inventory portal
    Dark navy, clean & functional. Built for staff, not customers.
    ===================================================================== */
 
-@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
-@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
-@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap;}
-@font-face{font-family:'Satoshi';src:url('../../../shared/fonts/Satoshi-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Black.otf') format('opentype');font-weight:900;font-style:normal;font-display:swap;}
 
 :root {
   --flogal-navy:   #0B1D2D;
