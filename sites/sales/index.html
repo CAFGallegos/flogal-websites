@@ -67,7 +67,7 @@ button{font-family:var(--font-sans);}
 .sl-symbol{height:30px;width:auto;display:block;flex:none;}
 .sl-wm{height:23px;width:auto;display:block;flex:none;margin-top:-4px;}
 .sl-brand-divider{width:1px;height:20px;background:rgba(255,255,255,.25);flex:none;}
-.sl-brand-division{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;white-space:nowrap;}
+.sl-brand-division{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;white-space:nowrap;margin-top:6px;}
 .sl-fl{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:0.04em;}
 .sl-sub{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--flogal-gold);}
 .sl-nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;align-items:center;}
@@ -383,7 +383,7 @@ button{font-family:var(--font-sans);}
       <h3 class="sl-source-h">Don't see what you need? We source it.</h3>
       <p class="sl-source-p">Tell us the spec — make, year, mileage, attachments, condition. Our equipment desk works carrier auctions, OEM allocations, and lease-end returns daily. Most requests come back inside a week, available for purchase or lease.</p>
     </div>
-    <a class="sl-source-btn" href="mailto:equipment@flogalhq.com">Submit a Request &#8594;</a>
+    <a class="sl-source-btn" href="mailto:sales@flogalhq.com">Submit a Request &#8594;</a>
   </div>
 </section>
 
@@ -417,7 +417,7 @@ button{font-family:var(--font-sans);}
         <div class="sl-footer-col">
           <span class="sl-footer-col-h">Company</span>
           <a href="https://www.flogalhq.com">About</a>
-          <a href="mailto:info@flogalhq.com">Contact</a>
+          <a href="mailto:sales@flogalhq.com">Contact</a>
           <a href="https://www.flogalhq.com">flogalhq.com</a>
         </div>
       </nav>
@@ -790,7 +790,7 @@ function renderDrawer(id) {
           <span class="sl-contact-avatar">ED</span>
           <div>
             <div class="sl-contact-name">Equipment desk</div>
-            <div class="sl-contact-meta">equipment@flogalhq.com &middot; +1 (713) 555-0199</div>
+            <div class="sl-contact-meta"><a href="mailto:sales@flogalhq.com">sales@flogalhq.com</a> &middot; +1 (713) 555-0199</div>
           </div>
           <button class="sl-btn sl-btn-ghost sl-btn-sm" onclick="openQuoteModal('${uid}')">Message</button>
         </div>
@@ -913,7 +913,7 @@ async function submitQuote(e) {
 
   if (error) {
     const errEl = document.getElementById('quoteError');
-    errEl.textContent    = 'Something went wrong — please email equipment@flogalhq.com directly.';
+    errEl.textContent    = 'Something went wrong — please email sales@flogalhq.com directly.';
     errEl.style.display  = 'block';
     btn.textContent = 'Send Request →';
     btn.disabled    = false;
