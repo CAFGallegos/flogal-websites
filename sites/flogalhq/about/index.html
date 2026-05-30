@@ -448,9 +448,9 @@ img{display:block;}
       <h2 class="h2" style="color:var(--navy);margin-bottom:20px;">Get in touch.</h2>
       <p style="font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:40px;max-width:380px;">For banking relationships, insurance discussions, business development, or general inquiries about the Flogal platform.</p>
       <div class="ci-block"><div class="ci-label">General Inquiries</div><div class="ci-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
-      <div class="ci-block"><div class="ci-label">Carrier Operations</div><div class="ci-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
-      <div class="ci-block"><div class="ci-label">Equipment</div><div class="ci-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
-      <div class="ci-block"><div class="ci-label">Properties</div><div class="ci-val"><a href="mailto:info@flogalhq.com">info@flogalhq.com</a></div></div>
+      <div class="ci-block"><div class="ci-label">Carrier Operations</div><div class="ci-val"><a href="mailto:carriers@flogalhq.com">carriers@flogalhq.com</a></div></div>
+      <div class="ci-block"><div class="ci-label">Equipment</div><div class="ci-val"><a href="mailto:sales@flogalhq.com">sales@flogalhq.com</a></div></div>
+      <div class="ci-block"><div class="ci-label">Properties</div><div class="ci-val"><a href="mailto:properties@flogalhq.com">properties@flogalhq.com</a></div></div>
       <div class="ci-block"><div class="ci-label">Headquarters</div><div class="ci-val">Oklahoma City, Oklahoma</div></div>
     </div>
     <form class="form" onsubmit="sub(event)">
@@ -475,6 +475,14 @@ img{display:block;}
         </select>
       </div>
       <div class="field"><label>Message</label><textarea id="ab-ms" placeholder="Tell us about your inquiry..."></textarea></div>
+      <div class="field"><label>Preferred Contact</label>
+        <select id="ab-pc">
+          <option value="">Select…</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+          <option value="text">Text</option>
+        </select>
+      </div>
       <button type="submit" class="form-btn" id="abSubmitBtn">Send Message →</button>
       <div id="abFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:4px;"></div>
     </form>
@@ -541,17 +549,18 @@ async function sub(e) {
   const btn = document.getElementById('abSubmitBtn');
   btn.disabled = true;
   btn.textContent = 'Sending…';
-  const name = [document.getElementById('ab-fn').value.trim(), document.getElementById('ab-ln').value.trim()].filter(Boolean).join(' ') || null;
-  const iq   = document.getElementById('ab-iq').value;
-  const ms   = document.getElementById('ab-ms').value.trim();
   const payload = {
-    name:         name,
-    company:      document.getElementById('ab-co').value.trim() || null,
-    email:        document.getElementById('ab-em').value.trim(),
-    message:      [iq, ms].filter(Boolean).join(' — ') || null,
-    status:       'new',
-    source:       'hq',
-    submitted_at: new Date().toISOString(),
+    first_name:        document.getElementById('ab-fn').value.trim() || null,
+    last_name:         document.getElementById('ab-ln').value.trim() || null,
+    company:           document.getElementById('ab-co').value.trim() || null,
+    email:             document.getElementById('ab-em').value.trim(),
+    inquiry_type:      document.getElementById('ab-iq').value || null,
+    message:           document.getElementById('ab-ms').value.trim() || null,
+    preferred_contact: document.getElementById('ab-pc').value || null,
+    lead_source:       'website',
+    status:            'new',
+    source:            'hq',
+    submitted_at:      new Date().toISOString(),
   };
   const { error } = await _sb.from('inquiries').insert(payload);
   if (error) {

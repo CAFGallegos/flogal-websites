@@ -76,7 +76,7 @@ body{background:#FFFFFF;}
   <!-- SIDEBAR -->
   <aside class="ad-side">
     <div class="ad-side-brand">
-      <img class="ad-side-mark" src="../../shared/logos/flogal-symbol-tricolor.png" alt="">
+      <img class="ad-side-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
       <div>
         <div class="ad-side-wm">FLOGAL</div>
         <div class="ad-side-sub" id="sideSubLabel">ADMIN</div>
@@ -655,7 +655,7 @@ function inqRow(r) {
           type="date"
           title="Follow-up date"
           value="${r.follow_up_date ? r.follow_up_date.substring(0,10) : ''}"
-          onblur="saveInquiryField('${r.id}','follow_up_date',this.value||null)"
+          onchange="saveInquiryField('${r.id}','follow_up_date',this.value||null)"
           style="${iStyle}"
         >
       </div>
@@ -678,7 +678,7 @@ function renderInquirySection(tbodyId, source, searchId, filterStatusId) {
 
   const rows = allInquiries.filter(r => {
     if (source && r.source !== source) return false;
-    if (search && !`${r.name||''} ${r.company||''} ${r.email||''}`.toLowerCase().includes(search)) return false;
+    if (search && !`${r.first_name||''} ${r.last_name||''} ${r.company||''} ${r.email||''}`.toLowerCase().includes(search)) return false;
     if (statF && r.status !== statF) return false;
     return true;
   });
