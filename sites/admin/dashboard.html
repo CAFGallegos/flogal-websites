@@ -4,61 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FLOGAL Admin — Dashboard</title>
+<link rel="icon" type="image/x-icon" href="shared/favicons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="shared/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="shared/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="shared/favicons/apple-touch-icon.png">
+<link rel="icon" sizes="192x192" href="shared/favicons/android-chrome-192x192.png">
 <link rel="stylesheet" href="styles.css">
 <style>
-body{background:#FFFFFF;}
+/* Photo management (dashboard-specific) */
 .ad-photo-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
-.ad-photo-thumb{position:relative;width:80px;height:80px;border-radius:6px;overflow:hidden;border:1.5px solid #2a3a4f;flex:none;}
+.ad-photo-thumb{position:relative;width:80px;height:80px;border-radius:6px;overflow:hidden;border:1.5px solid rgba(148,163,184,0.2);flex:none;}
 .ad-photo-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .ad-photo-remove{position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.65);border:0;cursor:pointer;color:white;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;}
 .ad-photo-remove:hover{background:#e05a5a;}
-.ad-photo-badge{position:absolute;bottom:3px;left:3px;font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#C79A2B;color:#0B1D2D;padding:1px 5px;border-radius:3px;}
-.ad-photo-upload-status{font-size:11px;color:#6b7f94;margin-top:6px;min-height:16px;}
-.ad-drop.is-drag-over{border-color:#334155!important;background:rgba(51,65,85,.06);}
+.ad-photo-badge{position:absolute;bottom:3px;left:3px;font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#C9A84C;color:#0F172A;padding:1px 5px;border-radius:3px;}
+.ad-photo-upload-status{font-size:11px;color:var(--silver-dim);margin-top:6px;min-height:16px;}
+.ad-drop.is-drag-over{border-color:var(--accent)!important;background:rgba(148,163,184,.05);}
 .ad-drop>*{pointer-events:none;}
-/* Main area */
-.ad-main{background:#FFFFFF;}
-.ad-top{background:#FFFFFF;border-bottom-color:#E2E8F0;}
-.ad-top-eyebrow{color:#64748B;}
-.ad-top-title{color:#0F172A;}
-.ad-kpi{background:#F8FAFC;border-color:#E2E8F0;}
-.ad-kpi-lab{color:#64748B;}
-.ad-kpi-val{color:#0F172A;}
-.ad-kpi-meta{color:#475569;}
-.ad-search{background:#F8FAFC;border-color:#E2E8F0;}
-.ad-search input{color:#0F172A;}
-.ad-search input::placeholder{color:#94A3B8;}
-.ad-search svg{color:#94A3B8;}
-.ad-select{background:#F8FAFC;border-color:#E2E8F0;color:#0F172A;}
-.ad-table-wrap{background:#FFFFFF;border-color:#E2E8F0;}
-.ad-table th{background:#F8FAFC;color:#64748B;border-bottom-color:#E2E8F0;}
-.ad-table td{color:#0F172A;border-bottom-color:#F1F5F9;}
-.ad-table tr:hover td{background:#F8FAFC;}
-.ad-table .stock{background:#F1F5F9;color:#0F172A;}
-.ad-table .price{color:#0F172A;}
-.ad-table td a{color:#2D7DD2;}
-/* Sidebar */
-.ad-side{background:#0F172A;border-right-color:#1E293B;}
-.ad-side-brand{border-bottom-color:#1E293B;}
-.ad-side-h{color:rgba(255,255,255,.28);}
-.ad-side-item{color:rgba(255,255,255,.55);}
-.ad-side-item:hover:not(:disabled){background:rgba(255,255,255,.06)!important;color:white!important;}
-.ad-side-item.is-active{background:#334155!important;color:white!important;box-shadow:none!important;}
-.ad-side-count{color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);}
-.ad-side-item.is-active .ad-side-count{background:rgba(255,255,255,.14);color:white;}
-.ad-side-foot{border-top-color:#1E293B;}
-.ad-user-name{color:white;}
-.ad-user-role{color:rgba(255,255,255,.4);}
-.ad-user-out{color:rgba(255,255,255,.4);}
-.ad-user-out:hover{color:white;}
-.ad-role-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:#334155;color:rgba(255,255,255,.75);margin-top:2px;}
-/* Primary action button (replaces gold for branding) */
-.ad-btn-primary{background:#334155;color:white;border-color:#334155;}
-.ad-btn-primary:hover{background:#475569;border-color:#475569;}
+/* Inline inquiry editing */
 .msg-cell{max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* Role badge */
+.ad-role-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:rgba(148,163,184,0.1);color:var(--silver);margin-top:2px;}
+/* Primary action button */
+.ad-btn-primary{background:var(--accent);color:var(--navy);border-color:var(--accent);}
+.ad-btn-primary:hover{filter:brightness(1.1);}
 /* Access denied overlay */
-#accessDenied{display:none;position:fixed;inset:0;background:#0F172A;z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:white;text-align:center;padding:40px;}
-/* All role-gated elements hidden until JS reveals them */
+#accessDenied{display:none;position:fixed;inset:0;background:var(--navy);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:white;text-align:center;padding:40px;}
+/* Role-gated elements hidden until JS reveals them */
 .roles-hidden{display:none !important;}
 </style>
 </head>
@@ -76,7 +48,7 @@ body{background:#FFFFFF;}
   <!-- SIDEBAR -->
   <aside class="ad-side">
     <div class="ad-side-brand">
-      <img class="ad-side-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
+      <img class="ad-side-mark" src="shared/logos/flogal-symbol-white.png" alt="">
       <div>
         <div class="ad-side-wm">FLOGAL</div>
         <div class="ad-side-sub" id="sideSubLabel">ADMIN</div>
@@ -532,6 +504,15 @@ function showAccessDenied(msg) {
 
 // ── UI SETUP ──────────────────────────────────────────────────────────────
 function setupUI(role, displayName, email) {
+  // Apply role-based accent color to the entire UI via CSS variable
+  const ACCENT = {
+    holdings:   '#94A3B8',  // silver
+    sales:      '#C9A84C',  // gold
+    carriers:   '#4A90D9',  // blue
+    properties: '#4CAF7D',  // green
+  };
+  document.documentElement.style.setProperty('--accent', ACCENT[role] || '#94A3B8');
+
   const LABELS = {
     holdings:   'HOLDINGS ADMIN',
     sales:      'SALES ADMIN',
