@@ -448,19 +448,49 @@ const _loadTimeout = setTimeout(() => {
 // ── INIT ──────────────────────────────────────────────────────────────────
 (async () => {
   try {
-    const { data, error: authErr } = await sb.auth.getSession();
-    const session = data?.session;
-    if (authErr || !session) { window.location.href = 'login.html'; return; }
+    // 3-second delay to allow session to fully initialise before role fetch
+    await new Promise(r => setTimeout(r, 3000));
 
-    const { data: roleData, error: roleErr } = await sb
+    const sessionResult = await sb.auth.getSession();
+    console.log('[FLOGAL] auth.getSession() result:', JSON.stringify({
+      session: sessionResult.data?.session
+        ? { user_id: sessionResult.data.session.user.id, email: sessionResult.data.session.user.email }
+        : null,
+      error: sessionResult.error,
+    }));
+
+    const session = sessionResult.data?.session;
+    if (sessionResult.error || !session) {
+      console.warn('[FLOGAL] No active session — redirecting to login.');
+      window.location.href = 'login.html';
+      return;
+    }
+
+    console.log('[FLOGAL] Fetching admin_roles for user_id:', session.user.id);
+    const roleResponse = await sb
       .from('admin_roles')
       .select('role, display_name')
       .eq('user_id', session.user.id)
       .single();
 
-    if (roleErr || !roleData || !roleData.role) {
-      console.error('[FLOGAL] role fetch failed:', roleErr);
-      showAccessDenied();
+    console.log('[FLOGAL] admin_roles raw response:', JSON.stringify({
+      data:       roleResponse.data,
+      error:      roleResponse.error,
+      status:     roleResponse.status,
+      statusText: roleResponse.statusText,
+    }));
+
+    const roleData = roleResponse.data;
+    const roleErr  = roleResponse.error;
+
+    if (roleErr) {
+      console.error('[FLOGAL] admin_roles query error:', roleErr);
+      showAccessDenied('Error fetching role: ' + (roleErr.message || JSON.stringify(roleErr)));
+      return;
+    }
+    if (!roleData || !roleData.role) {
+      console.warn('[FLOGAL] admin_roles returned no row for this user.');
+      showAccessDenied('Role not found — contact administrator');
       return;
     }
 
@@ -479,12 +509,18 @@ const _loadTimeout = setTimeout(() => {
     await Promise.all(loads);
   } catch (err) {
     console.error('[FLOGAL] init error:', err);
+    showAccessDenied('Unexpected error: ' + err.message);
   }
 })();
 
-function showAccessDenied() {
+function showAccessDenied(msg) {
   clearTimeout(_loadTimeout);
-  document.getElementById('accessDenied').style.display = 'flex';
+  const el = document.getElementById('accessDenied');
+  if (msg) {
+    const sub = el.querySelector('div:last-child');
+    if (sub) sub.textContent = msg;
+  }
+  el.style.display = 'flex';
   sb.auth.signOut();
 }
 
