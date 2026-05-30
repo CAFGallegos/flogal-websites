@@ -59,7 +59,7 @@ body{background:#FFFFFF;}
 /* Access denied overlay */
 #accessDenied{display:none;position:fixed;inset:0;background:#0F172A;z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:white;text-align:center;padding:40px;}
 /* All role-gated elements hidden until JS reveals them */
-[data-roles]{display:none;}
+.roles-hidden{display:none !important;}
 </style>
 </head>
 <body>
@@ -437,6 +437,12 @@ let pendingFiles    = [];
 let pendingPreviews = [];
 let existingPhotos  = [];
 
+// Stamp every [data-roles] element with a JS-managed class so we can
+// reveal them by removing the class — overriding a CSS rule with
+// el.style.display='' doesn't work because '' just clears the inline
+// style and the stylesheet rule [data-roles]{display:none} still wins.
+document.querySelectorAll('[data-roles]').forEach(el => el.classList.add('roles-hidden'));
+
 // Timeout fallback — only relevant while inventory loading row is present
 const _loadTimeout = setTimeout(() => {
   const tbody = document.getElementById('inventoryBody');
@@ -534,10 +540,13 @@ function setupUI(role, displayName, email) {
   };
   document.getElementById('sideSubLabel').textContent = LABELS[role] || role.toUpperCase() + ' ADMIN';
 
-  // Reveal nav items and headings for this role
+  // Reveal nav items and headings that match this role.
+  // We remove the .roles-hidden class rather than setting style.display,
+  // so the element's natural CSS display (flex for buttons, block for spans)
+  // takes effect correctly.
   document.querySelectorAll('[data-roles]').forEach(el => {
     const roles = el.dataset.roles.split(' ');
-    if (roles.includes(role)) el.style.display = '';
+    if (roles.includes(role)) el.classList.remove('roles-hidden');
   });
 
   // User info
@@ -560,14 +569,14 @@ function setupUI(role, displayName, email) {
 // ── DATA LOADING ──────────────────────────────────────────────────────────
 async function loadInventory() {
   try {
-    const { data, error } = await sb.from('inventory').select('*').order('created_at', { ascending: false });
-    console.log('[loadInventory]', { rowCount: data?.length, error });
-    if (error) throw error;
-    inventory = data || [];
+    const res = await sb.from('inventory').select('*').order('created_at', { ascending: false });
+    console.log('[loadInventory] status:', res.status, 'rows:', Array.isArray(res.data) ? res.data.length : res.data, 'error:', res.error);
+    if (res.error) throw res.error;
+    inventory = Array.isArray(res.data) ? res.data : [];
     renderInventory();
     updateKPIs();
   } catch (err) {
-    console.error('[loadInventory]', err);
+    console.error('[loadInventory] failed:', err);
     document.getElementById('inventoryBody').innerHTML =
       `<tr><td colspan="8" style="text-align:center;color:#e05a5a;padding:32px;">Failed to load inventory: ${err.message}</td></tr>`;
   }
@@ -615,6 +624,7 @@ function esc(str) {
 }
 
 function renderInventory() {
+  console.log('[renderInventory] inventory.length=', inventory.length);
   const search = (document.getElementById('inventorySearch').value || '').toLowerCase();
   const typeF  = document.getElementById('filterType').value;
   const statF  = document.getElementById('filterStatus').value;
