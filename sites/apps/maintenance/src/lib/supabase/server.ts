@@ -9,12 +9,18 @@ export async function createClient() {
     {
       cookies: {
         getAll() { return cookieStore.getAll(); },
-        setAll(cookiesToSet: Array<{ name: string; value: string; options?: Record<string, unknown> }>) {
+        // Do NOT type cookiesToSet explicitly — same overload-resolution bug as
+        // middleware: `Parameters<typeof cookieStore.set>[2]` resolves to
+        // undefined in Next.js 15, silently dropping cookie options.
+        setAll(cookiesToSet: Array<{ name: string; value: string; options: Record<string, unknown> }>) {
           try {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options as Parameters<typeof cookieStore.set>[2]),
+              cookieStore.set(name, value, options as any),
             );
-          } catch { /* called from Server Component */ }
+          } catch {
+            // Throws in Server Components (read-only context) — safe to ignore.
+          }
         },
       },
     },
