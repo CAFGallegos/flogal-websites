@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
   --nardo-bg:         #d2d4d3;
@@ -440,6 +440,9 @@ body {
 .mx-page::-webkit-scrollbar-thumb, .mx-tablewrap::-webkit-scrollbar-thumb { background: var(--nardo-faint); border-radius: 6px; border: 3px solid var(--nardo-bg); }
 .mx-nav::-webkit-scrollbar-thumb { background: var(--char-3); border-radius: 6px; }
 
+/* Hamburger — hidden on desktop, visible when sidebar is in slide-over mode */
+.mx-menu-btn { display: none; }
+
 /* Responsive */
 @media (max-width: 960px) {
   .mx-side { position: fixed; left: 0; top: 0; z-index: 50; transform: translateX(-100%); transition: transform var(--dur-base) var(--ease-standard); }
@@ -448,6 +451,7 @@ body {
   .mx-grid-2, .mx-grid-2b { grid-template-columns: 1fr; }
   .mx-page { padding: 16px 16px 48px; }
   .mx-top { padding: 0 16px; }
+  .mx-menu-btn { display: flex; }
 }
 @media (max-width: 640px) {
   .mx-kpis { grid-template-columns: repeat(2, 1fr); }

@@ -89,6 +89,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const supabase = createClient();
     await supabase.auth.signOut();
     setAppUser(null);
+    window.location.href = '/maintenance/login';
   };
 
   return (

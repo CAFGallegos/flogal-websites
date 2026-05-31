@@ -14,7 +14,7 @@ export type GlobalRole = 'flogal_admin' | 'company_user';
 export interface MxCompany {
   id: CompanyId;
   name: string;
-  short_name: string;
+  short: string;
   dot_color: string;
   is_admin: boolean;
 }

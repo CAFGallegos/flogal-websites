@@ -42,7 +42,7 @@ export function Sidebar({ downCount = 0, partsCount = 0, isOpen = false, onClose
   const userName = appUser?.profile.full_name ?? appUser?.email ?? 'User';
   const userRole = appUser?.isFlogalAdmin
     ? 'FLOGAL ADMIN'
-    : `${(appUser?.companies[0]?.short_name ?? '').toUpperCase()} · ${appUser?.profile.global_role === 'flogal_admin' ? 'ADMIN' : 'USER'}`;
+    : `${(appUser?.companies[0]?.short ?? '').toUpperCase()} · ${appUser?.profile.global_role === 'flogal_admin' ? 'ADMIN' : 'USER'}`;
 
   return (
     <>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Download, Plus, CheckCircle2 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { createClient } from '@/lib/supabase/client';
@@ -64,6 +65,7 @@ function MiniTable({ title, sub, cols, empty, onMore, children, hasRows }: MiniT
 
 export default function DashboardPage() {
   const { selectedCompanyId } = useApp();
+  const router = useRouter();
   const [units, setUnits] = useState<MxUnit[]>([]);
   const [entries, setEntries] = useState<MxServiceEntry[]>([]);
   const [parts, setParts] = useState<MxPartNeeded[]>([]);
@@ -135,13 +137,13 @@ export default function DashboardPage() {
       </div>
 
       <div className="mx-kpis">
-        <Kpi tone="neutral" label="Active units" value={active}  meta={`${units.length} total`} />
-        <Kpi tone="ready"   label="Ready"         value={ready}   meta="for dispatch" />
-        <Kpi tone="down"    label="Units down"    value={down}    meta="needs repair" />
-        <Kpi tone="wait"    label="Waiting parts" value={waiting} meta={`${parts.filter((p) => p.status === 'ordered').length} on order`} />
-        <Kpi tone="down"    label="Safety / DOT"  value={safety}  meta="priority" />
-        <Kpi tone="info"    label="Open entries"  value={open}    meta="in progress" />
-        <Kpi tone="ready"   label="Done · week"   value={doneWk}  meta="completed" />
+        <Kpi tone="neutral" label="Active units" value={active}  meta={`${units.length} total`}          onClick={() => router.push('/units')} />
+        <Kpi tone="ready"   label="Ready"         value={ready}   meta="for dispatch"                     onClick={() => router.push('/units')} />
+        <Kpi tone="down"    label="Units down"    value={down}    meta="needs repair"                     onClick={() => router.push('/units')} />
+        <Kpi tone="wait"    label="Waiting parts" value={waiting} meta={`${parts.filter((p) => p.status === 'ordered').length} on order`} onClick={() => router.push('/parts')} />
+        <Kpi tone="down"    label="Safety / DOT"  value={safety}  meta="priority"                        onClick={() => router.push('/parts')} />
+        <Kpi tone="info"    label="Open entries"  value={open}    meta="in progress"                     onClick={() => router.push('/completed')} />
+        <Kpi tone="ready"   label="Done · week"   value={doneWk}  meta="completed"                       onClick={() => router.push('/completed')} />
       </div>
 
       <div className="mx-grid-2" style={{ marginBottom: 18 }}>

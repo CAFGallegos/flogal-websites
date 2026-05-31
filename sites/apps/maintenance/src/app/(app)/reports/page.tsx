@@ -6,7 +6,7 @@ import { useApp } from '@/context/AppContext';
 import { createClient } from '@/lib/supabase/client';
 import { SERVICE_TYPE_LABEL, STATUS_LABEL } from '@/lib/labels';
 import { shortDate, todayISO, csvEscape } from '@/lib/utils';
-import type { MxServiceEntry, MxUnit } from '@/lib/types';
+import type { MxServiceEntry, MxUnit, MxPartNeeded } from '@/lib/types';
 
 interface ReportCard {
   icon: React.ElementType;
@@ -80,6 +80,24 @@ export default function ReportsPage() {
     downloadCSV(`units-down-${todayISO()}.csv`, [header, ...body]);
   }
 
+  async function generatePartsNeeded() {
+    const supabase = createClient();
+    const q = supabase
+      .from('mx_parts_needed')
+      .select('*, mx_units(unit_number)')
+      .in('status', ['needed', 'ordered', 'received'])
+      .order('date_requested', { ascending: false });
+    const { data } = await (co !== 'all' ? q.eq('company_id', co) : q);
+    const rows = data ?? [];
+    const header = ['Part','Unit','Company','Priority','Qty','Requested By','Date','Vendor','Status','Notes'];
+    const body = rows.map((p: MxPartNeeded) => [
+      p.part_name, p.mx_units?.unit_number ?? '', p.company_id,
+      p.priority, String(p.quantity), p.requested_by ?? '',
+      p.date_requested, p.vendor ?? '', p.status, p.notes ?? '',
+    ]);
+    downloadCSV(`parts-needed-${todayISO()}.csv`, [header, ...body]);
+  }
+
   async function generateMonthlyCSV() {
     const supabase = createClient();
     const now = new Date();
@@ -116,7 +134,7 @@ export default function ReportsPage() {
   const reports: ReportCard[] = [
     { icon: BarChart3, title: 'Weekly maintenance summary', description: 'All service activity, labor, and status changes for the current week.', meta: 'Updated daily', onGenerate: generateServiceHistory },
     { icon: Truck, title: 'Units down', description: 'Every unit out of service with issue, parts, and days down.', meta: 'Live', onGenerate: generateUnitsDown },
-    { icon: Package, title: 'Parts needed', description: 'Open parts demand across the fleet by priority and vendor.', meta: 'Live', onGenerate: generateServiceHistory },
+    { icon: Package, title: 'Parts needed', description: 'Open parts demand across the fleet by priority and vendor.', meta: 'Live', onGenerate: generatePartsNeeded },
     { icon: History, title: 'Service history by unit', description: 'Full repair record for a single unit — pick a unit to generate.', meta: 'On demand', onGenerate: generateServiceHistory },
     { icon: Calendar, title: 'Monthly maintenance summary', description: 'Clean monthly rollup, formatted for Google Drive and accounting.', meta: 'Month to date', onGenerate: generateMonthlyCSV },
     { icon: Receipt, title: 'Accounting export', description: 'Labor, parts, and invoice links exported as a CSV for accounting.', meta: 'CSV', onGenerate: generateMonthlyCSV },

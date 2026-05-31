@@ -45,11 +45,9 @@ export function Topbar({ alertCount = 0, onMenuClick }: TopbarProps) {
   return (
     <header className="mx-top">
       <button
-        className="mx-iconbtn md:hidden"
+        className="mx-iconbtn mx-menu-btn"
         onClick={onMenuClick}
-        title="Menu"
-        style={{ display: 'none' }}
-        id="sidebar-toggle"
+        title="Open menu"
       >
         <Menu size={17} />
       </button>
