@@ -1,0 +1,32 @@
+# Next.js
+.next/
+out/
+build/
+
+# Dependencies
+node_modules/
+
+# Design handoff — reference only, not shipped
+_design_handoff/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logos copied from shared/ at build time — not duplicated in git
+public/logo-white.png
+public/logo-navy.png
+public/logo-grey.png
+public/icons/
