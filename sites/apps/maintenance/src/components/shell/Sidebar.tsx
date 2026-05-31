@@ -55,7 +55,7 @@ export function Sidebar({ downCount = 0, partsCount = 0, isOpen = false, onClose
       <aside className={`mx-side${isOpen ? ' is-open' : ''}`}>
         <div className="mx-brand">
           <Image
-            src="/maintenance/logo-white.png"
+            src="/logo-white.png"
             alt="Flogal"
             width={26}
             height={26}

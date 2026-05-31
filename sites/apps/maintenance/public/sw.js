@@ -1,5 +1,5 @@
 const CACHE = 'flogal-mx-v1';
-const OFFLINE_URL = '/maintenance/login';
+const OFFLINE_URL = '/login';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

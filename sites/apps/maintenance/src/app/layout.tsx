@@ -4,7 +4,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Flogal Maintenance',
   description: 'Internal fleet maintenance system',
-  manifest: '/maintenance/manifest.json',
+  manifest: '/manifest.json',
   appleWebApp: { capable: true, statusBarStyle: 'default', title: 'Flogal MX' },
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `
           if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-              navigator.serviceWorker.register('/maintenance/sw.js');
+              navigator.serviceWorker.register('/sw.js');
             });
           }
         ` }} />

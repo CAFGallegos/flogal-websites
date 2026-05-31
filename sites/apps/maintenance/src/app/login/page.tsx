@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { ArrowRight, Shield } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
 export default function LoginPage() {
@@ -12,6 +11,13 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) router.push('/');
+    });
+  }, [router]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,76 +29,98 @@ export default function LoginPage() {
       setError(authError.message);
       setLoading(false);
     } else {
-      router.push('/dashboard');
+      router.push('/');
       router.refresh();
     }
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1.05fr 1fr' }}>
-      {/* Left — charcoal brand panel */}
+    <>
+      <style>{`
+        @keyframes flogal-halo {
+          0%   { box-shadow: 0 0 0 2px #4A90D9, 0 0 28px 6px rgba(74,144,217,0.22); }
+          33%  { box-shadow: 0 0 0 2px #C9A84C, 0 0 28px 6px rgba(201,168,76,0.22); }
+          66%  { box-shadow: 0 0 0 2px #4CAF7D, 0 0 28px 6px rgba(76,175,125,0.22); }
+          100% { box-shadow: 0 0 0 2px #4A90D9, 0 0 28px 6px rgba(74,144,217,0.22); }
+        }
+        .portal-card { animation: flogal-halo 5s ease-in-out infinite; }
+        .portal-input {
+          width: 100%; padding: 11px 14px; border-radius: 7px;
+          border: 1px solid rgba(255,255,255,0.12);
+          background: rgba(255,255,255,0.06);
+          color: #fff; font-family: inherit; font-size: 14px;
+          outline: none; transition: border-color 0.15s;
+          box-sizing: border-box;
+        }
+        .portal-input::placeholder { color: rgba(255,255,255,0.3); }
+        .portal-input:focus { border-color: rgba(255,255,255,0.35); }
+        .portal-label {
+          display: block; margin-bottom: 7px;
+          font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+          text-transform: uppercase; color: rgba(255,255,255,0.45);
+        }
+        .portal-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.18); flex-shrink: 0; }
+      `}</style>
+
       <div style={{
-        background: 'var(--char-1)', color: '#fff',
-        display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-        padding: '48px 56px',
+        minHeight: '100vh',
+        background: '#6B6E70',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px',
+        fontFamily: 'Inter, system-ui, sans-serif',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <Image
-            src="/maintenance/logo-white.png"
-            alt="Flogal"
-            width={30} height={30}
-            style={{ objectFit: 'contain' }}
-          />
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 3, lineHeight: 1 }}>
-            <span style={{ fontWeight: 700, fontSize: 17, letterSpacing: '0.02em' }}>Flogal</span>
-            <span style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: '0.22em', color: 'var(--char-fg-faint)', textTransform: 'uppercase' }}>Maintenance</span>
-          </div>
-        </div>
-
-        <div style={{ maxWidth: 420 }}>
-          <div style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--char-fg-faint)', marginBottom: 16 }}>
-            Internal fleet operations
-          </div>
-          <h1 style={{ fontWeight: 700, fontSize: 38, lineHeight: 1.08, letterSpacing: '-0.02em', margin: 0 }}>
-            Every unit. Every repair. One record.
-          </h1>
-          <p style={{ color: 'var(--char-fg-dim)', fontSize: 15, lineHeight: 1.6, marginTop: 18 }}>
-            Track status, parts, and service history across the fleet — built for the shop floor, fast enough to finish before the next truck rolls in.
-          </p>
-        </div>
-
-        <div style={{ display: 'flex', gap: 40 }}>
-          {[['3', 'Companies'], ['46', 'Power units'], ['24/7', 'Shop access']].map(([n, l]) => (
-            <div key={l}>
-              <div style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em' }}>{n}</div>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--char-fg-faint)', marginTop: 4 }}>{l}</div>
+        <div
+          className="portal-card"
+          style={{
+            background: '#1A1F2E',
+            borderRadius: 14,
+            padding: '40px 44px 36px',
+            width: '100%',
+            maxWidth: 420,
+          }}
+        >
+          {/* Card header */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logos/flogal-symbol-white.png"
+              alt="Flogal"
+              style={{ height: 32, width: 'auto', display: 'block', flexShrink: 0 }}
+            />
+            <div className="portal-divider" />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <span style={{
+                color: '#fff', fontWeight: 700, fontSize: 13,
+                letterSpacing: '0.18em', fontVariant: 'small-caps', textTransform: 'uppercase',
+              }}>
+                Flogal
+              </span>
+              <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                Flogal Technologies
+              </span>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Right — login form */}
-      <div style={{
-        background: 'var(--nardo-bg)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 40,
-      }}>
-        <div style={{ width: '100%', maxWidth: 380 }}>
-          <Image
-            src="/maintenance/logo-navy.png"
-            alt=""
-            width={34} height={34}
-            style={{ objectFit: 'contain', marginBottom: 26 }}
-          />
-          <h2 style={{ fontWeight: 700, fontSize: 24, letterSpacing: '-0.015em', margin: '0 0 4px' }}>Sign in</h2>
-          <p className="mx-sub" style={{ margin: '0 0 26px' }}>
-            Internal maintenance system · apps.flogalhq.com/maintenance
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.1)', margin: '0 0 28px' }} />
+
+          <h1 style={{
+            color: '#fff', fontWeight: 700, fontSize: 26,
+            letterSpacing: '-0.01em', margin: '0 0 8px',
+          }}>
+            Flogal Technologies
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 14, margin: '0 0 28px', lineHeight: 1.5 }}>
+            Sign in to access your Flogal applications.
           </p>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div className="mx-field">
-              <label className="mx-label">Email</label>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <div>
+              <label className="portal-label" htmlFor="email">Email</label>
               <input
-                className="mx-input"
+                id="email"
+                className="portal-input"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -101,10 +129,12 @@ export default function LoginPage() {
                 placeholder="you@flogalhq.com"
               />
             </div>
-            <div className="mx-field">
-              <label className="mx-label">Password</label>
+
+            <div>
+              <label className="portal-label" htmlFor="password">Password</label>
               <input
-                className="mx-input"
+                id="password"
+                className="portal-input"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -115,8 +145,8 @@ export default function LoginPage() {
 
             {error && (
               <div style={{
-                background: 'var(--st-down-bg)', color: 'var(--st-down)',
-                borderRadius: 6, padding: '10px 14px', fontSize: 13,
+                background: 'rgba(162,59,37,0.25)', color: '#f87171',
+                borderRadius: 7, padding: '10px 14px', fontSize: 13,
               }}>
                 {error}
               </div>
@@ -124,19 +154,31 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="mx-btn mx-btn-primary mx-btn-lg"
-              style={{ justifyContent: 'center', marginTop: 6 }}
               disabled={loading}
+              style={{
+                width: '100%', padding: '13px 20px', borderRadius: 7,
+                background: '#6B6E70', border: 'none',
+                color: '#fff', fontWeight: 600, fontSize: 15,
+                fontFamily: 'inherit', cursor: loading ? 'not-allowed' : 'pointer',
+                opacity: loading ? 0.7 : 1,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                marginTop: 4, transition: 'opacity 0.15s',
+              }}
             >
-              {loading ? 'Signing in…' : <>Sign in <ArrowRight size={16} /></>}
+              {loading ? 'Signing in...' : (
+                <>Sign In <ArrowRight size={16} /></>
+              )}
             </button>
           </form>
 
-          <div style={{ marginTop: 22, display: 'flex', alignItems: 'center', gap: 8, fontSize: 11.5, color: 'var(--nardo-faint)' }}>
-            <Shield size={14} /> Access is scoped to your assigned company.
-          </div>
+          <p style={{ marginTop: 24, textAlign: 'center', fontSize: 12.5, color: 'rgba(255,255,255,0.3)' }}>
+            Trouble signing in?{' '}
+            <a href="mailto:info@flogalhq.com" style={{ color: 'rgba(255,255,255,0.55)', textDecoration: 'underline' }}>
+              Email IT
+            </a>
+          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 }

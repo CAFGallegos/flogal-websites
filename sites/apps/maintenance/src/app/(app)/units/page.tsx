@@ -95,7 +95,7 @@ export default function UnitsPage() {
                 </thead>
                 <tbody>
                   {rows.map((u) => (
-                    <tr key={u.id} onClick={() => window.location.href = `/maintenance/units/${u.id}`}>
+                    <tr key={u.id} onClick={() => window.location.href = `/units/${u.id}`}>
                       <td><span className="mx-unit">{u.unit_number}</span></td>
                       <td><CompanyTag id={u.company_id} /></td>
                       <td className="mx-sub">{u.mx_locations?.name ?? '—'}</td>
