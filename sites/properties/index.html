@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FLOGAL Properties — Industrial real estate, built for freight</title>
+<link rel="stylesheet" href="../../shared/css/tokens.css">
 <style>
 /* ---- Fonts ---- */
 @font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
@@ -14,6 +15,7 @@
 
 /* ---- Tokens ---- */
 :root{
+  --accent:#4CAF7D; /* properties brand accent — see CLAUDE.md brand accents */
   --flogal-green:#165E3A;
   --green-300:#5B9C7E;
   --green-400:#2D7A56;
@@ -56,7 +58,7 @@ button{font-family:inherit;}
 .pr-wm{height:23px;width:auto;display:block;flex:none;margin-top:-4px;}
 
 .pr-divider{width:1px;height:18px;background:rgba(255,255,255,.18);}
-.pr-sub-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#4CAF7D;margin-top:16px;}
+.pr-sub-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:16px;}
 .pr-nav-links{display:flex;gap:28px;flex:1;margin-left:16px;align-items:center;}
 .pr-nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.74);text-decoration:none;transition:color 160ms;}
 .pr-nav-link:hover{color:white;}
@@ -121,7 +123,7 @@ button{font-family:inherit;}
 .pr-listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 
 /* ---- LISTING CARDS ---- */
-.pr-card{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 200ms,transform 200ms;cursor:pointer;}
+.pr-card{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 200ms,transform 200ms;}
 .pr-card:hover{box-shadow:var(--shadow-md);}
 .pr-card-photo{position:relative;aspect-ratio:4/3;background:var(--bg-subtle);overflow:hidden;}
 .pr-card-photo-fallback{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,29,45,0) 0%,rgba(11,29,45,.55) 100%),repeating-linear-gradient(45deg,#c8d3df 0 12px,#d6dee8 12px 24px);}
@@ -218,7 +220,7 @@ button{font-family:inherit;}
 .pr-footer-wm{height:20px;width:auto;display:block;flex:none;opacity:.9;}
 .pr-footer-sub{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green-300);}
 .pr-footer-tag{margin:4px 0 0;font-size:14px;color:rgba(255,255,255,.6);line-height:1.55;max-width:320px;}
-.pr-footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
+.pr-footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
 .pr-footer-col{display:flex;flex-direction:column;gap:12px;}
 .pr-footer-h{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:white;}
 .pr-footer-link{font-size:13px;color:rgba(255,255,255,.62);text-decoration:none;}
@@ -253,7 +255,7 @@ button{font-family:inherit;}
       <a href="#contact" class="pr-nav-link">Contact</a>
     </nav>
     <div class="pr-nav-tools">
-      <a class="pr-cta-btn pr-cta-ghost" href="#">Sign in</a>
+      <a class="pr-cta-btn pr-cta-ghost" href="https://admin.flogalhq.com/login.html">Sign in</a>
       <a class="pr-cta-btn pr-cta-green" href="#" onclick="openPropModal('List a property');return false;">List a property</a>
     </div>
   </div>
@@ -380,7 +382,6 @@ button{font-family:inherit;}
         <button class="pr-toggle-btn is-active" data-view="grid">Grid</button>
         <button class="pr-toggle-btn" data-view="map">Map</button>
       </div>
-      <a class="pr-cta-btn" href="#" style="border-color:var(--border);color:var(--ink-900);">View all 42 &#8594;</a>
     </div>
   </div>
 
@@ -395,9 +396,6 @@ button{font-family:inherit;}
           <span class="pr-badge">Lease</span>
           <span class="pr-badge pr-badge-gold">High demand</span>
         </div>
-        <button class="pr-card-fave" aria-label="Save listing">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        </button>
       </div>
       <div class="pr-card-body">
         <span class="pr-card-loc">Dallas&#8211;Fort Worth, TX &middot; I-20 / I-35E</span>
@@ -410,7 +408,6 @@ button{font-family:inherit;}
         </div>
         <div class="pr-card-foot">
           <span class="pr-card-price">$0.42<span class="pr-card-price-unit">/sq ft / yr</span></span>
-          <span class="pr-card-arrow">View &#8594;</span>
         </div>
       </div>
     </article>
@@ -422,9 +419,6 @@ button{font-family:inherit;}
         <div class="pr-card-badges">
           <span class="pr-badge pr-badge-green">Available</span>
         </div>
-        <button class="pr-card-fave" aria-label="Save listing">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        </button>
       </div>
       <div class="pr-card-body">
         <span class="pr-card-loc">Atlanta, GA &middot; I-285 SW Quadrant</span>
@@ -437,7 +431,6 @@ button{font-family:inherit;}
         </div>
         <div class="pr-card-foot">
           <span class="pr-card-price">$2.4M<span class="pr-card-price-unit"> / sale</span></span>
-          <span class="pr-card-arrow">View &#8594;</span>
         </div>
       </div>
     </article>
@@ -449,9 +442,6 @@ button{font-family:inherit;}
         <div class="pr-card-badges">
           <span class="pr-badge pr-badge-gold">Under LOI</span>
         </div>
-        <button class="pr-card-fave" aria-label="Save listing">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        </button>
       </div>
       <div class="pr-card-body">
         <span class="pr-card-loc">Phoenix, AZ &middot; I-10 / Loop 202</span>
@@ -464,7 +454,6 @@ button{font-family:inherit;}
         </div>
         <div class="pr-card-foot">
           <span class="pr-card-price">$0.95<span class="pr-card-price-unit">/sq ft / yr</span></span>
-          <span class="pr-card-arrow">View &#8594;</span>
         </div>
       </div>
     </article>
@@ -478,9 +467,6 @@ button{font-family:inherit;}
           <span class="pr-badge">Lease</span>
           <span class="pr-badge pr-badge-gold">High demand</span>
         </div>
-        <button class="pr-card-fave" aria-label="Save listing">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        </button>
       </div>
       <div class="pr-card-body">
         <span class="pr-card-loc">Chicago, IL &middot; I-80 Joliet</span>
@@ -493,7 +479,6 @@ button{font-family:inherit;}
         </div>
         <div class="pr-card-foot">
           <span class="pr-card-price">$0.38<span class="pr-card-price-unit">/sq ft / yr</span></span>
-          <span class="pr-card-arrow">View &#8594;</span>
         </div>
       </div>
     </article>
@@ -505,9 +490,6 @@ button{font-family:inherit;}
         <div class="pr-card-badges">
           <span class="pr-badge pr-badge-green">Available</span>
         </div>
-        <button class="pr-card-fave" aria-label="Save listing">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        </button>
       </div>
       <div class="pr-card-body">
         <span class="pr-card-loc">Las Vegas, NV &middot; I-15 N</span>
@@ -520,7 +502,6 @@ button{font-family:inherit;}
         </div>
         <div class="pr-card-foot">
           <span class="pr-card-price">$3.1M<span class="pr-card-price-unit"> / sale</span></span>
-          <span class="pr-card-arrow">View &#8594;</span>
         </div>
       </div>
     </article>
@@ -532,9 +513,6 @@ button{font-family:inherit;}
         <div class="pr-card-badges">
           <span class="pr-badge pr-badge-gold">Coming soon</span>
         </div>
-        <button class="pr-card-fave" aria-label="Save listing">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        </button>
       </div>
       <div class="pr-card-body">
         <span class="pr-card-loc">Memphis, TN &middot; I-40 / I-55</span>
@@ -547,7 +525,6 @@ button{font-family:inherit;}
         </div>
         <div class="pr-card-foot">
           <span class="pr-card-price">$0.55<span class="pr-card-price-unit">/sq ft / yr</span></span>
-          <span class="pr-card-arrow">View &#8594;</span>
         </div>
       </div>
     </article>
@@ -646,7 +623,6 @@ button{font-family:inherit;}
       <li>Guard house + ALPR cameras</li>
       <li>Lease terms 3&#8211;7 yr, full or share-yard</li>
     </ul>
-    <a class="pr-feature-cta" href="#">Download the spec sheet (PDF) &#8594;</a>
   </div>
 </section>
 
@@ -746,30 +722,17 @@ button{font-family:inherit;}
       <div class="pr-footer-col">
         <span class="pr-footer-h">Properties</span>
         <a href="#listings" class="pr-footer-link">Browse listings</a>
-        <a href="#" class="pr-footer-link">Drop yards</a>
-        <a href="#" class="pr-footer-link">Terminals</a>
-        <a href="#" class="pr-footer-link">Last-mile sites</a>
         <a href="#developments" class="pr-footer-link">Developments</a>
-      </div>
-      <div class="pr-footer-col">
-        <span class="pr-footer-h">Tenants</span>
-        <a href="#" class="pr-footer-link">Anchor leases</a>
-        <a href="#" class="pr-footer-link">Share-yard program</a>
-        <a href="#" class="pr-footer-link">Build-to-suit</a>
-        <a href="#" class="pr-footer-link">Tenant resources</a>
       </div>
       <div class="pr-footer-col">
         <span class="pr-footer-h">Network</span>
         <a href="https://carriers.flogalhq.com" class="pr-footer-link">FLOGAL Hauling</a>
         <a href="https://sales.flogalhq.com" class="pr-footer-link">FLOGAL Equipment</a>
         <a href="https://www.flogalhq.com" class="pr-footer-link">FLOGAL HQ</a>
-        <a href="#" class="pr-footer-link">Industrial</a>
       </div>
       <div class="pr-footer-col">
         <span class="pr-footer-h">Company</span>
         <a href="https://www.flogalhq.com/about" class="pr-footer-link">About</a>
-        <a href="#" class="pr-footer-link">Press</a>
-        <a href="#" class="pr-footer-link">Careers</a>
         <a href="#contact" class="pr-footer-link">Contact realty</a>
       </div>
     </div>
@@ -793,7 +756,7 @@ button{font-family:inherit;}
   <div style="background:white;border-radius:12px;width:100%;max-width:480px;margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);">
     <div style="background:#0B2A1A;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;">
       <div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4CAF7D;margin-bottom:4px;">Properties</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Properties</div>
         <div id="propModalTitle" style="color:white;font-weight:700;font-size:20px;letter-spacing:-.01em;">Get in Touch</div>
       </div>
       <button onclick="closePropModal()" style="background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;">&#215;</button>

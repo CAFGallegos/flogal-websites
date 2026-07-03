@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FLOGAL Equipment — Inventory</title>
+<link rel="stylesheet" href="../../shared/css/tokens.css">
 <style>
 /* ---- Fonts --------------------------------------------------------- */
 @font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
@@ -14,6 +15,7 @@
 
 /* ---- Design tokens ------------------------------------------------- */
 :root{
+  --accent:#C9A84C; /* sales brand accent — see CLAUDE.md brand accents */
   --flogal-navy:#0B1D2D;
   --flogal-gold:#C79A2B;
   --flogal-green:#165E3A;
@@ -67,7 +69,7 @@ button{font-family:var(--font-sans);}
 .sl-symbol{height:30px;width:auto;display:block;flex:none;}
 .sl-wm{height:23px;width:auto;display:block;flex:none;margin-top:-4px;}
 .sl-brand-divider{width:1px;height:20px;background:rgba(255,255,255,.25);flex:none;}
-.sl-brand-division{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C9A84C;white-space:nowrap;margin-top:6px;}
+.sl-brand-division{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);white-space:nowrap;margin-top:6px;}
 .sl-fl{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:0.04em;}
 .sl-sub{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--flogal-gold);}
 .sl-nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;align-items:center;}
@@ -122,8 +124,8 @@ button{font-family:var(--font-sans);}
 
 .sl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .sl-tile{background:white;border:2px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;padding:0;display:flex;flex-direction:column;transition:box-shadow 0.2s ease,border-color 0.2s ease,transform 0.2s ease;width:100%;}
-.sl-tile:hover{border:2px solid #C9A84C;transform:translateY(-3px);transition:0.2s ease;}
-.sl-tile.is-selected{border:2px solid #C9A84C;transform:scale(1.02);}
+.sl-tile:hover{border:2px solid var(--accent);transform:translateY(-3px);transition:0.2s ease;}
+.sl-tile.is-selected{border:2px solid var(--accent);transform:scale(1.02);}
 .sl-tile:focus{outline:none;}
 .sl-tile-photo{position:relative;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.32);}
 .sl-tile-emoji{font-size:56px;filter:grayscale(.6) brightness(.8);}
@@ -245,10 +247,7 @@ button{font-family:var(--font-sans);}
     </a>
     <ul class="sl-nav-links">
       <li><a href="#inventory">Inventory</a></li>
-      <li><a href="#types">Equipment Types</a></li>
-      <li><a href="#financing">Financing</a></li>
-      <li><a href="#tradein">Trade-In</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" id="navContactLink">Contact</a></li>
     </ul>
     <a class="sl-cta" href="#" id="btnNavQuote">Request a Quote &#8594;</a>
   </div>
@@ -361,7 +360,6 @@ button{font-family:var(--font-sans);}
         </label>
         <div class="sl-grid-view">
           <button class="is-active" title="Grid">&#9638;</button>
-          <button title="List">&#8801;</button>
         </div>
       </div>
     </div>
@@ -405,8 +403,6 @@ button{font-family:var(--font-sans);}
         <div class="sl-footer-col">
           <span class="sl-footer-col-h">Sales</span>
           <a href="#inventory">Inventory</a>
-          <a href="#financing">Financing</a>
-          <a href="#tradein">Trade-In</a>
         </div>
         <div class="sl-footer-col">
           <span class="sl-footer-col-h">Properties</span>
@@ -790,7 +786,7 @@ function renderDrawer(id) {
         </div>
         <div class="sl-drawer-actions">
           <button class="sl-btn sl-btn-gold" onclick="openQuoteModal('${uid}')">Request quote</button>
-          <button class="sl-btn sl-btn-ghost">Schedule walk-around</button>
+          <button class="sl-btn sl-btn-ghost" onclick="openQuoteModal('${uid}')">Schedule walk-around</button>
         </div>
       </div>
       <div class="sl-drawer-section">
@@ -874,6 +870,10 @@ document.getElementById('sortSelect').addEventListener('change', renderGrid);
 
 // Nav CTA
 document.getElementById('btnNavQuote').addEventListener('click', e => {
+  e.preventDefault();
+  openQuoteModal(null);
+});
+document.getElementById('navContactLink').addEventListener('click', e => {
   e.preventDefault();
   openQuoteModal(null);
 });

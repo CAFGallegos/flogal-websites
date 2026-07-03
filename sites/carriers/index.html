@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FLOGAL Carrier Operations — Direct capacity. Vetted partners. No brokers.</title>
+<link rel="stylesheet" href="../../shared/css/tokens.css">
 <style>
 /* ---- Fonts --------------------------------------------------------- */
 @font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
@@ -14,6 +15,7 @@
 
 /* ---- Tokens -------------------------------------------------------- */
 :root{
+  --accent:#4A90D9; /* carriers brand accent — see CLAUDE.md brand accents */
   --flogal-navy:#0B1D2D;
   --flogal-gold:#C79A2B;
   --gold-400:#DDB452;
@@ -70,7 +72,7 @@ a{color:inherit;text-decoration:none;}
 .op-nav-symbol{height:30px;width:auto;display:block;flex:none;}
 .op-nav-wm{height:23px;width:auto;display:block;flex:none;margin-top:-4px;}
 .op-brand-divider{width:1px;height:20px;background:rgba(255,255,255,.25);flex:none;}
-.op-brand-division{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#4A90D9;white-space:nowrap;margin-top:16px;}
+.op-brand-division{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);white-space:nowrap;margin-top:16px;}
 .op-nav-fl{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:.04em;}
 .op-nav-sub{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--op-blue-strong);}
 .op-nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;align-items:center;}
@@ -352,7 +354,7 @@ a{color:inherit;text-decoration:none;}
 </section>
 
 <!-- WHY DIRECT -->
-<section class="op-why">
+<section class="op-why" id="about">
   <div class="op-wrap">
     <div class="op-section-head">
       <span class="op-eyebrow">Why direct</span>

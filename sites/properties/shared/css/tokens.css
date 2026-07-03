@@ -1,0 +1,21 @@
+/* FLOGAL — Design tokens
+   Extends shared/css/brand.css (the existing primitives: color scale,
+   type, spacing, radii, shadows) with one addition: --accent.
+
+   Each site sets exactly one override —
+     :root{ --accent:#C9A84C; }   (sales   — gold,  see CLAUDE.md brand accents)
+     :root{ --accent:#4A90D9; }   (carriers — blue)
+     :root{ --accent:#4CAF7D; }   (properties — green)
+   — placed in the site's own inline <style> block, after this file is
+   linked. admin/ already implements this pattern natively in styles.css
+   (role-based --accent, swapped via JS) and does not link this file.
+
+   Link with: <link rel="stylesheet" href="{relative-path}/shared/css/tokens.css">
+   Must be linked before the site's own <style> block so the override wins. */
+@import url('./brand.css');
+
+:root {
+  /* Default accent for pages that don't set their own (e.g. flogalhq,
+     which uses the tricolor mark rather than a single accent hue). */
+  --accent: var(--flogal-navy);
+}

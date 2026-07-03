@@ -1,35 +1,39 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node -e ' *)",
-      "Bash(curl -v \"https://api.anthropic.com/v1/design/h/SIT9bvVDtT7NGTftxwfV0Q?open_file=ui_kits%2Fflogalhq%2Findex.html\")",
-      "Bash(ls \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\\" 2>&1 | head -30)",
-      "Read(//c/Users/Carlos/Desktop/**)",
-      "PowerShell(git -C \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" log --oneline -5)",
-      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" | ForEach-Object { if \\($_.PSIsContainer\\) { \"DIR  $\\($_.Name\\)\" } else { \"FILE $\\($_.Name\\)\" } })",
-      "PowerShell(Move-Item \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\about.html\" \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\flogalhq\\\\about.html\" -Force)",
-      "Bash(curl -s -L \"https://api.anthropic.com/v1/design/h/Qp7HabgxTmcu56W5ao0lng\" -o /tmp/sales-design.tar.gz)",
-      "Bash(mkdir -p /tmp/sales-design)",
-      "Bash(tar -xzf /tmp/sales-design.tar.gz -C /tmp/sales-design)",
-      "Read(//tmp/**)",
-      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/login.html /tmp/sales-admin-login.html)",
-      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/dashboard.html /tmp/sales-admin-dashboard.html)",
-      "Bash(cp /tmp/sales-design/flogal-design-system/project/ui_kits/sales/admin/styles.css /tmp/sales-admin-styles.css)",
-      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\sales\" -Recurse | ForEach-Object { $_.FullName.Replace\\(\"c:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\\\\sites\\\\sales\\\\\", \"\"\\) })",
-      "Bash(curl -s -L \"https://api.anthropic.com/v1/design/h/4Ai5AHzetzhcRsFZSVlcsw\" -o /tmp/operations-design.tar.gz)",
-      "Bash(mkdir -p /tmp/ops-design)",
-      "Bash(tar -xzf /tmp/operations-design.tar.gz -C /tmp/ops-design)",
-      "Bash(Get-ChildItem \"C:\\\\Users\\\\Carlos\\\\.claude\\\\projects\\\\c--Users-Carlos-Desktop-flogal-websites\\\\\" -ErrorAction SilentlyContinue)",
-      "Read(//c/Users/Carlos/.claude/projects/c--Users-Carlos-Desktop-flogal-websites/memory/**)",
-      "Read(//c/Users/Carlos/.claude/projects/c--Users-Carlos-Desktop-flogal-websites/**)",
-      "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" status)",
-      "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" diff sites/properties/index.html)",
-      "PowerShell(git -C \"C:\\\\Users\\\\Carlos\\\\Desktop\\\\flogal-websites\" add sites/properties/index.html)",
-      "Bash(node c:/Users/Carlos/Desktop/flogal-websites/_transform-about.js)",
-      "Bash(node \"c:/Users/Carlos/Desktop/flogal-websites/_unify-nav-footer.js\")"
+      "Read(**)",
+      "Glob(**)",
+      "Grep(**)",
+      "Edit(sites/**)",
+      "Write(sites/**)",
+      "Edit(shared/**)",
+      "Write(shared/**)",
+      "Write(scripts/**)",
+      "Bash(node *)",
+      "Bash(npx *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(which *)",
+      "Bash(echo *)",
+      "Bash(mkdir *)",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)"
     ],
-    "additionalDirectories": [
-      "c:\\Users\\Carlos\\Desktop\\flogal-websites\\_archive\\2026-05-25_Flogal_Websites"
+    "deny": [
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(git reset*)",
+      "Bash(git checkout*)",
+      "Bash(rm -rf *)",
+      "Edit(_archive/**)",
+      "Write(_archive/**)"
     ]
   }
 }
