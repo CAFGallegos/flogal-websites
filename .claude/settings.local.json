@@ -3,7 +3,10 @@
     "allow": [
       "Bash(node scripts/check-links.mjs)",
       "Bash(echo \"EXIT CODE: $?\")",
-      "Bash(git status *)"
+      "Bash(git status *)",
+      "Bash(grep -n \"@media\\\\|nav-links,.*{display:none\" /home/flogal_dev/flogal-websites/sites/properties/index.html)",
+      "Bash(sed -n '/=== flogalhq ===/,/=== sales ===/p')",
+      "Bash(echo \"full run exit: $?\")"
     ]
   }
 }

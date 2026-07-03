@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FLOGAL — Brand. Routing. Trust.</title>
 <link rel="stylesheet" href="../../shared/css/tokens.css">
+<link rel="stylesheet" href="../../shared/css/flogalhq-shell.css">
 <style>
 @font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
@@ -182,6 +183,23 @@ a{color:inherit;text-decoration:none;}
     </ul>
     <a href="tel:+12147021336" class="nav-phone">(214) 702-1336</a>
     <a href="#contact" class="nav-cta">Request a Quote</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav" hidden>
+    <ul class="mobile-nav-links">
+      <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
+      <li><a href="https://sales.flogalhq.com">Sales</a></li>
+      <li><a href="https://properties.flogalhq.com">Properties</a></li>
+      <li><a href="https://apps.flogalhq.com">Apps</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:+12147021336" class="mobile-nav-phone">(214) 702-1336</a>
+    <a href="#contact" class="mobile-nav-cta">Request a Quote</a>
   </div>
 </header>
 
@@ -390,6 +408,26 @@ a{color:inherit;text-decoration:none;}
     </div>
   </div>
 </footer>
+
+<!-- MOBILE NAV TOGGLE -->
+<script>
+(function(){
+  var btn = document.getElementById('navToggle');
+  var panel = document.getElementById('mobileNav');
+  if (!btn || !panel) return;
+  btn.addEventListener('click', function(){
+    var willOpen = panel.hidden;
+    panel.hidden = !willOpen;
+    btn.setAttribute('aria-expanded', String(willOpen));
+  });
+  panel.addEventListener('click', function(e){
+    if (e.target.closest('a')) {
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+</script>
 
 <!-- PARALLAX SCRIPT -->
 <script>
