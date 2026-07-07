@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FLOGAL — Brand. Routing. Trust.</title>
+<title>Flogal — Operator-Led Freight Platform</title>
+<meta name="description" content="Flogal is an operator-funded freight platform: freight-native companies in hauling, equipment, and industrial real estate, run on one shared operating system.">
+<link rel="canonical" href="https://flogalhq.com/">
+<meta property="og:title" content="Flogal — Operator-Led Freight Platform">
+<meta property="og:description" content="Flogal is an operator-funded freight platform: freight-native companies in hauling, equipment, and industrial real estate, run on one shared operating system.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flogalhq.com/">
+<meta property="og:image" content="https://flogalhq.com/shared/logos/flogal-symbol-tricolor.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../shared/css/tokens.css">
 <link rel="stylesheet" href="../../shared/css/flogalhq-shell.css">
 <style>
@@ -34,8 +42,6 @@ a{color:inherit;text-decoration:none;}
 .nav{position:sticky;top:0;z-index:50;background:rgba(11,29,45,.94);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06);}
 .nav-inner{max-width:1440px;margin:0 auto;padding:13px 40px;display:flex;align-items:center;gap:48px;color:white;}
 .nav-brand{display:flex;align-items:center;gap:10px;}
-.nav-symbol{height:33px;width:auto;display:block;flex:none;}
-.nav-wm{height:25px;width:auto;display:block;flex:none;margin-top:-4px;}
 .nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;align-items:center;}
 .nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.78);transition:color 150ms;}
 .nav-links a:hover{color:white;}
@@ -58,11 +64,12 @@ a{color:inherit;text-decoration:none;}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:6px;font-size:14px;font-weight:600;color:white;border:1px solid rgba(168,184,200,.4);background:rgba(168,184,200,.1);backdrop-filter:blur(10px);transition:all 150ms;}
 .btn-outline:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
 
-/* ---- HERO STATS (sits above tri-band) ---------------------------- */
-.hero-stats{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 40px 56px;
-  display:flex;gap:64px;flex-wrap:wrap;}
-.hero-stat-val{font-weight:700;font-size:34px;line-height:1;letter-spacing:-.02em;color:white;font-variant-numeric:tabular-nums;}
-.hero-stat-lbl{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:8px;}
+/* ---- PROOF CARDS (sits above tri-band) ---------------------------- */
+.proof-grid{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 40px 56px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.proof-card{background:rgba(168,184,200,.08);border:1px solid rgba(168,184,200,.18);border-radius:8px;padding:20px 22px;backdrop-filter:blur(6px);}
+.proof-title{font-weight:700;font-size:14px;color:white;letter-spacing:-.005em;margin-bottom:6px;}
+.proof-body{font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.6);}
 
 /* ---- TRI-BAND CTA ------------------------------------------------ */
 .tri-wrap{background:var(--night);padding:0 0 64px;}
@@ -84,7 +91,7 @@ a{color:inherit;text-decoration:none;}
 .svc-head{margin-bottom:48px;}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--silver);}
 .h2{font-weight:700;font-size:42px;letter-spacing:-.02em;line-height:1.1;color:var(--navy);margin:14px 0 0;}
-.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .svc-card{background:white;border:1px solid var(--hairline);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:box-shadow 180ms,transform 180ms,border-color 180ms;}
 .svc-card:hover{box-shadow:0 8px 24px rgba(11,29,45,.1);transform:translateY(-2px);border-color:rgba(168,184,200,.8);}
 .svc-tag{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);}
@@ -92,6 +99,20 @@ a{color:inherit;text-decoration:none;}
 .svc-body{font-size:14px;line-height:1.6;color:var(--fg-muted);margin:0;}
 .svc-link{font-size:13px;font-weight:700;color:var(--silver);margin-top:8px;}
 .svc-link:hover{text-decoration:underline;}
+
+/* ---- TECH ---------------------------------------------------------- */
+.tech-section{background:var(--navy-050);padding:80px 40px;}
+.tech-inner{max-width:900px;margin:0 auto;}
+.tech-body{margin-top:20px;font-size:16px;line-height:1.75;color:var(--fg-muted);}
+
+/* ---- FAQ ------------------------------------------------------------ */
+.faq-section{background:var(--paper);padding:80px 40px;border-top:1px solid var(--hairline);}
+.faq-inner{max-width:900px;margin:0 auto;}
+.faq-list{margin-top:32px;display:flex;flex-direction:column;}
+.faq-item{padding:24px 0;border-bottom:1px solid var(--hairline);}
+.faq-item:first-child{border-top:1px solid var(--hairline);}
+.faq-q{font-size:17px;font-weight:700;color:var(--navy);margin:0 0 8px;letter-spacing:-.005em;}
+.faq-a{font-size:14px;line-height:1.65;color:var(--fg-muted);margin:0;}
 
 /* ---- BUILT FOR THE LONG GAME (dark) ------------------------------ */
 .about{background:var(--night);padding:96px 40px;}
@@ -150,10 +171,10 @@ a{color:inherit;text-decoration:none;}
   .footer-inner{padding:0 24px;}
   .hero-title{font-size:42px;}
   .hero-inner{padding:72px 24px 56px;}
-  .hero-stats{padding:0 24px 40px;gap:32px;}
+  .proof-grid{padding:0 24px 40px;gap:12px;grid-template-columns:1fr 1fr;}
   .tri-band{grid-template-columns:1fr;padding:0 24px;}
   .tri-wrap{padding-bottom:48px;}
-  .svc-section,.about,.contact{padding:64px 24px;}
+  .svc-section,.tech-section,.faq-section,.about,.contact{padding:64px 24px;}
   .svc-grid,.about-inner,.contact-inner{grid-template-columns:1fr;gap:40px;}
   .form-row{grid-template-columns:1fr;}
 }
@@ -163,6 +184,57 @@ a{color:inherit;text-decoration:none;}
 <link rel="icon" type="image/png" sizes="16x16" href="../../shared/favicons/flogalhq/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../shared/favicons/flogalhq/apple-touch-icon.png">
 <link rel="icon" sizes="192x192" href="../../shared/favicons/flogalhq/android-chrome-192x192.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Flogal Holdings, LLC",
+  "url": "https://flogalhq.com/",
+  "logo": "https://flogalhq.com/shared/logos/flogal-symbol-tricolor.png",
+  "description": "Flogal is an operator-funded freight platform: freight-native companies in hauling, equipment, and industrial real estate, run on one shared operating system.",
+  "areaServed": ["Oklahoma", "Texas"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Flogal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flogal is an operator-funded freight platform. It builds and operates a group of freight-native companies — hauling, equipment sales and leasing, and industrial real estate — on a shared operating system."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Flogal a carrier or a broker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flogal operates asset-based carriers through J&D Hauling and RRTL. It is not a freight broker."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does Flogal operate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flogal's freight operations run primarily across Oklahoma, Texas, and regional freight corridors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Flogal Technologies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flogal Technologies is Flogal's internal operating system for maintenance, dispatch, payroll, and per-truck P&L. It runs Flogal's own companies; it is not sold as software."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -211,20 +283,33 @@ a{color:inherit;text-decoration:none;}
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-copy">
-      <h1 class="hero-title">We move freight<br>on the lanes<br>that matter to you<span style="color:rgba(168,184,200,.55);">.</span></h1>
-      <p class="hero-sub">Flogal operates across hauling, equipment, real estate, and industrial solutions to keep your business moving forward.</p>
+      <span class="eyebrow" style="display:block;margin-bottom:16px;">Operator-Funded Freight Platform</span>
+      <h1 class="hero-title">Freight-native companies,<br>run on one system<span style="color:rgba(168,184,200,.55);">.</span></h1>
+      <p class="hero-sub">Flogal builds and operates freight companies — hauling, equipment, and industrial real estate — on a shared operating backbone we run ourselves. Founder-funded, freight-experienced, built for the long haul.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-outline">Get in Touch →</a>
       </div>
     </div>
   </div>
 
-  <!-- Stats — sits inside hero, above tri-band -->
-  <div class="hero-stats">
-    <div><div class="hero-stat-val">50+</div><div class="hero-stat-lbl">Power Units</div></div>
-    <div><div class="hero-stat-val">20</div><div class="hero-stat-lbl">Dedicated Lanes</div></div>
-    <div><div class="hero-stat-val">99.2%</div><div class="hero-stat-lbl">On-Time</div></div>
-    <div><div class="hero-stat-val">24/7</div><div class="hero-stat-lbl">Dispatch Support</div></div>
+  <!-- Proof cards — sits inside hero, above tri-band -->
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-title">Operator-funded</div>
+      <div class="proof-body">Founder-capitalized, full decision capacity. No outside mandate.</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-title">Freight-native</div>
+      <div class="proof-body">Built by people who've run trucks, not a fund shopping for a sector.</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-title">One operating system</div>
+      <div class="proof-body">Maintenance, dispatch, payroll, and per-truck P&amp;L on shared infrastructure.</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-title">Multi-entity by design</div>
+      <div class="proof-body">Separate operating companies under one holding structure.</div>
+    </div>
   </div>
 </section>
 
@@ -253,33 +338,36 @@ a{color:inherit;text-decoration:none;}
 <section class="svc-section">
   <div class="svc-head">
     <span class="eyebrow">Operating Divisions</span>
-    <h2 class="h2">Asset-backed across the freight stack.</h2>
+    <h2 class="h2">Three freight-built companies, one backbone.</h2>
   </div>
   <div class="svc-grid">
     <article class="svc-card">
-      <span class="svc-tag">HAULING</span>
-      <h3 class="svc-title">Dedicated &amp; spot freight, OTR coverage</h3>
-      <p class="svc-body">Fleet operations running dedicated lanes across the continental U.S. with industry-leading on-time delivery and full compliance documentation.</p>
+      <span class="svc-tag">CARRIERS</span>
+      <h3 class="svc-title">Flogal Carriers</h3>
+      <p class="svc-body">Asset-based hauling across Oklahoma and Texas, operated through J&amp;D Hauling and RRTL. Aggregate, end-dump, flatbed, and dry van freight on regional corridors.</p>
       <a class="svc-link" href="https://carriers.flogalhq.com">Go to Carriers →</a>
     </article>
     <article class="svc-card">
-      <span class="svc-tag">EQUIPMENT</span>
-      <h3 class="svc-title">Used Class 8 tractors &amp; trailers</h3>
-      <p class="svc-body">Inspected, financed inventory — dry vans, reefers, flatbeds, and day cabs. Buy, lease-to-own, or trade. Hard work, real specs, real prices.</p>
+      <span class="svc-tag">SALES</span>
+      <h3 class="svc-title">Flogal Sales</h3>
+      <p class="svc-body">Trucks, trailers, and heavy equipment for sale and lease — inspected units, real specs, real prices.</p>
       <a class="svc-link" href="https://sales.flogalhq.com">Go to Inventory →</a>
     </article>
     <article class="svc-card">
-      <span class="svc-tag">REALTY</span>
-      <h3 class="svc-title">Industrial yards &amp; terminals</h3>
-      <p class="svc-body">Properties built around freight: drop yards, terminals, and last-mile staging in growth corridors. Direct buyer — no agents, last close.</p>
+      <span class="svc-tag">PROPERTIES</span>
+      <h3 class="svc-title">Flogal Properties</h3>
+      <p class="svc-body">Industrial real estate built for freight: yards, terminals, and the land our operations run on.</p>
       <a class="svc-link" href="https://properties.flogalhq.com">Go to Listings →</a>
     </article>
-    <article class="svc-card">
-      <span class="svc-tag">INDUSTRIAL</span>
-      <h3 class="svc-title">Infrastructure operations</h3>
-      <p class="svc-body">Long-term industrial services supporting logistics infrastructure, site operations, and asset-backed growth across regional markets.</p>
-      <a class="svc-link" href="#contact">Learn More →</a>
-    </article>
+  </div>
+</section>
+
+<!-- TECH -->
+<section class="tech-section" id="technology">
+  <div class="tech-inner">
+    <span class="eyebrow">Flogal Technologies</span>
+    <h2 class="h2">Run like one company, not five.</h2>
+    <p class="tech-body">Every Flogal company runs on the same internal operating system — Flogal Technologies. Maintenance, driver tickets, payroll, and per-truck profitability live in one platform we built and operate ourselves. That means every truck's real cost is visible, every load is auditable, and a new company can plug into working systems on day one — not rebuild them. It's not a product we sell; it's how we keep freight companies disciplined, auditable, and ready to scale.</p>
   </div>
 </section>
 
@@ -289,29 +377,55 @@ a{color:inherit;text-decoration:none;}
     <div class="about-left">
       <span class="eyebrow">About Flogal</span>
       <h2 class="h2">Built for the long game.</h2>
-      <p class="lead">We build and operate logistics and asset businesses with institutional discipline. Structured for banks, insurance carriers, and corporate partners from day one.</p>
+      <p class="lead">We build asset-backed freight companies with institutional discipline — structured, documented, and designed to outlast the people who started them. The goal is to be the kind of operator banks, insurers, and partners can depend on.</p>
     </div>
     <div class="pillars">
       <div class="pillar">
         <span class="pn">01</span>
         <div>
           <div class="pt">Institutional Structure</div>
-          <div class="pb">Entity design and operations built to meet bank, insurance, and corporate standards.</div>
+          <div class="pb">Entities designed to meet bank, insurer, and partner standards from the start.</div>
         </div>
       </div>
       <div class="pillar">
         <span class="pn">02</span>
         <div>
           <div class="pt">Vertical Integration</div>
-          <div class="pb">Equipment, real estate, and industrial assets under a holding structure.</div>
+          <div class="pb">Equipment, real estate, and operations under one holding structure.</div>
         </div>
       </div>
       <div class="pillar">
         <span class="pn">03</span>
         <div>
           <div class="pt">Operator Model</div>
-          <div class="pb">Every entity run by operators — not appointees.</div>
+          <div class="pb">Every entity run by operators, not appointees.</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="h2">Common questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3 class="faq-q">What is Flogal?</h3>
+        <p class="faq-a">Flogal is an operator-funded freight platform. It builds and operates a group of freight-native companies — hauling, equipment sales and leasing, and industrial real estate — on a shared operating system.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Is Flogal a carrier or a broker?</h3>
+        <p class="faq-a">Flogal operates asset-based carriers through J&amp;D Hauling and RRTL. It is not a freight broker.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">Where does Flogal operate?</h3>
+        <p class="faq-a">Flogal's freight operations run primarily across Oklahoma, Texas, and regional freight corridors.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-q">What is Flogal Technologies?</h3>
+        <p class="faq-a">Flogal Technologies is Flogal's internal operating system for maintenance, dispatch, payroll, and per-truck P&amp;L. It runs Flogal's own companies; it is not sold as software.</p>
       </div>
     </div>
   </div>

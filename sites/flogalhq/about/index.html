@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>About — Flogal Holdings</title>
+<title>About Flogal — Operator-Led Freight Platform</title>
+<meta name="description" content="About Flogal Holdings — an operator-funded freight platform building freight-native companies in hauling, equipment, and industrial real estate.">
+<link rel="canonical" href="https://flogalhq.com/about">
+<meta property="og:title" content="About Flogal — Operator-Led Freight Platform">
+<meta property="og:description" content="About Flogal Holdings — an operator-funded freight platform building freight-native companies in hauling, equipment, and industrial real estate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flogalhq.com/about">
+<meta property="og:image" content="https://flogalhq.com/shared/logos/flogal-symbol-tricolor.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../../shared/css/tokens.css">
 <link rel="stylesheet" href="../../../shared/css/flogalhq-shell.css">
 <style>
@@ -39,15 +47,6 @@ img{display:block;}
 .hero-sub{font-size:17px;line-height:1.6;color:rgba(255,255,255,.6);max-width:500px;margin:0 0 40px;}
 .hero-scroll{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);}
 .hero-scroll-line{width:40px;height:1px;background:rgba(255,255,255,.2);}
-
-/* OVERVIEW BAND */
-.overview{background:var(--navy);padding:64px 40px;}
-.overview-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.06);}
-.ov-item{padding:40px 36px;background:var(--navy);}
-.ov-num{font-weight:900;font-size:52px;letter-spacing:-.04em;color:white;line-height:1;font-variant-numeric:tabular-nums;}
-.ov-num sup{font-size:24px;vertical-align:top;margin-top:8px;}
-.ov-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:8px;}
-.ov-bar{height:2px;width:40px;background:var(--gold);margin-top:16px;}
 
 /* WHAT WE ARE */
 .what{padding:96px 40px;background:var(--paper);}
@@ -87,7 +86,7 @@ img{display:block;}
 .tree-connector::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--hair);}
 
 /* Entity cards grid */
-.ent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--hair);}
+.ent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--hair);}
 .ent-card{background:white;padding:28px 20px 24px;position:relative;display:flex;flex-direction:column;gap:12px;}
 .ent-color-bar{position:absolute;top:0;left:0;right:0;height:4px;}
 .ent-mark{height:28px;width:auto;margin-bottom:4px;}
@@ -111,7 +110,7 @@ img{display:block;}
 /* WHO WE BUILD FOR */
 .for{padding:80px 40px;background:var(--paper);}
 .for-inner{max-width:1440px;margin:0 auto;}
-.for-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px;}
+.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
 .for-card{background:white;border:1px solid var(--hair);border-radius:10px;padding:32px 24px;}
 .for-icon{width:48px;height:48px;border-radius:10px;background:var(--navy-050);display:flex;align-items:center;justify-content:center;color:var(--navy);margin-bottom:20px;}
 .for-title{font-weight:700;font-size:16px;color:var(--navy);margin-bottom:8px;}
@@ -151,7 +150,7 @@ img{display:block;}
 @media(max-width:900px){
   .nav-links,.nav-cta,.nav-phone{display:none;}.nav-inner{padding:16px 24px;}
   .hero-title{font-size:46px;}.hero-inner{padding:80px 24px 100px;}
-  .hero-photo{width:100%;}.overview-inner{grid-template-columns:1fr;gap:0;}
+  .hero-photo{width:100%;}
   .what{padding:64px 24px;}.what-inner{grid-template-columns:1fr;gap:40px;}
   .entities{padding:0 24px 64px;}.ent-grid{grid-template-columns:1fr 1fr;}
   .thesis{padding:64px 24px;}.thesis-head{grid-template-columns:1fr;gap:24px;}.pillars{grid-template-columns:1fr;}
@@ -166,6 +165,17 @@ img{display:block;}
 <link rel="icon" type="image/png" sizes="16x16" href="../../../shared/favicons/flogalhq/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../shared/favicons/flogalhq/apple-touch-icon.png">
 <link rel="icon" sizes="192x192" href="../../../shared/favicons/flogalhq/android-chrome-192x192.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Flogal Holdings, LLC",
+  "url": "https://flogalhq.com/",
+  "logo": "https://flogalhq.com/shared/logos/flogal-symbol-tricolor.png",
+  "description": "Flogal is an operator-funded freight platform: freight-native companies in hauling, equipment, and industrial real estate, run on one shared operating system.",
+  "areaServed": ["Oklahoma", "Texas"]
+}
+</script>
 </head>
 <body>
 
@@ -212,32 +222,11 @@ img{display:block;}
   <div class="hero-protect"></div>
   <div class="hero-inner">
     <div class="hero-label">Flogal Holdings</div>
-    <h1 class="hero-title">One platform.<br><span>Five operators.</span><br>Built to scale.</h1>
-    <p class="hero-sub">Flogal Holdings is a privately held logistics and asset platform operating across hauling, equipment, real estate, and industrial services — structured for institutional-grade relationships.</p>
+    <h1 class="hero-title">One platform.<br><span>Freight-native operating companies.</span></h1>
+    <p class="hero-sub">Flogal Holdings is a privately held, operator-funded freight platform operating across hauling, equipment, and industrial real estate — built for durable, asset-backed growth.</p>
     <div class="hero-scroll"><span class="hero-scroll-line"></span>Scroll to explore</div>
   </div>
 </section>
-
-<!-- OVERVIEW NUMBERS -->
-<div class="overview">
-  <div class="overview-inner">
-    <div class="ov-item">
-      <div class="ov-num">5<sup>+</sup></div>
-      <div class="ov-label">Operating Entities</div>
-      <div class="ov-bar"></div>
-    </div>
-    <div class="ov-item">
-      <div class="ov-num">4</div>
-      <div class="ov-label">Industry Verticals</div>
-      <div class="ov-bar"></div>
-    </div>
-    <div class="ov-item">
-      <div class="ov-num">1</div>
-      <div class="ov-label">Holding Structure</div>
-      <div class="ov-bar"></div>
-    </div>
-  </div>
-</div>
 
 <!-- WHAT WE ARE -->
 <section class="what" id="platform">
@@ -247,10 +236,9 @@ img{display:block;}
       <h2 class="h2" style="color:var(--navy)">A logistics platform built from the ground up.</h2>
     </div>
     <div class="what-body">
-      <p>Flogal Holdings is the parent company of a vertically integrated group of operating businesses built around logistics infrastructure, asset ownership, and long-term value creation. We are not a startup. We are not a broker. We are operators who own physical assets, run real businesses, and build institutional relationships.</p>
+      <p>Flogal Holdings is the parent of a group of operating businesses built around freight, physical assets, and long-term value. We're not a startup and not a broker — we're operators who own assets and run real freight companies.</p>
       <div class="what-pull">"We build companies the way infrastructure should be built — documented, structured, and designed to outlast the people who started them."</div>
-      <p>Every entity under Flogal Holdings operates with its own leadership, its own market, and its own growth trajectory — but shares a common financial and operational discipline that makes the platform stronger than any single company alone.</p>
-      <p>Our goal is to be the kind of operator that banks want to lend to, insurers want to underwrite, and corporate partners want to depend on. That standard drives every decision we make — from how we structure our entities to how we answer the phone.</p>
+      <p>Every entity operates with its own leadership and market, but shares one operating system and one standard of discipline. Our aim is to be the kind of operator banks want to lend to, insurers want to underwrite, and partners want to depend on.</p>
     </div>
   </div>
 </section>
@@ -296,24 +284,16 @@ img{display:block;}
           <div class="ent-color-bar" style="background:var(--blue);"></div>
           <img class="ent-mark" src="../../../shared/logos/flogal-symbol-blue.png" alt="">
           <div class="ent-type" style="color:var(--blue);">Operating</div>
-          <div class="ent-name">J&amp;D Hauling</div>
-          <div class="ent-desc">Commercial carrier operating DOT-compliant fleet across dedicated and spot freight lanes.</div>
-          <a class="ent-link" style="color:var(--blue);" href="https://carriers.flogalhq.com">Carriers →</a>
-        </div>
-        <div class="ent-card">
-          <div class="ent-color-bar" style="background:var(--blue);"></div>
-          <img class="ent-mark" src="../../../shared/logos/flogal-symbol-blue.png" alt="">
-          <div class="ent-type" style="color:var(--blue);">Operating</div>
-          <div class="ent-name">RRTL</div>
-          <div class="ent-desc">Regional transport and logistics operations supporting supply chain execution across key corridors.</div>
+          <div class="ent-name">Flogal Carriers</div>
+          <div class="ent-desc">Asset-based freight and hauling, operated through J&amp;D Hauling and RRTL across Oklahoma and Texas.</div>
           <a class="ent-link" style="color:var(--blue);" href="https://carriers.flogalhq.com">Carriers →</a>
         </div>
         <div class="ent-card">
           <div class="ent-color-bar" style="background:var(--gold);"></div>
           <img class="ent-mark" src="../../../shared/logos/flogal-symbol-gold.png" alt="">
           <div class="ent-type" style="color:var(--gold);">Equipment</div>
-          <div class="ent-name">Flogal Equipment</div>
-          <div class="ent-desc">Heavy equipment and commercial vehicle sales, leasing, and fleet solutions for operators and contractors.</div>
+          <div class="ent-name">Flogal Sales</div>
+          <div class="ent-desc">Truck, trailer, and equipment sales and leasing.</div>
           <a class="ent-link" style="color:var(--gold);" href="https://sales.flogalhq.com">Inventory →</a>
         </div>
         <div class="ent-card">
@@ -321,16 +301,16 @@ img{display:block;}
           <img class="ent-mark" src="../../../shared/logos/flogal-symbol-green.png" alt="">
           <div class="ent-type" style="color:var(--green);">Real Estate</div>
           <div class="ent-name">Flogal Properties</div>
-          <div class="ent-desc">Industrial and commercial real estate acquisition, management, and value-add repositioning.</div>
+          <div class="ent-desc">Industrial real estate and freight-oriented land and facilities.</div>
           <a class="ent-link" style="color:var(--green);" href="https://properties.flogalhq.com">Properties →</a>
         </div>
         <div class="ent-card">
           <div class="ent-color-bar" style="background:var(--gray);"></div>
           <img class="ent-mark" src="../../../shared/logos/flogal-symbol-navy.png" alt="">
-          <div class="ent-type" style="color:var(--gray);">Industrial</div>
-          <div class="ent-name">Flogal Industrial</div>
-          <div class="ent-desc">Site operations, facility services, and industrial support for logistics and construction clients.</div>
-          <span class="ent-link" style="color:var(--gray);">Industrial →</span>
+          <div class="ent-type" style="color:var(--gray);">Internal</div>
+          <div class="ent-name">Flogal Technologies</div>
+          <div class="ent-desc">Internal operating platform: maintenance, dispatch, payroll, and per-truck P&amp;L. Runs Flogal's own companies.</div>
+          <span class="ent-link" style="color:var(--gray);">Internal →</span>
         </div>
       </div>
     </div>
@@ -366,7 +346,7 @@ img{display:block;}
       <div class="pillar">
         <div class="p-num">04</div>
         <div class="p-title">Operators, Not Consultants</div>
-        <div class="p-body">Every dollar we earn is from moving freight, selling equipment, or collecting rent — not from advisory fees or management contracts.</div>
+        <div class="p-body">We make money by moving freight, selling equipment, and owning assets — not advisory or management fees.</div>
       </div>
       <div class="pillar">
         <div class="p-num">05</div>
@@ -393,28 +373,21 @@ img{display:block;}
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="3" y1="8" x2="21" y2="8"/><line x1="9" y1="2" x2="9" y2="8"/></svg>
         </div>
         <div class="for-title">Shippers &amp; Freight Partners</div>
-        <div class="for-body">Reliable capacity, full compliance documentation, and dedicated account management. The kind of operator partners want to depend on for the long haul.</div>
+        <div class="for-body">Reliable capacity and dedicated account management from operators who run their own trucks.</div>
       </div>
       <div class="for-card">
         <div class="for-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="for-title">Insurance Carriers</div>
-        <div class="for-body">DOT-compliant operations, documented safety programs, and full authority records across all fleet entities. Audit-ready at all times.</div>
-      </div>
-      <div class="for-card">
-        <div class="for-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-        </div>
-        <div class="for-title">Corporate Shippers</div>
-        <div class="for-body">Reliable capacity, documented compliance, and dedicated account structure. The kind of carrier partner that shows up and shows documentation.</div>
+        <div class="for-title">Insurance &amp; Lending Partners</div>
+        <div class="for-body">Asset-backed entities with clean corporate documentation, structured for underwriting and credit.</div>
       </div>
       <div class="for-card">
         <div class="for-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div class="for-title">Sellers &amp; Partners</div>
-        <div class="for-body">Whether you're selling a property, equipment, or a business — we are a direct buyer with the structure to close, not just the intention to.</div>
+        <div class="for-body">Whether you're selling a property, equipment, or a business, we're a direct buyer with the structure to close.</div>
       </div>
     </div>
   </div>
@@ -438,23 +411,15 @@ img{display:block;}
         <span class="str-val">Oklahoma City, OK</span>
       </div>
       <div class="str-row">
-        <span class="str-key">Operating Entities</span>
-        <span class="str-val">5 Active</span>
-      </div>
-      <div class="str-row">
-        <span class="str-key">Industry Verticals</span>
-        <span class="str-val">Logistics · Equipment · Real Estate · Industrial</span>
+        <span class="str-key">Operating Focus</span>
+        <span class="str-val">Freight · Equipment · Real Estate</span>
       </div>
       <div class="str-row">
         <span class="str-key">Primary Website</span>
         <span class="str-val">flogalhq.com</span>
       </div>
-      <div class="str-row"><span class="str-key">Status</span><span class="str-val"><span class="str-badge">Actively Operating</span></span></div>
-      <div class="str-row"><span class="str-key">Funding Model</span><span class="str-val" style="font-size:13px;text-align:right;">Self-Funded · Full Decision Capacity</span></div>
-      <div class="str-row">
-        <span class="str-key">Carrier Authority</span>
-        <span class="str-val"><span class="str-badge">DOT + MC Active</span></span>
-      </div>
+      <div class="str-row"><span class="str-key">Funding Model</span><span class="str-val">Self-Funded</span></div>
+      <div class="str-row"><span class="str-key">Status</span><span class="str-val"><span class="str-badge">Operating</span></span></div>
     </div>
   </div>
 </section>
