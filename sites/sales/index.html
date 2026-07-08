@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FLOGAL Equipment — Inventory</title>
+<title>Flogal Sales — Trucks, Trailers & Equipment</title>
+<meta name="description" content="Flogal Sales — used Class 8 trucks, trailers, and heavy equipment for sale or lease, operator-direct from working freight yards.">
+<link rel="canonical" href="https://sales.flogalhq.com/">
+<meta property="og:title" content="Flogal Sales — Trucks, Trailers & Equipment">
+<meta property="og:description" content="Flogal Sales — used Class 8 trucks, trailers, and heavy equipment for sale or lease, operator-direct from working freight yards.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sales.flogalhq.com/">
+<meta property="og:image" content="https://sales.flogalhq.com/shared/logos/flogal-symbol-gold.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../shared/css/tokens.css">
 <style>
 /* ---- Fonts --------------------------------------------------------- */
@@ -84,6 +92,26 @@ button{font-family:var(--font-sans);}
 .sl-subtitle-dot{width:7px;height:7px;border-radius:50%;background:var(--flogal-gold);flex:none;}
 .sl-subtitle-text{color:rgba(255,255,255,.82);}
 .sl-subtitle-sep{color:rgba(255,255,255,.4);}
+
+/* ---- Intro (static, crawlable) -------------------------------------- */
+.sl-intro{background:var(--paper);padding:56px 32px 40px;}
+.sl-intro-inner{max-width:1440px;margin:0 auto;}
+.sl-intro-title{margin:0 0 16px;font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-.015em;line-height:1.15;color:var(--flogal-navy);max-width:820px;}
+.sl-intro-lead{margin:0 0 28px;font-size:15px;line-height:1.65;color:var(--fg-muted);max-width:720px;}
+.sl-proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.sl-proof-card{background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;}
+.sl-proof-title{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--flogal-navy);margin-bottom:6px;}
+.sl-proof-body{font-size:12.5px;line-height:1.55;color:var(--fg-muted);}
+
+/* ---- FAQ -------------------------------------------------------------- */
+.sl-faq{background:var(--paper);padding:56px 32px 64px;border-top:1px solid var(--border);}
+.sl-faq-inner{max-width:1440px;margin:0 auto;}
+.sl-faq-h{margin:0 0 24px;font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:-.01em;color:var(--flogal-navy);}
+.sl-faq-list{display:flex;flex-direction:column;}
+.sl-faq-item{padding:20px 0;border-bottom:1px solid var(--border);}
+.sl-faq-item:first-child{border-top:1px solid var(--border);}
+.sl-faq-q{margin:0 0 6px;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--flogal-navy);}
+.sl-faq-a{margin:0;font-size:13.5px;line-height:1.6;color:var(--fg-muted);}
 
 /* ---- Three-column layout ------------------------------------------- */
 .sl-page{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:240px 1fr 380px;align-items:start;flex:1;}
@@ -218,6 +246,10 @@ button{font-family:var(--font-sans);}
   .sl-nav-links,.sl-cta{display:none;}
   .sl-nav-inner{padding:14px 20px;}
   .sl-subtitle-inner{padding:14px 20px;}
+  .sl-intro{padding:32px 20px 24px;}
+  .sl-intro-title{font-size:26px;}
+  .sl-proof-grid{grid-template-columns:1fr;}
+  .sl-faq{padding:32px 20px 40px;}
   .sl-page{grid-template-columns:1fr;display:block;}
   .sl-fil{display:none;}
   .sl-grid-wrap{padding:16px;}
@@ -233,6 +265,58 @@ button{font-family:var(--font-sans);}
 <link rel="icon" type="image/png" sizes="16x16" href="../../shared/favicons/sales/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../shared/favicons/sales/apple-touch-icon.png">
 <link rel="icon" sizes="192x192" href="../../shared/favicons/sales/android-chrome-192x192.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Flogal Sales",
+  "url": "https://sales.flogalhq.com/",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Flogal Holdings, LLC"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does Flogal Sales sell?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flogal Sales sells and leases used Class 8 tractors (day cab and sleeper), dry van, reefer, and flatbed trailers, and heavy equipment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I see a unit in person?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Units are staged at working Flogal yards and shown by appointment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Flogal Sales offer leasing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Most units are available for purchase or lease, including lease-to-own on select equipment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Flogal source specific equipment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Flogal equipment desk sources trucks, trailers, and machinery to spec through auctions, OEM allocations, and lease-end returns."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -243,7 +327,7 @@ button{font-family:var(--font-sans);}
       <img class="sl-symbol" src="../../shared/logos/flogal-symbol-gold.png" alt="">
       <img class="sl-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
       <span class="sl-brand-divider" aria-hidden="true"></span>
-      <span class="sl-brand-division">Equipment &middot; Sales</span>
+      <span class="sl-brand-division">Sales</span>
     </a>
     <ul class="sl-nav-links">
       <li><a href="#inventory">Inventory</a></li>
@@ -264,6 +348,28 @@ button{font-family:var(--font-sans);}
     </span>
   </div>
 </div>
+
+<!-- INTRO (static, crawlable) -->
+<section class="sl-intro">
+  <div class="sl-intro-inner">
+    <h1 class="sl-intro-title">Trucks, trailers, and equipment — sold by the operator that runs them.</h1>
+    <p class="sl-intro-lead">Flogal Sales is the equipment arm of Flogal, an operator-funded freight platform. We sell and lease used Class 8 tractors, trailers, and heavy equipment — online-first, staged at working freight yards, no dealership overhead.</p>
+    <div class="sl-proof-grid">
+      <div class="sl-proof-card">
+        <div class="sl-proof-title">Operator-direct</div>
+        <div class="sl-proof-body">Inspected and priced by people who run equipment, not a showroom.</div>
+      </div>
+      <div class="sl-proof-card">
+        <div class="sl-proof-title">Online-first</div>
+        <div class="sl-proof-body">Live inventory below; view any unit by appointment at a Flogal yard.</div>
+      </div>
+      <div class="sl-proof-card">
+        <div class="sl-proof-title">Repeat buyers</div>
+        <div class="sl-proof-body">Most of our equipment sells to operators who've bought from us before.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- THREE-COLUMN LAYOUT -->
 <div class="sl-page" id="inventory">
@@ -346,7 +452,7 @@ button{font-family:var(--font-sans);}
     <div class="sl-grid-head">
       <div>
         <span class="sl-grid-count" id="gridCount">Loading…</span>
-        <span class="sl-grid-meta">· Houston, TX yard</span>
+        <span class="sl-grid-meta">· Flogal yard · viewing by appointment</span>
       </div>
       <div class="sl-grid-tools">
         <label class="sl-grid-sort">
@@ -379,9 +485,34 @@ button{font-family:var(--font-sans);}
     <div class="sl-source-copy">
       <span class="sl-source-eyebrow">Equipment desk</span>
       <h3 class="sl-source-h">Don't see what you need? We source it.</h3>
-      <p class="sl-source-p">Tell us the spec — make, year, mileage, attachments, condition. Our equipment desk works carrier auctions, OEM allocations, and lease-end returns daily. Most requests come back inside a week, available for purchase or lease.</p>
+      <p class="sl-source-p">Tell us the spec — make, year, mileage, attachments, condition. Our equipment desk works auctions, OEM allocations, and lease-end returns. Most requests come back inside a week, for purchase or lease.</p>
     </div>
     <a class="sl-source-btn" href="mailto:sales@flogalhq.com">Submit a Request &#8594;</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sl-faq" id="faq">
+  <div class="sl-faq-inner">
+    <h2 class="sl-faq-h">Common questions.</h2>
+    <div class="sl-faq-list">
+      <div class="sl-faq-item">
+        <h3 class="sl-faq-q">What does Flogal Sales sell?</h3>
+        <p class="sl-faq-a">Flogal Sales sells and leases used Class 8 tractors (day cab and sleeper), dry van, reefer, and flatbed trailers, and heavy equipment.</p>
+      </div>
+      <div class="sl-faq-item">
+        <h3 class="sl-faq-q">Can I see a unit in person?</h3>
+        <p class="sl-faq-a">Yes. Units are staged at working Flogal yards and shown by appointment.</p>
+      </div>
+      <div class="sl-faq-item">
+        <h3 class="sl-faq-q">Does Flogal Sales offer leasing?</h3>
+        <p class="sl-faq-a">Yes. Most units are available for purchase or lease, including lease-to-own on select equipment.</p>
+      </div>
+      <div class="sl-faq-item">
+        <h3 class="sl-faq-q">Can Flogal source specific equipment?</h3>
+        <p class="sl-faq-a">Yes. The Flogal equipment desk sources trucks, trailers, and machinery to spec through auctions, OEM allocations, and lease-end returns.</p>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FLOGAL Properties — Industrial real estate, built for freight</title>
+<title>Flogal Properties — Industrial Real Estate for Freight</title>
+<meta name="description" content="Flogal Properties acquires freight-oriented industrial real estate — yards, terminals, and truck-ready sites — as an operator-funded direct buyer on active freight corridors.">
+<link rel="canonical" href="https://properties.flogalhq.com/">
+<meta property="og:title" content="Flogal Properties — Industrial Real Estate for Freight">
+<meta property="og:description" content="Flogal Properties acquires freight-oriented industrial real estate — yards, terminals, and truck-ready sites — as an operator-funded direct buyer on active freight corridors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://properties.flogalhq.com/">
+<meta property="og:image" content="https://properties.flogalhq.com/shared/logos/flogal-symbol-green.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../shared/css/tokens.css">
 <style>
 /* ---- Fonts ---- */
@@ -87,98 +95,23 @@ button{font-family:inherit;}
 .pr-hero-sub{font-size:17px;line-height:1.55;max-width:540px;color:rgba(255,255,255,.74);margin:0 0 36px;}
 .pr-hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 
-/* ---- SEARCH BAR ---- */
-.pr-search{position:relative;z-index:3;max-width:1440px;margin:-42px auto 0;padding:0 40px;}
-.pr-search-card{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;align-items:stretch;background:white;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(5,10,18,.18);overflow:hidden;}
-.pr-search-field{display:flex;flex-direction:column;padding:14px 20px;border-right:1px solid var(--border);gap:4px;}
-.pr-search-label{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-muted);}
-.pr-search-value{font-size:15px;font-weight:500;color:var(--ink-900);background:transparent;border:0;outline:none;padding:0;margin:0;font-family:inherit;appearance:none;}
-.pr-search-value::placeholder{color:var(--ink-400);}
-.pr-search-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--flogal-green);color:white;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.02em;padding:0 28px;border:0;cursor:pointer;transition:background 160ms;white-space:nowrap;}
-.pr-search-btn:hover{background:var(--green-400);}
-
-/* ---- PROPERTY TYPES ---- */
-.pr-types{max-width:1440px;margin:0 auto;padding:56px 40px 32px;display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border-radius:12px;overflow:hidden;border:1px solid var(--border);}
-.pr-type{background:white;padding:22px;display:flex;flex-direction:column;gap:6px;cursor:pointer;position:relative;transition:background 160ms;border:0;text-align:left;}
-.pr-type:hover{background:var(--bg-muted);}
-.pr-type.is-active{background:var(--green-700);color:white;}
-.pr-type.is-active .pr-type-count,.pr-type.is-active .pr-type-label{color:rgba(255,255,255,.78);}
-.pr-type.is-active .pr-type-name{color:white;}
-.pr-type-icon{width:28px;height:28px;color:var(--flogal-green);display:block;margin-bottom:6px;}
-.pr-type.is-active .pr-type-icon{color:var(--green-300);}
-.pr-type-name{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:-.005em;color:var(--flogal-navy);}
-.pr-type-label{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-muted);}
-.pr-type-count{font-family:var(--font-mono);font-size:11px;color:var(--fg-subtle);font-feature-settings:'tnum' 1;}
-
-/* ---- LISTINGS ---- */
-.pr-listings{max-width:1440px;margin:0 auto;padding:64px 40px 80px;}
-.pr-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px;}
-.pr-section-titlewrap{display:flex;flex-direction:column;gap:10px;max-width:720px;}
-.pr-section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--flogal-green);}
+/* ---- WHAT WE BUY ---- */
 .pr-h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-.02em;line-height:1.1;color:var(--flogal-navy);}
-.pr-section-tools{display:flex;align-items:center;gap:8px;}
-.pr-toggle{display:inline-flex;background:white;border:1px solid var(--border);border-radius:8px;padding:3px;gap:2px;}
-.pr-toggle-btn{font-size:12px;font-weight:700;letter-spacing:.06em;padding:7px 14px;background:transparent;border:0;color:var(--fg-muted);border-radius:6px;cursor:pointer;font-family:inherit;}
-.pr-toggle-btn.is-active{background:var(--flogal-navy);color:white;}
-.pr-listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pr-section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--flogal-green);}
+.pr-buy{max-width:1440px;margin:0 auto;padding:80px 40px;}
+.pr-buy-inner{max-width:1440px;margin:0 auto;}
+.pr-buy-body{margin:16px 0 40px;font-size:16px;line-height:1.62;color:var(--fg-muted);max-width:760px;}
+.pr-type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+.pr-type-card{background:white;padding:24px 22px;display:flex;flex-direction:column;gap:12px;}
+.pr-type-card-icon{width:26px;height:26px;color:var(--flogal-green);display:block;}
+.pr-type-card-name{font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.005em;color:var(--flogal-navy);}
 
-/* ---- LISTING CARDS ---- */
-.pr-card{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 200ms,transform 200ms;}
-.pr-card:hover{box-shadow:var(--shadow-md);}
-.pr-card-photo{position:relative;aspect-ratio:4/3;background:var(--bg-subtle);overflow:hidden;}
-.pr-card-photo-fallback{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,29,45,0) 0%,rgba(11,29,45,.55) 100%),repeating-linear-gradient(45deg,#c8d3df 0 12px,#d6dee8 12px 24px);}
-.pr-card-photo-fallback::after{content:'Yard / Terminal photo';position:absolute;inset:auto 0 16px 0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.78);}
-.pr-card-badges{position:absolute;left:14px;top:14px;display:flex;gap:6px;flex-wrap:wrap;}
-.pr-badge{display:inline-flex;align-items:center;background:rgba(11,29,45,.78);color:white;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:5px 8px;border-radius:4px;backdrop-filter:blur(8px);}
-.pr-badge-green{background:var(--flogal-green);}
-.pr-badge-gold{background:var(--flogal-gold);color:var(--flogal-navy);}
-.pr-card-fave{position:absolute;right:12px;top:12px;width:32px;height:32px;background:rgba(255,255,255,.92);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--flogal-navy);border:0;cursor:pointer;}
-.pr-card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;}
-.pr-card-loc{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--fg-muted);letter-spacing:.04em;text-transform:uppercase;}
-.pr-card-loc::before{content:'';width:6px;height:6px;background:var(--flogal-green);border-radius:50%;flex:none;}
-.pr-card-title{margin:0;font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;line-height:1.2;color:var(--flogal-navy);}
-.pr-card-specs{display:flex;gap:16px;flex-wrap:wrap;margin-top:2px;border-top:1px solid var(--rule);padding-top:12px;}
-.pr-card-spec{display:flex;flex-direction:column;gap:2px;}
-.pr-card-spec-label{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-faint);}
-.pr-card-spec-value{font-feature-settings:'tnum' 1;font-weight:700;font-size:14px;color:var(--ink-900);}
-.pr-card-foot{display:flex;align-items:baseline;justify-content:space-between;padding-top:6px;border-top:1px solid var(--rule);margin-top:4px;}
-.pr-card-price{font-family:var(--font-display);font-feature-settings:'tnum' 1;font-weight:700;font-size:20px;letter-spacing:-.01em;color:var(--flogal-navy);}
-.pr-card-price-unit{font-family:var(--font-sans);font-weight:500;font-size:12px;color:var(--fg-muted);letter-spacing:0;margin-left:2px;}
-.pr-card-arrow{font-size:13px;font-weight:700;color:var(--flogal-green);}
-
-/* ---- COVERAGE ---- */
-.pr-coverage{background:var(--flogal-navy);color:white;padding:96px 0;position:relative;overflow:hidden;}
-.pr-coverage-inner{max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center;}
-.pr-coverage-eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--green-300);display:block;margin-bottom:8px;}
-.pr-coverage-title{margin:18px 0 18px;font-family:var(--font-display);font-weight:700;font-size:48px;letter-spacing:-.025em;line-height:1.04;color:white;}
-.pr-coverage-body{font-size:16px;line-height:1.62;color:rgba(255,255,255,.72);margin:0 0 28px;max-width:480px;}
-.pr-coverage-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;max-width:480px;}
-.pr-coverage-stat{padding:18px 20px;background:rgba(255,255,255,.02);display:flex;flex-direction:column;gap:4px;}
-.pr-coverage-stat-num{font-family:var(--font-display);font-feature-settings:'tnum' 1;font-weight:700;font-size:28px;letter-spacing:-.02em;color:white;}
-.pr-coverage-stat-suffix{color:var(--green-300);}
-.pr-coverage-stat-lbl{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55);}
-.pr-map{position:relative;background:radial-gradient(120% 80% at 50% 60%,rgba(46,122,85,.10) 0%,transparent 60%),var(--night-1);border:1px solid rgba(255,255,255,.08);border-radius:14px;aspect-ratio:16/11;overflow:hidden;padding:24px;}
-.pr-map svg{width:100%;height:100%;display:block;}
-.pr-map-legend{position:absolute;left:20px;bottom:18px;display:flex;gap:18px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);}
-.pr-map-legend-item{display:inline-flex;align-items:center;gap:8px;}
-.pr-map-dot{width:8px;height:8px;border-radius:50%;}
-.pr-map-dot.is-active{background:var(--green-300);box-shadow:0 0 0 4px rgba(91,156,126,.15);}
-.pr-map-dot.is-dev{background:var(--flogal-gold);}
-.pr-map-dot.is-leased{background:rgba(255,255,255,.45);}
-
-/* ---- FEATURED DEV ---- */
-.pr-feature{max-width:1440px;margin:0 auto;padding:96px 40px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;}
-.pr-feature-photo{aspect-ratio:5/4;background:var(--bg-subtle);border-radius:12px;overflow:hidden;position:relative;border:1px solid var(--border);}
-.pr-photo-fallback{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,29,45,0) 0%,rgba(11,29,45,.4) 100%),repeating-linear-gradient(45deg,#c8d3df 0 14px,#d6dee8 14px 28px);}
-.pr-photo-fallback::after{content:'Development render';position:absolute;inset:auto 0 18px 0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.78);}
-.pr-feature-tag{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--flogal-green);display:block;}
-.pr-feature-h{margin:16px 0 16px;font-family:var(--font-display);font-weight:700;font-size:44px;letter-spacing:-.025em;line-height:1.05;color:var(--flogal-navy);}
-.pr-feature-body{font-size:16px;line-height:1.62;color:var(--fg-muted);margin:0 0 28px;}
-.pr-feature-list{list-style:none;padding:0;margin:0 0 32px;display:grid;grid-template-columns:1fr 1fr;gap:16px 28px;}
-.pr-feature-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink-800);}
-.pr-feature-list li::before{content:'';flex:none;width:18px;height:18px;border-radius:4px;background:var(--green-300);background-image:linear-gradient(135deg,rgba(255,255,255,0) 50%,rgba(255,255,255,.55) 50%);margin-top:1px;}
-.pr-feature-cta{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:var(--flogal-green);color:white;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.02em;transition:background 160ms;}
-.pr-feature-cta:hover{background:var(--green-400);}
+/* ---- WHY AN OPERATOR BUYS DIFFERENTLY ---- */
+.pr-why-buy{background:var(--flogal-navy);color:white;padding:80px 0;}
+.pr-why-buy-inner{max-width:900px;margin:0 auto;padding:0 40px;}
+.pr-why-buy-eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--green-300);display:block;margin-bottom:16px;}
+.pr-why-buy-h{margin:0 0 18px;font-family:var(--font-display);font-weight:700;font-size:36px;letter-spacing:-.02em;line-height:1.15;color:white;}
+.pr-why-buy-body{margin:0;font-size:16px;line-height:1.62;color:rgba(255,255,255,.72);}
 
 /* ---- PROCESS BAND ---- */
 .pr-process{background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
@@ -190,26 +123,21 @@ button{font-family:inherit;}
 .pr-process-step h4{margin:0;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.005em;color:var(--flogal-navy);padding-top:14px;border-top:2px solid var(--flogal-green);}
 .pr-process-step p{margin:0;font-size:14px;line-height:1.6;color:var(--fg-muted);}
 
-/* ---- TENANT QUOTE ---- */
-.pr-quote{max-width:1440px;margin:0 auto;padding:96px 40px;display:grid;grid-template-columns:1.4fr 1fr;gap:64px;align-items:center;}
-.pr-quote-eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--flogal-green);display:block;margin-bottom:8px;}
-.pr-quote-text{margin:16px 0 24px;font-family:var(--font-display);font-weight:700;font-size:36px;line-height:1.18;letter-spacing:-.015em;color:var(--flogal-navy);}
-.pr-quote-byline{display:flex;align-items:center;gap:14px;font-size:13px;}
-.pr-quote-avatar{width:44px;height:44px;border-radius:50%;background:var(--green-700);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;letter-spacing:.06em;flex:none;}
-.pr-quote-name{font-weight:700;color:var(--flogal-navy);}
-.pr-quote-role{color:var(--fg-muted);}
-.pr-quote-stats{display:flex;flex-direction:column;border-left:1px solid var(--border);padding-left:32px;}
-.pr-quote-stat{padding:18px 0;border-bottom:1px solid var(--rule);}
-.pr-quote-stat:last-child{border-bottom:0;}
-.pr-quote-stat-num{font-family:var(--font-display);font-feature-settings:'tnum' 1;font-weight:700;font-size:32px;letter-spacing:-.02em;color:var(--flogal-green);}
-.pr-quote-stat-lbl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-muted);}
-
-/* ---- CTA STRIP ---- */
+/* ---- CTA STRIP (reused for "Sell us your site") ---- */
 .pr-cta-strip{background:linear-gradient(135deg,rgba(11,29,45,0) 0%,rgba(11,29,45,.85) 100%),var(--flogal-green);color:white;padding:72px 0;}
 .pr-cta-inner{max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
 .pr-cta-h{margin:0;font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-.02em;line-height:1.05;color:white;}
 .pr-cta-sub{margin:12px 0 0;font-size:16px;color:rgba(255,255,255,.78);max-width:560px;}
 .pr-cta-actions{display:flex;gap:12px;align-items:center;}
+
+/* ---- FAQ ---- */
+.pr-faq{background:var(--paper);padding:80px 40px;border-top:1px solid var(--border);}
+.pr-faq-inner{max-width:1440px;margin:0 auto;}
+.pr-faq-list{margin-top:24px;display:flex;flex-direction:column;}
+.pr-faq-item{padding:22px 0;border-bottom:1px solid var(--border);}
+.pr-faq-item:first-child{border-top:1px solid var(--border);}
+.pr-faq-q{margin:0 0 8px;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--flogal-navy);letter-spacing:-.005em;}
+.pr-faq-a{margin:0;font-size:14px;line-height:1.6;color:var(--fg-muted);}
 
 /* ---- FOOTER ---- */
 .pr-footer{background:var(--night-0);color:rgba(255,255,255,.7);padding:72px 0 28px;}
@@ -235,6 +163,51 @@ button{font-family:inherit;}
 <link rel="icon" type="image/png" sizes="16x16" href="../../shared/favicons/properties/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../../shared/favicons/properties/apple-touch-icon.png">
 <link rel="icon" sizes="192x192" href="../../shared/favicons/properties/android-chrome-192x192.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Flogal Properties",
+  "url": "https://properties.flogalhq.com/",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Flogal Holdings, LLC"
+  },
+  "areaServed": ["Oklahoma", "Texas"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Flogal Properties?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flogal Properties is the industrial real estate arm of Flogal, acquiring freight-oriented property — yards, terminals, and truck-ready sites — on active freight corridors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Flogal Properties buy property directly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Flogal Properties is an operator-funded direct buyer of freight-oriented industrial real estate, including off-market sites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of property does Flogal Properties look for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Drop yards, terminals, truck parking, and industrial land that supports freight operations, primarily in Oklahoma and Texas freight corridors."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -248,10 +221,8 @@ button{font-family:inherit;}
       <span class="pr-sub-label">Properties</span>
     </a>
     <nav class="pr-nav-links">
-      <a href="#listings" class="pr-nav-link">Listings</a>
-      <a href="#yards" class="pr-nav-link">Yards &amp; Terminals</a>
-      <a href="#developments" class="pr-nav-link">Developments</a>
-      <a href="#tenants" class="pr-nav-link">Tenants</a>
+      <a href="#what-we-buy" class="pr-nav-link">What We Buy</a>
+      <a href="#approach" class="pr-nav-link">Our Approach</a>
       <a href="#contact" class="pr-nav-link">Contact</a>
     </nav>
     <div class="pr-nav-tools">
@@ -269,360 +240,72 @@ button{font-family:inherit;}
   <div class="pr-hero-protect" aria-hidden="true"></div>
   <div class="pr-hero-inner">
     <div class="pr-hero-copy">
-      <span class="pr-eyebrow">Industrial real estate &middot; built for freight</span>
+      <span class="pr-eyebrow">Flogal Properties &middot; Industrial real estate for freight</span>
       <h1 class="pr-hero-title">
-        Yards, terminals,<br>and last-mile sites<br>where the lanes are<span class="pr-period">.</span>
+        We buy the ground<br>freight runs on<span class="pr-period">.</span>
       </h1>
       <p class="pr-hero-sub">
-        Flogal Properties acquires and develops industrial real estate purpose-built
-        for trucking &#8212; drop yards, cross-docks, and terminals in the growth corridors
-        our carrier network already runs.
+        Flogal Properties acquires freight-oriented industrial real estate — yards,
+        terminals, and truck-ready sites — starting with the ground Flogal's own
+        fleets operate from.
       </p>
       <div class="pr-hero-actions">
-        <a href="#listings" class="pr-cta-btn pr-cta-green">Browse listings &#8594;</a>
+        <a href="#what-we-buy" class="pr-cta-btn pr-cta-green">What we buy &#8594;</a>
         <a href="#contact" class="pr-cta-btn pr-cta-ghost">Talk to realty</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SEARCH BAR -->
-<div class="pr-search">
-  <div class="pr-search-card">
-    <div class="pr-search-field">
-      <span class="pr-search-label">Location</span>
-      <input class="pr-search-value" type="text" value="Dallas&#8211;Fort Worth, TX" placeholder="City, market, or ZIP">
-    </div>
-    <div class="pr-search-field">
-      <span class="pr-search-label">Property Type</span>
-      <input class="pr-search-value" type="text" value="Drop yard" placeholder="Any type">
-    </div>
-    <div class="pr-search-field">
-      <span class="pr-search-label">Min. acreage</span>
-      <input class="pr-search-value" type="text" value="2 ac" placeholder="Any size">
-    </div>
-    <div class="pr-search-field">
-      <span class="pr-search-label">Availability</span>
-      <input class="pr-search-value" type="text" value="Lease or sale" placeholder="Any">
-    </div>
-    <button class="pr-search-btn">Search 42 sites &#8594;</button>
-  </div>
-</div>
-
-<!-- PROPERTY TYPES -->
-<div class="pr-types" id="type-strip">
-
-  <button class="pr-type is-active" data-type="yards">
-    <svg class="pr-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="3" y="4" width="18" height="16" rx="1"/>
-      <path d="M9 16V8h3.5a2.5 2.5 0 0 1 0 5H9"/>
-    </svg>
-    <span class="pr-type-name">Drop yards</span>
-    <span class="pr-type-label">Truck parking &amp; staging</span>
-    <span class="pr-type-count">18 sites &middot; 7 markets</span>
-  </button>
-
-  <button class="pr-type" data-type="terminals">
-    <svg class="pr-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <rect x="2" y="9" width="14" height="9"/>
-      <rect x="16" y="11" width="6" height="7"/>
-      <circle cx="6" cy="20" r="1.3"/>
-      <circle cx="13" cy="20" r="1.3"/>
-      <circle cx="19" cy="20" r="1.3"/>
-    </svg>
-    <span class="pr-type-name">Terminals</span>
-    <span class="pr-type-label">Cross-dock &amp; freight</span>
-    <span class="pr-type-count">9 sites &middot; 7 markets</span>
-  </button>
-
-  <button class="pr-type" data-type="lastmile">
-    <svg class="pr-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3 17V7h11v10"/>
-      <path d="M14 11h4l3 3v3h-7"/>
-      <circle cx="7" cy="18" r="1.6"/>
-      <circle cx="17" cy="18" r="1.6"/>
-    </svg>
-    <span class="pr-type-name">Last-mile</span>
-    <span class="pr-type-label">Urban distribution</span>
-    <span class="pr-type-count">7 sites &middot; 7 markets</span>
-  </button>
-
-  <button class="pr-type" data-type="flex">
-    <svg class="pr-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3 20V9l9-5 9 5v11"/>
-      <path d="M3 14h18"/>
-      <path d="M9 20v-4h6v4"/>
-    </svg>
-    <span class="pr-type-name">Flex industrial</span>
-    <span class="pr-type-label">Shop + yard combos</span>
-    <span class="pr-type-count">5 sites &middot; 7 markets</span>
-  </button>
-
-  <button class="pr-type" data-type="land">
-    <svg class="pr-type-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3 18l5-9 4 6 3-4 6 7"/>
-      <path d="M3 21h18"/>
-    </svg>
-    <span class="pr-type-name">Land</span>
-    <span class="pr-type-label">Developable parcels</span>
-    <span class="pr-type-count">3 sites &middot; 7 markets</span>
-  </button>
-
-</div>
-
-<!-- FEATURED LISTINGS -->
-<section class="pr-listings" id="listings">
-  <div class="pr-section-head">
-    <div class="pr-section-titlewrap">
-      <span class="pr-section-eyebrow">Available &middot; 42 sites &middot; 7 markets</span>
-      <h2 class="pr-h2">Recently listed yards &amp; terminals.</h2>
-    </div>
-    <div class="pr-section-tools">
-      <div class="pr-toggle" id="view-toggle">
-        <button class="pr-toggle-btn is-active" data-view="grid">Grid</button>
-        <button class="pr-toggle-btn" data-view="map">Map</button>
+<!-- WHAT WE BUY -->
+<section class="pr-buy" id="what-we-buy">
+  <div class="pr-buy-inner">
+    <h2 class="pr-section-eyebrow">What we buy</h2>
+    <p class="pr-buy-body">Flogal Properties is the real estate arm of Flogal, an operator-funded freight platform. We acquire industrial property built for trucking: drop yards, terminals, truck parking, and freight-support sites on the corridors our carriers already run.</p>
+    <div class="pr-type-grid">
+      <div class="pr-type-card">
+        <svg class="pr-type-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="16" rx="1"/>
+          <path d="M9 16V8h3.5a2.5 2.5 0 0 1 0 5H9"/>
+        </svg>
+        <span class="pr-type-card-name">Drop yards</span>
       </div>
-    </div>
-  </div>
-
-  <div class="pr-listings-grid">
-
-    <!-- DFW-22 -->
-    <article class="pr-card">
-      <div class="pr-card-photo">
-        <div class="pr-card-photo-fallback"></div>
-        <div class="pr-card-badges">
-          <span class="pr-badge pr-badge-green">Available</span>
-          <span class="pr-badge">Lease</span>
-          <span class="pr-badge pr-badge-gold">High demand</span>
-        </div>
+      <div class="pr-type-card">
+        <svg class="pr-type-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="9" width="14" height="9"/>
+          <rect x="16" y="11" width="6" height="7"/>
+          <circle cx="6" cy="20" r="1.3"/>
+          <circle cx="13" cy="20" r="1.3"/>
+          <circle cx="19" cy="20" r="1.3"/>
+        </svg>
+        <span class="pr-type-card-name">Terminals</span>
       </div>
-      <div class="pr-card-body">
-        <span class="pr-card-loc">Dallas&#8211;Fort Worth, TX &middot; I-20 / I-35E</span>
-        <h3 class="pr-card-title">Mountain Creek Drop Yard</h3>
-        <div class="pr-card-specs">
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Type</span><span class="pr-card-spec-value">Drop yard</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Acres</span><span class="pr-card-spec-value">12.4</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Doors</span><span class="pr-card-spec-value">&#8212;</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Stalls</span><span class="pr-card-spec-value">184</span></div>
-        </div>
-        <div class="pr-card-foot">
-          <span class="pr-card-price">$0.42<span class="pr-card-price-unit">/sq ft / yr</span></span>
-        </div>
+      <div class="pr-type-card">
+        <svg class="pr-type-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 17V7h11v10"/>
+          <path d="M14 11h4l3 3v3h-7"/>
+          <circle cx="7" cy="18" r="1.6"/>
+          <circle cx="17" cy="18" r="1.6"/>
+        </svg>
+        <span class="pr-type-card-name">Truck parking</span>
       </div>
-    </article>
-
-    <!-- ATL-09 -->
-    <article class="pr-card">
-      <div class="pr-card-photo">
-        <div class="pr-card-photo-fallback"></div>
-        <div class="pr-card-badges">
-          <span class="pr-badge pr-badge-green">Available</span>
-        </div>
-      </div>
-      <div class="pr-card-body">
-        <span class="pr-card-loc">Atlanta, GA &middot; I-285 SW Quadrant</span>
-        <h3 class="pr-card-title">South Fulton Cross-Dock</h3>
-        <div class="pr-card-specs">
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Type</span><span class="pr-card-spec-value">Terminal</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Acres</span><span class="pr-card-spec-value">8.1</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Doors</span><span class="pr-card-spec-value">36</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Stalls</span><span class="pr-card-spec-value">92</span></div>
-        </div>
-        <div class="pr-card-foot">
-          <span class="pr-card-price">$2.4M<span class="pr-card-price-unit"> / sale</span></span>
-        </div>
-      </div>
-    </article>
-
-    <!-- PHX-04 -->
-    <article class="pr-card">
-      <div class="pr-card-photo">
-        <div class="pr-card-photo-fallback"></div>
-        <div class="pr-card-badges">
-          <span class="pr-badge pr-badge-gold">Under LOI</span>
-        </div>
-      </div>
-      <div class="pr-card-body">
-        <span class="pr-card-loc">Phoenix, AZ &middot; I-10 / Loop 202</span>
-        <h3 class="pr-card-title">Buckeye Last-Mile Hub</h3>
-        <div class="pr-card-specs">
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Type</span><span class="pr-card-spec-value">Last-mile</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Acres</span><span class="pr-card-spec-value">5.6</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Doors</span><span class="pr-card-spec-value">24</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Stalls</span><span class="pr-card-spec-value">60</span></div>
-        </div>
-        <div class="pr-card-foot">
-          <span class="pr-card-price">$0.95<span class="pr-card-price-unit">/sq ft / yr</span></span>
-        </div>
-      </div>
-    </article>
-
-    <!-- CHI-17 -->
-    <article class="pr-card">
-      <div class="pr-card-photo">
-        <div class="pr-card-photo-fallback"></div>
-        <div class="pr-card-badges">
-          <span class="pr-badge pr-badge-green">Available</span>
-          <span class="pr-badge">Lease</span>
-          <span class="pr-badge pr-badge-gold">High demand</span>
-        </div>
-      </div>
-      <div class="pr-card-body">
-        <span class="pr-card-loc">Chicago, IL &middot; I-80 Joliet</span>
-        <h3 class="pr-card-title">Joliet Intermodal Yard</h3>
-        <div class="pr-card-specs">
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Type</span><span class="pr-card-spec-value">Drop yard</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Acres</span><span class="pr-card-spec-value">22.0</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Doors</span><span class="pr-card-spec-value">&#8212;</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Stalls</span><span class="pr-card-spec-value">320</span></div>
-        </div>
-        <div class="pr-card-foot">
-          <span class="pr-card-price">$0.38<span class="pr-card-price-unit">/sq ft / yr</span></span>
-        </div>
-      </div>
-    </article>
-
-    <!-- LAS-02 -->
-    <article class="pr-card">
-      <div class="pr-card-photo">
-        <div class="pr-card-photo-fallback"></div>
-        <div class="pr-card-badges">
-          <span class="pr-badge pr-badge-green">Available</span>
-        </div>
-      </div>
-      <div class="pr-card-body">
-        <span class="pr-card-loc">Las Vegas, NV &middot; I-15 N</span>
-        <h3 class="pr-card-title">Apex Industrial Flex</h3>
-        <div class="pr-card-specs">
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Type</span><span class="pr-card-spec-value">Flex industrial</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Acres</span><span class="pr-card-spec-value">6.8</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Doors</span><span class="pr-card-spec-value">12</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Stalls</span><span class="pr-card-spec-value">48</span></div>
-        </div>
-        <div class="pr-card-foot">
-          <span class="pr-card-price">$3.1M<span class="pr-card-price-unit"> / sale</span></span>
-        </div>
-      </div>
-    </article>
-
-    <!-- MEM-06 -->
-    <article class="pr-card">
-      <div class="pr-card-photo">
-        <div class="pr-card-photo-fallback"></div>
-        <div class="pr-card-badges">
-          <span class="pr-badge pr-badge-gold">Coming soon</span>
-        </div>
-      </div>
-      <div class="pr-card-body">
-        <span class="pr-card-loc">Memphis, TN &middot; I-40 / I-55</span>
-        <h3 class="pr-card-title">Lamar Avenue Terminal</h3>
-        <div class="pr-card-specs">
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Type</span><span class="pr-card-spec-value">Terminal</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Acres</span><span class="pr-card-spec-value">14.2</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Doors</span><span class="pr-card-spec-value">54</span></div>
-          <div class="pr-card-spec"><span class="pr-card-spec-label">Stalls</span><span class="pr-card-spec-value">140</span></div>
-        </div>
-        <div class="pr-card-foot">
-          <span class="pr-card-price">$0.55<span class="pr-card-price-unit">/sq ft / yr</span></span>
-        </div>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- COVERAGE / MAP -->
-<section class="pr-coverage" id="yards">
-  <div class="pr-coverage-inner">
-    <div class="pr-coverage-copy">
-      <span class="pr-coverage-eyebrow">Network coverage</span>
-      <h2 class="pr-coverage-title">Sited on the lanes our trucks already run.</h2>
-      <p class="pr-coverage-body">
-        Every Flogal Properties site is acquired against a lane density model &#8212; we
-        site yards and terminals where our hauling network already moves freight, so
-        tenants land in a corridor with carrier capacity, fuel infrastructure, and
-        driver depth from day one.
-      </p>
-      <div class="pr-coverage-stats">
-        <div class="pr-coverage-stat">
-          <span class="pr-coverage-stat-num">42</span>
-          <span class="pr-coverage-stat-lbl">Active sites</span>
-        </div>
-        <div class="pr-coverage-stat">
-          <span class="pr-coverage-stat-num">7</span>
-          <span class="pr-coverage-stat-lbl">Metro markets</span>
-        </div>
-        <div class="pr-coverage-stat">
-          <span class="pr-coverage-stat-num">3.1<span class="pr-coverage-stat-suffix">M</span></span>
-          <span class="pr-coverage-stat-lbl">Sq ft under mgmt</span>
-        </div>
-        <div class="pr-coverage-stat">
-          <span class="pr-coverage-stat-num">96<span class="pr-coverage-stat-suffix">%</span></span>
-          <span class="pr-coverage-stat-lbl">Stabilized occupancy</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="pr-map" aria-hidden="true">
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M6,38 L14,30 L24,28 L34,30 L46,28 L60,26 L74,28 L86,32 L92,40 L94,52 L92,62 L86,72 L78,80 L66,86 L52,90 L40,90 L28,86 L18,80 L10,68 L6,54 Z" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)" stroke-width="0.3" vector-effect="non-scaling-stroke"/>
-        <g stroke="rgba(91,156,126,.45)" stroke-width="0.4" fill="none" vector-effect="non-scaling-stroke">
-          <path d="M12,64 L22,56 L32,68 L50,70 L60,68 L71,78"/>
-          <path d="M22,56 L18,38 L62,38 L78,44"/>
-          <path d="M50,70 L45,84"/>
-          <path d="M71,78 L85,56"/>
-          <path d="M62,38 L70,60 L71,78"/>
-        </g>
-        <!-- Active pins (with glow ring) -->
-        <g><circle cx="22" cy="56" r="2.4" fill="#5B9C7E" opacity="0.18"/><circle cx="22" cy="56" r="1.1" fill="#5B9C7E" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/></g>
-        <g><circle cx="32" cy="68" r="2.4" fill="#5B9C7E" opacity="0.18"/><circle cx="32" cy="68" r="1.1" fill="#5B9C7E" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/></g>
-        <g><circle cx="50" cy="70" r="2.4" fill="#5B9C7E" opacity="0.18"/><circle cx="50" cy="70" r="1.1" fill="#5B9C7E" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/></g>
-        <g><circle cx="60" cy="68" r="2.4" fill="#5B9C7E" opacity="0.18"/><circle cx="60" cy="68" r="1.1" fill="#5B9C7E" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/></g>
-        <g><circle cx="71" cy="78" r="2.4" fill="#5B9C7E" opacity="0.18"/><circle cx="71" cy="78" r="1.1" fill="#5B9C7E" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/></g>
-        <g><circle cx="62" cy="38" r="2.4" fill="#5B9C7E" opacity="0.18"/><circle cx="62" cy="38" r="1.1" fill="#5B9C7E" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/></g>
-        <!-- Leased pins -->
-        <circle cx="78" cy="44" r="0.9" fill="rgba(255,255,255,.55)" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/>
-        <circle cx="18" cy="38" r="0.9" fill="rgba(255,255,255,.55)" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/>
-        <circle cx="70" cy="60" r="0.9" fill="rgba(255,255,255,.55)" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/>
-        <!-- Dev pins -->
-        <circle cx="85" cy="56" r="0.9" fill="#DDB452" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/>
-        <circle cx="12" cy="64" r="0.9" fill="#DDB452" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/>
-        <circle cx="45" cy="84" r="0.9" fill="#DDB452" stroke="rgba(5,10,18,.9)" stroke-width="0.18" vector-effect="non-scaling-stroke"/>
-        <!-- Featured lane callout -->
-        <path d="M22,56 L32,68 L50,70 L60,68 L71,78" fill="none" stroke="#5B9C7E" stroke-width="0.55" stroke-dasharray="0.8 0.6" vector-effect="non-scaling-stroke"/>
-      </svg>
-      <div class="pr-map-legend">
-        <span class="pr-map-legend-item"><span class="pr-map-dot is-active"></span>Active</span>
-        <span class="pr-map-legend-item"><span class="pr-map-dot is-dev"></span>In development</span>
-        <span class="pr-map-legend-item"><span class="pr-map-dot is-leased"></span>Stabilized &middot; leased</span>
+      <div class="pr-type-card">
+        <svg class="pr-type-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 18l5-9 4 6 3-4 6 7"/>
+          <path d="M3 21h18"/>
+        </svg>
+        <span class="pr-type-card-name">Freight-support land</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURED DEVELOPMENT -->
-<section class="pr-feature" id="developments">
-  <div class="pr-feature-photo">
-    <div class="pr-photo-fallback"></div>
-  </div>
-  <div class="pr-feature-copy">
-    <span class="pr-feature-tag">Now leasing &middot; Phase II opens Q3</span>
-    <h2 class="pr-feature-h">Mountain Creek &middot; a 22-acre drop yard purpose-built for OTR.</h2>
-    <p class="pr-feature-body">
-      A new build-to-suit yard on the I-20 / I-35E split in Dallas&#8211;Fort Worth.
-      Hardened concrete, security-rated fencing, and a fueling pad sized for
-      184 power units. Designed with our own dispatch team &#8212; the spec sheet
-      reads like a driver&#8217;s checklist.
-    </p>
-    <ul class="pr-feature-list">
-      <li>184 secured tractor stalls, 24/7 access</li>
-      <li>On-site bulk diesel + DEF island</li>
-      <li>Class 8 reinforced concrete pad</li>
-      <li>Direct lane to I-20 east + I-35E south</li>
-      <li>Guard house + ALPR cameras</li>
-      <li>Lease terms 3&#8211;7 yr, full or share-yard</li>
-    </ul>
+<!-- WHY AN OPERATOR BUYS DIFFERENTLY -->
+<section class="pr-why-buy" id="approach">
+  <div class="pr-why-buy-inner">
+    <span class="pr-why-buy-eyebrow">Why an operator buys differently</span>
+    <h2 class="pr-why-buy-h">We site property against freight reality, not listing photos.</h2>
+    <p class="pr-why-buy-body">Our own dispatch desk knows which corridors have carrier density, fuel access, and driver depth — because our trucks run them. When we buy a yard, it's because freight already moves there.</p>
   </div>
 </section>
 
@@ -636,69 +319,59 @@ button{font-family:inherit;}
     <div class="pr-process-grid">
       <div class="pr-process-step" data-n="01">
         <h4>Lane density model</h4>
-        <p>We site every acquisition against carrier lane data &#8212; yards land where the freight already moves, not where the parcel happened to come up.</p>
+        <p>We evaluate every site against carrier lane data — where freight already moves, not where the parcel happened to come up.</p>
       </div>
       <div class="pr-process-step" data-n="02">
         <h4>Site &amp; spec</h4>
-        <p>Acquire, entitle, and build to a freight-grade spec: reinforced concrete, security-rated fencing, fuel + DEF, ALPR cameras.</p>
+        <p>We buy and improve to a freight-grade spec: hardened surfaces, security, fuel access.</p>
       </div>
       <div class="pr-process-step" data-n="03">
         <h4>Lease or share</h4>
-        <p>Full-site triple-net leases for anchor tenants, share-yard arrangements for fleets needing 10&#8211;60 stalls without the full acquisition.</p>
+        <p>Full-site leases for anchor tenants, or shared-yard arrangements for fleets that need stalls without an acquisition.</p>
       </div>
       <div class="pr-process-step" data-n="04">
         <h4>Ops handoff</h4>
-        <p>Site is enrolled in the Flogal carrier network from day one &#8212; your tenants land in a corridor with fuel, drivers, and dispatch already in place.</p>
+        <p>Sites plug into the Flogal carrier network from day one — fuel, drivers, and dispatch in the corridor.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TENANT QUOTE -->
-<section class="pr-quote" id="tenants">
-  <div class="pr-quote-copy">
-    <span class="pr-quote-eyebrow">Tenant &middot; Anchor lease, Mountain Creek</span>
-    <p class="pr-quote-text">
-      &#8220;Flogal didn&#8217;t pitch us a parcel &#8212; they pitched the lane. Our drivers fuel,
-      park, and rotate trailers without leaving the corridor. That&#8217;s what we
-      were buying.&#8221;
-    </p>
-    <div class="pr-quote-byline">
-      <span class="pr-quote-avatar">RM</span>
-      <div>
-        <div class="pr-quote-name">Renata Marsh</div>
-        <div class="pr-quote-role">VP, Fleet Operations &middot; Continental Reefer Co.</div>
+<!-- FAQ -->
+<section class="pr-faq" id="faq">
+  <div class="pr-faq-inner">
+    <span class="pr-section-eyebrow">FAQ</span>
+    <h2 class="pr-h2">Common questions.</h2>
+    <div class="pr-faq-list">
+      <div class="pr-faq-item">
+        <h3 class="pr-faq-q">What is Flogal Properties?</h3>
+        <p class="pr-faq-a">Flogal Properties is the industrial real estate arm of Flogal, acquiring freight-oriented property — yards, terminals, and truck-ready sites — on active freight corridors.</p>
       </div>
-    </div>
-  </div>
-  <div class="pr-quote-stats">
-    <div class="pr-quote-stat">
-      <div class="pr-quote-stat-num">7.2 yr</div>
-      <div class="pr-quote-stat-lbl">Weighted avg. lease term</div>
-    </div>
-    <div class="pr-quote-stat">
-      <div class="pr-quote-stat-num">96%</div>
-      <div class="pr-quote-stat-lbl">Stabilized portfolio occupancy</div>
-    </div>
-    <div class="pr-quote-stat">
-      <div class="pr-quote-stat-num">$0.41</div>
-      <div class="pr-quote-stat-lbl">Avg. yard rent &middot; sq ft / yr</div>
+      <div class="pr-faq-item">
+        <h3 class="pr-faq-q">Does Flogal Properties buy property directly?</h3>
+        <p class="pr-faq-a">Yes. Flogal Properties is an operator-funded direct buyer of freight-oriented industrial real estate, including off-market sites.</p>
+      </div>
+      <div class="pr-faq-item">
+        <h3 class="pr-faq-q">What kind of property does Flogal Properties look for?</h3>
+        <p class="pr-faq-a">Drop yards, terminals, truck parking, and industrial land that supports freight operations, primarily in Oklahoma and Texas freight corridors.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA STRIP -->
+<!-- SELL US YOUR SITE -->
 <section class="pr-cta-strip" id="contact">
   <div class="pr-cta-inner">
     <div>
-      <h2 class="pr-cta-h">List a site, lease a yard, or build to suit.</h2>
+      <h2 class="pr-cta-h">Sell us your site.</h2>
       <p class="pr-cta-sub">
-        Talk to the Flogal Properties team &#8212; we cover acquisitions, ground-up
-        development, and tenant placement across the network.
+        Own a yard, terminal, or industrial parcel on a freight corridor? We're a
+        direct buyer — operator-funded, no committee, structured to close.
+        Off-market conversations welcome.
       </p>
     </div>
     <div class="pr-cta-actions">
-      <a class="pr-cta-btn pr-cta-white" href="#" onclick="openPropModal('Schedule a tour');return false;">Schedule a tour &#8594;</a>
+      <a class="pr-cta-btn pr-cta-white" href="#" onclick="openPropModal('List a property');return false;">Talk to a Direct Buyer &#8594;</a>
       <a class="pr-cta-btn pr-cta-ghost" href="mailto:properties@flogalhq.com">Email realty</a>
     </div>
   </div>
@@ -721,13 +394,13 @@ button{font-family:inherit;}
     <div class="pr-footer-cols">
       <div class="pr-footer-col">
         <span class="pr-footer-h">Properties</span>
-        <a href="#listings" class="pr-footer-link">Browse listings</a>
-        <a href="#developments" class="pr-footer-link">Developments</a>
+        <a href="#what-we-buy" class="pr-footer-link">What we buy</a>
+        <a href="#approach" class="pr-footer-link">Our approach</a>
       </div>
       <div class="pr-footer-col">
         <span class="pr-footer-h">Network</span>
-        <a href="https://carriers.flogalhq.com" class="pr-footer-link">FLOGAL Hauling</a>
-        <a href="https://sales.flogalhq.com" class="pr-footer-link">FLOGAL Equipment</a>
+        <a href="https://carriers.flogalhq.com" class="pr-footer-link">Flogal Carriers</a>
+        <a href="https://sales.flogalhq.com" class="pr-footer-link">Flogal Sales</a>
         <a href="https://www.flogalhq.com" class="pr-footer-link">FLOGAL HQ</a>
       </div>
       <div class="pr-footer-col">
@@ -805,21 +478,6 @@ button{font-family:inherit;}
   </div>
 </div>
 
-<script>
-document.querySelectorAll('.pr-type').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.pr-type').forEach(function(b) { b.classList.remove('is-active'); });
-    btn.classList.add('is-active');
-  });
-});
-
-document.getElementById('view-toggle').addEventListener('click', function(e) {
-  var btn = e.target.closest('.pr-toggle-btn');
-  if (!btn) return;
-  document.querySelectorAll('#view-toggle .pr-toggle-btn').forEach(function(b) { b.classList.remove('is-active'); });
-  btn.classList.add('is-active');
-});
-</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const _sb = supabase.createClient(
