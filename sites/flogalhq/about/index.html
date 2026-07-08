@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>About Flogal — Operator-Led Freight Platform</title>
 <meta name="description" content="About Flogal Holdings — an operator-funded freight platform building freight-native companies in hauling, equipment, and industrial real estate.">
-<link rel="canonical" href="https://flogalhq.com/about">
+<link rel="canonical" href="https://www.flogalhq.com/about">
 <meta property="og:title" content="About Flogal — Operator-Led Freight Platform">
 <meta property="og:description" content="About Flogal Holdings — an operator-funded freight platform building freight-native companies in hauling, equipment, and industrial real estate.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://flogalhq.com/about">
-<meta property="og:image" content="https://flogalhq.com/shared/logos/flogal-symbol-tricolor.png">
+<meta property="og:url" content="https://www.flogalhq.com/about">
+<meta property="og:image" content="https://www.flogalhq.com/shared/logos/flogal-symbol-tricolor.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../../shared/css/tokens.css">
 <link rel="stylesheet" href="../../../shared/css/flogalhq-shell.css">
@@ -75,26 +75,26 @@ img{display:block;}
   width:100%;max-width:560px;
   position:relative;
 }
-.holdco-card::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:2px;height:32px;background:var(--hair);}
 .holdco-mark{height:36px;width:auto;}
 .holdco-name{font-weight:700;font-size:20px;letter-spacing:-.01em;}
 .holdco-sub{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.14em;text-transform:uppercase;margin-top:3px;}
 
-/* connector */
-.tree-connector{display:flex;justify-content:center;position:relative;height:32px;margin:0;}
-.tree-connector::before{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:var(--hair);}
-.tree-connector::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--hair);}
+/* connector — single rule + short centered tick */
+.ent-connector{position:relative;height:40px;}
+.ent-connector::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:20px;background:var(--hair);}
+.ent-connector::after{content:'';position:absolute;top:20px;left:0;right:0;height:1px;background:var(--hair);}
 
 /* Entity cards grid */
 .ent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--hair);}
-.ent-card{background:white;padding:28px 20px 24px;position:relative;display:flex;flex-direction:column;gap:12px;}
-.ent-color-bar{position:absolute;top:0;left:0;right:0;height:4px;}
-.ent-mark{height:28px;width:auto;margin-bottom:4px;}
-.ent-name{font-weight:700;font-size:15px;color:var(--navy);letter-spacing:-.01em;line-height:1.2;}
-.ent-type{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:2px;}
+.ent-card{background:white;padding:24px 20px;position:relative;display:flex;flex-direction:column;gap:10px;border-top:3px solid;}
+.ent-badge{display:inline-flex;align-items:center;gap:8px;}
+.ent-mark{height:36px;width:auto;flex:none;}
+.ent-name{font-weight:700;font-size:18px;color:var(--navy);letter-spacing:-.01em;line-height:1.2;margin-top:2px;}
+.ent-type{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;}
 .ent-desc{font-size:12px;line-height:1.6;color:var(--muted);flex:1;}
 .ent-link{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:auto;display:inline-flex;align-items:center;gap:5px;}
 .ent-link:hover{opacity:.75;}
+.ent-note{font-size:11px;color:var(--muted);margin-top:auto;}
 
 /* THESIS */
 .thesis{background:var(--night);padding:96px 40px;}
@@ -170,8 +170,8 @@ img{display:block;}
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Flogal Holdings, LLC",
-  "url": "https://flogalhq.com/",
-  "logo": "https://flogalhq.com/shared/logos/flogal-symbol-tricolor.png",
+  "url": "https://www.flogalhq.com/",
+  "logo": "https://www.flogalhq.com/shared/logos/flogal-symbol-tricolor.png",
   "description": "Flogal is an operator-funded freight platform: freight-native companies in hauling, equipment, and industrial real estate, run on one shared operating system.",
   "areaServed": ["Oklahoma", "Texas"]
 }
@@ -264,53 +264,45 @@ img{display:block;}
       </div>
 
       <!-- Connector -->
-      <div style="display:flex;justify-content:center;padding:28px 0 0;margin-bottom:-1px;">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:0;position:relative;width:100%;">
-          <div style="width:2px;height:28px;background:var(--hair);"></div>
-          <div style="position:absolute;top:28px;left:10%;right:10%;height:1px;background:var(--hair);"></div>
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-around;padding:0 10%;margin-bottom:0;">
-        <div style="width:2px;height:24px;background:var(--hair);"></div>
-        <div style="width:2px;height:24px;background:var(--hair);"></div>
-        <div style="width:2px;height:24px;background:var(--hair);"></div>
-        <div style="width:2px;height:24px;background:var(--hair);"></div>
-        <div style="width:2px;height:24px;background:var(--hair);"></div>
-      </div>
+      <div class="ent-connector"></div>
 
       <!-- Entities -->
       <div class="ent-grid">
-        <div class="ent-card">
-          <div class="ent-color-bar" style="background:var(--blue);"></div>
-          <img class="ent-mark" src="../../../shared/logos/flogal-symbol-blue.png" alt="">
-          <div class="ent-type" style="color:var(--blue);">Operating</div>
+        <div class="ent-card" style="border-top-color:#4A90D9;">
+          <div class="ent-badge">
+            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-blue.png" alt="">
+            <span class="ent-type" style="color:#4A90D9;">Operating</span>
+          </div>
           <div class="ent-name">Flogal Carriers</div>
           <div class="ent-desc">Asset-based freight and hauling, operated through J&amp;D Hauling and RRTL across Oklahoma and Texas.</div>
-          <a class="ent-link" style="color:var(--blue);" href="https://carriers.flogalhq.com">Carriers →</a>
+          <a class="ent-link" style="color:#4A90D9;" href="https://carriers.flogalhq.com">Carriers →</a>
         </div>
-        <div class="ent-card">
-          <div class="ent-color-bar" style="background:var(--gold);"></div>
-          <img class="ent-mark" src="../../../shared/logos/flogal-symbol-gold.png" alt="">
-          <div class="ent-type" style="color:var(--gold);">Equipment</div>
+        <div class="ent-card" style="border-top-color:#C9A84C;">
+          <div class="ent-badge">
+            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-gold.png" alt="">
+            <span class="ent-type" style="color:#C9A84C;">Equipment</span>
+          </div>
           <div class="ent-name">Flogal Sales</div>
           <div class="ent-desc">Truck, trailer, and equipment sales and leasing.</div>
-          <a class="ent-link" style="color:var(--gold);" href="https://sales.flogalhq.com">Inventory →</a>
+          <a class="ent-link" style="color:#C9A84C;" href="https://sales.flogalhq.com">Inventory →</a>
         </div>
-        <div class="ent-card">
-          <div class="ent-color-bar" style="background:var(--green);"></div>
-          <img class="ent-mark" src="../../../shared/logos/flogal-symbol-green.png" alt="">
-          <div class="ent-type" style="color:var(--green);">Real Estate</div>
+        <div class="ent-card" style="border-top-color:#4CAF7D;">
+          <div class="ent-badge">
+            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-green.png" alt="">
+            <span class="ent-type" style="color:#4CAF7D;">Real Estate</span>
+          </div>
           <div class="ent-name">Flogal Properties</div>
           <div class="ent-desc">Industrial real estate and freight-oriented land and facilities.</div>
-          <a class="ent-link" style="color:var(--green);" href="https://properties.flogalhq.com">Properties →</a>
+          <a class="ent-link" style="color:#4CAF7D;" href="https://properties.flogalhq.com">Properties →</a>
         </div>
-        <div class="ent-card">
-          <div class="ent-color-bar" style="background:var(--gray);"></div>
-          <img class="ent-mark" src="../../../shared/logos/flogal-symbol-navy.png" alt="">
-          <div class="ent-type" style="color:var(--gray);">Internal</div>
+        <div class="ent-card" style="border-top-color:#0F172A;">
+          <div class="ent-badge">
+            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-navy.png" alt="">
+            <span class="ent-type" style="color:#0F172A;">Internal</span>
+          </div>
           <div class="ent-name">Flogal Technologies</div>
           <div class="ent-desc">Internal operating platform: maintenance, dispatch, payroll, and per-truck P&amp;L. Runs Flogal's own companies.</div>
-          <span class="ent-link" style="color:var(--gray);">Internal →</span>
+          <span class="ent-note">Internal platform · no public site</span>
         </div>
       </div>
     </div>
