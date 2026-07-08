@@ -15,6 +15,13 @@
   Leasing, Flogal Sales, Flogal Properties are DIFFERENT legal entities.
   Never merge, swap, or "simplify" entity names, DOT/MC numbers, or authority
   claims. All compliance/authority language is STOP-AND-FLAG (Legal owns it).
+  Adjudicated boundary (Jul 2026): authority CREDENTIALS (USDOT/MC numbers,
+  SAFER/CSA ratings, insurance figures, "DOT + MC Active") remain STOP-AND-FLAG
+  pending legal review. Approved business-description copy is cleared and may
+  be reused verbatim: "asset-based carrier", "owned fleets RRTL and J&D
+  Hauling", and cross-border reach phrased as moving THROUGH Mexico partners
+  (never on Flogal's own cross-border authority). New claim types outside
+  these still stop-and-flag.
 - Inquiry forms: the source tag (e.g. source='sales') must match the site the
   form lives on. A mismatched source silently corrupts lead attribution.
 - Design tokens: per-site changes go in that site's tokens.css --accent
