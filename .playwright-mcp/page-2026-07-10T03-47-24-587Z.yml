@@ -1,0 +1,91 @@
+- generic [active] [ref=f15e1]:
+  - banner [ref=f15e2]:
+    - link "FLOGAL Sales" [ref=f15e4] [cursor=pointer]:
+      - /url: https://www.flogalhq.com
+      - img "FLOGAL" [ref=f15e5]
+      - generic [ref=f15e7]: Sales
+  - generic [ref=f15e8]: Trucks, trailers, heavy machinery, and industrial equipment — available for purchase or lease.
+  - generic [ref=f15e13]:
+    - heading "Trucks, trailers, and equipment — sold by the operator that runs them." [level=1] [ref=f15e14]
+    - paragraph [ref=f15e15]: Flogal Sales is the equipment arm of Flogal, an operator-funded freight platform. We sell and lease used Class 8 tractors, trailers, and heavy equipment — online-first, staged at working freight yards, no dealership overhead.
+    - generic [ref=f15e16]:
+      - generic [ref=f15e17]:
+        - generic [ref=f15e18]: Operator-direct
+        - generic [ref=f15e19]: Inspected and priced by people who run equipment, not a showroom.
+      - generic [ref=f15e20]:
+        - generic [ref=f15e21]: Online-first
+        - generic [ref=f15e22]: Live inventory below; view any unit by appointment at a Flogal yard.
+      - generic [ref=f15e23]:
+        - generic [ref=f15e24]: Repeat buyers
+        - generic [ref=f15e25]: Most of our equipment sells to operators who've bought from us before.
+  - generic [ref=f15e28]:
+    - generic [ref=f15e29]: Loading… · Flogal yard · viewing by appointment
+    - generic [ref=f15e30]:
+      - generic [ref=f15e31]:
+        - generic [ref=f15e32]: Sort
+        - combobox "Sort" [ref=f15e33]:
+          - option "Recently added" [selected]
+          - option "Price · low to high"
+          - option "Price · high to low"
+          - option "Year · newest first"
+      - button "▦" [ref=f15e35] [cursor=pointer]
+  - generic [ref=f15e37]:
+    - generic [ref=f15e38]:
+      - text: Equipment desk
+      - heading "Don't see what you need? We source it." [level=3] [ref=f15e39]
+      - paragraph [ref=f15e40]: Tell us the spec — make, year, mileage, attachments, condition. Our equipment desk works auctions, OEM allocations, and lease-end returns. Most requests come back inside a week, for purchase or lease.
+    - link "Submit a Request →" [ref=f15e41] [cursor=pointer]:
+      - /url: mailto:sales@flogalhq.com
+  - generic [ref=f15e43]:
+    - heading "Common questions." [level=2] [ref=f15e44]
+    - generic [ref=f15e45]:
+      - generic [ref=f15e46]:
+        - heading "What does Flogal Sales sell?" [level=3] [ref=f15e47]
+        - paragraph [ref=f15e48]: Flogal Sales sells and leases used Class 8 tractors (day cab and sleeper), dry van, reefer, and flatbed trailers, and heavy equipment.
+      - generic [ref=f15e49]:
+        - heading "Can I see a unit in person?" [level=3] [ref=f15e50]
+        - paragraph [ref=f15e51]: Yes. Units are staged at working Flogal yards and shown by appointment.
+      - generic [ref=f15e52]:
+        - heading "Does Flogal Sales offer leasing?" [level=3] [ref=f15e53]
+        - paragraph [ref=f15e54]: Yes. Most units are available for purchase or lease, including lease-to-own on select equipment.
+      - generic [ref=f15e55]:
+        - heading "Can Flogal source specific equipment?" [level=3] [ref=f15e56]
+        - paragraph [ref=f15e57]: Yes. The Flogal equipment desk sources trucks, trailers, and machinery to spec through auctions, OEM allocations, and lease-end returns.
+  - contentinfo [ref=f15e58]:
+    - generic [ref=f15e59]:
+      - generic [ref=f15e60]:
+        - img "FLOGAL" [ref=f15e62]
+        - navigation [ref=f15e63]:
+          - generic [ref=f15e64]:
+            - generic [ref=f15e65]: Carriers
+            - link "Load Board" [ref=f15e66] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+            - link "Active Lanes" [ref=f15e67] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+            - link "Partner Portal" [ref=f15e68] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+          - generic [ref=f15e69]:
+            - generic [ref=f15e70]: Sales
+            - link "Inventory" [ref=f15e71] [cursor=pointer]:
+              - /url: "#inventory"
+          - generic [ref=f15e72]:
+            - generic [ref=f15e73]: Properties
+            - link "Listings" [ref=f15e74] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Yard Leasing" [ref=f15e75] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Contact" [ref=f15e76] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+          - generic [ref=f15e77]:
+            - generic [ref=f15e78]: Company
+            - link "About" [ref=f15e79] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+            - link "Contact" [ref=f15e80] [cursor=pointer]:
+              - /url: mailto:sales@flogalhq.com
+            - link "flogalhq.com" [ref=f15e81] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+      - generic [ref=f15e82]:
+        - generic [ref=f15e83]: flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com
+        - generic [ref=f15e84]: © 2026 FLOGAL Holdings, LLC
+        - link "Staff Login" [ref=f15e85] [cursor=pointer]:
+          - /url: https://admin.flogalhq.com/login.html

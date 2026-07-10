@@ -1,0 +1,110 @@
+- generic [active] [ref=f19e1]:
+  - banner [ref=f19e2]:
+    - generic [ref=f19e3]:
+      - link "FLOGAL Carriers" [ref=f19e4] [cursor=pointer]:
+        - /url: https://www.flogalhq.com
+        - img "FLOGAL" [ref=f19e5]
+        - generic [ref=f19e7]: Carriers
+      - list [ref=f19e8]:
+        - listitem [ref=f19e9]:
+          - link "Home" [ref=f19e10] [cursor=pointer]:
+            - /url: https://www.flogalhq.com
+        - listitem [ref=f19e11]:
+          - link "Sales" [ref=f19e12] [cursor=pointer]:
+            - /url: https://sales.flogalhq.com
+        - listitem [ref=f19e13]:
+          - link "Properties" [ref=f19e14] [cursor=pointer]:
+            - /url: https://properties.flogalhq.com
+        - listitem [ref=f19e15]:
+          - link "About" [ref=f19e16] [cursor=pointer]:
+            - /url: ../index.html#about
+        - listitem [ref=f19e17]:
+          - link "Contact" [ref=f19e18] [cursor=pointer]:
+            - /url: ../index.html#quote
+      - generic [ref=f19e19]:
+        - link "Partner Login" [ref=f19e20] [cursor=pointer]:
+          - /url: ../portal/login.html
+        - link "Request a Quote" [ref=f19e21] [cursor=pointer]:
+          - /url: ../index.html#quote
+  - generic [ref=f19e23]:
+    - generic [ref=f19e24]: Flogal Carriers · Equipment transport
+    - heading "Flatbed freight and equipment transport on the TX–OK corridor." [level=1] [ref=f19e25]
+    - paragraph [ref=f19e26]: Flogal Carriers is an asset-based carrier that moves flatbed freight and equipment — machinery, vehicles, and construction equipment — across Oklahoma, Texas, and regional corridors through its owned fleets, with partner reach across the U.S. and into Mexico.
+    - generic [ref=f19e27]:
+      - link "Request a Quote →" [ref=f19e28] [cursor=pointer]:
+        - /url: ../index.html#quote
+      - link "Back to Flogal Carriers" [ref=f19e29] [cursor=pointer]:
+        - /url: ../index.html
+  - generic [ref=f19e31]:
+    - generic [ref=f19e32]:
+      - generic [ref=f19e33]: Equipment transport
+      - heading "What we move, how we run it." [level=2] [ref=f19e34]
+    - generic [ref=f19e35]:
+      - generic [ref=f19e36]:
+        - heading "What we move" [level=3] [ref=f19e37]
+        - paragraph [ref=f19e38]: Construction and industrial machinery, commercial vehicles, and general flatbed freight.
+      - generic [ref=f19e39]:
+        - heading "Equipment" [level=3] [ref=f19e40]
+        - paragraph [ref=f19e41]: Flatbed and dry van trailers, owned power, one dispatch desk.
+      - generic [ref=f19e42]:
+        - heading "Where we run" [level=3] [ref=f19e43]
+        - paragraph [ref=f19e44]: TX–OK corridor daily; extended lanes through a vetted partner network across the U.S. and cross-border into Mexico.
+  - generic [ref=f19e47]:
+    - generic [ref=f19e48]: How to get a quote
+    - heading "Share dimensions, weight, pickup and delivery points, and window." [level=2] [ref=f19e49]
+    - paragraph [ref=f19e50]: Our ops desk quotes directly.
+    - link "Request a Quote →" [ref=f19e52] [cursor=pointer]:
+      - /url: ../index.html#quote
+  - generic [ref=f19e54]:
+    - generic [ref=f19e55]:
+      - generic [ref=f19e56]: FAQ
+      - heading "Common questions." [level=2] [ref=f19e57]
+    - generic [ref=f19e58]:
+      - generic [ref=f19e59]:
+        - heading "Does Flogal Carriers move heavy equipment?" [level=3] [ref=f19e60]
+        - paragraph [ref=f19e61]: Yes. Flogal Carriers transports machinery and equipment on flatbed trailers across Oklahoma, Texas, and regional corridors.
+      - generic [ref=f19e62]:
+        - heading "Can you handle cross-border equipment moves?" [level=3] [ref=f19e63]
+        - paragraph [ref=f19e64]: Cross-border freight into Mexico moves through Flogal's vetted Mexico partners with the same accountability standard both directions.
+  - contentinfo [ref=f19e65]:
+    - generic [ref=f19e66]:
+      - generic [ref=f19e67]:
+        - img "FLOGAL" [ref=f19e69]
+        - navigation [ref=f19e70]:
+          - generic [ref=f19e71]:
+            - generic [ref=f19e72]: Carriers
+            - link "Our Fleet" [ref=f19e73] [cursor=pointer]:
+              - /url: ../index.html#fleet
+            - link "Active Lanes" [ref=f19e74] [cursor=pointer]:
+              - /url: ../index.html#lanes
+            - link "Equipment" [ref=f19e75] [cursor=pointer]:
+              - /url: ../index.html#equipment
+          - generic [ref=f19e76]:
+            - generic [ref=f19e77]: Sales
+            - link "Inventory" [ref=f19e78] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Financing" [ref=f19e79] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Trade-In" [ref=f19e80] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+          - generic [ref=f19e81]:
+            - generic [ref=f19e82]: Properties
+            - link "Listings" [ref=f19e83] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Yard Leasing" [ref=f19e84] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Contact" [ref=f19e85] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+          - generic [ref=f19e86]:
+            - generic [ref=f19e87]: Company
+            - link "About" [ref=f19e88] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+            - link "Contact" [ref=f19e89] [cursor=pointer]:
+              - /url: mailto:carriers@flogalhq.com
+            - link "flogalhq.com" [ref=f19e90] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+      - generic [ref=f19e91]:
+        - generic [ref=f19e92]: flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com
+        - generic [ref=f19e93]: © 2026 FLOGAL Holdings, LLC
+        - link "Staff Login" [ref=f19e94] [cursor=pointer]:
+          - /url: https://admin.flogalhq.com/login.html

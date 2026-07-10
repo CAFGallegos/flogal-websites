@@ -3,13 +3,6 @@
    Navy / Silver / White  +  role-based --accent color
    ===================================================================== */
 
-/* Animated conic-gradient property for login glow */
-@property --glow-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
 @font-face{font-family:'Satoshi';src:url('shared/fonts/Satoshi-Light.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap;}
 @font-face{font-family:'Satoshi';src:url('shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'Satoshi';src:url('shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
@@ -96,36 +89,13 @@ input, button, select, textarea { font-family: inherit; font-size: 14px; }
    LOGIN PAGE
    ================================================================ */
 
-@keyframes glow-spin { to { --glow-angle: 360deg; } }
-
 .lg-page {
   display: flex; align-items: center; justify-content: center;
   min-height: 100vh; padding: 40px;
   background: var(--navy);
 }
 
-/* Glow ring wrapper */
-.lg-glow-wrap {
-  position: relative;
-  width: 100%; max-width: 420px;
-}
-.lg-glow-wrap::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 17px;
-  background: conic-gradient(
-    from var(--glow-angle),
-    #4A90D9 0%,
-    #C9A84C 33%,
-    #4CAF7D 66%,
-    #4A90D9 100%
-  );
-  animation: glow-spin 4s linear infinite;
-  filter: blur(8px);
-  opacity: 0.72;
-  z-index: 0;
-}
+/* Glow ring wrapper — see shared/css/glow.css (linked in login.html) */
 
 .lg-card {
   position: relative; z-index: 1;

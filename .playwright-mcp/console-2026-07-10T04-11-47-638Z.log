@@ -1,0 +1,2 @@
+[    3031ms] [LOG] [FLOGAL] auth.getSession() result: {"session":null,"error":null} @ http://localhost:4000/sites/admin/dashboard:432
+[    3031ms] [WARNING] [FLOGAL] No active session — redirecting to login. @ http://localhost:4000/sites/admin/dashboard:441

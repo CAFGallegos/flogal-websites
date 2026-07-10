@@ -1,0 +1,41 @@
+- generic [ref=f30e2]:
+  - complementary [ref=f30e3]:
+    - link "FLOGAL Carriers" [ref=f30e4] [cursor=pointer]:
+      - /url: ../index.html
+      - generic [ref=f30e5]: FLOGAL
+      - generic [ref=f30e7]: Carriers
+    - generic [ref=f30e8]:
+      - generic [ref=f30e9]: Partner network
+      - heading "Direct dispatch. One accountability chain." [level=2] [ref=f30e10]
+      - paragraph [ref=f30e11]: Signed in, you'll land on the dispatch portal — live load board, BOL and POD uploads, settlement statements, and your compliance binder kept current.
+      - list [ref=f30e12]:
+        - listitem [ref=f30e13]: Real-time load board with assigned lanes and rates
+        - listitem [ref=f30e14]: Drag-and-drop BOL, POD, and rate-confirmation uploads
+        - listitem [ref=f30e15]: Compliance documents on file — W9, COI, MC authority, ELD
+        - listitem [ref=f30e16]: Settlement history and detention claims, line-by-line
+      - paragraph [ref=f30e17]: Partner access for dispatched carriers.
+  - main [ref=f30e18]:
+    - generic [ref=f30e19]:
+      - text: Sign In
+      - heading "Partner Access" [level=1] [ref=f30e20]
+      - paragraph [ref=f30e21]: Access your dispatch portal, load board, and compliance documents.
+      - generic [ref=f30e22]:
+        - generic [ref=f30e23]:
+          - generic [ref=f30e24]: Email
+          - textbox "Email" [ref=f30e25]:
+            - /placeholder: dispatch@yourfleet.com
+        - generic [ref=f30e26]:
+          - generic [ref=f30e27]: Password
+          - textbox "Password" [ref=f30e28]:
+            - /placeholder: ••••••••••••
+        - generic [ref=f30e30] [cursor=pointer]:
+          - checkbox "Keep me signed in" [ref=f30e31]
+          - text: Keep me signed in
+        - button "Sign In →" [ref=f30e32] [cursor=pointer]
+      - generic [ref=f30e33]:
+        - text: New partner?
+        - link "Request access" [ref=f30e34] [cursor=pointer]:
+          - /url: ../index.html#partners
+        - text: ·
+        - link "Talk to ops" [ref=f30e35] [cursor=pointer]:
+          - /url: ../index.html#quote

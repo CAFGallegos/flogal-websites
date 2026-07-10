@@ -1,0 +1,207 @@
+- generic [active] [ref=f13e1]:
+  - banner [ref=f13e2]:
+    - generic [ref=f13e3]:
+      - link [ref=f13e4] [cursor=pointer]:
+        - /url: /
+        - img "FLOGAL" [ref=f13e5]
+      - button "Menu" [ref=f13e6] [cursor=pointer]
+  - generic [ref=f13e10]:
+    - generic [ref=f13e13]:
+      - generic [ref=f13e14]: Operator-Funded Freight Platform
+      - heading "Freight-native companies, run on one system." [level=1] [ref=f13e15]: Freight-native companies,run on one system.
+      - paragraph [ref=f13e16]: Flogal builds and operates freight companies — hauling, equipment, and industrial real estate — on a shared operating backbone we run ourselves. Founder-funded, freight-experienced, built for the long haul.
+      - link "Get in Touch →" [ref=f13e18] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=f13e19]:
+      - generic [ref=f13e20]:
+        - generic [ref=f13e21]: Operator-funded
+        - generic [ref=f13e22]: Founder-capitalized, full decision capacity. No outside mandate.
+      - generic [ref=f13e23]:
+        - generic [ref=f13e24]: Freight-native
+        - generic [ref=f13e25]: Built by people who've run trucks, not a fund shopping for a sector.
+      - generic [ref=f13e26]:
+        - generic [ref=f13e27]: One operating system
+        - generic [ref=f13e28]: Maintenance, dispatch, payroll, and per-truck P&L on shared infrastructure.
+      - generic [ref=f13e29]:
+        - generic [ref=f13e30]: Multi-entity by design
+        - generic [ref=f13e31]: Separate operating companies under one holding structure.
+  - generic [ref=f13e33]:
+    - link "Move Freight Carriers →" [ref=f13e34] [cursor=pointer]:
+      - /url: https://carriers.flogalhq.com
+      - generic [ref=f13e35]:
+        - generic [ref=f13e36]: Move Freight
+        - generic [ref=f13e37]: Carriers
+      - generic [ref=f13e38]: →
+    - link "Buy Equipment Sales Inventory →" [ref=f13e39] [cursor=pointer]:
+      - /url: https://sales.flogalhq.com
+      - generic [ref=f13e40]:
+        - generic [ref=f13e41]: Buy Equipment
+        - generic [ref=f13e42]: Sales Inventory
+      - generic [ref=f13e43]: →
+    - link "Real Estate Properties →" [ref=f13e44] [cursor=pointer]:
+      - /url: https://properties.flogalhq.com
+      - generic [ref=f13e45]:
+        - generic [ref=f13e46]: Real Estate
+        - generic [ref=f13e47]: Properties
+      - generic [ref=f13e48]: →
+  - generic [ref=f13e49]:
+    - generic [ref=f13e50]:
+      - text: Operating Divisions
+      - heading "Three freight-built companies, one backbone." [level=2] [ref=f13e51]
+    - generic [ref=f13e52]:
+      - article [ref=f13e53]:
+        - generic [ref=f13e54]: CARRIERS
+        - heading "Flogal Carriers" [level=3] [ref=f13e55]
+        - paragraph [ref=f13e56]: Asset-based hauling across Oklahoma and Texas, operated through J&D Hauling and RRTL and extended by a vetted U.S.–Mexico partner network. Aggregate, end-dump, flatbed, and dry van freight on regional corridors.
+        - link "Go to Carriers →" [ref=f13e57] [cursor=pointer]:
+          - /url: https://carriers.flogalhq.com
+      - article [ref=f13e58]:
+        - generic [ref=f13e59]: SALES
+        - heading "Flogal Sales" [level=3] [ref=f13e60]
+        - paragraph [ref=f13e61]: Trucks, trailers, and heavy equipment for sale and lease — inspected units, real specs, real prices.
+        - link "Go to Inventory →" [ref=f13e62] [cursor=pointer]:
+          - /url: https://sales.flogalhq.com
+      - article [ref=f13e63]:
+        - generic [ref=f13e64]: PROPERTIES
+        - heading "Flogal Properties" [level=3] [ref=f13e65]
+        - paragraph [ref=f13e66]: "Industrial real estate built for freight: yards, terminals, and the land our operations run on."
+        - link "Go to Listings →" [ref=f13e67] [cursor=pointer]:
+          - /url: https://properties.flogalhq.com
+  - generic [ref=f13e69]:
+    - text: Flogal Technologies
+    - heading "Run like one company, not five." [level=2] [ref=f13e70]
+    - paragraph [ref=f13e71]: Every Flogal company runs on the same internal operating system — Flogal Technologies. Maintenance, driver tickets, payroll, and per-truck profitability live in one platform we built and operate ourselves. That means every truck's real cost is visible, every load is auditable, and a new company can plug into working systems on day one — not rebuild them. It's not a product we sell; it's how we keep freight companies disciplined, auditable, and ready to scale.
+  - generic [ref=f13e73]:
+    - text: Growth Model
+    - heading "We build, partner, and acquire." [level=2] [ref=f13e74]
+    - paragraph [ref=f13e75]: "Flogal grows three ways: building freight companies from the ground up, partnering with operators who want real infrastructure behind them, and acquiring businesses and assets that fit the platform. Operating companies plug into shared maintenance, dispatch, payroll, and per-truck P&L from day one — keeping what makes them work and gaining what they lacked."
+    - generic [ref=f13e76]:
+      - generic [ref=f13e77]:
+        - generic [ref=f13e78]: Build
+        - generic [ref=f13e79]: We start freight-native companies on infrastructure that already runs — not from a blank page.
+      - generic [ref=f13e80]:
+        - generic [ref=f13e81]: Partner
+        - generic [ref=f13e82]: Operators keep their identity and customers; the platform carries the back office.
+      - generic [ref=f13e83]:
+        - generic [ref=f13e84]: Acquire
+        - generic [ref=f13e85]: If you're selling a fleet, freight business, or freight-oriented asset, we're a direct, structured counterparty with the ability to close.
+    - link "Start a Conversation →" [ref=f13e86] [cursor=pointer]:
+      - /url: "#contact"
+  - generic [ref=f13e88]:
+    - text: FAQ
+    - heading "Common questions." [level=2] [ref=f13e89]
+    - generic [ref=f13e90]:
+      - generic [ref=f13e91]:
+        - heading "What is Flogal?" [level=3] [ref=f13e92]
+        - paragraph [ref=f13e93]: Flogal is an operator-funded freight platform. It builds and operates a group of freight-native companies — hauling, equipment sales and leasing, and industrial real estate — on a shared operating system.
+      - generic [ref=f13e94]:
+        - heading "Is Flogal a carrier or a broker?" [level=3] [ref=f13e95]
+        - paragraph [ref=f13e96]: Flogal operates asset-based carriers through J&D Hauling and RRTL. It is not a freight broker.
+      - generic [ref=f13e97]:
+        - heading "Where does Flogal operate?" [level=3] [ref=f13e98]
+        - paragraph [ref=f13e99]: Flogal's freight operations run primarily on the Oklahoma–Texas corridor. The team also brings nationwide over-the-road and US–Mexico cross-border freight experience.
+      - generic [ref=f13e100]:
+        - heading "What is Flogal Technologies?" [level=3] [ref=f13e101]
+        - paragraph [ref=f13e102]: Flogal Technologies is Flogal's internal operating system for maintenance, dispatch, payroll, and per-truck P&L. It runs Flogal's own companies; it is not sold as software.
+      - generic [ref=f13e103]:
+        - heading "Does Flogal acquire companies?" [level=3] [ref=f13e104]
+        - paragraph [ref=f13e105]: Yes. Flogal partners with and acquires freight businesses, fleets, and freight-oriented assets that fit its platform. Sellers and operators can reach out through the contact form.
+  - generic [ref=f13e107]:
+    - generic [ref=f13e108]:
+      - text: Contact
+      - heading "Request an Introduction" [level=2] [ref=f13e109]
+      - paragraph [ref=f13e110]: For partnership inquiries, carrier relations, financing discussions, or general business development.
+      - generic [ref=f13e111]:
+        - generic [ref=f13e112]: General
+        - link "info@flogalhq.com" [ref=f13e114] [cursor=pointer]:
+          - /url: mailto:info@flogalhq.com
+      - generic [ref=f13e115]:
+        - generic [ref=f13e116]: Carriers
+        - link "carriers@flogalhq.com" [ref=f13e118] [cursor=pointer]:
+          - /url: mailto:carriers@flogalhq.com
+      - generic [ref=f13e119]:
+        - generic [ref=f13e120]: Equipment
+        - link "sales@flogalhq.com" [ref=f13e122] [cursor=pointer]:
+          - /url: mailto:sales@flogalhq.com
+    - generic [ref=f13e123]:
+      - generic [ref=f13e124]:
+        - generic [ref=f13e125]:
+          - generic [ref=f13e126]: First Name
+          - textbox "First Name" [ref=f13e127]:
+            - /placeholder: John
+        - generic [ref=f13e128]:
+          - generic [ref=f13e129]: Last Name
+          - textbox "Last Name" [ref=f13e130]:
+            - /placeholder: Smith
+      - generic [ref=f13e131]:
+        - generic [ref=f13e132]: Company
+        - textbox "Company" [ref=f13e133]:
+          - /placeholder: Company Name
+      - generic [ref=f13e134]:
+        - generic [ref=f13e135]: Email
+        - textbox "Email" [ref=f13e136]:
+          - /placeholder: john@companyname.com
+      - generic [ref=f13e137]:
+        - generic [ref=f13e138]: Inquiry Type
+        - combobox "Inquiry Type" [ref=f13e139]:
+          - option "Select…" [selected]
+          - option "Carrier / Freight"
+          - option "Equipment"
+          - option "Real Estate"
+          - option "Partnership / Business Development"
+          - option "Acquisition / Sell Your Business"
+          - option "Other"
+      - generic [ref=f13e140]:
+        - generic [ref=f13e141]: Message
+        - textbox "Message" [ref=f13e142]:
+          - /placeholder: Brief description of your inquiry…
+      - generic [ref=f13e143]:
+        - generic [ref=f13e144]: Preferred Contact
+        - combobox "Preferred Contact" [ref=f13e145]:
+          - option "Select…" [selected]
+          - option "Email"
+          - option "Phone"
+          - option "Text"
+      - button "Send Inquiry" [ref=f13e146] [cursor=pointer]
+  - contentinfo [ref=f13e147]:
+    - generic [ref=f13e148]:
+      - generic [ref=f13e149]:
+        - generic [ref=f13e150]:
+          - img "FLOGAL" [ref=f13e152]
+          - paragraph [ref=f13e153]: Asset-backed across the freight stack.
+        - navigation [ref=f13e154]:
+          - generic [ref=f13e155]:
+            - generic [ref=f13e156]: Hauling
+            - link "Load Board" [ref=f13e157] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+            - link "Request a Quote" [ref=f13e158] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+            - link "Partner Login" [ref=f13e159] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+          - generic [ref=f13e160]:
+            - generic [ref=f13e161]: Equipment
+            - link "Inventory" [ref=f13e162] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Financing" [ref=f13e163] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Trade-In" [ref=f13e164] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+          - generic [ref=f13e165]:
+            - generic [ref=f13e166]: Realty
+            - link "Listings" [ref=f13e167] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Yard Leasing" [ref=f13e168] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Contact" [ref=f13e169] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+          - generic [ref=f13e170]:
+            - generic [ref=f13e171]: Company
+            - link "About" [ref=f13e172] [cursor=pointer]:
+              - /url: /about
+            - link "Contact" [ref=f13e173] [cursor=pointer]:
+              - /url: "#contact"
+      - generic [ref=f13e174]:
+        - generic [ref=f13e175]: flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com
+        - generic [ref=f13e176]: © 2026 FLOGAL Holdings, LLC
+        - link "Staff Login" [ref=f13e177] [cursor=pointer]:
+          - /url: https://admin.flogalhq.com/login.html

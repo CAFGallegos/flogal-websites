@@ -1,0 +1,113 @@
+- generic [active] [ref=f5e1]:
+  - banner [ref=f5e2]:
+    - generic [ref=f5e3]:
+      - link "FLOGAL Carriers" [ref=f5e4] [cursor=pointer]:
+        - /url: https://www.flogalhq.com
+        - img "FLOGAL" [ref=f5e5]
+        - generic [ref=f5e7]: Carriers
+      - list [ref=f5e8]:
+        - listitem [ref=f5e9]:
+          - link "Home" [ref=f5e10] [cursor=pointer]:
+            - /url: https://www.flogalhq.com
+        - listitem [ref=f5e11]:
+          - link "Sales" [ref=f5e12] [cursor=pointer]:
+            - /url: https://sales.flogalhq.com
+        - listitem [ref=f5e13]:
+          - link "Properties" [ref=f5e14] [cursor=pointer]:
+            - /url: https://properties.flogalhq.com
+        - listitem [ref=f5e15]:
+          - link "About" [ref=f5e16] [cursor=pointer]:
+            - /url: ../index.html#about
+        - listitem [ref=f5e17]:
+          - link "Contact" [ref=f5e18] [cursor=pointer]:
+            - /url: ../index.html#quote
+      - generic [ref=f5e19]:
+        - link "Partner Login" [ref=f5e20] [cursor=pointer]:
+          - /url: ../portal/login.html
+        - link "Request a Quote" [ref=f5e21] [cursor=pointer]:
+          - /url: ../index.html#quote
+  - generic [ref=f5e23]:
+    - generic [ref=f5e24]: Flogal Carriers · Aggregate hauling
+    - heading "End dump and aggregate hauling across Oklahoma and Texas." [level=1] [ref=f5e25]
+    - paragraph [ref=f5e26]: Flogal Carriers is an asset-based carrier that hauls aggregate — rock, sand, gravel, and base material — with end-dump and belly-dump trailers across the Oklahoma–Texas corridor. Quarry freight is the core of our business, run daily by our owned fleet, RRTL.
+    - generic [ref=f5e27]:
+      - link "Request a Quote →" [ref=f5e28] [cursor=pointer]:
+        - /url: ../index.html#quote
+      - link "Back to Flogal Carriers" [ref=f5e29] [cursor=pointer]:
+        - /url: ../index.html
+  - generic [ref=f5e31]:
+    - generic [ref=f5e32]:
+      - generic [ref=f5e33]: Aggregate hauling
+      - heading "What we haul, how we run it." [level=2] [ref=f5e34]
+    - generic [ref=f5e35]:
+      - generic [ref=f5e36]:
+        - heading "What we haul" [level=3] [ref=f5e37]
+        - paragraph [ref=f5e38]: Rock, sand, gravel, crushed stone, and base material. Quarry-to-site, quarry-to-plant, and jobsite supply runs.
+      - generic [ref=f5e39]:
+        - heading "Equipment" [level=3] [ref=f5e40]
+        - paragraph [ref=f5e41]: End-dump and belly-dump trailers, dispatched from one ops desk with owned day-cab power.
+      - generic [ref=f5e42]:
+        - heading "Where we run" [level=3] [ref=f5e43]
+        - paragraph [ref=f5e44]: The Texas–Oklahoma corridor is home — regional quarries, plants, and jobsites, with same-day turnaround on local runs.
+  - generic [ref=f5e47]:
+    - generic [ref=f5e48]: How to get a quote
+    - heading "Share the material, pickup point, delivery point, and window." [level=2] [ref=f5e49]
+    - paragraph [ref=f5e50]: Our ops desk quotes directly — no broker markup.
+    - link "Request a Quote →" [ref=f5e52] [cursor=pointer]:
+      - /url: ../index.html#quote
+  - generic [ref=f5e54]:
+    - generic [ref=f5e55]:
+      - generic [ref=f5e56]: FAQ
+      - heading "Common questions." [level=2] [ref=f5e57]
+    - generic [ref=f5e58]:
+      - generic [ref=f5e59]:
+        - heading "Who does aggregate hauling in Oklahoma?" [level=3] [ref=f5e60]
+        - paragraph [ref=f5e61]: Flogal Carriers hauls aggregate across Oklahoma and Texas through its owned fleet RRTL, running end-dump and belly-dump trailers out of regional quarries.
+      - generic [ref=f5e62]:
+        - heading "What is end dump hauling?" [level=3] [ref=f5e63]
+        - paragraph [ref=f5e64]: End dump hauling moves loose bulk material — rock, sand, gravel — in trailers that unload by raising the bed. It's the standard method for quarry and jobsite aggregate delivery.
+      - generic [ref=f5e65]:
+        - heading "Do you handle recurring quarry runs?" [level=3] [ref=f5e66]
+        - paragraph [ref=f5e67]: Yes. Daily quarry freight is the core of the operation — recurring lanes are what our dispatch desk is built around.
+  - contentinfo [ref=f5e68]:
+    - generic [ref=f5e69]:
+      - generic [ref=f5e70]:
+        - img "FLOGAL" [ref=f5e72]
+        - navigation [ref=f5e73]:
+          - generic [ref=f5e74]:
+            - generic [ref=f5e75]: Carriers
+            - link "Our Fleet" [ref=f5e76] [cursor=pointer]:
+              - /url: ../index.html#fleet
+            - link "Active Lanes" [ref=f5e77] [cursor=pointer]:
+              - /url: ../index.html#lanes
+            - link "Equipment" [ref=f5e78] [cursor=pointer]:
+              - /url: ../index.html#equipment
+          - generic [ref=f5e79]:
+            - generic [ref=f5e80]: Sales
+            - link "Inventory" [ref=f5e81] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Financing" [ref=f5e82] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Trade-In" [ref=f5e83] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+          - generic [ref=f5e84]:
+            - generic [ref=f5e85]: Properties
+            - link "Listings" [ref=f5e86] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Yard Leasing" [ref=f5e87] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Contact" [ref=f5e88] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+          - generic [ref=f5e89]:
+            - generic [ref=f5e90]: Company
+            - link "About" [ref=f5e91] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+            - link "Contact" [ref=f5e92] [cursor=pointer]:
+              - /url: mailto:carriers@flogalhq.com
+            - link "flogalhq.com" [ref=f5e93] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+      - generic [ref=f5e94]:
+        - generic [ref=f5e95]: flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com
+        - generic [ref=f5e96]: © 2026 FLOGAL Holdings, LLC
+        - link "Staff Login" [ref=f5e97] [cursor=pointer]:
+          - /url: https://admin.flogalhq.com/login.html

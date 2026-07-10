@@ -1,0 +1,10 @@
+# Repo-internal files that must never be part of a Vercel deployment output.
+# flogalhq.com's project is rooted at the repo root, so without this file
+# everything below is served publicly. See G1 session flag, 2026-07-09.
+.claude/
+_archive/
+docs/
+scripts/
+CLAUDE.md
+README.md
+README_Naming_Conventions.md

@@ -1,0 +1,243 @@
+- generic [ref=f31e2]:
+  - complementary [ref=f31e3]:
+    - generic [ref=f31e5]:
+      - generic [ref=f31e6]: FLOGAL
+      - generic [ref=f31e7]: Carriers
+    - navigation [ref=f31e8]:
+      - generic [ref=f31e9]:
+        - generic [ref=f31e10]: Operations
+        - button "Overview" [ref=f31e11] [cursor=pointer]
+        - button "Load Board" [ref=f31e13] [cursor=pointer]
+        - button "Dispatch" [ref=f31e15] [cursor=pointer]
+        - button "Tracking" [ref=f31e17] [cursor=pointer]
+      - generic [ref=f31e19]:
+        - generic [ref=f31e20]: Fleet
+        - button "Drivers" [ref=f31e21] [cursor=pointer]
+        - button "Power Units" [ref=f31e23] [cursor=pointer]
+        - button "Trailers" [ref=f31e25] [cursor=pointer]
+        - button "Maintenance" [ref=f31e27] [cursor=pointer]
+      - generic [ref=f31e29]:
+        - generic [ref=f31e30]: Commercial
+        - button "Customers" [ref=f31e31] [cursor=pointer]
+        - button "RRTL" [ref=f31e33] [cursor=pointer]
+        - button "Billing" [ref=f31e35] [cursor=pointer]
+    - generic [ref=f31e38]:
+      - generic [ref=f31e39]: Dispatch on-call
+      - generic [ref=f31e40]:
+        - generic [ref=f31e41]: M
+        - generic [ref=f31e42]:
+          - generic [ref=f31e43]: Marcus Holt
+          - generic [ref=f31e44]: +1 (903) 555-0140
+  - generic [ref=f31e45]:
+    - banner [ref=f31e46]:
+      - generic [ref=f31e47]:
+        - generic [ref=f31e48]: ⌕
+        - textbox "Search loads, drivers, lanes, customers… (⌘ K)" [ref=f31e49]
+      - generic [ref=f31e50]:
+        - button "+ New load" [ref=f31e51] [cursor=pointer]
+        - generic [ref=f31e52]: SHIFT · Day · CDT
+        - generic "Notifications" [ref=f31e53] [cursor=pointer]:
+          - generic [ref=f31e54]: ●
+          - generic [ref=f31e55]: "3"
+        - generic [ref=f31e56]:
+          - generic [ref=f31e57]: JT
+          - generic [ref=f31e58]:
+            - generic [ref=f31e59]: Joel Tarango
+            - generic [ref=f31e60]: Dispatch supervisor
+    - main [ref=f31e61]:
+      - generic [ref=f31e62]:
+        - generic [ref=f31e63]:
+          - generic [ref=f31e64]: Dispatch · live
+          - heading "Load board · Tuesday, May 19" [level=1] [ref=f31e65]
+        - generic [ref=f31e67]:
+          - button "24h" [ref=f31e68] [cursor=pointer]
+          - button "7d" [ref=f31e69] [cursor=pointer]
+          - button "30d" [ref=f31e70] [cursor=pointer]
+          - button "MTD" [ref=f31e71] [cursor=pointer]
+      - generic [ref=f31e72]:
+        - generic [ref=f31e73]:
+          - generic [ref=f31e74]: Active loads
+          - generic [ref=f31e75]: "142"
+          - generic [ref=f31e76]: +8 today
+        - generic [ref=f31e77]:
+          - generic [ref=f31e78]: On-time · 7d
+          - generic [ref=f31e79]: 99.2%
+          - generic [ref=f31e80]: +0.4 vs target
+        - generic [ref=f31e81]:
+          - generic [ref=f31e82]: Empty miles
+          - generic [ref=f31e83]: 6.8%
+          - generic [ref=f31e84]: −1.1 vs prior
+        - generic [ref=f31e85]:
+          - generic [ref=f31e86]: Rev / mi
+          - generic [ref=f31e87]: $3.42
+          - generic [ref=f31e88]: −$0.08 to floor
+        - generic [ref=f31e89]:
+          - generic [ref=f31e90]: Units in svc
+          - generic [ref=f31e91]: 294/320
+          - generic [ref=f31e92]: 92% utilization
+      - generic [ref=f31e93]:
+        - generic [ref=f31e94]:
+          - generic [ref=f31e95]:
+            - generic [ref=f31e96]:
+              - button "All 8" [ref=f31e97] [cursor=pointer]:
+                - text: All
+                - generic [ref=f31e98]: "8"
+              - button "In transit 4" [ref=f31e99] [cursor=pointer]:
+                - text: In transit
+                - generic [ref=f31e100]: "4"
+              - button "At risk 1" [ref=f31e101] [cursor=pointer]:
+                - text: At risk
+                - generic [ref=f31e102]: "1"
+              - button "Late 1" [ref=f31e103] [cursor=pointer]:
+                - text: Late
+                - generic [ref=f31e104]: "1"
+              - button "Unassigned 1" [ref=f31e105] [cursor=pointer]:
+                - text: Unassigned
+                - generic [ref=f31e106]: "1"
+            - generic [ref=f31e107]:
+              - button "⋮" [ref=f31e108] [cursor=pointer]
+              - button "↓" [ref=f31e109] [cursor=pointer]
+              - button "↻" [ref=f31e110] [cursor=pointer]
+          - generic:
+            - generic [ref=f31e111]:
+              - generic [ref=f31e112]: "Load #"
+              - generic [ref=f31e113]: Lane
+              - generic [ref=f31e114]: Mi
+              - generic [ref=f31e115]: Equipment
+              - generic [ref=f31e116]: Driver
+              - generic [ref=f31e117]: Rate
+              - generic [ref=f31e118]: ETA
+              - generic [ref=f31e119]: Status
+            - generic [ref=f31e120] [cursor=pointer]:
+              - generic [ref=f31e121]: LD-148729
+              - generic [ref=f31e122]:
+                - strong [ref=f31e123]: Dallas, TX
+                - text: →
+                - strong [ref=f31e124]: Chicago, IL
+              - generic [ref=f31e125]: "968"
+              - generic [ref=f31e126]: 53′ Dry Van
+              - generic [ref=f31e127]: R. Aguilar
+              - generic [ref=f31e128]: $3,210
+              - generic [ref=f31e129]: May 19 · 14:20
+              - generic [ref=f31e130]: On time
+            - generic [ref=f31e132] [cursor=pointer]:
+              - generic [ref=f31e133]: LD-148730
+              - generic [ref=f31e134]:
+                - strong [ref=f31e135]: Laredo, TX
+                - text: →
+                - strong [ref=f31e136]: Memphis, TN
+              - generic [ref=f31e137]: "832"
+              - generic [ref=f31e138]: Reefer
+              - generic [ref=f31e139]: S. Patel
+              - generic [ref=f31e140]: $2,985
+              - generic [ref=f31e141]: May 19 · 09:45
+              - generic [ref=f31e142]: At risk
+            - generic [ref=f31e144] [cursor=pointer]:
+              - generic [ref=f31e145]: LD-148731
+              - generic [ref=f31e146]:
+                - strong [ref=f31e147]: El Paso, TX
+                - text: →
+                - strong [ref=f31e148]: Phoenix, AZ
+              - generic [ref=f31e149]: "432"
+              - generic [ref=f31e150]: Flatbed
+              - generic [ref=f31e151]: D. Cervantes
+              - generic [ref=f31e152]: $1,840
+              - generic [ref=f31e153]: May 18 · 22:10
+              - generic [ref=f31e154]: Late
+            - generic [ref=f31e156] [cursor=pointer]:
+              - generic [ref=f31e157]: LD-148732
+              - generic [ref=f31e158]:
+                - strong [ref=f31e159]: Houston, TX
+                - text: →
+                - strong [ref=f31e160]: Atlanta, GA
+              - generic [ref=f31e161]: "789"
+              - generic [ref=f31e162]: 53′ Dry Van
+              - generic [ref=f31e163]: M. Holt
+              - generic [ref=f31e164]: $2,640
+              - generic [ref=f31e165]: May 20 · 06:00
+              - generic [ref=f31e166]: On time
+            - generic [ref=f31e168] [cursor=pointer]:
+              - generic [ref=f31e169]: LD-148733
+              - generic [ref=f31e170]:
+                - strong [ref=f31e171]: Oklahoma City
+                - text: →
+                - strong [ref=f31e172]: Kansas City, KS
+              - generic [ref=f31e173]: "354"
+              - generic [ref=f31e174]: Reefer
+              - generic [ref=f31e175]: A. Boateng
+              - generic [ref=f31e176]: $1,290
+              - generic [ref=f31e177]: May 19 · 11:50
+              - generic [ref=f31e178]: In transit
+            - generic [ref=f31e180] [cursor=pointer]:
+              - generic [ref=f31e181]: LD-148734
+              - generic [ref=f31e182]:
+                - strong [ref=f31e183]: Lubbock, TX
+                - text: →
+                - strong [ref=f31e184]: Denver, CO
+              - generic [ref=f31e185]: "528"
+              - generic [ref=f31e186]: 48′ Flatbed
+              - generic [ref=f31e187]: —
+              - generic [ref=f31e188]: $1,745
+              - generic [ref=f31e189]: Unassigned
+              - generic [ref=f31e190]: Unassigned
+            - generic [ref=f31e192] [cursor=pointer]:
+              - generic [ref=f31e193]: LD-148735
+              - generic [ref=f31e194]:
+                - strong [ref=f31e195]: San Antonio
+                - text: →
+                - strong [ref=f31e196]: Nashville, TN
+              - generic [ref=f31e197]: "999"
+              - generic [ref=f31e198]: 53′ Dry Van
+              - generic [ref=f31e199]: L. Renteria
+              - generic [ref=f31e200]: $3,120
+              - generic [ref=f31e201]: May 20 · 18:40
+              - generic [ref=f31e202]: On time
+            - generic [ref=f31e204] [cursor=pointer]:
+              - generic [ref=f31e205]: LD-148736
+              - generic [ref=f31e206]:
+                - strong [ref=f31e207]: McAllen, TX
+                - text: →
+                - strong [ref=f31e208]: St. Louis, MO
+              - generic [ref=f31e209]: "1014"
+              - generic [ref=f31e210]: Reefer
+              - generic [ref=f31e211]: K. Vance
+              - generic [ref=f31e212]: $3,450
+              - generic [ref=f31e213]: May 20 · 22:00
+              - generic [ref=f31e214]: In transit
+        - generic [ref=f31e216]:
+          - generic [ref=f31e217]:
+            - generic [ref=f31e218]:
+              - generic [ref=f31e219]:
+                - text: Lane utilization · last 24h
+                - heading "Active lanes" [level=3] [ref=f31e220]
+              - generic [ref=f31e221]:
+                - generic [ref=f31e222]: On time
+                - generic [ref=f31e224]: At risk
+                - generic [ref=f31e226]: Late
+            - generic [ref=f31e228]:
+              - img [ref=f31e230]:
+                - generic [ref=f31e236]: DAL
+                - generic [ref=f31e239]: CHI
+                - generic [ref=f31e242]: LRD
+                - generic [ref=f31e245]: MEM
+                - generic [ref=f31e248]: ELP
+                - generic [ref=f31e251]: PHX
+                - generic [ref=f31e254]: NAS
+              - generic [ref=f31e257]: FREIGHT LANES · INDICATIVE
+          - generic [ref=f31e258]:
+            - generic [ref=f31e260]:
+              - text: Exceptions queue
+              - heading "Needs dispatcher" [level=3] [ref=f31e261]
+            - generic [ref=f31e262]:
+              - generic [ref=f31e263]:
+                - generic [ref=f31e264]: LD-148731
+                - generic [ref=f31e265]: "! HOS violation predicted at 19:00"
+                - button "Resolve →" [ref=f31e266] [cursor=pointer]
+              - generic [ref=f31e267]:
+                - generic [ref=f31e268]: LD-148730
+                - generic [ref=f31e269]: "! Weather hold · I-40 west of Memphis"
+                - button "Resolve →" [ref=f31e270] [cursor=pointer]
+              - generic [ref=f31e271]:
+                - generic [ref=f31e272]: LD-148736
+                - generic [ref=f31e273]: "! Reefer temp drift 32°F → 36°F"
+                - button "Resolve →" [ref=f31e274] [cursor=pointer]

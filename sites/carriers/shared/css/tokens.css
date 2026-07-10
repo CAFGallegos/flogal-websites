@@ -18,4 +18,12 @@
   /* Default accent for pages that don't set their own (e.g. flogalhq,
      which uses the tricolor mark rather than a single accent hue). */
   --accent: var(--flogal-navy);
+
+  /* Derived per-site tokens (§3.2). Defined once here so they stay live
+     against whatever --accent a site overrides above this point in the
+     cascade — color-mix() re-resolves var(--accent) at use time, not
+     declaration time, so this doesn't need repeating per site. */
+  --accent-soft:   color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-border: color-mix(in srgb, var(--accent) 32%, transparent);
+  --accent-ring:   0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
 }

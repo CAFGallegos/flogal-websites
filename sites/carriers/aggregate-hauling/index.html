@@ -55,16 +55,16 @@ a{color:inherit;text-decoration:none;}
 
 .op-wrap{max-width:var(--op-max);margin:0 auto;padding:0 40px;}
 
-.op-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--op-blue-strong);}
+.op-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--op-blue-strong);}
 .op-eyebrow::before{content:'';width:22px;height:1px;background:var(--op-blue);display:inline-block;}
-.op-h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:44px;letter-spacing:-.025em;line-height:1.05;color:white;}
+.op-h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:var(--t-h2);letter-spacing:-.015em;line-height:1.15;color:white;}
 .op-section-head{display:flex;flex-direction:column;gap:16px;max-width:760px;margin-bottom:48px;}
 .op-section-sub{margin:0;color:var(--op-fg-dim);font-size:16px;max-width:640px;}
 
 /* ---- Buttons ------------------------------------------------------- */
-.op-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.02em;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background 160ms,border-color 160ms,color 160ms;}
-.op-btn-gold{background:var(--op-gold);color:var(--flogal-navy);border-color:var(--op-gold);}
-.op-btn-gold:hover{background:var(--op-gold-hover);border-color:var(--op-gold-hover);}
+.op-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.02em;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background 160ms,border-color 160ms,color 160ms;}
+.op-btn-blue{background:var(--op-blue);color:white;border-color:var(--op-blue);}
+.op-btn-blue:hover{background:var(--op-blue-strong);border-color:var(--op-blue-strong);}
 .op-btn-ghost{background:transparent;color:white;border-color:rgba(255,255,255,.28);}
 .op-btn-ghost:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.48);}
 
@@ -82,15 +82,15 @@ a{color:inherit;text-decoration:none;}
 .op-nav-actions{display:flex;gap:10px;align-items:center;margin-left:auto;}
 .op-nav-login{font-size:13px;font-weight:600;color:var(--op-blue-strong);padding:8px 14px;border:1px solid var(--op-blue-line);border-radius:6px;transition:background 140ms;}
 .op-nav-login:hover{background:var(--op-blue-soft);}
-.op-nav-cta{background:var(--op-gold);color:var(--flogal-navy);padding:9px 18px;border-radius:6px;font-size:13px;font-weight:700;transition:background 140ms;}
-.op-nav-cta:hover{background:var(--op-gold-hover);}
+.op-nav-cta{background:var(--op-blue);color:white;padding:9px 18px;border-radius:6px;font-size:13px;font-weight:700;transition:background 140ms;}
+.op-nav-cta:hover{background:var(--op-blue-strong);}
 
 /* ---- Hero ---------------------------------------------------------- */
-.op-hero{position:relative;padding:120px 0 96px;overflow:hidden;background:radial-gradient(80% 60% at 80% 30%,rgba(45,125,210,.18) 0%,transparent 60%),radial-gradient(70% 60% at 10% 90%,rgba(45,125,210,.10) 0%,transparent 60%),linear-gradient(180deg,#07111c 0%,#050a12 100%);}
+.op-hero{position:relative;padding:var(--sec-y-lg) 0 var(--sec-y);overflow:hidden;background:radial-gradient(80% 60% at 80% 30%,rgba(45,125,210,.18) 0%,transparent 60%),radial-gradient(70% 60% at 10% 90%,rgba(45,125,210,.10) 0%,transparent 60%),linear-gradient(180deg,#07111c 0%,#050a12 100%);}
 .op-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(80% 70% at 50% 30%,black 0%,transparent 90%);-webkit-mask-image:radial-gradient(80% 70% at 50% 30%,black 0%,transparent 90%);pointer-events:none;}
 .op-hero-inner{position:relative;z-index:2;}
 .op-hero-title{margin:22px 0;font-family:var(--font-display);font-weight:700;font-size:clamp(40px,5vw,60px);letter-spacing:-.03em;line-height:1.05;color:white;max-width:900px;}
-.op-hero-sub{margin:0 0 36px;font-size:19px;line-height:1.55;color:var(--op-fg-dim);max-width:720px;}
+.op-hero-sub{margin:0 0 36px;font-size:var(--t-body-lg);line-height:1.55;color:var(--op-fg-dim);max-width:720px;}
 .op-hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 
 /* ---- Info grid ------------------------------------------------------ */
@@ -229,7 +229,7 @@ a{color:inherit;text-decoration:none;}
     <h1 class="op-hero-title">End dump and aggregate hauling across Oklahoma and Texas.</h1>
     <p class="op-hero-sub">Flogal Carriers is an asset-based carrier that hauls aggregate — rock, sand, gravel, and base material — with end-dump and belly-dump trailers across the Oklahoma–Texas corridor. Quarry freight is the core of our business, run daily by our owned fleet, RRTL.</p>
     <div class="op-hero-actions">
-      <a href="../index.html#quote" class="op-btn op-btn-gold">Request a Quote →</a>
+      <a href="../index.html#quote" class="op-btn op-btn-blue">Request a Quote →</a>
       <a href="../index.html" class="op-btn op-btn-ghost">Back to Flogal Carriers</a>
     </div>
   </div>
@@ -267,7 +267,7 @@ a{color:inherit;text-decoration:none;}
       <h2 class="op-cta-band-h">Share the material, pickup point, delivery point, and window.</h2>
       <p class="op-cta-band-p">Our ops desk quotes directly — no broker markup.</p>
       <div class="op-cta-band-actions">
-        <a href="../index.html#quote" class="op-btn op-btn-gold">Request a Quote →</a>
+        <a href="../index.html#quote" class="op-btn op-btn-blue">Request a Quote →</a>
       </div>
     </div>
   </div>

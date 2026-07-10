@@ -1,0 +1,92 @@
+- generic [active] [ref=f33e1]:
+  - main [ref=f33e3]:
+    - generic [ref=f33e5]:
+      - generic [ref=f33e6]: Dashboard
+      - generic [ref=f33e7]: Loading…
+  - complementary [ref=f33e10]:
+    - generic [ref=f33e11]:
+      - generic [ref=f33e12]:
+        - generic [ref=f33e13]: New listing
+        - generic [ref=f33e14]: Add Equipment Unit
+      - button [ref=f33e15] [cursor=pointer]
+    - generic [ref=f33e19]:
+      - generic [ref=f33e20]: Identification
+      - generic [ref=f33e23]:
+        - generic [ref=f33e24]: Stock Number *
+        - textbox [ref=f33e25]:
+          - /placeholder: CT-2208
+      - generic [ref=f33e26]:
+        - generic [ref=f33e27]: Equipment Type *
+        - combobox [ref=f33e28]
+      - generic [ref=f33e29]: Vehicle specs
+      - generic [ref=f33e32]:
+        - generic [ref=f33e33]: Year
+        - textbox [ref=f33e34]:
+          - /placeholder: "2023"
+      - generic [ref=f33e35]:
+        - generic [ref=f33e36]: Make
+        - textbox [ref=f33e37]:
+          - /placeholder: Freightliner
+      - generic [ref=f33e38]:
+        - generic [ref=f33e39]: Model
+        - textbox [ref=f33e40]:
+          - /placeholder: Cascadia 126
+      - generic [ref=f33e41]:
+        - generic [ref=f33e42]: Engine
+        - textbox [ref=f33e43]:
+          - /placeholder: Detroit DD15 · 505 hp
+      - generic [ref=f33e44]:
+        - generic [ref=f33e45]: Transmission
+        - textbox [ref=f33e46]:
+          - /placeholder: DT12 · 12-speed AMT
+      - generic [ref=f33e47]:
+        - generic [ref=f33e48]: Mileage
+        - textbox [ref=f33e49]:
+          - /placeholder: 342,108
+      - generic [ref=f33e50]: Pricing
+      - generic [ref=f33e53]:
+        - generic [ref=f33e54]: Price (USD) *
+        - textbox [ref=f33e55]:
+          - /placeholder: "78500"
+      - generic [ref=f33e56]:
+        - generic [ref=f33e57]: Monthly Payment (lease)
+        - textbox [ref=f33e58]:
+          - /placeholder: $1,840 · 48 mo
+      - generic [ref=f33e60] [cursor=pointer]:
+        - checkbox [checked] [ref=f33e61]
+        - text: Lease-eligible · show "Lease-to-own" badge on public site
+      - generic [ref=f33e62]: Condition & legal
+      - generic [ref=f33e65]:
+        - generic [ref=f33e66]: Condition
+        - combobox [ref=f33e67]
+      - generic [ref=f33e68]:
+        - generic [ref=f33e69]: Location
+        - textbox [ref=f33e70]:
+          - /placeholder: Dallas, TX — Mountain Creek yard
+      - generic [ref=f33e71]:
+        - generic [ref=f33e72]: VIN
+        - textbox [ref=f33e73]:
+          - /placeholder: 1FUJGLDR9GLGW3217
+      - generic [ref=f33e74]:
+        - generic [ref=f33e75]: Axle Configuration
+        - textbox [ref=f33e76]:
+          - /placeholder: 6x4 · 40k rears
+      - generic [ref=f33e77]:
+        - generic [ref=f33e78]: Wheelbase
+        - textbox [ref=f33e79]:
+          - /placeholder: 228 in
+      - generic [ref=f33e80]:
+        - generic [ref=f33e81]: DOT Inspection
+        - textbox [ref=f33e82]
+      - generic [ref=f33e83]:
+        - generic [ref=f33e84]: Title Status
+        - combobox [ref=f33e85]
+      - generic [ref=f33e86]: Photos
+      - generic [ref=f33e90] [cursor=pointer]:
+        - generic: Drop photos here, or click to browse
+        - generic: Hero shot · 3/4 front · 3/4 rear · interior · spec sheet
+        - generic: JPG · PNG · WEBP · up to 12 MB each
+    - generic [ref=f33e92]:
+      - generic [ref=f33e93]: Draft saved · will publish on Submit
+      - button [ref=f33e94] [cursor=pointer]: Cancel
+      - button [ref=f33e95] [cursor=pointer]: Add to Inventory

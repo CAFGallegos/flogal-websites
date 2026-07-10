@@ -52,10 +52,10 @@ img{display:block;}
 .what{padding:96px 40px;background:var(--paper);}
 .what-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:5fr 7fr;gap:96px;align-items:start;}
 .what-left{}
-.eyebrow{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:10px;}
+.eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:10px;}
 .eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);}
-.h2{font-weight:700;font-size:44px;letter-spacing:-.025em;line-height:1.05;margin:16px 0 0;}
-.what-body{font-size:17px;line-height:1.75;color:var(--muted);}
+.h2{font-weight:700;font-size:var(--t-h2);letter-spacing:-.015em;line-height:1.15;margin:16px 0 0;}
+.what-body{font-size:17px;line-height:1.75;color:var(--muted);max-width:var(--measure);}
 .what-body p{margin:0 0 20px;}
 .what-body p:last-child{margin-bottom:0;}
 .what-pull{font-size:22px;line-height:1.45;font-weight:500;color:var(--navy);letter-spacing:-.01em;border-left:3px solid var(--gold);padding-left:24px;margin:40px 0;}
@@ -158,6 +158,9 @@ img{display:block;}
   .structure{padding:64px 24px;}.structure-inner{grid-template-columns:1fr;gap:40px;}
   .contact{padding:64px 24px;}.contact-inner{grid-template-columns:1fr;gap:40px;}
   .frow{grid-template-columns:1fr;}.holdco-row{padding:0;}
+}
+@media(max-width:480px){
+  .ent-grid{grid-template-columns:1fr;}
 }
 </style>
 <link rel="icon" type="image/x-icon" href="../../../shared/favicons/flogalhq/favicon.ico">

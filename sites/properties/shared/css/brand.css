@@ -6,25 +6,14 @@
    ===================================================================== */
 
 /* ---- Fonts: Satoshi (self-hosted, licensed) ------------------------ */
-@font-face {
-  font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-Light.otf') format('opentype');
-  font-weight: 300; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-LightItalic.otf') format('opentype');
-  font-weight: 300; font-style: italic; font-display: swap;
-}
+/* Trimmed to weights actually used in markup: 400/500/700 per plan, plus
+   900 which real content depends on (wordmarks, HQ about hero title) —
+   confirmed via repo-wide grep before trimming, see G1-T3 session note.
+   No italic usage found in rendered content; italic faces dropped. */
 @font-face {
   font-family: 'Satoshi';
   src: url('../fonts/Satoshi-Regular.otf') format('opentype');
   font-weight: 400; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-Italic.otf') format('opentype');
-  font-weight: 400; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: 'Satoshi';
@@ -33,31 +22,20 @@
 }
 @font-face {
   font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-MediumItalic.otf') format('opentype');
-  font-weight: 500; font-style: italic; font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
   src: url('../fonts/Satoshi-Bold.otf') format('opentype');
   font-weight: 700; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-BoldItalic.otf') format('opentype');
-  font-weight: 700; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: 'Satoshi';
   src: url('../fonts/Satoshi-Black.otf') format('opentype');
   font-weight: 900; font-style: normal; font-display: swap;
 }
-@font-face {
-  font-family: 'Satoshi';
-  src: url('../fonts/Satoshi-BlackItalic.otf') format('opentype');
-  font-weight: 900; font-style: italic; font-display: swap;
-}
 
-/* JetBrains Mono — still served from Fontshare CDN for the lone mono family */
+/* JetBrains Mono — still served from Fontshare CDN for the lone mono family.
+   Self-hosting deferred: Google Fonts' css2 API returned identical woff2
+   URLs for the 400 and 500 weight requests during this session's lookup,
+   which couldn't be verified as correct without risking a broken/duplicate
+   font file in production. Flagged for Carlos, not silently done. */
 @import url('https://api.fontshare.com/v2/css?f[]=jetbrains-mono@500,400&display=swap');
 
 :root {
@@ -189,9 +167,9 @@
      6. TYPOGRAPHY — Satoshi family
         Geometric, disciplined, freight-grade.
         ========================================================= */
-  --font-sans:          'Satoshi', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-display:       'Satoshi', 'Inter', system-ui, sans-serif;
-  --font-mono:          'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-sans:          'Satoshi', system-ui, sans-serif;
+  --font-display:       'Satoshi', system-ui, sans-serif;
+  --font-mono:          'JetBrains Mono', ui-monospace, Menlo, monospace;
 
   /* Weights */
   --fw-light:           300;
@@ -284,6 +262,42 @@
   --dur-base:    200ms;
   --dur-slow:    320ms;
   --dur-hero:    600ms;
+
+  /* =========================================================
+     11. TYPE SCALE — --t-* system (design plan §3.3)
+        Sizes only; weight/line-height/tracking applied via the
+        .t-* utility classes below. Values are final.
+        ========================================================= */
+  --t-display:  clamp(3rem, 4.5vw + 0.6rem, 4.5rem); /* 48–72px, hero H1 only */
+  --t-h1:       3rem;      /* 48px */
+  --t-h2:       2.5rem;    /* 40px */
+  --t-h3:       1.5rem;    /* 24px */
+  --t-h4:       1.125rem;  /* 18px */
+  --t-body-lg:  1.125rem;  /* 18px */
+  --t-body:     1rem;      /* 16px */
+  --t-body-sm:  0.875rem;  /* 14px */
+  --t-eyebrow:  0.75rem;   /* 12px */
+  --t-micro:    0.625rem;  /* 10px */
+  --t-mono:     0.8125rem; /* 13px */
+
+  /* =========================================================
+     12. SECTION RHYTHM & MEASURE (§3.4 / §3.8)
+        ========================================================= */
+  --sec-y:      var(--s-24); /* 96px desktop; 64px <=860px, see media query below */
+  --sec-y-lg:   112px;       /* statement bands (dark full-bleed) */
+  --measure:    62ch;        /* prose line-length cap */
+
+  /* =========================================================
+     13. HERO VEIL & GRAIN (§3.9 / §4.3)
+        ========================================================= */
+  --hero-veil:
+    linear-gradient(90deg, rgba(5,10,18,.88) 0%, rgba(5,10,18,.55) 38%, rgba(5,10,18,.12) 68%, rgba(5,10,18,.35) 100%),
+    linear-gradient(180deg, rgba(5,10,18,.35), rgba(5,10,18,.15) 40%, rgba(5,10,18,.78) 100%);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 860px) {
+  :root { --sec-y: 64px; }
 }
 
 /* =====================================================================
@@ -380,3 +394,110 @@ a {
   transition: border-color var(--dur-fast) var(--ease-standard);
 }
 a:hover { border-bottom-color: currentColor; }
+
+/* ---- Type scale utility classes (§3.3, use with --t-* tokens) ------ */
+.t-display {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-display); line-height: 1.05; letter-spacing: -0.02em;
+}
+.t-h1 {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-h1); line-height: 1.08; letter-spacing: -0.02em;
+}
+.t-h2 {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-h2); line-height: 1.15; letter-spacing: -0.015em;
+}
+.t-h3 {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.01em;
+}
+.t-h4 {
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  font-size: var(--t-h4); line-height: 1.25;
+}
+.t-body-lg { font-size: var(--t-body-lg); line-height: 1.6; }
+.t-body    { font-size: var(--t-body); line-height: 1.62; }
+.t-body-sm { font-size: var(--t-body-sm); line-height: 1.5; }
+.t-eyebrow {
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  font-size: var(--t-eyebrow); letter-spacing: 0.14em;
+  text-transform: uppercase; line-height: 1;
+}
+.t-micro {
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  font-size: var(--t-micro); letter-spacing: 0.22em;
+  text-transform: uppercase; line-height: 1.2;
+}
+.t-mono {
+  font-family: var(--font-mono); font-weight: var(--fw-medium);
+  font-size: var(--t-mono); letter-spacing: 0.02em; line-height: 1.4;
+}
+
+/* ---- Button system (§3.5) — one spec, three surfaces --------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  border-radius: var(--r-md); border: 1px solid transparent;
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  padding: 11px 20px; font-size: 14px; /* md, default */
+  transition: background var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard),
+              filter var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard);
+}
+.btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible { outline: none; box-shadow: var(--accent-ring); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; transform: none; }
+
+.btn-sm { padding: 9px 16px; font-size: 13px; }
+.btn-lg { padding: 14px 24px; font-size: 15px; }
+
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--btn-primary-fg, #FFFFFF); }
+.btn-outline { background: transparent; border-color: var(--accent-border); color: inherit; }
+.btn-outline.on-dark { border-color: rgba(255,255,255,.42); color: #FFFFFF; }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--accent); }
+.btn-ghost:hover { background: var(--accent-soft); }
+.btn-inverse { background: #FFFFFF; border-color: #FFFFFF; color: var(--flogal-navy); }
+
+/* ---- Card system (§3.6) --------------------------------------------- */
+.card-light {
+  background: var(--surface-0); border: 1px solid var(--hairline);
+  border-radius: var(--r-lg); padding: 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.card-light.is-linked {
+  transition: box-shadow var(--dur-slow) var(--ease-standard),
+              transform var(--dur-slow) var(--ease-standard),
+              border-color var(--dur-slow) var(--ease-standard);
+}
+.card-light.is-linked:hover {
+  box-shadow: var(--shadow-md); transform: translateY(-2px);
+  border-color: var(--accent-border);
+}
+/* Bottom-align a trailing link row so mismatched body lengths still end flush */
+.card-light .card-link-row { margin-top: auto; }
+
+.card-dark {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--r-lg); padding: 24px;
+  transition: border-color var(--dur-slow) var(--ease-standard);
+}
+.card-dark:hover { border-color: rgba(255,255,255,.22); }
+.card-dark.on-photo { backdrop-filter: blur(6px); }
+
+.icon-tile {
+  width: 40px; height: 40px; border-radius: var(--r-md);
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-tile svg { width: 20px; height: 20px; stroke-width: 1.75; }
+
+/* ---- Motion layer (§4) ----------------------------------------------
+   Shared keyframes only — apply the ::before glow-drift layer per site
+   on the site's own night-band selector (background/accent already
+   differs per site, so there's no single shared class to hook). Every
+   consumer must gate the animation behind prefers-reduced-motion. */
+@keyframes glow-drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-4%,3%,0); } }
+@keyframes lane-run { to { stroke-dashoffset: 0; } }

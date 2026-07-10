@@ -56,16 +56,14 @@ a{color:inherit;text-decoration:none;}
 
 .op-wrap{max-width:var(--op-max);margin:0 auto;padding:0 40px;}
 
-.op-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--op-blue-strong);}
+.op-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--op-blue-strong);}
 .op-eyebrow::before{content:'';width:22px;height:1px;background:var(--op-blue);display:inline-block;}
-.op-h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:44px;letter-spacing:-.025em;line-height:1.05;color:white;}
+.op-h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:var(--t-h2);letter-spacing:-.015em;line-height:1.15;color:white;}
 .op-section-head{display:flex;flex-direction:column;gap:16px;max-width:760px;margin-bottom:48px;}
 .op-section-sub{margin:0;color:var(--op-fg-dim);font-size:16px;max-width:640px;}
 
 /* ---- Buttons ------------------------------------------------------- */
-.op-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.02em;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background 160ms,border-color 160ms,color 160ms;}
-.op-btn-gold{background:var(--op-gold);color:var(--flogal-navy);border-color:var(--op-gold);}
-.op-btn-gold:hover{background:var(--op-gold-hover);border-color:var(--op-gold-hover);}
+.op-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:14px;letter-spacing:.02em;text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background 160ms,border-color 160ms,color 160ms;}
 .op-btn-blue{background:var(--op-blue);color:white;border-color:var(--op-blue);}
 .op-btn-blue:hover{background:var(--op-blue-strong);border-color:var(--op-blue-strong);}
 .op-btn-ghost{background:transparent;color:white;border-color:rgba(255,255,255,.28);}
@@ -89,16 +87,20 @@ a{color:inherit;text-decoration:none;}
 .op-nav-actions{display:flex;gap:10px;align-items:center;margin-left:auto;}
 .op-nav-login{font-size:13px;font-weight:600;color:var(--op-blue-strong);padding:8px 14px;border:1px solid var(--op-blue-line);border-radius:6px;transition:background 140ms;}
 .op-nav-login:hover{background:var(--op-blue-soft);}
-.op-nav-cta{background:var(--op-gold);color:var(--flogal-navy);padding:9px 18px;border-radius:6px;font-size:13px;font-weight:700;transition:background 140ms;}
-.op-nav-cta:hover{background:var(--op-gold-hover);}
+.op-nav-cta{background:var(--op-blue);color:white;padding:9px 18px;border-radius:6px;font-size:13px;font-weight:700;transition:background 140ms;}
+.op-nav-cta:hover{background:var(--op-blue-strong);}
 
 /* ---- Hero ---------------------------------------------------------- */
-.op-hero{position:relative;padding:120px 0 96px;overflow:hidden;background:radial-gradient(80% 60% at 80% 30%,rgba(45,125,210,.18) 0%,transparent 60%),radial-gradient(70% 60% at 10% 90%,rgba(45,125,210,.10) 0%,transparent 60%),linear-gradient(180deg,#07111c 0%,#050a12 100%);}
+.op-hero{position:relative;padding:var(--sec-y-lg) 0 var(--sec-y);overflow:hidden;background:radial-gradient(80% 60% at 80% 30%,rgba(45,125,210,.18) 0%,transparent 60%),radial-gradient(70% 60% at 10% 90%,rgba(45,125,210,.10) 0%,transparent 60%),linear-gradient(180deg,#07111c 0%,#050a12 100%);}
+.op-hero::before{content:'';position:absolute;inset:-10%;z-index:0;pointer-events:none;
+  background:radial-gradient(900px 480px at 80% 20%, var(--accent-soft), transparent 70%);
+  animation:glow-drift 80s var(--ease-standard) infinite alternate;will-change:transform;}
+@media(prefers-reduced-motion:reduce){.op-hero::before{animation:none;}}
 .op-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.024) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.024) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(80% 70% at 50% 30%,black 0%,transparent 90%);-webkit-mask-image:radial-gradient(80% 70% at 50% 30%,black 0%,transparent 90%);pointer-events:none;}
 .op-hero-inner{position:relative;z-index:2;}
 .op-hero-title{margin:22px 0;font-family:var(--font-display);font-weight:700;font-size:clamp(56px,6.5vw,92px);letter-spacing:-.03em;line-height:.98;color:white;max-width:1100px;}
 .op-hero-title .op-dot{color:var(--op-blue);}
-.op-hero-sub{margin:0 0 36px;font-size:19px;line-height:1.5;color:var(--op-fg-dim);max-width:680px;}
+.op-hero-sub{margin:0 0 36px;font-size:var(--t-body-lg);line-height:1.5;color:var(--op-fg-dim);max-width:680px;}
 .op-hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 
 /* ---- Proof cards ----------------------------------------------------- */
@@ -163,6 +165,13 @@ a{color:inherit;text-decoration:none;}
 .op-lanes-row.is-primary .op-lanes-row-name::before{background:var(--op-blue-strong);box-shadow:0 0 0 4px rgba(45,125,210,.18);}
 .op-lanes-row-equip{color:var(--op-fg-dim);font-size:12.5px;}
 .op-lanes-row-status{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-blue-strong);}
+/* ---- Corridor map lane motion (§4.2) -------------------------------- */
+.lane{stroke-dasharray:6 94;stroke-dashoffset:100;animation:lane-run 16s linear infinite;}
+.lane-primary{animation-duration:12s;}
+.lane-3{animation-delay:-4s;}
+.lane-4{animation-delay:-8s;}
+.lane-5{animation-delay:-12s;}
+@media(prefers-reduced-motion:reduce){.lane{animation:none;stroke-dasharray:none;}}
 
 /* ---- How we operate ----------------------------------------------- */
 .op-how{padding:96px 0;background:var(--op-surface);border-top:1px solid var(--op-rule);border-bottom:1px solid var(--op-rule);}
@@ -240,7 +249,7 @@ a{color:inherit;text-decoration:none;}
   .op-nav-links,.op-nav-login,.op-nav-cta{display:none;}
   .op-nav-inner{padding:14px 20px;}
   .op-hero{padding:72px 0 64px;}
-  .op-stats-inner,.op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-quote-grid,.op-lanes-grid{grid-template-columns:1fr!important;}
+  .op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-quote-grid,.op-lanes-grid{grid-template-columns:1fr!important;}
   .op-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 }
 </style>
@@ -339,7 +348,7 @@ a{color:inherit;text-decoration:none;}
     </h1>
     <p class="op-hero-sub">Flogal Carriers runs asset-based hauling on the Oklahoma–Texas corridor through two owned fleets — RRTL and J&amp;D Hauling — extended by a vetted partner network across the U.S. and into Mexico.</p>
     <div class="op-hero-actions">
-      <a href="#quote" class="op-btn op-btn-gold">Request a Quote →</a>
+      <a href="#quote" class="op-btn op-btn-blue">Request a Quote →</a>
       <a href="#lanes" class="op-btn op-btn-ghost">View active lanes</a>
     </div>
   </div>
@@ -508,10 +517,10 @@ a{color:inherit;text-decoration:none;}
         <svg viewBox="0 0 100 90" preserveAspectRatio="xMidYMid meet">
           <path d="M14,16 L62,12 L78,18 L80,32 L88,38 L82,52 L78,68 L66,80 L46,82 L24,76 L12,62 L10,40 Z" fill="rgba(45,125,210,0.06)" stroke="rgba(45,125,210,0.40)" stroke-width="0.3" vector-effect="non-scaling-stroke"/>
           <path d="M14,32 L80,32" stroke="rgba(255,255,255,0.10)" stroke-width="0.3" stroke-dasharray="1 1" vector-effect="non-scaling-stroke"/>
-          <path d="M44,52 L48,28" stroke="#4A93E1" stroke-width="0.9" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+          <path class="lane lane-primary" pathLength="100" d="M44,52 L48,28" stroke="#4A93E1" stroke-width="0.9" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
           <g stroke="rgba(45,125,210,0.55)" stroke-width="0.5" fill="none" vector-effect="non-scaling-stroke">
-            <path d="M44,52 L26,68"/><path d="M44,52 L62,58"/>
-            <path d="M44,52 L36,42"/><path d="M48,28 L66,24"/>
+            <path class="lane lane-2" pathLength="100" d="M44,52 L26,68"/><path class="lane lane-3" pathLength="100" d="M44,52 L62,58"/>
+            <path class="lane lane-4" pathLength="100" d="M44,52 L36,42"/><path class="lane lane-5" pathLength="100" d="M48,28 L66,24"/>
           </g>
           <!-- OKC -->
           <circle cx="48" cy="28" r="2.4" fill="#4A93E1" opacity="0.22"/>
@@ -683,7 +692,7 @@ a{color:inherit;text-decoration:none;}
           <div class="op-form-field"><label class="op-form-lab">Load details</label><textarea id="cr-details" class="op-form-textarea" placeholder="Commodity, weight, dimensions, accessorial needs, delivery window, special instructions."></textarea></div>
         </div>
         <div class="op-form-actions">
-          <button type="submit" id="crSubmitBtn" class="op-btn op-btn-gold">Request a Quote →</button>
+          <button type="submit" id="crSubmitBtn" class="op-btn op-btn-blue">Request a Quote →</button>
           <span class="op-form-disclaimer">Reply inside 4 business hours · No broker markup</span>
         </div>
         <div id="crFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:8px;"></div>

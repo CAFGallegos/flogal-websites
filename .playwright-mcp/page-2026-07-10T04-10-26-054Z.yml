@@ -1,0 +1,225 @@
+- generic [active] [ref=f25e1]:
+  - banner [ref=f25e2]:
+    - generic [ref=f25e3]:
+      - link [ref=f25e4] [cursor=pointer]:
+        - /url: /
+        - img "FLOGAL" [ref=f25e5]
+      - button "Menu" [ref=f25e6] [cursor=pointer]
+  - generic [ref=f25e10]:
+    - img "Flogal fleet" [ref=f25e12]
+    - generic [ref=f25e13]:
+      - generic [ref=f25e14]: Flogal Holdings
+      - heading "One platform. Freight-native operating companies." [level=1] [ref=f25e15]: One platform.Freight-native operating companies.
+      - paragraph [ref=f25e16]: Flogal Holdings is a privately held, operator-funded freight platform operating across hauling, equipment, and industrial real estate — built for durable, asset-backed growth.
+      - generic [ref=f25e17]: Scroll to explore
+  - generic [ref=f25e20]:
+    - generic [ref=f25e21]:
+      - generic [ref=f25e22]: Who We Are
+      - heading "A logistics platform built from the ground up." [level=2] [ref=f25e23]
+    - generic [ref=f25e24]:
+      - paragraph [ref=f25e25]: Flogal Holdings is the parent of a group of operating businesses built around freight, physical assets, and long-term value. We're not a startup and not a broker — we're operators who own assets and run real freight companies.
+      - generic [ref=f25e26]: "\"We build companies the way infrastructure should be built — documented, structured, and designed to outlast the people who started them.\""
+      - paragraph [ref=f25e27]: Every entity operates with its own leadership and market, but shares one operating system and one standard of discipline. Our aim is to be the kind of operator banks want to lend to, insurers want to underwrite, and partners want to depend on.
+  - generic [ref=f25e29]:
+    - generic [ref=f25e30]:
+      - generic [ref=f25e31]: Platform Structure
+      - heading "The full entity map." [level=2] [ref=f25e32]
+    - generic [ref=f25e33]:
+      - generic [ref=f25e36]:
+        - generic [ref=f25e37]: Flogal Holdings
+        - generic [ref=f25e38]: Parent Company · Private
+      - generic [ref=f25e40]:
+        - generic [ref=f25e41]:
+          - generic [ref=f25e42]: Operating
+          - generic [ref=f25e44]: Flogal Carriers
+          - generic [ref=f25e45]: Asset-based freight and hauling, operated through J&D Hauling and RRTL across Oklahoma and Texas.
+          - link "Carriers →" [ref=f25e46] [cursor=pointer]:
+            - /url: https://carriers.flogalhq.com
+        - generic [ref=f25e47]:
+          - generic [ref=f25e48]: Equipment
+          - generic [ref=f25e50]: Flogal Sales
+          - generic [ref=f25e51]: Truck, trailer, and equipment sales and leasing.
+          - link "Inventory →" [ref=f25e52] [cursor=pointer]:
+            - /url: https://sales.flogalhq.com
+        - generic [ref=f25e53]:
+          - generic [ref=f25e54]: Real Estate
+          - generic [ref=f25e56]: Flogal Properties
+          - generic [ref=f25e57]: Industrial real estate and freight-oriented land and facilities.
+          - link "Properties →" [ref=f25e58] [cursor=pointer]:
+            - /url: https://properties.flogalhq.com
+        - generic [ref=f25e59]:
+          - generic [ref=f25e60]: Internal
+          - generic [ref=f25e62]: Flogal Technologies
+          - generic [ref=f25e63]: "Internal operating platform: maintenance, dispatch, payroll, and per-truck P&L. Runs Flogal's own companies."
+          - generic [ref=f25e64]: Internal platform · no public site
+  - generic [ref=f25e66]:
+    - generic [ref=f25e67]:
+      - generic [ref=f25e68]:
+        - generic [ref=f25e69]: Operating Thesis
+        - heading "Why we build this way." [level=2] [ref=f25e70]: Why we buildthis way.
+      - paragraph [ref=f25e71]: The freight and logistics industry is fragmented, undercapitalized, and poorly structured at the ownership level. Flogal is being built to be the exception — a multi-entity platform that operates like an institution from day one.
+    - generic [ref=f25e72]:
+      - generic [ref=f25e73]:
+        - generic [ref=f25e74]: "01"
+        - generic [ref=f25e75]: Institutional Structure First
+        - generic [ref=f25e76]: Every entity is formed, documented, and capitalized to meet the standards of banks, insurers, and corporate partners. Not after we grow — from the start.
+      - generic [ref=f25e77]:
+        - generic [ref=f25e78]: "02"
+        - generic [ref=f25e79]: Vertical Integration Creates Leverage
+        - generic [ref=f25e80]: When you own the truck, the equipment, the yard, and the financing — you control margin at every level. That's the Flogal model.
+      - generic [ref=f25e81]:
+        - generic [ref=f25e82]: "03"
+        - generic [ref=f25e83]: Assets Over Revenue
+        - generic [ref=f25e84]: We build asset-backed businesses, not revenue-dependent service companies. Physical assets create permanence, collateral, and compounding value.
+      - generic [ref=f25e85]:
+        - generic [ref=f25e86]: "04"
+        - generic [ref=f25e87]: Operators, Not Consultants
+        - generic [ref=f25e88]: We make money by moving freight, selling equipment, and owning assets — not advisory or management fees.
+      - generic [ref=f25e89]:
+        - generic [ref=f25e90]: "05"
+        - generic [ref=f25e91]: Scalable by Design
+        - generic [ref=f25e92]: The holding structure is built to absorb new entities without restructuring. We can add a business the way you add a division — cleanly.
+      - generic [ref=f25e93]:
+        - generic [ref=f25e94]: "06"
+        - generic [ref=f25e95]: Long Time Horizon
+        - generic [ref=f25e96]: We are not building to flip. We are building to compound. Every decision is made through the lens of what the business looks like in ten years.
+  - generic [ref=f25e98]:
+    - generic [ref=f25e99]: Who We Serve
+    - heading "Built for partners who require institutional quality." [level=2] [ref=f25e100]: Built for partners whorequire institutional quality.
+    - generic [ref=f25e101]:
+      - generic [ref=f25e102]:
+        - generic [ref=f25e106]: Shippers & Freight Partners
+        - generic [ref=f25e107]: Reliable capacity and dedicated account management from operators who run their own trucks.
+      - generic [ref=f25e108]:
+        - generic [ref=f25e112]: Insurance & Lending Partners
+        - generic [ref=f25e113]: Asset-backed entities with clean corporate documentation, structured for underwriting and credit.
+      - generic [ref=f25e114]:
+        - generic [ref=f25e121]: Sellers & Partners
+        - generic [ref=f25e122]: Whether you're selling a property, equipment, or a business, we're a direct buyer with the structure to close.
+  - generic [ref=f25e124]:
+    - generic [ref=f25e125]:
+      - generic [ref=f25e126]: Corporate Structure
+      - heading "What's under the hood." [level=2] [ref=f25e127]
+      - paragraph [ref=f25e128]: Flogal is structured as a holding company with operating subsidiaries in each business vertical. This gives us the flexibility to grow each entity independently while maintaining unified financial oversight.
+    - generic [ref=f25e129]:
+      - generic [ref=f25e130]:
+        - generic [ref=f25e131]: Entity Type
+        - generic [ref=f25e132]: Private Holding Company
+      - generic [ref=f25e133]:
+        - generic [ref=f25e134]: Headquarters
+        - generic [ref=f25e135]: Oklahoma City, OK
+      - generic [ref=f25e136]:
+        - generic [ref=f25e137]: Operating Focus
+        - generic [ref=f25e138]: Freight · Equipment · Real Estate
+      - generic [ref=f25e139]:
+        - generic [ref=f25e140]: Primary Website
+        - generic [ref=f25e141]: flogalhq.com
+      - generic [ref=f25e142]:
+        - generic [ref=f25e143]: Funding Model
+        - generic [ref=f25e144]: Self-Funded
+      - generic [ref=f25e145]:
+        - generic [ref=f25e146]: Status
+        - generic [ref=f25e147]: Operating
+  - generic [ref=f25e150]:
+    - generic [ref=f25e151]:
+      - generic [ref=f25e152]: Contact
+      - heading "Get in touch." [level=2] [ref=f25e153]
+      - paragraph [ref=f25e154]: For banking relationships, insurance discussions, business development, or general inquiries about the Flogal platform.
+      - generic [ref=f25e155]:
+        - generic [ref=f25e156]: General Inquiries
+        - link "info@flogalhq.com" [ref=f25e158] [cursor=pointer]:
+          - /url: mailto:info@flogalhq.com
+      - generic [ref=f25e159]:
+        - generic [ref=f25e160]: Carrier Operations
+        - link "carriers@flogalhq.com" [ref=f25e162] [cursor=pointer]:
+          - /url: mailto:carriers@flogalhq.com
+      - generic [ref=f25e163]:
+        - generic [ref=f25e164]: Equipment
+        - link "sales@flogalhq.com" [ref=f25e166] [cursor=pointer]:
+          - /url: mailto:sales@flogalhq.com
+      - generic [ref=f25e167]:
+        - generic [ref=f25e168]: Properties
+        - link "properties@flogalhq.com" [ref=f25e170] [cursor=pointer]:
+          - /url: mailto:properties@flogalhq.com
+      - generic [ref=f25e171]:
+        - generic [ref=f25e172]: Headquarters
+        - generic [ref=f25e173]: Oklahoma City, Oklahoma
+    - generic [ref=f25e174]:
+      - generic [ref=f25e175]:
+        - generic [ref=f25e176]:
+          - generic [ref=f25e177]: First Name
+          - textbox "John" [ref=f25e178]
+        - generic [ref=f25e179]:
+          - generic [ref=f25e180]: Last Name
+          - textbox "Smith" [ref=f25e181]
+      - generic [ref=f25e182]:
+        - generic [ref=f25e183]: Company
+        - textbox "Company or Institution" [ref=f25e184]
+      - generic [ref=f25e185]:
+        - generic [ref=f25e186]: Email
+        - textbox "john@institution.com" [ref=f25e187]
+      - generic [ref=f25e188]:
+        - generic [ref=f25e189]: Inquiry Type
+        - combobox [ref=f25e190]:
+          - option "Select..." [selected]
+          - option "Equipment Purchase or Lease"
+          - option "Insurance"
+          - option "Partnership / Business Development"
+          - option "Carrier / Freight"
+          - option "Equipment"
+          - option "Real Estate"
+          - option "Acquisition / Investment"
+          - option "Other"
+      - generic [ref=f25e191]:
+        - generic [ref=f25e192]: Message
+        - textbox "Tell us about your inquiry..." [ref=f25e193]
+      - generic [ref=f25e194]:
+        - generic [ref=f25e195]: Preferred Contact
+        - combobox [ref=f25e196]:
+          - option "Select…" [selected]
+          - option "Email"
+          - option "Phone"
+          - option "Text"
+      - button "Send Message →" [ref=f25e197] [cursor=pointer]
+  - contentinfo [ref=f25e198]:
+    - generic [ref=f25e199]:
+      - generic [ref=f25e200]:
+        - generic [ref=f25e201]:
+          - img "FLOGAL" [ref=f25e203]
+          - paragraph [ref=f25e204]: Asset-backed across the freight stack.
+        - navigation [ref=f25e205]:
+          - generic [ref=f25e206]:
+            - generic [ref=f25e207]: Hauling
+            - link "Load Board" [ref=f25e208] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+            - link "Request a Quote" [ref=f25e209] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+            - link "Partner Login" [ref=f25e210] [cursor=pointer]:
+              - /url: https://carriers.flogalhq.com
+          - generic [ref=f25e211]:
+            - generic [ref=f25e212]: Equipment
+            - link "Inventory" [ref=f25e213] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Financing" [ref=f25e214] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Trade-In" [ref=f25e215] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+          - generic [ref=f25e216]:
+            - generic [ref=f25e217]: Realty
+            - link "Listings" [ref=f25e218] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Yard Leasing" [ref=f25e219] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Contact" [ref=f25e220] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+          - generic [ref=f25e221]:
+            - generic [ref=f25e222]: Company
+            - link "About" [ref=f25e223] [cursor=pointer]:
+              - /url: /about
+            - link "Contact" [ref=f25e224] [cursor=pointer]:
+              - /url: "#contact"
+      - generic [ref=f25e225]:
+        - generic [ref=f25e226]: flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com
+        - generic [ref=f25e227]: © 2026 FLOGAL Holdings, LLC
+        - link "Staff Login" [ref=f25e228] [cursor=pointer]:
+          - /url: https://admin.flogalhq.com/login.html

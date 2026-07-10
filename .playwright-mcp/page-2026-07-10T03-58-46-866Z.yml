@@ -1,0 +1,328 @@
+- generic [active] [ref=f16e1]:
+  - banner [ref=f16e2]:
+    - generic [ref=f16e3]:
+      - link "FLOGAL Carriers" [ref=f16e4] [cursor=pointer]:
+        - /url: https://www.flogalhq.com
+        - img "FLOGAL" [ref=f16e5]
+        - generic [ref=f16e7]: Carriers
+      - list [ref=f16e8]:
+        - listitem [ref=f16e9]:
+          - link "Home" [ref=f16e10] [cursor=pointer]:
+            - /url: https://www.flogalhq.com
+        - listitem [ref=f16e11]:
+          - link "Sales" [ref=f16e12] [cursor=pointer]:
+            - /url: https://sales.flogalhq.com
+        - listitem [ref=f16e13]:
+          - link "Properties" [ref=f16e14] [cursor=pointer]:
+            - /url: https://properties.flogalhq.com
+        - listitem [ref=f16e15]:
+          - link "About" [ref=f16e16] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=f16e17]:
+          - link "Contact" [ref=f16e18] [cursor=pointer]:
+            - /url: "#quote"
+      - generic [ref=f16e19]:
+        - link "Partner Login" [ref=f16e20] [cursor=pointer]:
+          - /url: portal/login.html
+        - link "Request a Quote" [ref=f16e21] [cursor=pointer]:
+          - /url: "#quote"
+  - generic [ref=f16e23]:
+    - generic [ref=f16e24]: Flogal Carriers · Asset-based hauling
+    - heading "Our trucks. Our dispatch. Your freight." [level=1] [ref=f16e25]
+    - paragraph [ref=f16e26]: Flogal Carriers runs asset-based hauling on the Oklahoma–Texas corridor through two owned fleets — RRTL and J&D Hauling — extended by a vetted partner network across the U.S. and into Mexico.
+    - generic [ref=f16e27]:
+      - link "Request a Quote →" [ref=f16e28] [cursor=pointer]:
+        - /url: "#quote"
+      - link "View active lanes" [ref=f16e29] [cursor=pointer]:
+        - /url: "#lanes"
+  - generic [ref=f16e32]:
+    - generic [ref=f16e33]:
+      - generic [ref=f16e34]: Owned fleets
+      - generic [ref=f16e35]: RRTL and J&D Hauling, dispatched from one desk.
+    - generic [ref=f16e36]:
+      - generic [ref=f16e37]: TX–OK corridor
+      - generic [ref=f16e38]: Home lanes, run daily.
+    - generic [ref=f16e39]:
+      - generic [ref=f16e40]: U.S. + Mexico network
+      - generic [ref=f16e41]: Vetted partner carriers extending our reach.
+    - generic [ref=f16e42]:
+      - generic [ref=f16e43]: No load boards
+      - generic [ref=f16e44]: Your freight rides on trucks we run or partners we know.
+  - generic [ref=f16e46]:
+    - generic [ref=f16e47]:
+      - generic [ref=f16e48]: Why direct
+      - heading "Three things every shipper actually wants from a carrier." [level=2] [ref=f16e49]
+      - paragraph [ref=f16e50]: Most freight today rides on margins, not on trucks. Flogal Carriers runs the opposite model — owned fleets, vetted partners, and the shortest possible distance between you and the driver.
+    - generic [ref=f16e51]:
+      - generic [ref=f16e52]:
+        - heading "Direct capacity" [level=3] [ref=f16e57]
+        - paragraph [ref=f16e58]: Your freight rides on Flogal-operated equipment or vetted partner fleets we dispatch ourselves. No load posting boards, no double-brokered surprises.
+      - generic [ref=f16e59]:
+        - heading "Vetted partners" [level=3] [ref=f16e64]
+        - paragraph [ref=f16e65]: "Every partner fleet passes a 22-point compliance check: DOT authority, insurance verification, equipment age, and driver tenure. Re-checked quarterly."
+      - generic [ref=f16e66]:
+        - heading "No brokers" [level=3] [ref=f16e72]
+        - paragraph [ref=f16e73]: One contract, one truck, one accountability chain. You talk to the operator dispatching your load — not a sales desk passing it down the chain for a margin.
+  - generic [ref=f16e75]:
+    - generic [ref=f16e76]:
+      - generic [ref=f16e77]: Our fleet
+      - heading "Two owned fleets, one dispatch desk." [level=2] [ref=f16e78]
+      - paragraph [ref=f16e79]: Customers see one rate, one POD, one accountability chain.
+    - generic [ref=f16e80]:
+      - article [ref=f16e81]:
+        - generic [ref=f16e82]:
+          - generic [ref=f16e83]: J&D
+          - heading "J&D Hauling" [level=3] [ref=f16e85]
+        - paragraph [ref=f16e86]: An acquired Flogal carrier handling freight hauling and equipment transport on regional corridors, dispatched alongside RRTL from the same ops desk.
+      - article [ref=f16e87]:
+        - generic [ref=f16e88]:
+          - generic [ref=f16e89]: RRTL
+          - heading "RRTL" [level=3] [ref=f16e91]
+        - paragraph [ref=f16e92]: "End-dump and aggregate hauling: rock, sand, and base material out of regional quarries across the Texas–Oklahoma corridor. Day-in, day-out quarry freight is the core of what we do."
+  - generic [ref=f16e94]:
+    - generic [ref=f16e95]:
+      - generic [ref=f16e96]: Services & equipment
+      - heading "Trailers we run, freight we handle." [level=2] [ref=f16e97]
+      - paragraph [ref=f16e98]: Five trailer programs covering the freight that actually moves on the corridors we run. If you need something outside this list, our sourcing desk pulls capacity from the partner network.
+    - generic [ref=f16e99]:
+      - link [ref=f16e100] [cursor=pointer]:
+        - /url: aggregate-hauling/
+        - heading "End dump · aggregate" [level=3] [ref=f16e105]
+      - link [ref=f16e106] [cursor=pointer]:
+        - /url: aggregate-hauling/
+        - heading "Belly dump" [level=3] [ref=f16e111]
+      - link [ref=f16e112] [cursor=pointer]:
+        - /url: equipment-transport/
+        - heading "Flatbed" [level=3] [ref=f16e117]
+      - article [ref=f16e118]:
+        - heading "Dry van" [level=3] [ref=f16e124]
+      - link [ref=f16e125] [cursor=pointer]:
+        - /url: equipment-transport/
+        - heading "Equipment transport" [level=3] [ref=f16e132]
+  - generic [ref=f16e134]:
+    - generic [ref=f16e135]:
+      - generic [ref=f16e136]: Network partners
+      - heading "A partner network we actually know." [level=2] [ref=f16e137]
+      - paragraph [ref=f16e138]: Beyond our owned fleets, Flogal dispatches through a vetted network of carrier partners — relationships built truck-side, not off a load board.
+    - generic [ref=f16e139]:
+      - generic [ref=f16e140]: United States
+      - list [ref=f16e141]:
+        - listitem [ref=f16e142]: DA Transport
+        - listitem [ref=f16e143]: Evolution · California
+        - listitem [ref=f16e144]: International Transport · California
+        - listitem [ref=f16e145]: FLS Express · El Paso, TX
+    - generic [ref=f16e146]:
+      - generic [ref=f16e147]: Mexico
+      - list [ref=f16e148]:
+        - listitem [ref=f16e149]: Olior · Guadalajara
+        - listitem [ref=f16e150]: Odal
+    - paragraph [ref=f16e151]: Cross-border freight moves through trusted partners on both sides — the same accountability standard, both directions.
+  - generic [ref=f16e153]:
+    - generic [ref=f16e154]:
+      - generic [ref=f16e155]: Active lanes
+      - heading "Built around the TX–OK corridor." [level=2] [ref=f16e156]
+      - paragraph [ref=f16e157]: Our owned capacity runs densely on the Dallas–Oklahoma City spine. Secondary lanes feed in from Houston, San Antonio, and West Texas; partner capacity extends reach into the lower 48 and cross-border.
+    - generic [ref=f16e158]:
+      - generic [ref=f16e159]:
+        - img [ref=f16e160]:
+          - generic [ref=f16e170]: OKLAHOMA CITY
+          - generic [ref=f16e173]: DFW
+          - generic [ref=f16e175]: SAN ANTONIO
+          - generic [ref=f16e177]: AUSTIN
+          - generic [ref=f16e179]: HOUSTON
+          - generic [ref=f16e181]: TULSA
+          - generic [ref=f16e183]: MIDLAND
+        - generic [ref=f16e184]:
+          - generic [ref=f16e185]: Primary corridor
+          - generic [ref=f16e187]: Secondary lanes
+      - generic [ref=f16e189]:
+        - generic [ref=f16e190]: Corridor lanes
+        - generic [ref=f16e192]:
+          - generic [ref=f16e193]: Dallas / Fort Worth ↔ Oklahoma City
+          - generic [ref=f16e194]: Flatbed · dry van · bulk
+          - generic [ref=f16e195]: Primary
+        - generic [ref=f16e196]:
+          - generic [ref=f16e197]: Houston ↔ Tulsa
+          - generic [ref=f16e198]: Flatbed · heavy haul
+          - generic [ref=f16e199]: Active
+        - generic [ref=f16e200]:
+          - generic [ref=f16e201]: San Antonio ↔ Austin
+          - generic [ref=f16e202]: Bulk · aggregate
+          - generic [ref=f16e203]: Active
+        - generic [ref=f16e204]:
+          - generic [ref=f16e205]: Midland-Odessa ↔ Dallas
+          - generic [ref=f16e206]: Flatbed · hot-shot
+          - generic [ref=f16e207]: Active
+        - generic [ref=f16e208]:
+          - generic [ref=f16e209]: Dallas ↔ Memphis
+          - generic [ref=f16e210]: Dry van
+          - generic [ref=f16e211]: Spot
+        - generic [ref=f16e212]:
+          - generic [ref=f16e213]: Houston ↔ Laredo (via FLS)
+          - generic [ref=f16e214]: Cross-border dry van
+          - generic [ref=f16e215]: Partner
+  - generic [ref=f16e217]:
+    - generic [ref=f16e218]:
+      - generic [ref=f16e219]: How we operate
+      - heading "From RFP to POD on a single accountability chain." [level=2] [ref=f16e220]
+      - paragraph [ref=f16e221]: One operator, one ops desk, four steps. The whole load lives on a single transaction — no second-tier brokers, no double-dispatched confusion, no calls about who actually has your trailer.
+    - generic [ref=f16e222]:
+      - generic [ref=f16e223]:
+        - generic [ref=f16e224]: "01"
+        - heading "Quote" [level=4] [ref=f16e225]
+        - paragraph [ref=f16e226]: Share lane, equipment, weight, and pickup window — our ops desk quotes it directly, no broker markup.
+      - generic [ref=f16e227]:
+        - generic [ref=f16e228]: "02"
+        - heading "Dispatch" [level=4] [ref=f16e229]
+        - paragraph [ref=f16e230]: We assign owned equipment or a vetted partner fleet and you get the driver and truck before pickup.
+      - generic [ref=f16e231]:
+        - generic [ref=f16e232]: "03"
+        - heading "Track + POD" [level=4] [ref=f16e233]
+        - paragraph [ref=f16e234]: GPS tracking and signed PODs delivered electronically — one ops contact end to end.
+      - generic [ref=f16e235]:
+        - generic [ref=f16e236]: "04"
+        - heading "Settle" [level=4] [ref=f16e237]
+        - paragraph [ref=f16e238]: One clean invoice, accessorials itemized line by line.
+  - generic [ref=f16e240]:
+    - generic [ref=f16e241]:
+      - generic [ref=f16e242]: Request a quote
+      - heading "Tell us about your load. We'll quote it inside four hours." [level=2] [ref=f16e243]
+      - paragraph [ref=f16e244]: Lane, equipment, weight, pickup window. One reply from the ops desk — no broker queue, no chasing it down on Monday morning.
+    - generic [ref=f16e245]:
+      - complementary [ref=f16e246]:
+        - generic [ref=f16e247]:
+          - generic [ref=f16e252]:
+            - generic [ref=f16e253]: Ops desk
+            - generic [ref=f16e254]: +1 (903) 555-0140
+          - generic [ref=f16e260]:
+            - generic [ref=f16e261]: Email
+            - generic [ref=f16e262]: ops@carriers.flogalhq.com
+          - generic [ref=f16e268]:
+            - generic [ref=f16e269]: Response window
+            - generic [ref=f16e270]: Inside 4 business hours · Mon–Fri
+          - generic [ref=f16e276]:
+            - generic [ref=f16e277]: Headquarters
+            - generic [ref=f16e278]: 2400 N. Stemmons FwyDallas, TX 75207
+      - generic [ref=f16e279]:
+        - generic [ref=f16e280]:
+          - generic [ref=f16e281]:
+            - generic [ref=f16e282]: First Name
+            - textbox "Pat" [ref=f16e283]
+          - generic [ref=f16e284]:
+            - generic [ref=f16e285]: Last Name
+            - textbox "Hernandez" [ref=f16e286]
+        - generic [ref=f16e287]:
+          - generic [ref=f16e288]:
+            - generic [ref=f16e289]: Company
+            - textbox "Brazos Aggregate Holdings" [ref=f16e290]
+          - generic [ref=f16e291]:
+            - generic [ref=f16e292]: Preferred Contact
+            - combobox [ref=f16e293]:
+              - option "Select…" [selected]
+              - option "Email"
+              - option "Phone"
+              - option "Text"
+        - generic [ref=f16e294]:
+          - generic [ref=f16e295]:
+            - generic [ref=f16e296]: Email
+            - textbox "pat@brazos.co" [ref=f16e297]
+          - generic [ref=f16e298]:
+            - generic [ref=f16e299]: Phone
+            - textbox "+1 (903) 555-0173" [ref=f16e300]
+        - generic [ref=f16e301]:
+          - generic [ref=f16e302]:
+            - generic [ref=f16e303]: Origin
+            - textbox "Dallas, TX 75207" [ref=f16e304]
+          - generic [ref=f16e305]:
+            - generic [ref=f16e306]: Destination
+            - textbox "Oklahoma City, OK 73108" [ref=f16e307]
+        - generic [ref=f16e308]:
+          - generic [ref=f16e309]:
+            - generic [ref=f16e310]: Equipment
+            - combobox [ref=f16e311]:
+              - option "Flatbed · 53'" [selected]
+              - option "Dry van · 53'"
+              - option "Heavy haul · RGN"
+              - option "Bulk · end-dump"
+              - option "Pneumatic · dry bulk"
+              - option "Expedited · hot-shot"
+              - option "Other / not sure"
+          - generic [ref=f16e312]:
+            - generic [ref=f16e313]: Pickup window
+            - textbox "Tue 5/26 · 0700–1100 CT" [ref=f16e314]
+        - generic [ref=f16e316]:
+          - generic [ref=f16e317]: Load details
+          - textbox "Commodity, weight, dimensions, accessorial needs, delivery window, special instructions." [ref=f16e318]
+        - generic [ref=f16e319]:
+          - button "Request a Quote →" [ref=f16e320] [cursor=pointer]
+          - generic [ref=f16e321]: Reply inside 4 business hours · No broker markup
+  - generic [ref=f16e324]:
+    - generic [ref=f16e325]:
+      - generic [ref=f16e326]: Partner access
+      - heading "Already a partner?" [level=3] [ref=f16e327]
+      - paragraph [ref=f16e328]: Access your dispatch portal, load board, and compliance documents.
+    - link "Login →" [ref=f16e329] [cursor=pointer]:
+      - /url: portal/login.html
+  - generic [ref=f16e331]:
+    - generic [ref=f16e332]:
+      - generic [ref=f16e333]: FAQ
+      - heading "Common questions." [level=2] [ref=f16e334]
+    - generic [ref=f16e335]:
+      - generic [ref=f16e336]:
+        - heading "What is Flogal Carriers?" [level=3] [ref=f16e337]
+        - paragraph [ref=f16e338]: "Flogal Carriers is the asset-based hauling division of Flogal, operating through two owned fleets: RRTL and J&D Hauling."
+      - generic [ref=f16e339]:
+        - heading "Is Flogal Carriers a broker?" [level=3] [ref=f16e340]
+        - paragraph [ref=f16e341]: No. Freight moves on trucks Flogal owns and dispatches, or through vetted partner carriers we work with directly.
+      - generic [ref=f16e342]:
+        - heading "Where does Flogal Carriers operate?" [level=3] [ref=f16e343]
+        - paragraph [ref=f16e344]: Primarily the Oklahoma–Texas corridor, with partner reach across the U.S. and cross-border into Mexico through trusted Mexico partners.
+      - generic [ref=f16e345]:
+        - heading "What does RRTL haul?" [level=3] [ref=f16e346]
+        - paragraph [ref=f16e347]: "End-dump aggregate: rock, sand, and base material out of regional quarries."
+  - contentinfo [ref=f16e348]:
+    - generic [ref=f16e349]:
+      - generic [ref=f16e350]:
+        - img "FLOGAL" [ref=f16e352]
+        - navigation [ref=f16e353]:
+          - generic [ref=f16e354]:
+            - generic [ref=f16e355]: Carriers
+            - link "Our Fleet" [ref=f16e356] [cursor=pointer]:
+              - /url: "#fleet"
+            - link "Active Lanes" [ref=f16e357] [cursor=pointer]:
+              - /url: "#lanes"
+            - link "Equipment" [ref=f16e358] [cursor=pointer]:
+              - /url: "#equipment"
+            - link "Aggregate Hauling" [ref=f16e359] [cursor=pointer]:
+              - /url: aggregate-hauling/
+            - link "Equipment Transport" [ref=f16e360] [cursor=pointer]:
+              - /url: equipment-transport/
+          - generic [ref=f16e361]:
+            - generic [ref=f16e362]: Sales
+            - link "Inventory" [ref=f16e363] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Financing" [ref=f16e364] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+            - link "Trade-In" [ref=f16e365] [cursor=pointer]:
+              - /url: https://sales.flogalhq.com
+          - generic [ref=f16e366]:
+            - generic [ref=f16e367]: Properties
+            - link "Listings" [ref=f16e368] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Yard Leasing" [ref=f16e369] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+            - link "Contact" [ref=f16e370] [cursor=pointer]:
+              - /url: https://properties.flogalhq.com
+          - generic [ref=f16e371]:
+            - generic [ref=f16e372]: Company
+            - link "About" [ref=f16e373] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+            - link "Contact" [ref=f16e374] [cursor=pointer]:
+              - /url: mailto:carriers@flogalhq.com
+            - link "flogalhq.com" [ref=f16e375] [cursor=pointer]:
+              - /url: https://www.flogalhq.com
+      - generic [ref=f16e376]:
+        - generic [ref=f16e377]: flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com
+        - generic [ref=f16e378]: © 2026 FLOGAL Holdings, LLC
+        - link "Staff Login" [ref=f16e379] [cursor=pointer]:
+          - /url: https://admin.flogalhq.com/login.html

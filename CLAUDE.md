@@ -23,7 +23,11 @@ or jd-hauling/ folders.
 - Public copy must never imply authority, licensing, or guarantees. If a link
   fix would require new copy with entity or service claims, stop and flag it.
 - Do not touch _archive/ (blocked by settings).
-- Inter/system-ui only. No licensed fonts.
+- Satoshi (self-hosted) + system-ui fallback; JetBrains Mono for data voice
+  (stock #, VINs, stats). No paid fonts. Amended 2026-07-09: Satoshi was
+  already live in production and zero-cost (Fontshare OFL-equivalent
+  license, files already shipped in shared/fonts/); ratified by Carlos,
+  see ~/.claude/plans/model-fable-plan-glistening-aho.md §3.1.
 
 ## Brand accents (backgrounds/structure stay uniform; accent varies)
 flogalhq: tricolor symbol, white wordmark

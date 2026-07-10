@@ -1,0 +1,122 @@
+- generic [active] [ref=f21e1]:
+  - banner [ref=f21e2]:
+    - generic [ref=f21e3]:
+      - link "FLOGAL Properties" [ref=f21e4] [cursor=pointer]:
+        - /url: https://www.flogalhq.com
+        - img "FLOGAL" [ref=f21e5]
+        - generic [ref=f21e7]: Properties
+      - navigation [ref=f21e8]:
+        - link "What We Buy" [ref=f21e9] [cursor=pointer]:
+          - /url: "#what-we-buy"
+        - link "Our Approach" [ref=f21e10] [cursor=pointer]:
+          - /url: "#approach"
+        - link "Contact" [ref=f21e11] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=f21e12]:
+        - link "Sign in" [ref=f21e13] [cursor=pointer]:
+          - /url: https://admin.flogalhq.com/login.html
+        - link "List a property" [ref=f21e14] [cursor=pointer]:
+          - /url: "#"
+  - generic [ref=f21e19]:
+    - generic [ref=f21e20]: Flogal Properties · Industrial real estate for freight
+    - heading "We buy the ground freight runs on." [level=1] [ref=f21e21]: We buy the groundfreight runs on.
+    - paragraph [ref=f21e22]: Flogal Properties acquires freight-oriented industrial real estate — yards, terminals, and truck-ready sites — starting with the ground Flogal's own fleets operate from.
+    - generic [ref=f21e23]:
+      - link "What we buy →" [ref=f21e24] [cursor=pointer]:
+        - /url: "#what-we-buy"
+      - link "Talk to realty" [ref=f21e25] [cursor=pointer]:
+        - /url: "#contact"
+  - generic [ref=f21e27]:
+    - heading "What we buy" [level=2] [ref=f21e28]
+    - paragraph [ref=f21e29]: "Flogal Properties is the real estate arm of Flogal, an operator-funded freight platform. We acquire industrial property built for trucking: drop yards, terminals, truck parking, and freight-support sites on the corridors our carriers already run."
+    - generic [ref=f21e30]:
+      - generic [ref=f21e31]: Drop yards
+      - generic [ref=f21e36]: Terminals
+      - generic [ref=f21e44]: Truck parking
+      - generic [ref=f21e51]: Freight-support land
+  - generic [ref=f21e56]:
+    - generic [ref=f21e57]: Why an operator buys differently
+    - heading "We site property against freight reality, not listing photos." [level=2] [ref=f21e58]
+    - paragraph [ref=f21e59]: Our own dispatch desk knows which corridors have carrier density, fuel access, and driver depth — because our trucks run them. When we buy a yard, it's because freight already moves there.
+  - generic [ref=f21e61]:
+    - generic [ref=f21e62]:
+      - generic [ref=f21e63]: How we operate
+      - heading "Industrial real estate, run like an operating company." [level=2] [ref=f21e64]
+    - generic [ref=f21e65]:
+      - generic [ref=f21e66]:
+        - text: "01"
+        - heading "Lane density model" [level=4] [ref=f21e67]
+        - paragraph [ref=f21e68]: We evaluate every site against carrier lane data — where freight already moves, not where the parcel happened to come up.
+      - generic [ref=f21e69]:
+        - text: "02"
+        - heading "Site & spec" [level=4] [ref=f21e70]
+        - paragraph [ref=f21e71]: "We buy and improve to a freight-grade spec: hardened surfaces, security, fuel access."
+      - generic [ref=f21e72]:
+        - text: "03"
+        - heading "Lease or share" [level=4] [ref=f21e73]
+        - paragraph [ref=f21e74]: Full-site leases for anchor tenants, or shared-yard arrangements for fleets that need stalls without an acquisition.
+      - generic [ref=f21e75]:
+        - text: "04"
+        - heading "Ops handoff" [level=4] [ref=f21e76]
+        - paragraph [ref=f21e77]: Sites plug into the Flogal carrier network from day one — fuel, drivers, and dispatch in the corridor.
+  - generic [ref=f21e79]:
+    - text: FAQ
+    - heading "Common questions." [level=2] [ref=f21e80]
+    - generic [ref=f21e81]:
+      - generic [ref=f21e82]:
+        - heading "What is Flogal Properties?" [level=3] [ref=f21e83]
+        - paragraph [ref=f21e84]: Flogal Properties is the industrial real estate arm of Flogal, acquiring freight-oriented property — yards, terminals, and truck-ready sites — on active freight corridors.
+      - generic [ref=f21e85]:
+        - heading "Does Flogal Properties buy property directly?" [level=3] [ref=f21e86]
+        - paragraph [ref=f21e87]: Yes. Flogal Properties is an operator-funded direct buyer of freight-oriented industrial real estate, including off-market sites.
+      - generic [ref=f21e88]:
+        - heading "What kind of property does Flogal Properties look for?" [level=3] [ref=f21e89]
+        - paragraph [ref=f21e90]: Drop yards, terminals, truck parking, and industrial land that supports freight operations, primarily in Oklahoma and Texas freight corridors.
+  - generic [ref=f21e92]:
+    - generic [ref=f21e93]:
+      - heading "Sell us your site." [level=2] [ref=f21e94]
+      - paragraph [ref=f21e95]: Own a yard, terminal, or industrial parcel on a freight corridor? We're a direct buyer — operator-funded, no committee, structured to close. Off-market conversations welcome.
+    - generic [ref=f21e96]:
+      - link "Talk to a Direct Buyer →" [ref=f21e97] [cursor=pointer]:
+        - /url: "#"
+      - link "Email realty" [ref=f21e98] [cursor=pointer]:
+        - /url: mailto:properties@flogalhq.com
+  - contentinfo [ref=f21e99]:
+    - generic [ref=f21e100]:
+      - generic [ref=f21e101]:
+        - img "FLOGAL" [ref=f21e103]
+        - generic [ref=f21e104]: Properties
+        - paragraph [ref=f21e105]: Industrial real estate built around freight — yards, terminals, and last-mile sites in the corridors our trucks run.
+      - generic [ref=f21e106]:
+        - generic [ref=f21e107]:
+          - generic [ref=f21e108]: Properties
+          - link "What we buy" [ref=f21e109] [cursor=pointer]:
+            - /url: "#what-we-buy"
+          - link "Our approach" [ref=f21e110] [cursor=pointer]:
+            - /url: "#approach"
+        - generic [ref=f21e111]:
+          - generic [ref=f21e112]: Network
+          - link "Flogal Carriers" [ref=f21e113] [cursor=pointer]:
+            - /url: https://carriers.flogalhq.com
+          - link "Flogal Sales" [ref=f21e114] [cursor=pointer]:
+            - /url: https://sales.flogalhq.com
+          - link "FLOGAL HQ" [ref=f21e115] [cursor=pointer]:
+            - /url: https://www.flogalhq.com
+        - generic [ref=f21e116]:
+          - generic [ref=f21e117]: Company
+          - link "About" [ref=f21e118] [cursor=pointer]:
+            - /url: https://www.flogalhq.com/about
+          - link "Contact realty" [ref=f21e119] [cursor=pointer]:
+            - /url: "#contact"
+    - generic [ref=f21e120]:
+      - generic [ref=f21e121]: properties.flogalhq.com
+      - generic [ref=f21e122]: ·
+      - generic [ref=f21e123]: flogalhq.com
+      - generic [ref=f21e124]: ·
+      - generic [ref=f21e125]: carriers.flogalhq.com
+      - generic [ref=f21e126]: ·
+      - generic [ref=f21e127]: sales.flogalhq.com
+      - generic [ref=f21e128]: ·
+      - generic [ref=f21e129]: © 2026 FLOGAL Holdings, LLC
+      - link "Staff Login" [ref=f21e130] [cursor=pointer]:
+        - /url: https://admin.flogalhq.com/login.html
