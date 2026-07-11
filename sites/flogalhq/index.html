@@ -50,23 +50,37 @@ a{color:inherit;text-decoration:none;}
 .nav-cta:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
 
 /* ---- HERO (parallax) --------------------------------------------- */
-.hero{position:relative;background:var(--night);color:white;overflow:hidden;min-height:740px;}
+:root{--ease-out-soft:cubic-bezier(.22,1,.36,1);}
+.hero{position:relative;background:var(--night);color:white;overflow:hidden;min-height:720px;}
 .hero-bg{position:absolute;inset:0;z-index:0;will-change:transform;}
-.hero-bg img{width:100%;height:120%;object-fit:cover;object-position:60% 55%;display:block;filter:saturate(.9);}
-.hero-bg::after{content:'';position:absolute;inset:0;background:rgba(11,29,45,.28);mix-blend-mode:multiply;pointer-events:none;}
+.hero-bg img{width:100%;height:130%;object-fit:cover;object-position:62% 55%;display:block;filter:saturate(.92);}
+.has-js .hero-bg img{opacity:0;transform:scale(1.07);transition:opacity 2400ms var(--ease-out-soft),transform 2400ms var(--ease-out-soft);}
+.has-js .hero-bg.is-loaded img{opacity:1;transform:scale(1);}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(90deg,rgba(5,10,18,.95) 0%,rgba(5,10,18,.85) 30%,rgba(5,10,18,.5) 55%,rgba(5,10,18,.15) 78%,rgba(5,10,18,0) 100%),
-             linear-gradient(180deg,rgba(5,10,18,.2) 0%,rgba(5,10,18,.55) 100%);}
+  background:linear-gradient(90deg,rgba(5,10,18,.82) 0%,rgba(5,10,18,.55) 34%,rgba(5,10,18,.18) 58%,rgba(5,10,18,.05) 78%,rgba(5,10,18,.22) 100%),
+             linear-gradient(180deg,rgba(5,10,18,.10) 0%,rgba(5,10,18,.16) 45%,rgba(5,10,18,.70) 100%);}
+.hero-edge{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,10,18,.35) 0,transparent 8%,transparent 80%,#050A12 100%);}
 .hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:128px 40px 80px;}
 .hero-copy{max-width:640px;}
-.hero-title{margin:0 0 22px;font-weight:700;font-size:72px;line-height:1.02;letter-spacing:-.025em;color:white;}
-.hero-sub{font-size:var(--t-body-lg);line-height:1.6;max-width:480px;color:rgba(255,255,255,.74);margin:0 0 32px;}
+.has-js .hero-copy>*{opacity:0;transform:translateY(16px);}
+.has-js .hero-copy.is-revealed>*{animation:hero-rise 700ms var(--ease-out-soft) forwards;}
+.has-js .hero-copy.is-revealed>*:nth-child(1){animation-delay:150ms;}
+.has-js .hero-copy.is-revealed>*:nth-child(2){animation-delay:240ms;}
+.has-js .hero-copy.is-revealed>*:nth-child(3){animation-delay:330ms;}
+.has-js .hero-copy.is-revealed>*:nth-child(4){animation-delay:420ms;}
+@keyframes hero-rise{to{opacity:1;transform:translateY(0);}}
+.hero-title{margin:0 0 22px;font-family:var(--font-display);font-weight:700;font-size:var(--t-display);line-height:1.05;letter-spacing:-.02em;color:white;}
+.hero-sub{font-size:var(--t-body-lg);line-height:1.6;max-width:480px;color:rgba(255,255,255,.78);margin:0 0 32px;}
 .hero-actions{display:flex;gap:12px;}
+.hero-caption{position:absolute;z-index:2;right:40px;bottom:20px;font-family:'JetBrains Mono',var(--font-sans),monospace;font-size:11px;font-weight:400;letter-spacing:.04em;color:rgba(255,255,255,.38);transition:color 150ms;}
+.hero-caption:hover{color:rgba(255,255,255,.65);}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:6px;font-size:14px;font-weight:600;color:white;border:1px solid rgba(168,184,200,.4);background:rgba(168,184,200,.1);backdrop-filter:blur(10px);transition:all 150ms;}
 .btn-outline:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
 
-/* ---- PROOF CARDS (sits above tri-band) ---------------------------- */
-.proof-grid{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 40px 56px;
+/* ---- PROOF BAND (own night band, below hero) ---------------------- */
+.proof-band{background:#0B1D2D;padding:40px 0;}
+.proof-grid{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 40px;
   display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
 .proof-card{background:rgba(168,184,200,.08);border:1px solid rgba(168,184,200,.18);border-radius:8px;padding:20px 22px;backdrop-filter:blur(6px);}
 .proof-title{font-weight:700;font-size:14px;color:white;letter-spacing:-.005em;margin-bottom:6px;}
@@ -178,9 +192,8 @@ a{color:inherit;text-decoration:none;}
   .footer-top{grid-template-columns:1fr;}
   .footer-nav{grid-template-columns:repeat(2,1fr);}
   .footer-inner{padding:0 20px;}
-  .hero-title{font-size:48px;}
   .hero-inner{padding:72px 20px 56px;}
-  .proof-grid{padding:0 20px 40px;gap:12px;grid-template-columns:1fr 1fr;}
+  .proof-grid{padding:0 20px;gap:12px;grid-template-columns:1fr 1fr;}
   .tri-band{grid-template-columns:1fr;padding:0 20px;gap:12px;}
   .tri-wrap{padding-bottom:48px;}
   .svc-section,.tech-section,.faq-section,.growth,.contact{padding:64px 20px;}
@@ -189,10 +202,17 @@ a{color:inherit;text-decoration:none;}
   .hero-actions{flex-direction:column;align-items:stretch;gap:12px;}
   .hero{min-height:560px;}
   .hero-bg img{object-position:76% 62%;}
+  .has-js .hero-bg img{transform:none;transition:opacity 400ms var(--ease-out-soft);}
+  .has-js .hero-bg.is-loaded img{transform:none;}
+  .hero-caption{display:none;}
 }
 @media(max-width:480px){
   .proof-grid{grid-template-columns:1fr;}
   .footer-nav{grid-template-columns:1fr;}
+}
+@media(prefers-reduced-motion:reduce){
+  .has-js .hero-bg img{transition:none!important;transform:none!important;opacity:1!important;}
+  .has-js .hero-copy>*{animation:none!important;opacity:1!important;transform:none!important;}
 }
 </style>
 <link rel="icon" type="image/x-icon" href="../../shared/favicons/flogalhq/favicon.ico">
@@ -305,6 +325,7 @@ a{color:inherit;text-decoration:none;}
     <img src="../../shared/photos/hero-truck-sunset.jpg" alt="">
   </div>
   <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-edge" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-copy">
       <span class="eyebrow" style="display:block;margin-bottom:16px;">Operator-Funded Freight Platform</span>
@@ -315,8 +336,11 @@ a{color:inherit;text-decoration:none;}
       </div>
     </div>
   </div>
+  <div class="hero-caption">Flogal Kenworth T680 Next Gen &middot; southbound I-35, Texas</div>
+</section>
 
-  <!-- Proof cards — sits inside hero, above tri-band -->
+<!-- PROOF BAND -->
+<div class="proof-band">
   <div class="proof-grid">
     <div class="proof-card">
       <div class="proof-title">Operator-funded</div>
@@ -335,7 +359,7 @@ a{color:inherit;text-decoration:none;}
       <div class="proof-body">Separate operating companies under one holding structure.</div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- TRI-BAND CTAs -->
 <div class="tri-wrap">
@@ -569,13 +593,22 @@ a{color:inherit;text-decoration:none;}
 })();
 </script>
 
-<!-- PARALLAX SCRIPT -->
+<!-- HERO LOAD-IN + PARALLAX SCRIPT -->
 <script>
 (function(){
+  document.documentElement.classList.add('has-js');
   var bg = document.getElementById('heroBg');
   if (!bg) return;
   var hero = bg.parentElement;
+  var img = bg.querySelector('img');
+  var copy = hero.querySelector('.hero-copy');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function onImgLoad(){ bg.classList.add('is-loaded'); }
+  if (img.complete) { onImgLoad(); } else { img.addEventListener('load', onImgLoad); }
+
+  setTimeout(function(){ if (copy) copy.classList.add('is-revealed'); }, reduceMotion ? 0 : 150);
+
   if (reduceMotion) return;
   bg.style.willChange = 'transform';
   var inView = true;
@@ -585,9 +618,12 @@ a{color:inherit;text-decoration:none;}
     }).observe(hero);
   }
   function update() {
-    if (window.innerWidth <= 860 || !inView) return;
+    if (window.innerWidth <= 860 || !inView) { bg.style.transform = ''; return; }
+    var heroH = hero.offsetHeight;
+    var imgH = heroH * 1.3;
     var rect = hero.getBoundingClientRect();
-    var y = Math.min(Math.max(-rect.top * 0.06, -12), 12);
+    var p = Math.min(Math.max(-rect.top / heroH, 0), 1);
+    var y = p * (imgH - heroH) * 0.55;
     bg.style.transform = 'translate3d(0,' + y + 'px,0)';
   }
   var ticking = false;

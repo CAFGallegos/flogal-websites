@@ -34,17 +34,30 @@ img{display:block;}
 /* nav styles in ../../../shared/css/flogalhq-shell.css */
 #contact{scroll-margin-top:88px;}
 /* HERO — full bleed, dark, cinematic */
+:root{--ease-out-soft:cubic-bezier(.22,1,.36,1);}
 .hero{position:relative;background:var(--night);color:white;overflow:hidden;min-height:640px;}
-.hero-photo{position:absolute;right:0;bottom:0;width:70%;height:95%;z-index:0;
-  -webkit-mask-image:linear-gradient(to top left,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 30%,rgba(0,0,0,.5) 58%,rgba(0,0,0,0) 100%);
-  mask-image:linear-gradient(to top left,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 30%,rgba(0,0,0,.5) 58%,rgba(0,0,0,0) 100%);}
-.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;}
-.hero-protect{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(5,10,18,1) 0%,rgba(5,10,18,.95) 20%,rgba(5,10,18,.4) 50%,rgba(5,10,18,.06) 72%,transparent 100%);}
+.hero-bg{position:absolute;inset:0;z-index:0;will-change:transform;}
+.hero-bg img{width:100%;height:130%;object-fit:cover;object-position:62% 55%;display:block;filter:saturate(.92);}
+.has-js .hero-bg img{opacity:0;transform:scale(1.07);transition:opacity 2400ms var(--ease-out-soft),transform 2400ms var(--ease-out-soft);}
+.has-js .hero-bg.is-loaded img{opacity:1;transform:scale(1);}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,10,18,.82) 0%,rgba(5,10,18,.55) 34%,rgba(5,10,18,.18) 58%,rgba(5,10,18,.05) 78%,rgba(5,10,18,.22) 100%),
+             linear-gradient(180deg,rgba(5,10,18,.10) 0%,rgba(5,10,18,.16) 45%,rgba(5,10,18,.70) 100%);}
+.hero-edge{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,10,18,.35) 0,transparent 8%,transparent 80%,#050A12 100%);}
 .hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:100px 40px 120px;}
+.hero-copy{max-width:680px;}
+.has-js .hero-copy>*{opacity:0;transform:translateY(16px);}
+.has-js .hero-copy.is-revealed>*{animation:hero-rise 700ms var(--ease-out-soft) forwards;}
+.has-js .hero-copy.is-revealed>*:nth-child(1){animation-delay:150ms;}
+.has-js .hero-copy.is-revealed>*:nth-child(2){animation-delay:240ms;}
+.has-js .hero-copy.is-revealed>*:nth-child(3){animation-delay:330ms;}
+.has-js .hero-copy.is-revealed>*:nth-child(4){animation-delay:420ms;}
+@keyframes hero-rise{to{opacity:1;transform:translateY(0);}}
 .hero-label{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
 .hero-label::before{content:'';width:32px;height:1px;background:var(--gold);}
 .hero-title{font-weight:900;font-size:72px;line-height:.95;letter-spacing:-.03em;color:white;margin:0 0 24px;max-width:680px;}
-.hero-title span{color:var(--gold);}
+.hero-title span{color:white;}
 .hero-sub{font-size:17px;line-height:1.6;color:rgba(255,255,255,.6);max-width:500px;margin:0 0 40px;}
 .hero-scroll{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);}
 .hero-scroll-line{width:40px;height:1px;background:rgba(255,255,255,.2);}
@@ -151,7 +164,9 @@ img{display:block;}
 @media(max-width:860px){
   .nav-links,.nav-cta,.nav-phone{display:none;}.nav-inner{padding:0 20px;}
   .hero-title{font-size:48px;}.hero-inner{padding:80px 20px 100px;}
-  .hero-photo{width:100%;}
+  .hero-bg img{object-position:76% 62%;}
+  .has-js .hero-bg img{transform:none;transition:opacity 400ms var(--ease-out-soft);}
+  .has-js .hero-bg.is-loaded img{transform:none;}
   .what{padding:64px 20px;}.what-inner{grid-template-columns:1fr;gap:40px;}
   .entities{padding:0 20px 64px;}.ent-grid{grid-template-columns:1fr 1fr;}
   .thesis{padding:64px 20px;}.thesis-head{grid-template-columns:1fr;gap:24px;}.pillars{grid-template-columns:1fr;}
@@ -163,6 +178,10 @@ img{display:block;}
 @media(max-width:480px){
   .ent-grid{grid-template-columns:1fr;}
   .for-grid{grid-template-columns:1fr;}
+}
+@media(prefers-reduced-motion:reduce){
+  .has-js .hero-bg img{transition:none!important;transform:none!important;opacity:1!important;}
+  .has-js .hero-copy>*{animation:none!important;opacity:1!important;transform:none!important;}
 }
 </style>
 <link rel="icon" type="image/x-icon" href="../../../shared/favicons/flogalhq/favicon.ico">
@@ -223,13 +242,18 @@ img{display:block;}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-photo"><img src="../../../shared/photos/hero-truck-sunset.jpg" alt="Flogal fleet"></div>
-  <div class="hero-protect"></div>
+  <div class="hero-bg" id="heroBg" aria-hidden="true">
+    <img src="../../../shared/photos/hero-truck-sunset.jpg" alt="">
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-edge" aria-hidden="true"></div>
   <div class="hero-inner">
-    <div class="hero-label">Flogal Holdings</div>
-    <h1 class="hero-title">One platform.<br><span>Freight-native operating companies.</span></h1>
-    <p class="hero-sub">Flogal Holdings is a privately held, operator-funded freight platform operating across hauling, equipment, and industrial real estate — built for durable, asset-backed growth.</p>
-    <div class="hero-scroll"><span class="hero-scroll-line"></span>Scroll to explore</div>
+    <div class="hero-copy">
+      <div class="hero-label">Flogal Holdings</div>
+      <h1 class="hero-title">One platform.<br><span>Freight-native operating companies.</span></h1>
+      <p class="hero-sub">Flogal Holdings is a privately held, operator-funded freight platform operating across hauling, equipment, and industrial real estate — built for durable, asset-backed growth.</p>
+      <div class="hero-scroll"><span class="hero-scroll-line"></span>Scroll to explore</div>
+    </div>
   </div>
 </section>
 
@@ -543,6 +567,50 @@ img{display:block;}
       btn.focus();
     }
   });
+})();
+</script>
+
+<!-- HERO LOAD-IN + PARALLAX SCRIPT -->
+<script>
+(function(){
+  document.documentElement.classList.add('has-js');
+  var bg = document.getElementById('heroBg');
+  if (!bg) return;
+  var hero = bg.parentElement;
+  var img = bg.querySelector('img');
+  var copy = hero.querySelector('.hero-copy');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function onImgLoad(){ bg.classList.add('is-loaded'); }
+  if (img.complete) { onImgLoad(); } else { img.addEventListener('load', onImgLoad); }
+
+  setTimeout(function(){ if (copy) copy.classList.add('is-revealed'); }, reduceMotion ? 0 : 150);
+
+  if (reduceMotion) return;
+  bg.style.willChange = 'transform';
+  var inView = true;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      inView = entries[0].isIntersecting;
+    }).observe(hero);
+  }
+  function update() {
+    if (window.innerWidth <= 860 || !inView) { bg.style.transform = ''; return; }
+    var heroH = hero.offsetHeight;
+    var imgH = heroH * 1.3;
+    var rect = hero.getBoundingClientRect();
+    var p = Math.min(Math.max(-rect.top / heroH, 0), 1);
+    var y = p * (imgH - heroH) * 0.55;
+    bg.style.transform = 'translate3d(0,' + y + 'px,0)';
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (!ticking) {
+      window.requestAnimationFrame(function(){ update(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  update();
 })();
 </script>
 
