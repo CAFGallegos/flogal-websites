@@ -501,3 +501,21 @@ a:hover { border-bottom-color: currentColor; }
    consumer must gate the animation behind prefers-reduced-motion. */
 @keyframes glow-drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-4%,3%,0); } }
 @keyframes lane-run { to { stroke-dashoffset: 0; } }
+
+/* =========================================================
+   14. CONTAINER SYSTEM (G4 spec §1/§2 — locked, all five sites)
+      ========================================================= */
+:root {
+  --container-max:    1440px;
+  --container-pad:      40px;  /* >1024px */
+  --container-pad-md:   28px;  /* 641–1024px */
+  --container-pad-sm:   20px;  /* <=640px */
+
+  /* Header (G4 §1.2) */
+  --header-h: 64px;
+  --header-z: 100;
+
+  /* Footer accent bar (G4 §1.8) — solid per-site accent; HQ overrides
+     with the tricolor gradient in its own shell. */
+  --footer-bar-h: 4px;
+}

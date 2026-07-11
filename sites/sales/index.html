@@ -71,17 +71,17 @@ a{color:inherit;text-decoration:none;}
 button{font-family:var(--font-sans);}
 
 /* ---- Nav ----------------------------------------------------------- */
-.sl-nav{background:var(--flogal-navy);border-bottom:4px solid var(--flogal-gold);position:sticky;top:0;z-index:100;}
-.sl-nav-inner{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:36px;padding:14px 32px;}
+.sl-nav{position:sticky;top:0;z-index:100;background:rgba(11,29,45,.94);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06);}
+.sl-nav-inner{max-width:1440px;height:64px;margin:0 auto;display:flex;align-items:center;gap:36px;padding:0 40px;}
 .sl-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:white;}
 .sl-symbol{height:30px;width:auto;display:block;flex:none;}
 .sl-wm{height:23px;width:auto;display:block;flex:none;margin-top:-4px;}
-.sl-brand-divider{width:1px;height:20px;background:rgba(255,255,255,.25);flex:none;}
+.sl-brand-divider{width:1px;height:16px;background:rgba(255,255,255,.25);flex:none;}
 .sl-brand-division{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);white-space:nowrap;margin-top:6px;}
 .sl-fl{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:0.04em;}
 .sl-sub{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--flogal-gold);}
 .sl-nav-links{display:flex;gap:28px;flex:1;list-style:none;margin:0;padding:0;align-items:center;}
-.sl-nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.78);transition:color 150ms;}
+.sl-nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.78);transition:color 150ms;}
 .sl-nav-links a:hover{color:white;}
 .sl-cta{background:var(--flogal-gold);color:var(--flogal-navy);padding:9px 18px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.01em;transition:filter 150ms;white-space:nowrap;}
 .sl-cta:hover{filter:brightness(1.05);}
@@ -115,7 +115,7 @@ button{font-family:var(--font-sans);}
 .sl-faq-a{margin:0;font-size:13.5px;line-height:1.6;color:var(--fg-muted);}
 
 /* ---- Three-column layout ------------------------------------------- */
-.sl-page{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:240px 1fr 380px;align-items:start;flex:1;}
+.sl-page{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:240px 1fr 380px;align-items:start;flex:1;scroll-margin-top:88px;}
 
 /* ---- Filter rail --------------------------------------------------- */
 .sl-fil{position:sticky;top:0;padding:24px 20px;border-right:1px solid var(--border);background:white;min-height:100vh;}
@@ -219,17 +219,18 @@ button{font-family:var(--font-sans);}
 .sl-source-btn:hover{background:var(--gold-400);}
 
 /* ---- Footer -------------------------------------------------------- */
-.sl-footer{background:var(--night-0);padding:48px 0 0;margin-top:auto;}
-.sl-footer-inner{max-width:1440px;margin:0 auto;padding:0 32px;}
-.sl-footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sl-footer{position:relative;background:var(--night-0);padding:56px 0 0;margin-top:auto;}
+.sl-footer::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:var(--footer-bar-h,4px);background:var(--accent);}
+.sl-footer-inner{max-width:1440px;margin:0 auto;padding:0 40px;}
+.sl-footer-top{display:grid;grid-template-columns:260px 1fr;gap:56px;align-items:start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
 .sl-footer-symbol{height:32px;width:auto;display:block;flex:none;}
 .sl-footer-wm{height:20px;width:auto;display:block;flex:none;opacity:.9;}
-.sl-footer-nav{display:flex;gap:48px;flex-wrap:wrap;}
+.sl-footer-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
 .sl-footer-col{display:flex;flex-direction:column;gap:10px;}
 .sl-footer-col-h{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
 .sl-footer-col a{font-size:13px;color:rgba(255,255,255,.55);transition:color 140ms;}
 .sl-footer-col a:hover{color:rgba(255,255,255,.9);}
-.sl-footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;flex-wrap:wrap;position:relative;}
+.sl-footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0 28px;flex-wrap:wrap;position:relative;}
 .sl-footer-domains{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.25);letter-spacing:0.06em;}
 .sl-footer-copy{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.25);letter-spacing:0.04em;}
 .sl-staff-link{font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,.14);transition:color 200ms;padding:4px 6px;}
@@ -256,8 +257,8 @@ button{font-family:var(--font-sans);}
   .sl-grid-wrap{padding:16px;}
   .sl-grid{grid-template-columns:1fr;}
   .sl-source-inner{grid-template-columns:1fr;gap:24px;}
-  .sl-footer-top{flex-direction:column;gap:32px;}
-  .sl-footer-nav{gap:32px;}
+  .sl-footer-top{grid-template-columns:1fr;gap:32px;}
+  .sl-footer-nav{grid-template-columns:repeat(2,1fr);gap:32px;}
   .sl-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 }
 </style>
@@ -324,7 +325,7 @@ button{font-family:var(--font-sans);}
 <!-- NAV -->
 <header class="sl-nav">
   <div class="sl-nav-inner">
-    <a class="sl-brand" href="https://www.flogalhq.com">
+    <a class="sl-brand" href="/">
       <img class="sl-symbol" src="../../shared/logos/flogal-symbol-gold.png" alt="">
       <img class="sl-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
       <span class="sl-brand-divider" aria-hidden="true"></span>
@@ -533,7 +534,7 @@ button{font-family:var(--font-sans);}
           <a href="https://carriers.flogalhq.com">Partner Portal</a>
         </div>
         <div class="sl-footer-col">
-          <span class="sl-footer-col-h">Sales</span>
+          <span class="sl-footer-col-h">Equipment</span>
           <a href="#inventory">Inventory</a>
         </div>
         <div class="sl-footer-col">

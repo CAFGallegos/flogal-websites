@@ -59,14 +59,14 @@ a{color:inherit;}
 button{font-family:inherit;}
 
 /* ---- NAV ---- */
-.pr-nav{position:sticky;top:0;z-index:50;background:rgba(11,29,45,.92);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06);}
-.pr-nav-inner{max-width:1440px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;gap:40px;color:white;}
+.pr-nav{position:sticky;top:0;z-index:100;background:rgba(11,29,45,.94);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.06);}
+.pr-nav-inner{max-width:1440px;height:64px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:40px;color:white;}
 .pr-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:white;flex:none;}
 .pr-symbol{height:30px;width:auto;display:block;flex:none;}
 .pr-wm{height:23px;width:auto;display:block;flex:none;margin-top:-4px;}
 
-.pr-divider{width:1px;height:18px;background:rgba(255,255,255,.18);}
-.pr-sub-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:16px;}
+.pr-divider{width:1px;height:16px;background:rgba(255,255,255,.25);}
+.pr-sub-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:6px;}
 .pr-nav-links{display:flex;gap:28px;flex:1;margin-left:16px;align-items:center;}
 .pr-nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.74);text-decoration:none;transition:color 160ms;}
 .pr-nav-link:hover{color:white;}
@@ -79,6 +79,8 @@ button{font-family:inherit;}
 .pr-cta-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.48);color:white;}
 .pr-cta-white{background:var(--flogal-green);color:white !important;border-color:var(--flogal-green);}
 .pr-cta-white:hover{background:var(--green-400) !important;border-color:var(--green-400) !important;}
+
+#approach,#contact,#what-we-buy{scroll-margin-top:88px;}
 
 /* ---- HERO ---- */
 .pr-hero{position:relative;background:var(--night-0);color:white;overflow:hidden;min-height:680px;}
@@ -146,20 +148,21 @@ button{font-family:inherit;}
 .pr-faq-a{margin:0;font-size:14px;line-height:1.6;color:var(--fg-muted);}
 
 /* ---- FOOTER ---- */
-.pr-footer{background:var(--night-0);color:rgba(255,255,255,.7);padding:72px 0 28px;}
-.pr-footer-inner{max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1.1fr 2fr;gap:64px;}
+.pr-footer{position:relative;background:var(--night-0);color:rgba(255,255,255,.7);padding:56px 0 0;}
+.pr-footer::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:var(--footer-bar-h,4px);background:var(--accent);}
+.pr-footer-inner{max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:260px 1fr;gap:56px;padding-bottom:40px;}
 .pr-footer-brand{display:flex;flex-direction:column;gap:14px;}
 .pr-footer-lockup{display:flex;align-items:center;gap:12px;}
-.pr-footer-symbol{height:38px;width:auto;display:block;}
+.pr-footer-symbol{height:32px;width:auto;display:block;}
 .pr-footer-wm{height:20px;width:auto;display:block;flex:none;opacity:.9;}
 .pr-footer-sub{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green-300);}
 .pr-footer-tag{margin:4px 0 0;font-size:14px;color:rgba(255,255,255,.6);line-height:1.55;max-width:320px;}
-.pr-footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+.pr-footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
 .pr-footer-col{display:flex;flex-direction:column;gap:12px;}
 .pr-footer-h{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:white;}
 .pr-footer-link{font-size:13px;color:rgba(255,255,255,.62);text-decoration:none;}
 .pr-footer-link:hover{color:white;}
-.pr-footer-meta{max-width:1440px;margin:56px auto 0;padding:24px 40px 0;border-top:1px solid rgba(255,255,255,.08);font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.4);display:flex;gap:12px;flex-wrap:wrap;letter-spacing:.06em;align-items:center;}
+.pr-footer-meta{max-width:1440px;margin:0 auto;padding:20px 40px 28px;border-top:1px solid rgba(255,255,255,.08);font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.4);display:flex;gap:12px;flex-wrap:wrap;letter-spacing:.06em;align-items:center;}
 .pr-footer-dot{color:rgba(255,255,255,.2);}
 .pr-staff-link{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.14);text-decoration:none;margin-left:auto;}
 .pr-staff-link:hover{color:rgba(255,255,255,.35);}
@@ -169,11 +172,13 @@ button{font-family:inherit;}
   .pr-nav-inner{padding:14px 20px;}
   .pr-type-grid{grid-template-columns:repeat(2,1fr);}
   .pr-process-grid{grid-template-columns:1fr;gap:24px;}
-  .pr-footer-cols{grid-template-columns:1fr;gap:24px;}
+  .pr-footer-inner{grid-template-columns:1fr;gap:32px;}
+  .pr-footer-cols{grid-template-columns:repeat(2,1fr);gap:24px;}
   .pr-cta-inner{grid-template-columns:1fr;}
 }
 @media(max-width:540px){
   .pr-type-grid{grid-template-columns:1fr;}
+  .pr-footer-cols{grid-template-columns:1fr;}
 }
 </style>
 <link rel="icon" type="image/x-icon" href="../../shared/favicons/properties/favicon.ico">
@@ -232,7 +237,7 @@ button{font-family:inherit;}
 <!-- NAV -->
 <header class="pr-nav">
   <div class="pr-nav-inner">
-    <a class="pr-brand" href="https://www.flogalhq.com">
+    <a class="pr-brand" href="/">
       <img class="pr-symbol" src="../../shared/logos/flogal-symbol-green.png" alt="">
       <img class="pr-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
       <span class="pr-divider" aria-hidden="true"></span>
@@ -411,33 +416,39 @@ button{font-family:inherit;}
     </div>
     <div class="pr-footer-cols">
       <div class="pr-footer-col">
+        <span class="pr-footer-h">Carriers</span>
+        <a href="https://carriers.flogalhq.com" class="pr-footer-link">Load Board</a>
+        <a href="https://carriers.flogalhq.com" class="pr-footer-link">Active Lanes</a>
+        <a href="https://carriers.flogalhq.com" class="pr-footer-link">Partner Portal</a>
+      </div>
+      <div class="pr-footer-col">
+        <span class="pr-footer-h">Equipment</span>
+        <a href="https://sales.flogalhq.com" class="pr-footer-link">Inventory</a>
+        <a href="https://sales.flogalhq.com" class="pr-footer-link">Financing</a>
+        <a href="https://sales.flogalhq.com" class="pr-footer-link">Trade-In</a>
+      </div>
+      <div class="pr-footer-col">
         <span class="pr-footer-h">Properties</span>
         <a href="#what-we-buy" class="pr-footer-link">What we buy</a>
         <a href="#approach" class="pr-footer-link">Our approach</a>
       </div>
       <div class="pr-footer-col">
-        <span class="pr-footer-h">Network</span>
-        <a href="https://carriers.flogalhq.com" class="pr-footer-link">Flogal Carriers</a>
-        <a href="https://sales.flogalhq.com" class="pr-footer-link">Flogal Sales</a>
-        <a href="https://www.flogalhq.com" class="pr-footer-link">FLOGAL HQ</a>
-      </div>
-      <div class="pr-footer-col">
         <span class="pr-footer-h">Company</span>
         <a href="https://www.flogalhq.com/about" class="pr-footer-link">About</a>
-        <a href="#contact" class="pr-footer-link">Contact realty</a>
+        <a href="#contact" class="pr-footer-link">Contact</a>
+        <a href="https://www.flogalhq.com" class="pr-footer-link">flogalhq.com</a>
       </div>
     </div>
   </div>
   <div class="pr-footer-meta">
-    <span>properties.flogalhq.com</span>
-    <span class="pr-footer-dot">&middot;</span>
     <span>flogalhq.com</span>
     <span class="pr-footer-dot">&middot;</span>
     <span>carriers.flogalhq.com</span>
     <span class="pr-footer-dot">&middot;</span>
     <span>sales.flogalhq.com</span>
     <span class="pr-footer-dot">&middot;</span>
-    <span>&#169; 2026 FLOGAL Holdings, LLC</span>
+    <span>properties.flogalhq.com</span>
+    <span class="pr-footer-copy">&#169; 2026 FLOGAL Holdings, LLC</span>
     <a class="pr-staff-link" href="https://admin.flogalhq.com/login.html">Staff Login</a>
   </div>
 </footer>
