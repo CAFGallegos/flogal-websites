@@ -172,24 +172,27 @@ a{color:inherit;text-decoration:none;}
 .footer-staff:hover{color:rgba(255,255,255,.55);}
 
 /* ---- RESPONSIVE -------------------------------------------------- */
-@media(max-width:900px){
+@media(max-width:860px){
   .nav-links,.nav-cta,.nav-phone{display:none;}
-  .nav-inner{padding:16px 24px;}
+  .nav-inner{padding:0 20px;}
   .footer-top{grid-template-columns:1fr;}
   .footer-nav{grid-template-columns:repeat(2,1fr);}
-  .footer-inner{padding:0 24px;}
-  .hero-title{font-size:42px;}
-  .hero-inner{padding:72px 24px 56px;}
-  .proof-grid{padding:0 24px 40px;gap:12px;grid-template-columns:1fr 1fr;}
-  .tri-band{grid-template-columns:1fr;padding:0 24px;}
+  .footer-inner{padding:0 20px;}
+  .hero-title{font-size:48px;}
+  .hero-inner{padding:72px 20px 56px;}
+  .proof-grid{padding:0 20px 40px;gap:12px;grid-template-columns:1fr 1fr;}
+  .tri-band{grid-template-columns:1fr;padding:0 20px;gap:12px;}
   .tri-wrap{padding-bottom:48px;}
-  .svc-section,.tech-section,.faq-section,.growth,.contact{padding:64px 24px;}
+  .svc-section,.tech-section,.faq-section,.growth,.contact{padding:64px 20px;}
   .svc-grid,.growth-grid,.contact-inner{grid-template-columns:1fr;gap:40px;}
   .form-row{grid-template-columns:1fr;}
-}
-@media(max-width:860px){
+  .hero-actions{flex-direction:column;align-items:stretch;gap:12px;}
   .hero{min-height:560px;}
   .hero-bg img{object-position:76% 62%;}
+}
+@media(max-width:480px){
+  .proof-grid{grid-template-columns:1fr;}
+  .footer-nav{grid-template-columns:1fr;}
 }
 </style>
 <link rel="icon" type="image/x-icon" href="../../shared/favicons/flogalhq/favicon.ico">
@@ -282,19 +285,19 @@ a{color:inherit;text-decoration:none;}
       <span class="nav-toggle-bar"></span>
     </button>
   </div>
-  <div class="mobile-nav" id="mobileNav" hidden>
-    <ul class="mobile-nav-links">
-      <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
-      <li><a href="https://sales.flogalhq.com">Sales</a></li>
-      <li><a href="https://properties.flogalhq.com">Properties</a></li>
-      <li><a href="https://apps.flogalhq.com">Apps</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="tel:+12147021336" class="mobile-nav-phone">(214) 702-1336</a>
-    <a href="#contact" class="mobile-nav-cta">Request a Quote</a>
-  </div>
 </header>
+<div class="mobile-nav" id="mobileNav" hidden>
+  <ul class="mobile-nav-links">
+    <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
+    <li><a href="https://sales.flogalhq.com">Sales</a></li>
+    <li><a href="https://properties.flogalhq.com">Properties</a></li>
+    <li><a href="https://apps.flogalhq.com">Apps</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+12147021336" class="mobile-nav-phone">(214) 702-1336</a>
+  <a href="#contact" class="mobile-nav-cta">Request a Quote</a>
+</div>
 
 <!-- HERO with parallax -->
 <section class="hero">
@@ -554,6 +557,13 @@ a{color:inherit;text-decoration:none;}
     if (e.target.closest('a')) {
       panel.hidden = true;
       btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !panel.hidden) {
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
     }
   });
 })();

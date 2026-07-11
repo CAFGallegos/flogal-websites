@@ -80,6 +80,14 @@ button{font-family:inherit;}
 .pr-cta-white{background:var(--flogal-green);color:white !important;border-color:var(--flogal-green);}
 .pr-cta-white:hover{background:var(--green-400) !important;border-color:var(--green-400) !important;}
 
+/* ---- Nav toggle (mobile) ---- */
+.pr-nav-toggle{display:none;position:relative;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;padding:0;margin-left:auto;background:transparent;border:0;cursor:pointer;flex:none;}
+.pr-nav-toggle-bar{display:block;width:22px;height:2px;background:rgba(255,255,255,.85);border-radius:1px;transition:transform 200ms cubic-bezier(.2,.8,.4,1),opacity 150ms;}
+.pr-nav-toggle[aria-expanded="true"] .pr-nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.pr-nav-toggle[aria-expanded="true"] .pr-nav-toggle-bar:nth-child(2){opacity:0;}
+.pr-nav-toggle[aria-expanded="true"] .pr-nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.pr-mobile-nav{display:none;}
+
 #approach,#contact,#what-we-buy{scroll-margin-top:88px;}
 
 /* ---- HERO ---- */
@@ -169,16 +177,39 @@ button{font-family:inherit;}
 
 @media(max-width:860px){
   .pr-nav-links,.pr-nav-tools{display:none;}
-  .pr-nav-inner{padding:14px 20px;}
+  .pr-nav-toggle{display:flex;}
+  .pr-nav-inner{padding:0 20px;gap:0;}
+  .pr-hero-inner{padding:96px 20px 64px;}
+  .pr-hero-title{font-size:48px;}
+  .pr-hero-actions{flex-direction:column;align-items:stretch;}
+  .pr-buy{padding:64px 20px;}
+  .pr-why-buy-inner{padding:0 20px;}
+  .pr-process-inner{padding:64px 20px;}
+  .pr-faq{padding:64px 20px;}
   .pr-type-grid{grid-template-columns:repeat(2,1fr);}
   .pr-process-grid{grid-template-columns:1fr;gap:24px;}
-  .pr-footer-inner{grid-template-columns:1fr;gap:32px;}
+  .pr-footer-inner{grid-template-columns:1fr;gap:32px;padding:0 20px;}
   .pr-footer-cols{grid-template-columns:repeat(2,1fr);gap:24px;}
-  .pr-cta-inner{grid-template-columns:1fr;}
+  .pr-footer-meta{padding:20px 20px 28px;}
+  .pr-cta-inner{grid-template-columns:1fr;padding:0 20px;}
+  .pr-cta-actions{flex-direction:column;align-items:stretch;}
+
+  /* Full-screen night panel (spec §1.2/§15) */
+  .pr-mobile-nav{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:90;background:#050A12;display:flex;flex-direction:column;padding:8px 20px 24px;overflow-y:auto;}
+  .pr-mobile-nav[hidden]{display:none;}
+  .pr-mobile-nav-links{list-style:none;margin:0;padding:0;flex:1;}
+  .pr-mobile-nav-links a{display:block;padding:12px 4px;font-size:20px;line-height:28px;font-weight:600;color:rgba(255,255,255,.92);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08);}
+  .pr-mobile-nav-links a:hover{color:white;}
+  .pr-mobile-nav-signin{display:block;padding:12px 4px;font-size:14px;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;}
+  .pr-mobile-nav-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:12px;padding:14px 24px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.01em;background:var(--flogal-green);color:white;text-decoration:none;}
 }
 @media(max-width:540px){
   .pr-type-grid{grid-template-columns:1fr;}
   .pr-footer-cols{grid-template-columns:1fr;}
+  .modal-frow{grid-template-columns:1fr!important;}
+}
+@media (prefers-reduced-motion: reduce){
+  .pr-nav-toggle-bar{transition:none;}
 }
 </style>
 <link rel="icon" type="image/x-icon" href="../../shared/favicons/properties/favicon.ico">
@@ -244,6 +275,9 @@ button{font-family:inherit;}
       <span class="pr-sub-label">Properties</span>
     </a>
     <nav class="pr-nav-links">
+      <a href="https://www.flogalhq.com" class="pr-nav-link">Home</a>
+      <a href="https://carriers.flogalhq.com" class="pr-nav-link">Carriers</a>
+      <a href="https://sales.flogalhq.com" class="pr-nav-link">Sales</a>
       <a href="#what-we-buy" class="pr-nav-link">What We Buy</a>
       <a href="#approach" class="pr-nav-link">Our Approach</a>
       <a href="#contact" class="pr-nav-link">Contact</a>
@@ -252,8 +286,25 @@ button{font-family:inherit;}
       <a class="pr-cta-btn pr-cta-ghost" href="https://admin.flogalhq.com/login.html">Sign in</a>
       <a class="pr-cta-btn pr-cta-green" href="#" onclick="openPropModal('List a property');return false;">List a property</a>
     </div>
+    <button class="pr-nav-toggle" id="prNavToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="prMobileNav">
+      <span class="pr-nav-toggle-bar"></span>
+      <span class="pr-nav-toggle-bar"></span>
+      <span class="pr-nav-toggle-bar"></span>
+    </button>
   </div>
 </header>
+<div class="pr-mobile-nav" id="prMobileNav" hidden>
+  <ul class="pr-mobile-nav-links">
+    <li><a href="https://www.flogalhq.com">Home</a></li>
+    <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
+    <li><a href="https://sales.flogalhq.com">Sales</a></li>
+    <li><a href="#what-we-buy">What We Buy</a></li>
+    <li><a href="#approach">Our Approach</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="pr-mobile-nav-signin" href="https://admin.flogalhq.com/login.html">Sign in</a>
+  <a class="pr-mobile-nav-cta" href="#" id="prMobileListBtn">List a property</a>
+</div>
 
 <!-- HERO -->
 <section class="pr-hero">
@@ -464,11 +515,11 @@ button{font-family:inherit;}
       <button onclick="closePropModal()" style="background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;">&#215;</button>
     </div>
     <form id="propForm" onsubmit="submitPropInquiry(event)" style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">First Name *</label><input id="pr-first" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="First name"></div>
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Last Name</label><input id="pr-last" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Last name"></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Company</label><input id="pr-company" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Company name"></div>
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Inquiry Type</label>
           <select id="pr-inquiry-type" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
@@ -482,7 +533,7 @@ button{font-family:inherit;}
           </select>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Email *</label><input id="pr-email" type="email" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="you@company.com"></div>
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Phone</label><input id="pr-phone" type="tel" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="+1 (555) 000-0000"></div>
       </div>
@@ -513,6 +564,35 @@ const _sb = supabase.createClient(
   'https://uzbpsppeihazicmngqqq.supabase.co',
   'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
 );
+document.getElementById('prMobileListBtn').addEventListener('click', function(e){
+  e.preventDefault();
+  openPropModal('List a property');
+});
+
+(function(){
+  var btn = document.getElementById('prNavToggle');
+  var panel = document.getElementById('prMobileNav');
+  if (!btn || !panel) return;
+  btn.addEventListener('click', function(){
+    var willOpen = panel.hidden;
+    panel.hidden = !willOpen;
+    btn.setAttribute('aria-expanded', String(willOpen));
+  });
+  panel.addEventListener('click', function(e){
+    if (e.target.closest('a')) {
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !panel.hidden) {
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+})();
+
 function openPropModal(intent) {
   document.getElementById('propModalTitle').textContent = intent || 'Get in Touch';
   document.getElementById('propForm').reset();

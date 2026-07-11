@@ -86,6 +86,14 @@ button{font-family:var(--font-sans);}
 .sl-cta{background:var(--flogal-gold);color:var(--flogal-navy);padding:9px 18px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.01em;transition:filter 150ms;white-space:nowrap;}
 .sl-cta:hover{filter:brightness(1.05);}
 
+/* ---- Nav toggle (mobile) ------------------------------------------- */
+.sl-nav-toggle{display:none;position:relative;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;padding:0;margin-left:auto;background:transparent;border:0;cursor:pointer;flex:none;}
+.sl-nav-toggle-bar{display:block;width:22px;height:2px;background:rgba(255,255,255,.85);border-radius:1px;transition:transform 200ms cubic-bezier(.2,.8,.4,1),opacity 150ms;}
+.sl-nav-toggle[aria-expanded="true"] .sl-nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.sl-nav-toggle[aria-expanded="true"] .sl-nav-toggle-bar:nth-child(2){opacity:0;}
+.sl-nav-toggle[aria-expanded="true"] .sl-nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.sl-mobile-nav{display:none;}
+
 /* ---- Subtitle bar -------------------------------------------------- */
 .sl-subtitle{background:var(--night-1);border-bottom:1px solid var(--night-rule);}
 .sl-subtitle-inner{max-width:1440px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:12px;font-size:14px;}
@@ -225,6 +233,7 @@ button{font-family:var(--font-sans);}
 .sl-footer-top{display:grid;grid-template-columns:260px 1fr;gap:56px;align-items:start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
 .sl-footer-symbol{height:32px;width:auto;display:block;flex:none;}
 .sl-footer-wm{height:20px;width:auto;display:block;flex:none;opacity:.9;}
+.sl-footer-tag{margin:14px 0 0;font-size:14px;color:rgba(255,255,255,.55);line-height:1.5;max-width:220px;}
 .sl-footer-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
 .sl-footer-col{display:flex;flex-direction:column;gap:10px;}
 .sl-footer-col-h{font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
@@ -244,22 +253,40 @@ button{font-family:var(--font-sans);}
   .sl-page{grid-template-columns:200px 1fr;}
   .sl-drawer{display:none;}
 }
-@media(max-width:768px){
+@media(max-width:860px){
   .sl-nav-links,.sl-cta{display:none;}
-  .sl-nav-inner{padding:14px 20px;}
+  .sl-nav-toggle{display:flex;}
+  .sl-nav-inner{padding:0 20px;gap:0;}
   .sl-subtitle-inner{padding:14px 20px;}
   .sl-intro{padding:32px 20px 24px;}
   .sl-intro-title{font-size:26px;}
   .sl-proof-grid{grid-template-columns:1fr;}
   .sl-faq{padding:32px 20px 40px;}
+  .sl-footer-top{grid-template-columns:1fr;gap:32px;}
+  .sl-footer-nav{grid-template-columns:repeat(2,1fr);gap:32px;}
+  .sl-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
+
+  /* Full-screen night panel (spec §1.2/§15) */
+  .sl-mobile-nav{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:90;background:#050A12;display:flex;flex-direction:column;padding:8px 20px 24px;overflow-y:auto;}
+  .sl-mobile-nav[hidden]{display:none;}
+  .sl-mobile-nav-links{list-style:none;margin:0;padding:0;flex:1;}
+  .sl-mobile-nav-links a{display:block;padding:12px 4px;font-size:20px;line-height:28px;font-weight:600;color:rgba(255,255,255,.92);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08);}
+  .sl-mobile-nav-links a:hover{color:white;}
+  .sl-mobile-nav-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:12px;padding:14px 24px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.01em;background:var(--flogal-gold);color:var(--flogal-navy);text-decoration:none;}
+}
+@media(max-width:768px){
   .sl-page{grid-template-columns:1fr;display:block;}
   .sl-fil{display:none;}
   .sl-grid-wrap{padding:16px;}
   .sl-grid{grid-template-columns:1fr;}
   .sl-source-inner{grid-template-columns:1fr;gap:24px;}
-  .sl-footer-top{grid-template-columns:1fr;gap:32px;}
-  .sl-footer-nav{grid-template-columns:repeat(2,1fr);gap:32px;}
-  .sl-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+@media(max-width:480px){
+  .sl-footer-nav{grid-template-columns:1fr;}
+  .modal-frow{grid-template-columns:1fr!important;}
+}
+@media (prefers-reduced-motion: reduce){
+  .sl-nav-toggle-bar{transition:none;}
 }
 </style>
 <link rel="icon" type="image/x-icon" href="../../shared/favicons/sales/favicon.ico">
@@ -332,12 +359,30 @@ button{font-family:var(--font-sans);}
       <span class="sl-brand-division">Sales</span>
     </a>
     <ul class="sl-nav-links">
+      <li><a href="https://www.flogalhq.com">Home</a></li>
+      <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
+      <li><a href="https://properties.flogalhq.com">Properties</a></li>
       <li><a href="#inventory">Inventory</a></li>
       <li><a href="#" id="navContactLink">Contact</a></li>
     </ul>
     <a class="sl-cta" href="#" id="btnNavQuote">Request a Quote &#8594;</a>
+    <button class="sl-nav-toggle" id="slNavToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="slMobileNav">
+      <span class="sl-nav-toggle-bar"></span>
+      <span class="sl-nav-toggle-bar"></span>
+      <span class="sl-nav-toggle-bar"></span>
+    </button>
   </div>
 </header>
+<div class="sl-mobile-nav" id="slMobileNav" hidden>
+  <ul class="sl-mobile-nav-links">
+    <li><a href="https://www.flogalhq.com">Home</a></li>
+    <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
+    <li><a href="https://properties.flogalhq.com">Properties</a></li>
+    <li><a href="#inventory">Inventory</a></li>
+    <li><a href="#" id="mobileNavContactLink">Contact</a></li>
+  </ul>
+  <a class="sl-mobile-nav-cta" href="#" id="btnMobileNavQuote">Request a Quote &#8594;</a>
+</div>
 
 <!-- SUBTITLE BAR -->
 <div class="sl-subtitle">
@@ -525,6 +570,7 @@ button{font-family:var(--font-sans);}
       <div class="sl-footer-brand">
         <img class="sl-footer-symbol" src="../../shared/logos/flogal-symbol-gold.png" alt="">
         <img class="sl-footer-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
+        <p class="sl-footer-tag">Equipment sales and leasing, operator-direct from working freight yards.</p>
       </div>
       <nav class="sl-footer-nav">
         <div class="sl-footer-col">
@@ -580,7 +626,7 @@ button{font-family:var(--font-sans);}
     </div>
     <form id="quoteForm" onsubmit="submitQuote(event)" style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;">
       <div id="quoteInterestLine" style="display:none;background:var(--surface-1);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--fg-muted);border-left:3px solid var(--flogal-gold);"></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div>
           <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">First Name *</label>
           <input id="q-first" required style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="First name">
@@ -590,7 +636,7 @@ button{font-family:var(--font-sans);}
           <input id="q-last" required style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="Last name">
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div>
           <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Company</label>
           <input id="q-company" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="Company name">
@@ -605,7 +651,7 @@ button{font-family:var(--font-sans);}
           </select>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div>
           <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:5px;">Email *</label>
           <input id="q-email" type="email" required style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:6px;font:inherit;font-size:13px;color:var(--fg);" placeholder="you@company.com">
@@ -1010,6 +1056,39 @@ document.getElementById('navContactLink').addEventListener('click', e => {
   e.preventDefault();
   openQuoteModal(null);
 });
+document.getElementById('btnMobileNavQuote').addEventListener('click', e => {
+  e.preventDefault();
+  openQuoteModal(null);
+});
+document.getElementById('mobileNavContactLink').addEventListener('click', e => {
+  e.preventDefault();
+  openQuoteModal(null);
+});
+
+// Mobile nav toggle
+(function(){
+  var btn = document.getElementById('slNavToggle');
+  var panel = document.getElementById('slMobileNav');
+  if (!btn || !panel) return;
+  btn.addEventListener('click', function(){
+    var willOpen = panel.hidden;
+    panel.hidden = !willOpen;
+    btn.setAttribute('aria-expanded', String(willOpen));
+  });
+  panel.addEventListener('click', function(e){
+    if (e.target.closest('a')) {
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  window.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !panel.hidden) {
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+})();
 
 // Quote modal
 function openQuoteModal(unitId) {
