@@ -1,1 +1,6 @@
 # .gitignore
+
+# Session/verification artifacts — never commit
+.playwright-mcp/
+.claude/worktrees/
+/*.png
