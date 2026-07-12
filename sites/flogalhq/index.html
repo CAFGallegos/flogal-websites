@@ -49,19 +49,21 @@ a{color:inherit;text-decoration:none;}
 .nav-cta{display:inline-flex;align-items:center;padding:9px 20px;border-radius:6px;font-weight:700;font-size:13px;color:white;border:1px solid rgba(255,255,255,.42);transition:all 150ms;white-space:nowrap;}
 .nav-cta:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
 
-/* ---- HERO (parallax) --------------------------------------------- */
+/* ---- HERO CANVAS (photo extends through copy + proof + division rows) ---- */
 :root{--ease-out-soft:cubic-bezier(.22,1,.36,1);}
-.hero{position:relative;background:var(--night);color:white;overflow:hidden;min-height:720px;}
-.hero-bg{position:absolute;inset:0;z-index:0;will-change:transform;}
-.hero-bg img{width:100%;height:130%;object-fit:cover;object-position:62% 55%;display:block;filter:saturate(.92);}
+.hero{position:relative;background:var(--night);color:white;overflow:hidden;}
+.hero-photo-layer{position:absolute;inset:0;z-index:0;}
+.hero-bg{position:absolute;inset:0;will-change:transform;}
+.hero-bg img{width:100%;height:115%;object-fit:cover;object-position:62% 62%;display:block;filter:saturate(.92);}
 .has-js .hero-bg img{opacity:0;transform:scale(1.07);transition:opacity 2400ms var(--ease-out-soft),transform 2400ms var(--ease-out-soft);}
 .has-js .hero-bg.is-loaded img{opacity:1;transform:scale(1);}
-.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(90deg,rgba(5,10,18,.82) 0%,rgba(5,10,18,.55) 34%,rgba(5,10,18,.18) 58%,rgba(5,10,18,.05) 78%,rgba(5,10,18,.22) 100%),
-             linear-gradient(180deg,rgba(5,10,18,.10) 0%,rgba(5,10,18,.16) 45%,rgba(5,10,18,.70) 100%);}
-.hero-edge{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(5,10,18,.35) 0,transparent 8%,transparent 80%,#050A12 100%);}
-.hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:128px 40px 80px;}
+.hero-bottom-feather{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 0%,transparent 85%,var(--night) 100%);}
+
+.hero-copy-zone{position:relative;min-height:980px;}
+.hero-veil{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,10,18,.90) 0%,rgba(5,10,18,.72) 26%,rgba(5,10,18,.48) 42%,rgba(5,10,18,.26) 54%,rgba(5,10,18,.10) 68%,rgba(5,10,18,0) 85%),
+             linear-gradient(180deg,rgba(5,10,18,.10) 0%,transparent 8%,transparent 70%,rgba(5,10,18,.32) 100%);}
+.hero-inner{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:128px 40px 80px;}
 .hero-copy{max-width:640px;}
 .has-js .hero-copy>*{opacity:0;transform:translateY(16px);}
 .has-js .hero-copy.is-revealed>*{animation:hero-rise 700ms var(--ease-out-soft) forwards;}
@@ -73,27 +75,32 @@ a{color:inherit;text-decoration:none;}
 .hero-title{margin:0 0 22px;font-family:var(--font-display);font-weight:700;font-size:var(--t-display);line-height:1.05;letter-spacing:-.02em;color:white;}
 .hero-sub{font-size:var(--t-body-lg);line-height:1.6;max-width:480px;color:rgba(255,255,255,.78);margin:0 0 32px;}
 .hero-actions{display:flex;gap:12px;}
-.hero-caption{position:absolute;z-index:2;right:40px;bottom:20px;font-family:'JetBrains Mono',var(--font-sans),monospace;font-size:11px;font-weight:400;letter-spacing:.04em;color:rgba(255,255,255,.38);transition:color 150ms;}
+.hero-caption{position:absolute;z-index:2;right:40px;bottom:20px;font-family:'JetBrains Mono',var(--font-sans),monospace;font-size:11px;font-weight:400;letter-spacing:.04em;color:rgba(255,255,255,.55);text-shadow:0 1px 4px rgba(5,10,18,.85);transition:color 150ms;}
 .hero-caption:hover{color:rgba(255,255,255,.65);}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:6px;font-size:14px;font-weight:600;color:white;border:1px solid rgba(168,184,200,.4);background:rgba(168,184,200,.1);backdrop-filter:blur(10px);transition:all 150ms;}
 .btn-outline:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);}
 
-/* ---- PROOF BAND (own night band, below hero) ---------------------- */
-.proof-band{background:#0B1D2D;padding:40px 0;}
-.proof-grid{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 40px;
+/* ---- PROOF ROW (transparent cards over extended photo) ------------ */
+.proof-band{position:relative;padding:40px 0;}
+.proof-tint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,10,18,.32) 0%,rgba(5,10,18,.42) 100%);}
+.proof-grid{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:0 40px;
   display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.proof-card{background:rgba(168,184,200,.08);border:1px solid rgba(168,184,200,.18);border-radius:8px;padding:20px 22px;backdrop-filter:blur(6px);}
+.proof-card{background:rgba(11,29,45,.55);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:20px 22px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 .proof-title{font-weight:700;font-size:14px;color:white;letter-spacing:-.005em;margin-bottom:6px;}
 .proof-body{font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.6);}
 
-/* ---- TRI-BAND CTA ------------------------------------------------ */
-.tri-wrap{background:var(--night);padding:0 0 64px;}
-.tri-band{max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.tb{display:flex;align-items:center;gap:16px;padding:22px 28px;min-height:88px;color:white;transition:filter 180ms,transform 180ms;border-radius:8px;}
+/* ---- DIVISION LINKS ROW (transparent accent cards over photo) ----- */
+.tri-wrap{position:relative;padding:0 0 64px;}
+.tri-tint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,10,18,.42) 0%,rgba(5,10,18,.55) 100%);}
+.tri-band{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.tb{display:flex;align-items:center;gap:16px;padding:22px 28px;min-height:88px;color:white;transition:filter 180ms,transform 180ms,background-color 150ms;border-radius:8px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 .tb:hover{filter:brightness(1.10);transform:translateY(-2px);}
-.tb-blue{background:var(--blue);}
-.tb-gold{background:var(--gold);color:var(--navy);}
-.tb-green{background:var(--green);}
+.tb-blue{background:rgba(30,75,143,.80);}
+.tb-blue:hover{background:var(--blue);}
+.tb-gold{background:rgba(199,154,43,.80);color:var(--navy);}
+.tb-gold:hover{background:var(--gold);}
+.tb-green{background:rgba(22,94,58,.80);}
+.tb-green:hover{background:var(--green);}
 .tb-mark{height:26px;width:auto;flex:none;}
 .tb-text{display:flex;flex-direction:column;gap:4px;}
 .tb-name{font-weight:700;font-size:20px;letter-spacing:-.01em;}
@@ -200,11 +207,28 @@ a{color:inherit;text-decoration:none;}
   .svc-grid,.growth-grid,.contact-inner{grid-template-columns:1fr;gap:40px;}
   .form-row{grid-template-columns:1fr;}
   .hero-actions{flex-direction:column;align-items:stretch;gap:12px;}
-  .hero{min-height:560px;}
-  .hero-bg img{object-position:76% 62%;}
+
+  /* T5 — photo canvas ends after hero copy at mobile; proof/division get
+     their own solid night bands (translucent-over-photo cards don't read
+     well at this width, see session notes). */
+  .hero-photo-layer{top:0;left:0;right:0;bottom:auto;height:560px;}
+  .hero-copy-zone{min-height:560px;}
+  .hero-bg img{object-position:78% 60%;}
   .has-js .hero-bg img{transform:none;transition:opacity 400ms var(--ease-out-soft);}
   .has-js .hero-bg.is-loaded img{transform:none;}
+  .hero-bottom-feather{background:linear-gradient(180deg,transparent 0%,transparent 70%,var(--night) 100%);}
+  .hero-veil{background:linear-gradient(180deg,rgba(5,10,18,.55) 0%,rgba(5,10,18,.62) 55%,rgba(5,10,18,.75) 100%);}
   .hero-caption{display:none;}
+
+  .proof-band{background:#0B1D2D;}
+  .proof-tint{display:none;}
+  .proof-card{background:rgba(168,184,200,.08);border-color:rgba(168,184,200,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .tri-wrap{background:var(--night);}
+  .tri-tint{display:none;}
+  .tb{backdrop-filter:none;-webkit-backdrop-filter:none;}
+  .tb-blue{background:var(--blue);}
+  .tb-gold{background:var(--gold);}
+  .tb-green{background:var(--green);}
 }
 @media(max-width:480px){
   .proof-grid{grid-template-columns:1fr;}
@@ -321,66 +345,73 @@ a{color:inherit;text-decoration:none;}
 
 <!-- HERO with parallax -->
 <section class="hero">
-  <div class="hero-bg" id="heroBg" aria-hidden="true">
-    <img src="../../shared/photos/hero-truck-sunset.jpg" alt="">
+  <div class="hero-photo-layer" aria-hidden="true">
+    <div class="hero-bg" id="heroBg">
+      <img src="../../shared/photos/hero-truck-sunset.jpg" alt="">
+    </div>
+    <div class="hero-bottom-feather"></div>
   </div>
-  <div class="hero-veil" aria-hidden="true"></div>
-  <div class="hero-edge" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <span class="eyebrow" style="display:block;margin-bottom:16px;">Operator-Funded Freight Platform</span>
-      <h1 class="hero-title">Freight-native companies,<br>run on one system<span style="color:rgba(168,184,200,.55);">.</span></h1>
-      <p class="hero-sub">Flogal builds and operates freight companies — hauling, equipment, and industrial real estate — on a shared operating backbone we run ourselves. Founder-funded, freight-experienced, built for the long haul.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-outline">Get in Touch →</a>
+
+  <div class="hero-copy-zone">
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow" style="display:block;margin-bottom:16px;">Operator-Funded Freight Platform</span>
+        <h1 class="hero-title">Freight-native companies,<br>run on one system<span style="color:rgba(168,184,200,.55);">.</span></h1>
+        <p class="hero-sub">Flogal builds and operates freight companies — hauling, equipment, and industrial real estate — on a shared operating backbone we run ourselves. Founder-funded, freight-experienced, built for the long haul.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-outline">Get in Touch →</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-caption">Flogal Kenworth T680 Next Gen &middot; southbound I-35, Texas</div>
+  </div>
+
+  <!-- PROOF ROW -->
+  <div class="proof-band">
+    <div class="proof-tint" aria-hidden="true"></div>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-title">Operator-funded</div>
+        <div class="proof-body">Founder-capitalized, full decision capacity. No outside mandate.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-title">Freight-native</div>
+        <div class="proof-body">Built by people who've run trucks, not a fund shopping for a sector.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-title">One operating system</div>
+        <div class="proof-body">Maintenance, dispatch, payroll, and per-truck P&amp;L on shared infrastructure.</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-title">Multi-entity by design</div>
+        <div class="proof-body">Separate operating companies under one holding structure.</div>
       </div>
     </div>
   </div>
-  <div class="hero-caption">Flogal Kenworth T680 Next Gen &middot; southbound I-35, Texas</div>
+
+  <!-- DIVISION LINKS ROW -->
+  <div class="tri-wrap">
+    <div class="tri-tint" aria-hidden="true"></div>
+    <div class="tri-band">
+      <a href="https://carriers.flogalhq.com" class="tb tb-blue">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
+        <div class="tb-text"><span class="tb-name">Move Freight</span><span class="tb-sub">Carriers</span></div>
+        <span class="tb-arrow">→</span>
+      </a>
+      <a href="https://sales.flogalhq.com" class="tb tb-gold">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+        <div class="tb-text"><span class="tb-name">Buy Equipment</span><span class="tb-sub">Sales Inventory</span></div>
+        <span class="tb-arrow">→</span>
+      </a>
+      <a href="https://properties.flogalhq.com" class="tb tb-green">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
+        <div class="tb-text"><span class="tb-name">Real Estate</span><span class="tb-sub">Properties</span></div>
+        <span class="tb-arrow">→</span>
+      </a>
+    </div>
+  </div>
 </section>
-
-<!-- PROOF BAND -->
-<div class="proof-band">
-  <div class="proof-grid">
-    <div class="proof-card">
-      <div class="proof-title">Operator-funded</div>
-      <div class="proof-body">Founder-capitalized, full decision capacity. No outside mandate.</div>
-    </div>
-    <div class="proof-card">
-      <div class="proof-title">Freight-native</div>
-      <div class="proof-body">Built by people who've run trucks, not a fund shopping for a sector.</div>
-    </div>
-    <div class="proof-card">
-      <div class="proof-title">One operating system</div>
-      <div class="proof-body">Maintenance, dispatch, payroll, and per-truck P&amp;L on shared infrastructure.</div>
-    </div>
-    <div class="proof-card">
-      <div class="proof-title">Multi-entity by design</div>
-      <div class="proof-body">Separate operating companies under one holding structure.</div>
-    </div>
-  </div>
-</div>
-
-<!-- TRI-BAND CTAs -->
-<div class="tri-wrap">
-  <div class="tri-band">
-    <a href="https://carriers.flogalhq.com" class="tb tb-blue">
-      <img class="tb-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
-      <div class="tb-text"><span class="tb-name">Move Freight</span><span class="tb-sub">Carriers</span></div>
-      <span class="tb-arrow">→</span>
-    </a>
-    <a href="https://sales.flogalhq.com" class="tb tb-gold">
-      <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" alt="">
-      <div class="tb-text"><span class="tb-name">Buy Equipment</span><span class="tb-sub">Sales Inventory</span></div>
-      <span class="tb-arrow">→</span>
-    </a>
-    <a href="https://properties.flogalhq.com" class="tb tb-green">
-      <img class="tb-mark" src="../../shared/logos/flogal-symbol-white.png" alt="">
-      <div class="tb-text"><span class="tb-name">Real Estate</span><span class="tb-sub">Properties</span></div>
-      <span class="tb-arrow">→</span>
-    </a>
-  </div>
-</div>
 
 <!-- OPERATING DIVISIONS -->
 <section class="svc-section">
@@ -599,7 +630,8 @@ a{color:inherit;text-decoration:none;}
   document.documentElement.classList.add('has-js');
   var bg = document.getElementById('heroBg');
   if (!bg) return;
-  var hero = bg.parentElement;
+  var hero = bg.closest('.hero');
+  if (!hero) return;
   var img = bg.querySelector('img');
   var copy = hero.querySelector('.hero-copy');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -620,7 +652,7 @@ a{color:inherit;text-decoration:none;}
   function update() {
     if (window.innerWidth <= 860 || !inView) { bg.style.transform = ''; return; }
     var heroH = hero.offsetHeight;
-    var imgH = heroH * 1.3;
+    var imgH = heroH * 1.15;
     var rect = hero.getBoundingClientRect();
     var p = Math.min(Math.max(-rect.top / heroH, 0), 1);
     var y = p * (imgH - heroH) * 0.55;
