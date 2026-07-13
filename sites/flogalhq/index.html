@@ -60,11 +60,17 @@ a{color:inherit;text-decoration:none;}
 .has-js .hero-bg img{opacity:0;transform:scale(1.07);transition:opacity 2400ms var(--ease-out-soft),transform 2400ms var(--ease-out-soft);}
 .has-js .hero-bg.is-loaded img{opacity:1;transform:scale(1);}
 .hero-bottom-feather{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 0%,transparent 68%,rgba(5,10,18,.55) 84%,var(--night) 96%);}
+/* Left-side darkening spans the FULL hero (copy + cards + strip) so it can't
+   terminate in a hard edge at the card row; the mask tapers it off through
+   the lower zone instead of a step. */
+.hero-photo-layer::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,10,18,.90) 0%,rgba(5,10,18,.72) 26%,rgba(5,10,18,.48) 42%,rgba(5,10,18,.26) 54%,rgba(5,10,18,.10) 68%,rgba(5,10,18,0) 85%);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 62%,rgba(0,0,0,.5) 82%,rgba(0,0,0,.2) 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 62%,rgba(0,0,0,.5) 82%,rgba(0,0,0,.2) 100%);}
 
 .hero-copy-zone{position:relative;min-height:700px;}
 .hero-veil{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,rgba(5,10,18,.90) 0%,rgba(5,10,18,.72) 26%,rgba(5,10,18,.48) 42%,rgba(5,10,18,.26) 54%,rgba(5,10,18,.10) 68%,rgba(5,10,18,0) 85%),
-             linear-gradient(180deg,rgba(5,10,18,.10) 0%,transparent 8%,transparent 70%,rgba(5,10,18,.32) 100%);}
+  background:linear-gradient(180deg,rgba(5,10,18,.10) 0%,transparent 8%,transparent 70%,rgba(5,10,18,.32) 100%);}
 .hero-inner{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:112px 40px 56px;}
 .hero-copy{max-width:640px;}
 .has-js .hero-copy>*{opacity:0;transform:translateY(16px);}
@@ -87,13 +93,13 @@ a{color:inherit;text-decoration:none;}
 /* ---- DIVISION LINKS ROW (glass accent cards over the photo road) -- */
 .tri-wrap{position:relative;padding:0 0 36px;}
 .tri-band{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.tb{display:flex;align-items:center;gap:16px;padding:22px 28px;min-height:88px;color:var(--navy);border:1px solid rgba(255,255,255,.18);transition:background-color 150ms,transform 150ms,box-shadow 150ms;border-radius:8px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background-image:linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12));}
-.tb:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,10,18,.35);background-image:none;}
-.tb-blue{background-color:rgba(74,144,217,.80);}
+.tb{display:flex;align-items:center;gap:16px;padding:22px 28px;min-height:88px;color:var(--navy);border:1px solid rgba(255,255,255,.18);transition:background-color 150ms,transform 150ms,box-shadow 150ms;border-radius:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);text-shadow:0 1px 2px rgba(255,255,255,.25);}
+.tb:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,10,18,.35);}
+.tb-blue{background-color:rgba(74,144,217,.67);}
 .tb-blue:hover{background-color:#4A90D9;}
-.tb-gold{background-color:rgba(201,168,76,.80);}
+.tb-gold{background-color:rgba(201,168,76,.65);}
 .tb-gold:hover{background-color:#C9A84C;}
-.tb-green{background-color:rgba(76,175,125,.80);}
+.tb-green{background-color:rgba(76,175,125,.65);}
 .tb-green:hover{background-color:#4CAF7D;}
 .tb-mark{height:26px;width:auto;flex:none;}
 .tb-text{display:flex;flex-direction:column;gap:4px;}
