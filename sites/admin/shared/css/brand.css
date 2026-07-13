@@ -1,0 +1,521 @@
+/* =====================================================================
+   FLOGAL — Foundations: Color + Type Tokens
+   ---------------------------------------------------------------------
+   Premium logistics, freight, fleet & equipment platform.
+   Cinematic, industrial, asset-backed. Navy/gold/green/charcoal palette.
+   ===================================================================== */
+
+/* ---- Fonts: Satoshi (self-hosted, licensed) ------------------------ */
+/* Trimmed to weights actually used in markup: 400/500/700 per plan, plus
+   900 which real content depends on (wordmarks, HQ about hero title) —
+   confirmed via repo-wide grep before trimming, see G1-T3 session note.
+   No italic usage found in rendered content; italic faces dropped. */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../fonts/Satoshi-Regular.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../fonts/Satoshi-Medium.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../fonts/Satoshi-Bold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../fonts/Satoshi-Black.otf') format('opentype');
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+
+/* JetBrains Mono — still served from Fontshare CDN for the lone mono family.
+   Self-hosting deferred: Google Fonts' css2 API returned identical woff2
+   URLs for the 400 and 500 weight requests during this session's lookup,
+   which couldn't be verified as correct without risking a broken/duplicate
+   font file in production. Flagged for Carlos, not silently done. */
+@import url('https://api.fontshare.com/v2/css?f[]=jetbrains-mono@500,400&display=swap');
+
+:root {
+  /* =========================================================
+     1. CORE BRAND PALETTE — canonical hex values
+     ========================================================= */
+  --flogal-navy:        #0B1D2D;   /* primary dark, dominant brand */
+  --flogal-gold:        #C79A2B;   /* equipment / sales — warm metal */
+  --flogal-green:       #165E3A;   /* realty / properties — operational */
+  --flogal-blue:        #1E4B8F;   /* hauling / carriers — accent */
+  --flogal-graphite:    #5A6470;   /* industrial / lighter neutral grey */
+
+  /* Slight working-color shifts of the same family ---------- */
+  --navy-900:           #060F19;
+  --navy-800:           #0B1D2D;   /* = brand navy */
+  --navy-700:           #122A3F;
+  --navy-600:           #1A3651;
+  --navy-500:           #284763;
+  --navy-400:           #46627E;
+  --navy-300:           #7A8FA5;
+  --navy-200:           #B6C3D2;
+  --navy-100:           #DCE3EB;
+  --navy-050:           #EEF2F6;
+
+  --gold-700:           #8E6B14;
+  --gold-600:           #A88321;
+  --gold-500:           #C79A2B;   /* = brand gold */
+  --gold-400:           #DDB452;
+  --gold-300:           #ECCC81;
+  --gold-100:           #F8EBC9;
+
+  --green-700:           #0E4127;
+  --green-600:           #114E31;
+  --green-500:           #165E3A;   /* = brand green */
+  --green-400:           #2E7A55;
+  --green-300:           #5B9C7E;
+
+  --blue-700:           #143864;
+  --blue-600:           #1A4279;
+  --blue-500:           #1E4B8F;   /* = brand blue */
+  --blue-400:           #3868AD;
+  --blue-300:           #6E94C8;
+
+  --graphite-700:       #3A4250;
+  --graphite-600:       #4A5360;
+  --graphite-500:       #5A6470;   /* = brand graphite */
+  --graphite-400:       #7A8492;
+  --graphite-300:       #A4ADB8;
+
+  /* =========================================================
+     2. NEUTRAL / SURFACE SCALE — paper to deep night
+     ========================================================= */
+  --paper:              #F6F7F9;   /* default light page */
+  --paper-warm:         #FAF8F4;   /* document / investor materials */
+  --surface-0:          #FFFFFF;
+  --surface-1:          #F2F4F7;
+  --surface-2:          #E6EAF0;
+  --surface-3:          #D5DCE5;
+  --hairline:           #C6CFDA;
+  --rule:               #E1E6EE;
+
+  --ink-900:            #0B1320;   /* primary text on light */
+  --ink-800:            #182433;
+  --ink-700:            #2B3848;
+  --ink-600:            #475569;
+  --ink-500:            #64748B;   /* secondary text on light */
+  --ink-400:            #94A3B8;
+  --ink-300:            #B7C0CC;   /* tertiary / disabled */
+
+  /* Dark / cinematic surfaces ------------------------------- */
+  --night-0:            #050A12;   /* hero / freight cinematic bg */
+  --night-1:            #0B1421;
+  --night-2:            #111E2E;
+  --night-3:            #182B3F;
+  --night-rule:         #25344A;
+  --night-fg:           #E8EEF6;
+  --night-fg-dim:       #94A6BD;
+  --night-fg-dimmer:    #5F7491;
+
+  /* =========================================================
+     3. SEMANTIC FOREGROUND / BACKGROUND
+        Use these in components, NOT raw hex.
+     ========================================================= */
+  --bg:                 var(--paper);
+  --bg-elevated:        var(--surface-0);
+  --bg-muted:           var(--surface-1);
+  --bg-subtle:          var(--surface-2);
+
+  --fg:                 var(--ink-900);
+  --fg-muted:           var(--ink-600);
+  --fg-subtle:          var(--ink-500);
+  --fg-faint:           var(--ink-400);
+  --fg-disabled:        var(--ink-300);
+  --fg-inverse:         #FFFFFF;
+
+  --border:             var(--hairline);
+  --border-strong:      var(--ink-400);
+  --divider:            var(--rule);
+
+  --brand:              var(--flogal-navy);
+  --brand-fg:           #FFFFFF;
+  --brand-accent:       var(--flogal-gold);
+
+  /* =========================================================
+     4. STATUS / DISPATCH-OPS COLORS
+        Tuned for logistics dashboards (load board, ETA, etc).
+        ========================================================= */
+  --status-on-time:     #1F8A5B;   /* green — on time / delivered */
+  --status-on-time-bg:  #E4F4EC;
+  --status-at-risk:     #C79A2B;   /* gold — warning / delayed risk */
+  --status-at-risk-bg: #FBF1D9;
+  --status-late:        #B5391B;   /* rust red — late / exception */
+  --status-late-bg:     #F9E4DE;
+  --status-info:        #1E4B8F;   /* blue — informational / new */
+  --status-info-bg:     #E2EAF6;
+  --status-idle:        #64748B;   /* slate — idle / unassigned */
+  --status-idle-bg:     #EDF1F5;
+
+  /* =========================================================
+     5. SUB-BRAND ACCENTS (per division)
+        ========================================================= */
+  --sub-hauling:        var(--flogal-blue);     /* Carriers */
+  --sub-equipment:      var(--flogal-gold);     /* Sales */
+  --sub-realty:         var(--flogal-green);    /* Properties */
+  --sub-industrial:     var(--flogal-graphite); /* Industrial */
+  --sub-master:         var(--flogal-navy);     /* HQ */
+
+  /* =========================================================
+     6. TYPOGRAPHY — Satoshi family
+        Geometric, disciplined, freight-grade.
+        ========================================================= */
+  --font-sans:          'Satoshi', system-ui, sans-serif;
+  --font-display:       'Satoshi', system-ui, sans-serif;
+  --font-mono:          'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* Weights */
+  --fw-light:           300;
+  --fw-regular:         400;
+  --fw-medium:          500;
+  --fw-bold:            700;
+  --fw-black:           900;
+
+  /* Type scale — rooted in 16px, slightly compressed */
+  --fs-12:              0.75rem;     /* micro / eyebrow */
+  --fs-13:              0.8125rem;
+  --fs-14:              0.875rem;
+  --fs-16:              1rem;
+  --fs-18:              1.125rem;
+  --fs-20:              1.25rem;
+  --fs-24:              1.5rem;
+  --fs-28:              1.75rem;
+  --fs-32:              2rem;
+  --fs-40:              2.5rem;
+  --fs-48:              3rem;
+  --fs-56:              3.5rem;
+  --fs-64:              4rem;
+  --fs-72:              4.5rem;
+  --fs-88:              5.5rem;
+
+  /* Line heights */
+  --lh-tight:           1.05;
+  --lh-snug:            1.18;
+  --lh-base:            1.5;
+  --lh-relaxed:         1.62;
+
+  /* Tracking */
+  --tr-tight:           -0.02em;
+  --tr-snug:            -0.01em;
+  --tr-base:            0em;
+  --tr-wide:            0.04em;
+  --tr-wider:           0.08em;     /* eyebrows / labels */
+  --tr-widest:          0.14em;     /* small all-caps */
+
+  /* =========================================================
+     7. SPACING — 4px base
+        ========================================================= */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+
+  /* =========================================================
+     8. RADII — squared, industrial. Almost no pillow corners.
+        ========================================================= */
+  --r-0:    0px;
+  --r-xs:   2px;        /* hairline corner softening */
+  --r-sm:   4px;        /* inputs, chips */
+  --r-md:   6px;        /* buttons, badges */
+  --r-lg:   10px;       /* cards */
+  --r-xl:   14px;       /* hero panels */
+  --r-pill: 999px;      /* status pills only */
+
+  /* =========================================================
+     9. ELEVATION — restrained, technical, no pillowy shadows
+        ========================================================= */
+  --shadow-xs:  0 1px 0 rgba(11, 29, 45, 0.04);
+  --shadow-sm:  0 1px 2px rgba(11, 29, 45, 0.06), 0 1px 0 rgba(11, 29, 45, 0.04);
+  --shadow-md:  0 4px 12px rgba(11, 29, 45, 0.08), 0 1px 2px rgba(11, 29, 45, 0.06);
+  --shadow-lg:  0 12px 28px rgba(11, 29, 45, 0.10), 0 2px 6px rgba(11, 29, 45, 0.06);
+  --shadow-xl:  0 24px 56px rgba(11, 29, 45, 0.16), 0 4px 10px rgba(11, 29, 45, 0.08);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 0 rgba(11,29,45,0.18);
+
+  /* Ring / focus */
+  --ring-focus:  0 0 0 3px rgba(30, 75, 143, 0.30);
+  --ring-gold:   0 0 0 3px rgba(199, 154, 43, 0.35);
+  --ring-danger: 0 0 0 3px rgba(181, 57, 27, 0.30);
+
+  /* =========================================================
+     10. MOTION
+        ========================================================= */
+  --ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);    /* default */
+  --ease-emphasis: cubic-bezier(0.2, 0.8, 0.0, 1);    /* hero */
+  --ease-exit:     cubic-bezier(0.4, 0.0, 1.0, 1);    /* dismiss */
+  --dur-fast:    120ms;
+  --dur-base:    200ms;
+  --dur-slow:    320ms;
+  --dur-hero:    600ms;
+
+  /* =========================================================
+     11. TYPE SCALE — --t-* system (design plan §3.3)
+        Sizes only; weight/line-height/tracking applied via the
+        .t-* utility classes below. Values are final.
+        ========================================================= */
+  --t-display:  clamp(3rem, 4.5vw + 0.6rem, 4.5rem); /* 48–72px, hero H1 only */
+  --t-h1:       3rem;      /* 48px */
+  --t-h2:       2.5rem;    /* 40px */
+  --t-h3:       1.5rem;    /* 24px */
+  --t-h4:       1.125rem;  /* 18px */
+  --t-body-lg:  1.125rem;  /* 18px */
+  --t-body:     1rem;      /* 16px */
+  --t-body-sm:  0.875rem;  /* 14px */
+  --t-eyebrow:  0.75rem;   /* 12px */
+  --t-micro:    0.625rem;  /* 10px */
+  --t-mono:     0.8125rem; /* 13px */
+
+  /* =========================================================
+     12. SECTION RHYTHM & MEASURE (§3.4 / §3.8)
+        ========================================================= */
+  --sec-y:      var(--s-24); /* 96px desktop; 64px <=860px, see media query below */
+  --sec-y-lg:   112px;       /* statement bands (dark full-bleed) */
+  --measure:    62ch;        /* prose line-length cap */
+
+  /* =========================================================
+     13. HERO VEIL & GRAIN (§3.9 / §4.3)
+        ========================================================= */
+  --hero-veil:
+    linear-gradient(90deg, rgba(5,10,18,.88) 0%, rgba(5,10,18,.55) 38%, rgba(5,10,18,.12) 68%, rgba(5,10,18,.35) 100%),
+    linear-gradient(180deg, rgba(5,10,18,.35), rgba(5,10,18,.15) 40%, rgba(5,10,18,.78) 100%);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 860px) {
+  :root { --sec-y: 64px; }
+}
+
+/* =====================================================================
+   SEMANTIC ELEMENT STYLES — use these mixins via class on the doc root
+   ===================================================================== */
+html, body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Display & headings -------------------------------------------- */
+.h-display, h1.display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: clamp(var(--fs-48), 5vw + 1rem, var(--fs-88));
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  color: var(--fg);
+}
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-48);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-32);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tr-snug);
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-24);
+  line-height: var(--lh-snug);
+}
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-18);
+  line-height: var(--lh-snug);
+}
+h5, .h5 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-16);
+  line-height: var(--lh-snug);
+}
+
+/* ---- Body ---------------------------------------------------------- */
+p, .body {
+  font-size: var(--fs-16);
+  line-height: var(--lh-relaxed);
+  color: var(--fg);
+}
+.body-lg { font-size: var(--fs-18); line-height: var(--lh-relaxed); }
+.body-sm { font-size: var(--fs-14); line-height: var(--lh-base); }
+.muted   { color: var(--fg-muted); }
+.subtle  { color: var(--fg-subtle); }
+
+/* ---- Eyebrows / labels (uppercase, tracked) ------------------------- */
+.eyebrow, .overline {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-12);
+  letter-spacing: var(--tr-widest);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ---- Numeric / dispatch-grade tabular figures ----------------------- */
+.numeric, .tabular {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum' 1, 'zero' 1;
+}
+
+/* ---- Links --------------------------------------------------------- */
+a {
+  color: var(--flogal-blue);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+a:hover { border-bottom-color: currentColor; }
+
+/* ---- Type scale utility classes (§3.3, use with --t-* tokens) ------ */
+.t-display {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-display); line-height: 1.05; letter-spacing: -0.02em;
+}
+.t-h1 {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-h1); line-height: 1.08; letter-spacing: -0.02em;
+}
+.t-h2 {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-h2); line-height: 1.15; letter-spacing: -0.015em;
+}
+.t-h3 {
+  font-family: var(--font-display); font-weight: var(--fw-bold);
+  font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.01em;
+}
+.t-h4 {
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  font-size: var(--t-h4); line-height: 1.25;
+}
+.t-body-lg { font-size: var(--t-body-lg); line-height: 1.6; }
+.t-body    { font-size: var(--t-body); line-height: 1.62; }
+.t-body-sm { font-size: var(--t-body-sm); line-height: 1.5; }
+.t-eyebrow {
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  font-size: var(--t-eyebrow); letter-spacing: 0.14em;
+  text-transform: uppercase; line-height: 1;
+}
+.t-micro {
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  font-size: var(--t-micro); letter-spacing: 0.22em;
+  text-transform: uppercase; line-height: 1.2;
+}
+.t-mono {
+  font-family: var(--font-mono); font-weight: var(--fw-medium);
+  font-size: var(--t-mono); letter-spacing: 0.02em; line-height: 1.4;
+}
+
+/* ---- Button system (§3.5) — one spec, three surfaces --------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans); font-weight: var(--fw-bold);
+  border-radius: var(--r-md); border: 1px solid transparent;
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  padding: 11px 20px; font-size: 14px; /* md, default */
+  transition: background var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard),
+              filter var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard);
+}
+.btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible { outline: none; box-shadow: var(--accent-ring); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; transform: none; }
+
+.btn-sm { padding: 9px 16px; font-size: 13px; }
+.btn-lg { padding: 14px 24px; font-size: 15px; }
+
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--btn-primary-fg, #FFFFFF); }
+.btn-outline { background: transparent; border-color: var(--accent-border); color: inherit; }
+.btn-outline.on-dark { border-color: rgba(255,255,255,.42); color: #FFFFFF; }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--accent); }
+.btn-ghost:hover { background: var(--accent-soft); }
+.btn-inverse { background: #FFFFFF; border-color: #FFFFFF; color: var(--flogal-navy); }
+
+/* ---- Card system (§3.6) --------------------------------------------- */
+.card-light {
+  background: var(--surface-0); border: 1px solid var(--hairline);
+  border-radius: var(--r-lg); padding: 28px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.card-light.is-linked {
+  transition: box-shadow var(--dur-slow) var(--ease-standard),
+              transform var(--dur-slow) var(--ease-standard),
+              border-color var(--dur-slow) var(--ease-standard);
+}
+.card-light.is-linked:hover {
+  box-shadow: var(--shadow-md); transform: translateY(-2px);
+  border-color: var(--accent-border);
+}
+/* Bottom-align a trailing link row so mismatched body lengths still end flush */
+.card-light .card-link-row { margin-top: auto; }
+
+.card-dark {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--r-lg); padding: 24px;
+  transition: border-color var(--dur-slow) var(--ease-standard);
+}
+.card-dark:hover { border-color: rgba(255,255,255,.22); }
+.card-dark.on-photo { backdrop-filter: blur(6px); }
+
+.icon-tile {
+  width: 40px; height: 40px; border-radius: var(--r-md);
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-tile svg { width: 20px; height: 20px; stroke-width: 1.75; }
+
+/* ---- Motion layer (§4) ----------------------------------------------
+   Shared keyframes only — apply the ::before glow-drift layer per site
+   on the site's own night-band selector (background/accent already
+   differs per site, so there's no single shared class to hook). Every
+   consumer must gate the animation behind prefers-reduced-motion. */
+@keyframes glow-drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(-4%,3%,0); } }
+@keyframes lane-run { to { stroke-dashoffset: 0; } }
+
+/* =========================================================
+   14. CONTAINER SYSTEM (G4 spec §1/§2 — locked, all five sites)
+      ========================================================= */
+:root {
+  --container-max:    1440px;
+  --container-pad:      40px;  /* >1024px */
+  --container-pad-md:   28px;  /* 641–1024px */
+  --container-pad-sm:   20px;  /* <=640px */
+
+  /* Header (G4 §1.2) */
+  --header-h: 64px;
+  --header-z: 100;
+
+  /* Footer accent bar (G4 §1.8) — solid per-site accent; HQ overrides
+     with the tricolor gradient in its own shell. */
+  --footer-bar-h: 4px;
+}

@@ -153,3 +153,14 @@ The careers form (on carriers/index.html) uses [Formspree](https://formspree.io)
 | Green | `#165E3A` | Properties |
 | Gray | `#3A3F46` | Industrial |
 | Cream | `#F6F7F9` | Backgrounds |
+
+---
+
+## SHARED ASSET SYNC
+
+Each site under `sites/<name>/` keeps a local copy of root `shared/` (fonts, logos, favicons, CSS) because Vercel serves every site from its own folder only. After editing anything in root `shared/`, run:
+
+```bash
+node scripts/sync-shared.mjs        # copies root shared/ into every site mirror
+node scripts/check-shared-sync.mjs  # byte-compares mirrors against root; exits nonzero on drift
+```

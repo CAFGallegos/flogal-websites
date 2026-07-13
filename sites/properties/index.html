@@ -33,7 +33,7 @@
   --gold-400:#DDB452;
   --night-0:#050A12;
   --night-1:#070E17;
-  --paper:#F8F9FB;
+  --paper:#F6F7F9;
   --paper-warm:#F4F5F0;
   --bg-muted:#F0F2F7;
   --bg-subtle:#E8EBF3;
@@ -68,17 +68,25 @@ button{font-family:inherit;}
 .pr-divider{width:1px;height:16px;background:rgba(255,255,255,.25);}
 .pr-sub-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:6px;}
 .pr-nav-links{display:flex;gap:28px;flex:1;margin-left:16px;align-items:center;}
-.pr-nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.74);text-decoration:none;transition:color 160ms;}
-.pr-nav-link:hover{color:white;}
+.pr-nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.74);text-decoration:none;transition:color 150ms,text-decoration-color 150ms;}
+.pr-nav-link:hover{color:white;text-decoration:underline;text-underline-offset:4px;}
 .pr-nav-tools{display:flex;align-items:center;gap:10px;flex:none;}
-.pr-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:13px;letter-spacing:.01em;text-decoration:none;background:transparent;color:white;border:1px solid rgba(255,255,255,.34);transition:all 160ms cubic-bezier(.2,.6,.2,1);white-space:nowrap;cursor:pointer;}
-.pr-cta-btn:hover{background:white;color:var(--flogal-navy);border-color:white;}
-.pr-cta-green{background:var(--flogal-green);color:white !important;border-color:var(--flogal-green);}
-.pr-cta-green:hover{background:var(--green-400) !important;border-color:var(--green-400) !important;}
+#propSubmitBtn{outline:none;transition:filter 160ms,transform 160ms,box-shadow 160ms;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);}
+#propSubmitBtn:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 3px 8px rgba(5,10,18,.32),0 6px 18px rgba(5,10,18,.22);}
+#propSubmitBtn:active{filter:none;transform:translateY(0);box-shadow:inset 0 1px 2px rgba(5,10,18,.25),0 1px 2px rgba(5,10,18,.25);}
+#propSubmitBtn:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 3px rgba(76,175,125,.35);}
+.pr-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:13px;letter-spacing:.01em;text-decoration:none;background:transparent;color:white;border:1px solid rgba(255,255,255,.34);transition:all 160ms cubic-bezier(.2,.6,.2,1);white-space:nowrap;cursor:pointer;outline:none;}
+.pr-cta-btn:hover{background:white;color:var(--flogal-navy);border-color:white;transform:translateY(-1px);box-shadow:0 3px 8px rgba(5,10,18,.22);}
+.pr-cta-btn:active{transform:translateY(0);box-shadow:none;}
+.pr-cta-btn:focus-visible{box-shadow:0 0 0 3px rgba(76,175,125,.35);}
+.pr-cta-green{background:var(--accent);color:var(--flogal-navy) !important;border-color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);}
+.pr-cta-green:hover{background:var(--green-400) !important;border-color:var(--green-400) !important;transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 3px 8px rgba(5,10,18,.32),0 6px 18px rgba(5,10,18,.22);}
+.pr-cta-green:active{transform:translateY(0);box-shadow:inset 0 1px 2px rgba(5,10,18,.25),0 1px 2px rgba(5,10,18,.25);}
+.pr-cta-green:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 3px rgba(76,175,125,.35);}
 .pr-cta-ghost{background:transparent;color:white;border-color:rgba(255,255,255,.28);}
-.pr-cta-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.48);color:white;}
-.pr-cta-white{background:var(--flogal-green);color:white !important;border-color:var(--flogal-green);}
-.pr-cta-white:hover{background:var(--green-400) !important;border-color:var(--green-400) !important;}
+.pr-cta-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.48);color:white;transform:translateY(-1px);box-shadow:0 2px 6px rgba(5,10,18,.18);}
+.pr-cta-ghost:active{transform:translateY(0);box-shadow:none;}
+.pr-cta-ghost:focus-visible{box-shadow:0 0 0 3px rgba(76,175,125,.35);}
 
 /* ---- Nav toggle (mobile) ---- */
 .pr-nav-toggle{display:none;position:relative;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;padding:0;margin-left:auto;background:transparent;border:0;cursor:pointer;flex:none;}
@@ -101,23 +109,23 @@ button{font-family:inherit;}
 .pr-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-300);}
 .pr-eyebrow::before{content:'';width:22px;height:1px;background:var(--green-300);display:inline-block;}
 .pr-hero-title{margin:20px 0 22px;font-family:var(--font-display);font-weight:700;font-size:clamp(52px,6vw,76px);line-height:.98;letter-spacing:-.025em;color:white;}
-.pr-period{color:var(--flogal-green);}
+.pr-period{color:var(--accent);}
 .pr-hero-sub{font-size:var(--t-body-lg);line-height:1.55;max-width:540px;color:rgba(255,255,255,.74);margin:0 0 36px;}
 .pr-hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
 
 /* ---- WHAT WE BUY ---- */
 .pr-h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-.02em;line-height:1.1;color:var(--flogal-navy);}
-.pr-section-eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--flogal-green);}
-.pr-buy{max-width:1440px;margin:0 auto;padding:80px 40px;}
+.pr-section-eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+.pr-buy{max-width:1440px;margin:0 auto;padding:96px 40px;}
 .pr-buy-inner{max-width:1440px;margin:0 auto;}
 .pr-buy-body{margin:16px 0 40px;font-size:16px;line-height:1.62;color:var(--fg-muted);max-width:var(--measure);}
 .pr-type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:12px;overflow:hidden;border:1px solid var(--border);}
 .pr-type-card{background:white;padding:24px 22px;display:flex;flex-direction:column;gap:12px;}
-.pr-type-card-icon{width:26px;height:26px;color:var(--flogal-green);display:block;}
+.pr-type-card-icon{width:26px;height:26px;color:var(--accent);display:block;}
 .pr-type-card-name{font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.005em;color:var(--flogal-navy);}
 
 /* ---- WHY AN OPERATOR BUYS DIFFERENTLY ---- */
-.pr-why-buy{background:var(--flogal-navy);color:white;padding:80px 0;}
+.pr-why-buy{background:var(--flogal-navy);color:white;padding:96px 0;}
 .pr-why-buy-inner{max-width:900px;margin:0 auto;padding:0 40px;}
 .pr-why-buy-eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-300);display:block;margin-bottom:16px;}
 .pr-why-buy-h{margin:0 0 18px;font-family:var(--font-display);font-weight:700;font-size:36px;letter-spacing:-.02em;line-height:1.15;color:white;}
@@ -125,12 +133,12 @@ button{font-family:inherit;}
 
 /* ---- PROCESS BAND ---- */
 .pr-process{background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.pr-process-inner{max-width:1440px;margin:0 auto;padding:80px 40px;}
+.pr-process-inner{max-width:1440px;margin:0 auto;padding:96px 40px;}
 .pr-process-head{display:flex;flex-direction:column;gap:12px;margin-bottom:48px;max-width:720px;}
 .pr-process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
 .pr-process-step{display:flex;flex-direction:column;gap:12px;}
-.pr-process-step::before{content:attr(data-n);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--flogal-green);}
-.pr-process-step h4{margin:0;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.005em;color:var(--flogal-navy);padding-top:14px;border-top:2px solid var(--flogal-green);}
+.pr-process-step::before{content:attr(data-n);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--accent);}
+.pr-process-step h4{margin:0;font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.005em;color:var(--flogal-navy);padding-top:14px;border-top:2px solid var(--accent);}
 .pr-process-step p{margin:0;font-size:14px;line-height:1.6;color:var(--fg-muted);}
 
 /* ---- CTA STRIP (reused for "Sell us your site") — pattern C, §3.8 ---- */
@@ -147,29 +155,32 @@ button{font-family:inherit;}
 .pr-cta-actions{display:flex;gap:12px;align-items:center;}
 
 /* ---- FAQ ---- */
-.pr-faq{background:var(--paper);padding:80px 40px;border-top:1px solid var(--border);}
+.pr-faq{background:var(--paper);padding:96px 40px;border-top:1px solid var(--border);}
 .pr-faq-inner{max-width:1440px;margin:0 auto;}
 .pr-faq-list{margin-top:24px;display:flex;flex-direction:column;}
-.pr-faq-item{padding:22px 0;border-bottom:1px solid var(--border);}
+.pr-faq-item{padding:24px 0;border-bottom:1px solid var(--border);}
 .pr-faq-item:first-child{border-top:1px solid var(--border);}
-.pr-faq-q{margin:0 0 8px;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--flogal-navy);letter-spacing:-.005em;}
-.pr-faq-a{margin:0;font-size:14px;line-height:1.6;color:var(--fg-muted);}
+.pr-faq-q{margin:0 0 8px;font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--flogal-navy);letter-spacing:-.005em;}
+.pr-faq-a{margin:0;font-size:15px;line-height:1.65;color:var(--fg-muted);max-width:62ch;}
 
 /* ---- FOOTER ---- */
 .pr-footer{position:relative;background:var(--night-0);color:rgba(255,255,255,.7);padding:56px 0 0;}
 .pr-footer::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:var(--footer-bar-h,4px);background:var(--accent);}
 .pr-footer-inner{max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:260px 1fr;gap:56px;padding-bottom:40px;}
-.pr-footer-brand{display:flex;flex-direction:column;gap:14px;}
-.pr-footer-lockup{display:flex;align-items:center;gap:12px;}
+.pr-footer-brand{display:flex;flex-direction:column;}
+.pr-footer-lockup{display:flex;flex-direction:column;align-items:flex-start;gap:0;}
 .pr-footer-symbol{height:32px;width:auto;display:block;}
 .pr-footer-wm{height:20px;width:auto;display:block;flex:none;opacity:.9;}
-.pr-footer-sub{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green-300);}
-.pr-footer-tag{margin:4px 0 0;font-size:14px;color:rgba(255,255,255,.6);line-height:1.55;max-width:320px;}
+.pr-footer-tag{margin:14px 0 0;font-size:14px;color:rgba(255,255,255,.55);line-height:1.5;max-width:220px;}
+.pr-footer-social{display:flex;gap:14px;margin-top:14px;}
+.pr-footer-social a{display:inline-flex;color:rgba(255,255,255,.45);transition:color 150ms;cursor:default;}
+.pr-footer-social a:hover{color:var(--accent);}
+.pr-footer-social svg{width:18px;height:18px;display:block;}
 .pr-footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
 .pr-footer-col{display:flex;flex-direction:column;gap:12px;}
 .pr-footer-h{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:white;}
-.pr-footer-link{font-size:13px;color:rgba(255,255,255,.62);text-decoration:none;}
-.pr-footer-link:hover{color:white;}
+.pr-footer-link{font-size:13px;color:rgba(255,255,255,.62);text-decoration:none;transition:color 150ms,text-decoration-color 150ms;}
+.pr-footer-link:hover{color:white;text-decoration:underline;text-underline-offset:4px;}
 .pr-footer-meta{max-width:1440px;margin:0 auto;padding:20px 40px 28px;border-top:1px solid rgba(255,255,255,.08);font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.4);display:flex;gap:12px;flex-wrap:wrap;letter-spacing:.06em;align-items:center;}
 .pr-footer-dot{color:rgba(255,255,255,.2);}
 .pr-staff-link{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.14);text-decoration:none;margin-left:auto;}
@@ -201,7 +212,8 @@ button{font-family:inherit;}
   .pr-mobile-nav-links a{display:block;padding:12px 4px;font-size:20px;line-height:28px;font-weight:600;color:rgba(255,255,255,.92);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08);}
   .pr-mobile-nav-links a:hover{color:white;}
   .pr-mobile-nav-signin{display:block;padding:12px 4px;font-size:14px;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;}
-  .pr-mobile-nav-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:12px;padding:14px 24px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.01em;background:var(--flogal-green);color:white;text-decoration:none;}
+  .pr-mobile-nav-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:12px;padding:14px 24px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.01em;background:var(--accent);color:var(--flogal-navy);text-decoration:none;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);transition:box-shadow 150ms;}
+  .pr-mobile-nav-cta:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 3px rgba(76,175,125,.35);}
 }
 @media(max-width:540px){
   .pr-type-grid{grid-template-columns:1fr;}
@@ -211,6 +223,7 @@ button{font-family:inherit;}
 @media (prefers-reduced-motion: reduce){
   .pr-nav-toggle-bar{transition:none;}
 }
+:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(76,175,125,.35);border-radius:4px;}
 </style>
 <link rel="icon" type="image/x-icon" href="../../shared/favicons/properties/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="../../shared/favicons/properties/favicon-32x32.png">
@@ -284,7 +297,7 @@ button{font-family:inherit;}
     </nav>
     <div class="pr-nav-tools">
       <a class="pr-cta-btn pr-cta-ghost" href="https://admin.flogalhq.com/login.html">Sign in</a>
-      <a class="pr-cta-btn pr-cta-green" href="#" onclick="openPropModal('List a property');return false;">List a property</a>
+      <a class="pr-cta-btn pr-cta-green" href="#list-a-property" onclick="openPropModal('List a property');return false;">List a property</a>
     </div>
     <button class="pr-nav-toggle" id="prNavToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="prMobileNav">
       <span class="pr-nav-toggle-bar"></span>
@@ -303,7 +316,7 @@ button{font-family:inherit;}
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a class="pr-mobile-nav-signin" href="https://admin.flogalhq.com/login.html">Sign in</a>
-  <a class="pr-mobile-nav-cta" href="#" id="prMobileListBtn">List a property</a>
+  <a class="pr-mobile-nav-cta" href="#list-a-property" id="prMobileListBtn">List a property</a>
 </div>
 
 <!-- HERO -->
@@ -445,7 +458,7 @@ button{font-family:inherit;}
       </p>
     </div>
     <div class="pr-cta-actions">
-      <a class="pr-cta-btn pr-cta-white" href="#" onclick="openPropModal('List a property');return false;">Talk to a Direct Buyer &#8594;</a>
+      <a class="pr-cta-btn pr-cta-green" href="#list-a-property" onclick="openPropModal('List a property');return false;">Talk to a Direct Buyer &#8594;</a>
       <a class="pr-cta-btn pr-cta-ghost" href="mailto:properties@flogalhq.com">Email realty</a>
     </div>
   </div>
@@ -459,11 +472,17 @@ button{font-family:inherit;}
         <img class="pr-footer-symbol" src="../../shared/logos/flogal-symbol-green.png" alt="">
         <img class="pr-footer-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
       </div>
-      <span class="pr-footer-sub">Properties</span>
       <p class="pr-footer-tag">
         Industrial real estate built around freight &#8212; yards, terminals, and
         last-mile sites in the corridors our trucks run.
       </p>
+      <div class="pr-footer-social">
+        <a aria-label="Flogal on TikTok — coming soon" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+        <a aria-label="Flogal on X — coming soon" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+        <a aria-label="Flogal on Instagram — coming soon" aria-disabled="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></a>
+        <a aria-label="Flogal on LinkedIn — coming soon" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a aria-label="Flogal on YouTube — coming soon" aria-disabled="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
     </div>
     <div class="pr-footer-cols">
       <div class="pr-footer-col">
@@ -516,13 +535,13 @@ button{font-family:inherit;}
     </div>
     <form id="propForm" onsubmit="submitPropInquiry(event)" style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;">
       <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">First Name *</label><input id="pr-first" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="First name"></div>
-        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Last Name</label><input id="pr-last" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Last name"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">First Name *</label><input id="pr-first" required style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="First name"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Last Name</label><input id="pr-last" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Last name"></div>
       </div>
       <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Company</label><input id="pr-company" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Company name"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Company</label><input id="pr-company" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Company name"></div>
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Inquiry Type</label>
-          <select id="pr-inquiry-type" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
+          <select id="pr-inquiry-type" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
             <option value="">Select…</option>
             <option value="Buy">Buy</option>
             <option value="Lease">Lease</option>
@@ -534,18 +553,18 @@ button{font-family:inherit;}
         </div>
       </div>
       <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Email *</label><input id="pr-email" type="email" required style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="you@company.com"></div>
-        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Phone</label><input id="pr-phone" type="tel" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="+1 (555) 000-0000"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Email *</label><input id="pr-email" type="email" required style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="you@company.com"></div>
+        <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Phone</label><input id="pr-phone" type="tel" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="+1 (555) 000-0000"></div>
       </div>
       <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Preferred Contact</label>
-        <select id="pr-preferred" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
+        <select id="pr-preferred" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
           <option value="">Select…</option>
           <option value="email">Email</option>
           <option value="phone">Phone</option>
           <option value="text">Text</option>
         </select>
       </div>
-      <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Message</label><textarea id="pr-message" rows="3" style="width:100%;padding:9px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;resize:vertical;" placeholder="Property interest, questions, or details…"></textarea></div>
+      <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Message</label><textarea id="pr-message" rows="3" style="width:100%;min-height:88px;padding:10px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;resize:vertical;" placeholder="Property interest, questions, or details…"></textarea></div>
       <div id="propFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;"></div>
       <button type="submit" id="propSubmitBtn" style="background:#165E3A;color:white;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:14px;padding:12px 20px;border-radius:6px;">Send →</button>
     </form>
