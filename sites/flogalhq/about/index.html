@@ -37,14 +37,14 @@ img{display:block;}
 :root{--ease-out-soft:cubic-bezier(.22,1,.36,1);}
 .hero{position:relative;background:var(--night);color:white;overflow:hidden;min-height:640px;}
 .hero-bg{position:absolute;inset:0;z-index:0;will-change:transform;}
-.hero-bg img{width:100%;height:130%;object-fit:cover;object-position:62% 55%;display:block;filter:saturate(.92);}
+.hero-bg img{width:100%;height:115%;object-fit:cover;object-position:62% 100%;display:block;filter:saturate(.92);}
 .has-js .hero-bg img{opacity:0;transform:scale(1.07);transition:opacity 2400ms var(--ease-out-soft),transform 2400ms var(--ease-out-soft);}
 .has-js .hero-bg.is-loaded img{opacity:1;transform:scale(1);}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(90deg,rgba(5,10,18,.92) 0%,rgba(5,10,18,.78) 20%,rgba(5,10,18,.58) 35%,rgba(5,10,18,.40) 48%,rgba(5,10,18,.20) 60%,rgba(5,10,18,.05) 75%,rgba(5,10,18,0) 90%),
              linear-gradient(180deg,rgba(5,10,18,.55) 0%,rgba(5,10,18,.30) 20%,transparent 40%,transparent 85%,rgba(5,10,18,.30) 100%);}
 .hero-edge{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(5,10,18,.15) 0%,transparent 10%,transparent 75%,#050A12 100%);}
+  background:linear-gradient(180deg,rgba(5,10,18,.15) 0%,transparent 10%,transparent 68%,rgba(5,10,18,.45) 84%,#050A12 98%);}
 .hero-inner{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:100px 40px 120px;}
 .hero-copy{max-width:680px;}
 .has-js .hero-copy>*{opacity:0;transform:translateY(16px);}
@@ -73,6 +73,7 @@ img{display:block;}
 .what-body p{margin:0 0 20px;}
 .what-body p:last-child{margin-bottom:0;}
 .what-pull{font-size:22px;line-height:1.45;font-weight:500;color:var(--navy);letter-spacing:-.01em;border-left:3px solid var(--gold);padding-left:24px;margin:40px 0;}
+.what-pull-attr{font-size:14px;font-weight:600;letter-spacing:.02em;color:#4A5563;margin-top:14px;}
 
 /* ENTITY MAP */
 .entities{padding:0 40px 96px;background:var(--paper);}
@@ -168,7 +169,7 @@ img{display:block;}
 @media(max-width:860px){
   .nav-links,.nav-cta,.nav-phone{display:none;}.nav-inner{padding:0 20px;}
   .hero-title{font-size:48px;}.hero-inner{padding:80px 20px 100px;}
-  .hero-bg img{object-position:76% 62%;}
+  .hero-bg img{height:100%;object-position:76% 62%;}
   .has-js .hero-bg img{transform:none;transition:opacity 400ms var(--ease-out-soft);}
   .has-js .hero-bg.is-loaded img{transform:none;}
   .what{padding:64px 20px;}.what-inner{grid-template-columns:1fr;gap:40px;}
@@ -271,7 +272,7 @@ img{display:block;}
     </div>
     <div class="what-body">
       <p>Flogal Holdings is the parent of a group of operating businesses built around freight, physical assets, and long-term value. We're not a startup and not a broker — we're operators who own assets and run real freight companies.</p>
-      <div class="what-pull">"We build companies the way infrastructure should be built — documented, structured, and designed to outlast the people who started them."</div>
+      <div class="what-pull">"We build companies the way infrastructure should be built — documented, structured, and designed to outlast the people who started them."<div class="what-pull-attr">— Carlos Flores-Gallegos, Founder &amp; CEO</div></div>
       <p>Every entity operates with its own leadership and market, but shares one operating system and one standard of discipline. Our aim is to be the kind of operator banks want to lend to, insurers want to underwrite, and partners want to depend on.</p>
     </div>
   </div>
@@ -609,7 +610,7 @@ img{display:block;}
   function update() {
     if (window.innerWidth <= 860 || !inView) { bg.style.transform = ''; return; }
     var heroH = hero.offsetHeight;
-    var imgH = heroH * 1.3;
+    var imgH = heroH * 1.15;
     var rect = hero.getBoundingClientRect();
     var p = Math.min(Math.max(-rect.top / heroH, 0), 1);
     var y = p * (imgH - heroH) * 0.55;

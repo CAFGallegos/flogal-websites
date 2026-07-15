@@ -210,7 +210,9 @@ a{color:inherit;text-decoration:none;}
 .lane-3{animation-delay:-4s;}
 .lane-4{animation-delay:-8s;}
 .lane-5{animation-delay:-12s;}
-@media(prefers-reduced-motion:reduce){.lane{animation:none;stroke-dasharray:none;}}
+.lane-6{animation-delay:-9s;}
+/* Pulses ride on static base lines — without motion the bases keep every route visible */
+@media(prefers-reduced-motion:reduce){.lane{animation:none;opacity:0;}}
 
 /* ---- How we operate ----------------------------------------------- */
 .op-how{padding:96px 0;background:var(--op-surface);border-top:1px solid var(--op-rule);border-bottom:1px solid var(--op-rule);}
@@ -595,37 +597,78 @@ a{color:inherit;text-decoration:none;}
     </div>
     <div class="op-lanes-grid">
       <div class="op-lanes-map" aria-hidden="true">
-        <svg viewBox="0 0 100 90" preserveAspectRatio="xMidYMid meet">
-          <path d="M14,16 L62,12 L78,18 L80,32 L88,38 L82,52 L78,68 L66,80 L46,82 L24,76 L12,62 L10,40 Z" fill="rgba(74,144,217,0.06)" stroke="rgba(74,144,217,0.40)" stroke-width="0.3" vector-effect="non-scaling-stroke"/>
-          <path d="M14,32 L80,32" stroke="rgba(255,255,255,0.10)" stroke-width="0.3" stroke-dasharray="1 1" vector-effect="non-scaling-stroke"/>
-          <path class="lane lane-primary" pathLength="100" d="M44,52 L48,28" stroke="#4A93E1" stroke-width="0.9" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-          <g stroke="rgba(74,144,217,0.55)" stroke-width="0.5" fill="none" vector-effect="non-scaling-stroke">
-            <path class="lane lane-2" pathLength="100" d="M44,52 L26,68"/><path class="lane lane-3" pathLength="100" d="M44,52 L62,58"/>
-            <path class="lane lane-4" pathLength="100" d="M44,52 L36,42"/><path class="lane lane-5" pathLength="100" d="M48,28 L66,24"/>
+        <svg viewBox="0 0 110 90" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="mxFadeGrad" x1="0" y1="43" x2="0" y2="73" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#fff" stop-opacity="0.9"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+            <mask id="mxFade"><rect x="0" y="0" width="110" height="90" fill="url(#mxFadeGrad)"/></mask>
+          </defs>
+
+          <!-- Continental US — simplified silhouette (border segment San Diego→Brownsville doubles as US–MX line) -->
+          <path d="M0.6,6.0 L0.9,20.1 L1.1,25.7 L4.8,31.7 L8.2,38.7 L14.5,43.2 L19.4,43.0 L26.1,46.2 L34.5,45.0 L37.5,47.8 L40.3,51.0 L44.7,50.3 L47.5,54.6 L51.8,58.4 L52.2,54.1 L56.5,50.7 L62.4,51.0 L67.1,51.2 L69.0,48.7 L74.8,49.8 L78.9,54.6 L81.8,60.0 L83.5,57.5 L83.0,52.5 L81.5,48.0 L82.4,44.4 L86.7,40.3 L92.5,37.1 L91.5,32.8 L93.2,29.2 L95.1,25.1 L102.5,22.6 L105.3,16.7 L108.3,15.5 L104.0,9.6 L99.7,15.1 L92.7,15.5 L89.9,18.7 L85.7,19.8 L79.4,22.6 L78.5,19.8 L77.4,13.3 L75.1,11.7 L69.0,7.8 L61.5,11.0 L55.5,6.0 Z"
+            fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+
+          <!-- Northern Mexico — coastlines fade south -->
+          <g mask="url(#mxFade)" fill="none" stroke-linejoin="round">
+            <path d="M14.5,43.2 L16.4,47.3 L20.1,54.1 L28.0,64.6 L29.1,65.3 L24.2,57.1 L21.4,50.3 L19.4,45.7 L23.9,52.5 L28.3,58.7 L34.7,64.6 L36.9,70.5" stroke="rgba(255,255,255,0.18)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <path d="M51.8,58.4 L50.7,63.2 L51.6,68.4 L53.7,73.0" stroke="rgba(255,255,255,0.18)" stroke-width="1" vector-effect="non-scaling-stroke"/>
+            <!-- Cross-border hand-off from Laredo (partner network, via FLS) -->
+            <path d="M47.5,54.6 L44.2,60.2" stroke="rgba(74,144,217,0.75)" stroke-width="1.4" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>
           </g>
-          <!-- OKC -->
-          <circle cx="48" cy="28" r="2.4" fill="#4A93E1" opacity="0.22"/>
-          <circle cx="48" cy="28" r="1.2" fill="#4A93E1" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="50" y="28.6" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">OKLAHOMA CITY</text>
-          <!-- DFW -->
-          <circle cx="44" cy="52" r="2.4" fill="#4A93E1" opacity="0.22"/>
-          <circle cx="44" cy="52" r="1.2" fill="#4A93E1" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="46" y="52.6" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">DFW</text>
-          <!-- Secondary cities -->
-          <circle cx="26" cy="68" r="0.9" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="28" y="68.6" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">SAN ANTONIO</text>
-          <circle cx="36" cy="76" r="0.9" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="38" y="76.6" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">AUSTIN</text>
-          <circle cx="62" cy="58" r="0.9" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="64" y="58.6" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">HOUSTON</text>
-          <circle cx="66" cy="24" r="0.9" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="68" y="24.6" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">TULSA</text>
-          <circle cx="22" cy="50" r="0.9" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="24" y="50.6" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">MIDLAND</text>
+
+          <!-- TX + OK home territory -->
+          <path d="M34.5,45.0 L41.0,44.6 L41.0,33.2 L56.7,33.2 L57.0,41.0 L58.2,49.1 L56.5,50.7 L52.2,54.1 L51.8,58.4 L47.5,54.6 L44.7,50.3 L40.3,51.0 L37.5,47.8 Z"
+            fill="rgba(74,144,217,0.15)" stroke="rgba(74,144,217,0.5)" stroke-width="1" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+
+          <!-- Route base lines (static — routes stay traceable without motion/JS) -->
+          <g fill="none" stroke-linecap="round">
+            <path d="M52.2,42.5 L51.3,36.6" stroke="#4A90D9" stroke-width="2.4" opacity="0.85" vector-effect="non-scaling-stroke"/>
+            <path d="M55.2,49.6 Q56.8,42.0 54.2,35.1" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path d="M49.4,50.5 L50.9,48.4" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path d="M42.7,44.6 Q47.5,42.8 52.2,42.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path d="M52.2,42.5 Q58.8,39.2 65.2,37.6" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path d="M55.2,49.6 Q51.5,53.0 47.5,54.6" stroke="rgba(74,144,217,0.8)" stroke-width="1.4" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>
+          </g>
+          <!-- Route flow pulses (G0 §4.2 dash loop) -->
+          <g fill="none" stroke-linecap="round">
+            <path class="lane lane-primary" pathLength="100" d="M52.2,42.5 L51.3,36.6" stroke="#9CC4EE" stroke-width="2.4" vector-effect="non-scaling-stroke"/>
+            <path class="lane lane-2" pathLength="100" d="M55.2,49.6 Q56.8,42.0 54.2,35.1" stroke="rgba(255,255,255,0.85)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path class="lane lane-3" pathLength="100" d="M49.4,50.5 L50.9,48.4" stroke="rgba(255,255,255,0.85)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path class="lane lane-4" pathLength="100" d="M42.7,44.6 Q47.5,42.8 52.2,42.5" stroke="rgba(255,255,255,0.85)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path class="lane lane-5" pathLength="100" d="M52.2,42.5 Q58.8,39.2 65.2,37.6" stroke="rgba(255,255,255,0.85)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+            <path class="lane lane-6" pathLength="100" d="M55.2,49.6 Q51.5,53.0 47.5,54.6" stroke="rgba(74,144,217,0.9)" stroke-width="1.4" vector-effect="non-scaling-stroke"/>
+          </g>
+
+          <!-- Primary nodes -->
+          <circle cx="51.3" cy="36.6" r="2.0" fill="#4A90D9" opacity="0.22"/>
+          <circle cx="51.3" cy="36.6" r="1.0" fill="#4A90D9" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="49.2" y="36.2" text-anchor="end" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">OKLAHOMA CITY</text>
+          <circle cx="52.2" cy="42.5" r="2.0" fill="#4A90D9" opacity="0.22"/>
+          <circle cx="52.2" cy="42.5" r="1.0" fill="#4A90D9" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="51.0" y="44.8" text-anchor="end" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">DFW</text>
+          <!-- Secondary nodes -->
+          <circle cx="54.2" cy="35.1" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="56.0" y="35.2" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">TULSA</text>
+          <circle cx="55.2" cy="49.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="57.2" y="50.2" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">HOUSTON</text>
+          <circle cx="49.4" cy="50.5" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="47.6" y="51.9" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">SAN ANTONIO</text>
+          <circle cx="50.9" cy="48.4" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="49.3" y="47.9" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">AUSTIN</text>
+          <circle cx="42.7" cy="44.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="41.7" y="43.6" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">MIDLAND</text>
+          <!-- Route endpoints -->
+          <circle cx="65.2" cy="37.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="67.0" y="38.2" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">MEMPHIS</text>
+          <circle cx="47.5" cy="54.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
+          <text x="45.9" y="55.8" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">LAREDO</text>
         </svg>
         <div class="op-lanes-legend">
-          <span><i style="background:#4A93E1"></i>Primary corridor</span>
-          <span><i style="background:rgba(255,255,255,.5)"></i>Secondary lanes</span>
+          <span><i style="background:#4A90D9"></i>Primary corridor</span>
+          <span><i style="background:rgba(255,255,255,.5)"></i>Active lanes</span>
+          <span><i style="width:16px;height:2px;border-radius:1px;background:repeating-linear-gradient(90deg,rgba(74,144,217,.85) 0 4px,transparent 4px 7px)"></i>Partner · cross-border</span>
         </div>
       </div>
       <div class="op-lanes-table">
