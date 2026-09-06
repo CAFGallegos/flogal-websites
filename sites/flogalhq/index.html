@@ -85,6 +85,11 @@ a{color:inherit;text-decoration:none;}
 .hero-actions{display:flex;gap:12px;}
 .hero-caption{position:absolute;z-index:2;right:40px;bottom:20px;font-family:'JetBrains Mono',var(--font-sans),monospace;font-size:11px;font-weight:400;letter-spacing:.04em;color:rgba(255,255,255,.55);text-shadow:0 1px 4px rgba(5,10,18,.85);transition:color 150ms;}
 .hero-caption:hover{color:rgba(255,255,255,.65);}
+/* Image-edit disclosure: sits above the caption, revealed on hover over the hero;
+   always visible on touch devices (no hover there). Inherits the caption's type. */
+.hero-ai-note{position:absolute;right:0;bottom:100%;margin-bottom:6px;white-space:nowrap;text-align:right;color:rgba(255,255,255,.5);opacity:0;transition:opacity 200ms;pointer-events:none;}
+.hero-copy-zone:hover .hero-ai-note,.hero-caption:hover .hero-ai-note{opacity:1;}
+@media (hover:none){.hero-ai-note{opacity:1;}}
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:6px;font-size:14px;font-weight:600;color:white;border:1px solid rgba(168,184,200,.4);background:rgba(168,184,200,.1);backdrop-filter:blur(10px);transition:all 150ms;outline:none;}
 .btn-outline:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);transform:translateY(-1px);box-shadow:0 2px 6px rgba(5,10,18,.24);}
 .btn-outline:active{transform:translateY(0);box-shadow:none;}
@@ -383,7 +388,7 @@ a{color:inherit;text-decoration:none;}
         </div>
       </div>
     </div>
-    <div class="hero-caption">Flogal Kenworth T680 Next Gen &middot; southbound I-35, Texas</div>
+    <div class="hero-caption"><span class="hero-ai-note" role="note">Image note &middot; AI was used to remove other traffic from this photo.</span>Flogal Kenworth T680 Next Gen &middot; southbound I-35, Texas</div>
   </div>
 
   <!-- DIVISION LINKS ROW (glass cards over the photo's lower zone) -->
