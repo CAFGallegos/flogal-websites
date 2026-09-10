@@ -178,22 +178,26 @@ a{color:inherit;text-decoration:none;}
 .op-equip-h{margin:0;font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--op-fg);}
 
 /* ---- Network partners --------------------------------------------- */
-.op-partners{padding:96px 0;background:var(--op-surface);border-top:1px solid var(--op-rule);border-bottom:1px solid var(--op-rule);}
-.op-partner-group{margin-bottom:28px;}
-.op-partner-group:last-of-type{margin-bottom:0;}
+.op-partner-groups{margin-top:56px;display:flex;flex-direction:column;gap:28px;}
 .op-partner-group-h{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-blue-strong);margin-bottom:14px;}
 .op-partner-chips{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px;}
 .op-partner-chips li{font-size:13px;font-weight:600;color:var(--op-fg);padding:9px 16px;border:1px solid var(--op-blue-line);border-radius:999px;background:var(--op-blue-soft);}
-.op-partner-close{margin:28px 0 0;font-size:14px;line-height:1.6;color:var(--op-fg-dim);}
 
 /* ---- Active lanes -------------------------------------------------- */
 .op-lanes{padding:96px 0;}
 .op-lanes-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:stretch;}
-.op-lanes-map{position:relative;background:var(--op-night-surface);border:1px solid var(--op-night-rule);border-radius:14px;padding:28px;aspect-ratio:11/9;overflow:hidden;--op-fg-dim:var(--op-night-fg-dim);}
+.op-lanes-map{position:relative;background:var(--op-night-surface);border:1px solid var(--op-night-rule);border-radius:14px;padding:28px;aspect-ratio:110/97;overflow:hidden;--op-fg-dim:var(--op-night-fg-dim);}
 .op-lanes-map svg{width:100%;height:100%;display:block;}
-.op-lanes-legend{position:absolute;left:24px;bottom:20px;display:flex;gap:20px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-fg-dim);}
+.op-lanes-legend{position:absolute;left:24px;bottom:20px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-fg-dim);}
 .op-lanes-legend span{display:inline-flex;align-items:center;gap:7px;}
 .op-lanes-legend i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.op-legend-diamond{width:8px;height:8px;border-radius:0;background:rgba(74,144,217,.16);border:1px solid rgba(156,196,238,.85);transform:rotate(45deg);}
+.op-partner-marker{cursor:default;}
+.op-partner-marker path{transition:fill 140ms,stroke 140ms;}
+.op-partner-marker:hover path,.op-partner-marker:focus path{fill:rgba(74,144,217,.4);stroke:#9CC4EE;}
+.op-partner-marker .op-marker-label{opacity:0;pointer-events:none;transition:opacity 140ms;}
+.op-partner-marker:hover .op-marker-label,.op-partner-marker:focus .op-marker-label{opacity:1;}
+.op-partner-marker:focus-visible path{stroke:#9CC4EE;stroke-width:0.9;}
 .op-lanes-table{background:var(--op-surface);border:1px solid var(--op-rule);border-radius:14px;overflow:hidden;}
 .op-lanes-table-h{padding:16px 24px;background:var(--op-blue-soft);border-bottom:1px solid var(--op-blue-line);display:flex;justify-content:space-between;align-items:baseline;}
 .op-lanes-row{display:grid;grid-template-columns:1.4fr 1fr .8fr;align-items:center;padding:14px 24px;border-bottom:1px solid var(--op-rule);font-size:13px;gap:12px;}
@@ -224,15 +228,14 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- Quote form --------------------------------------------------- */
 .op-quote{position:relative;padding:112px 0;background:radial-gradient(70% 60% at 80% 20%,rgba(74,144,217,.18) 0%,transparent 60%),var(--op-surface);border-top:1px solid var(--op-rule);}
-.op-quote-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:flex-start;}
-.op-quote-info{display:flex;flex-direction:column;gap:24px;}
-.op-quote-info-list{display:flex;flex-direction:column;gap:16px;}
-.op-quote-info-row{display:flex;gap:14px;align-items:flex-start;}
+.op-quote-contact-row{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-bottom:32px;}
+.op-quote-info-row{display:flex;gap:10px;align-items:center;}
+.op-quote-contact-div{width:1px;height:16px;background:rgba(255,255,255,.25);flex:none;}
 .op-quote-info-icn{width:32px;height:32px;flex:none;background:var(--op-blue-soft);color:var(--op-blue-strong);border-radius:6px;display:flex;align-items:center;justify-content:center;}
 .op-quote-info-icn svg{width:16px;height:16px;}
-.op-quote-info-h{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--op-fg-faint);}
-.op-quote-info-v{color:white;font-size:15px;font-weight:600;margin-top:2px;}
+.op-quote-info-v{color:white;font-size:15px;font-weight:600;}
 .op-quote-info-v-mono{font-family:var(--font-mono);letter-spacing:.04em;}
+.op-quote-formwrap{width:100%;}
 .op-form{background:var(--op-surface-2);border:1px solid var(--op-blue-line);border-radius:14px;padding:36px;}
 .op-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
 .op-form-row-1{margin-bottom:16px;}
@@ -286,7 +289,7 @@ a{color:inherit;text-decoration:none;}
 /* ---- Responsive --------------------------------------------------- */
 @media(max-width:1080px){
   .op-wrap{padding:0 28px;}
-  .op-stats-inner,.op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-quote-grid,.op-lanes-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .op-stats-inner,.op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-lanes-grid{grid-template-columns:repeat(2,1fr)!important;}
   .op-stat{border-right:0;border-bottom:1px solid var(--op-rule);}
   .op-form-row{grid-template-columns:1fr;}
   .op-partner-cta-inner{grid-template-columns:1fr;}
@@ -300,7 +303,7 @@ a{color:inherit;text-decoration:none;}
   .op-hero{padding:72px 0 64px;}
   .op-hero-title{font-size:48px;}
   .op-hero-actions{flex-direction:column;align-items:stretch;gap:12px;}
-  .op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-quote-grid,.op-lanes-grid{grid-template-columns:1fr!important;}
+  .op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-lanes-grid{grid-template-columns:1fr!important;}
   .op-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 
   /* Full-screen night panel (spec §1.2/§15) */
@@ -314,6 +317,12 @@ a{color:inherit;text-decoration:none;}
 }
 @media(max-width:640px){
   .op-wrap{padding:0 20px;}
+  .op-quote-contact-row{flex-direction:column;align-items:flex-start;gap:12px;}
+  .op-quote-contact-div{display:none;}
+  .op-lanes-map .op-map-citylabel{display:none;}
+  .op-lanes-legend{position:static;margin-top:16px;gap:6px 14px;}
+  .op-lanes-map{padding:20px;aspect-ratio:auto;overflow:visible;}
+  .op-lanes-map svg{height:auto;}
 }
 @media (prefers-reduced-motion: reduce){
   .op-nav-toggle-bar{transition:none;}
@@ -559,65 +568,38 @@ a{color:inherit;text-decoration:none;}
   </div>
 </section>
 
-<!-- NETWORK PARTNERS -->
-<section class="op-partners" id="partners">
-  <div class="op-wrap">
-    <div class="op-section-head">
-      <span class="op-eyebrow">Network partners</span>
-      <h2 class="op-h2">A partner network we actually know.</h2>
-      <p class="op-section-sub">Beyond our owned fleets, Flogal dispatches through a vetted network of carrier partners — relationships built truck-side.</p>
-    </div>
-    <div class="op-partner-group">
-      <div class="op-partner-group-h">United States</div>
-      <ul class="op-partner-chips">
-        <li>DA Transport · California, US</li>
-        <li>Evolution · California, US</li>
-        <li>FLS Express · Texas, US</li>
-        <li>International Transport · California, US</li>
-        <li>Moreno Brothers · California, US</li>
-      </ul>
-    </div>
-    <div class="op-partner-group">
-      <div class="op-partner-group-h">Mexico</div>
-      <ul class="op-partner-chips">
-        <li>Odal · Jalisco, MX</li>
-        <li>Olior · Estado de México, MX</li>
-      </ul>
-    </div>
-    <p class="op-partner-close">Cross-border freight moves through trusted partners on both sides — the same accountability standard, both directions.</p>
-  </div>
-</section>
-
-<!-- ACTIVE LANES -->
+<!-- NETWORK + ACTIVE LANES (merged: the partners ARE the reach the map shows) -->
 <section class="op-lanes" id="lanes">
   <div class="op-wrap">
     <div class="op-section-head">
-      <span class="op-eyebrow">Active lanes</span>
-      <h2 class="op-h2">Built around the TX–OK corridor.</h2>
-      <p class="op-section-sub">Our owned capacity runs densely on the Dallas–Oklahoma City spine. Secondary lanes feed in from Houston, San Antonio, and West Texas; partner capacity extends reach into the lower 48 and cross-border.</p>
+      <span class="op-eyebrow">Network &amp; active lanes</span>
+      <h2 class="op-h2">Built around the TX–OK corridor — extended by partners we know.</h2>
+      <p class="op-section-sub">Our owned capacity runs densely on the Dallas–Oklahoma City spine, with secondary lanes feeding in from Houston, San Antonio, and West Texas. Beyond that, a vetted network of U.S. and Mexico carrier partners extends our reach into the lower 48 and cross-border — the same accountability standard, both directions.</p>
     </div>
     <div class="op-lanes-grid">
-      <div class="op-lanes-map" aria-hidden="true">
-        <svg viewBox="0 0 110 90" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <linearGradient id="mxFadeGrad" x1="0" y1="43" x2="0" y2="73" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#fff" stop-opacity="0.9"/>
-              <stop offset="1" stop-color="#fff" stop-opacity="0"/>
-            </linearGradient>
-            <mask id="mxFade"><rect x="0" y="0" width="110" height="90" fill="url(#mxFadeGrad)"/></mask>
-          </defs>
-
+      <div class="op-lanes-map">
+        <svg viewBox="0 0 110 97" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Map of owned TX–OK corridor lanes and partner carrier locations across the U.S. and Mexico">
           <!-- Continental US — simplified silhouette (border segment San Diego→Brownsville doubles as US–MX line) -->
           <path d="M0.6,6.0 L0.9,20.1 L1.1,25.7 L4.8,31.7 L8.2,38.7 L14.5,43.2 L19.4,43.0 L26.1,46.2 L34.5,45.0 L37.5,47.8 L40.3,51.0 L44.7,50.3 L47.5,54.6 L51.8,58.4 L52.2,54.1 L56.5,50.7 L62.4,51.0 L67.1,51.2 L69.0,48.7 L74.8,49.8 L78.9,54.6 L81.8,60.0 L83.5,57.5 L83.0,52.5 L81.5,48.0 L82.4,44.4 L86.7,40.3 L92.5,37.1 L91.5,32.8 L93.2,29.2 L95.1,25.1 L102.5,22.6 L105.3,16.7 L108.3,15.5 L104.0,9.6 L99.7,15.1 L92.7,15.5 L89.9,18.7 L85.7,19.8 L79.4,22.6 L78.5,19.8 L77.4,13.3 L75.1,11.7 L69.0,7.8 L61.5,11.0 L55.5,6.0 Z"
             fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
 
-          <!-- Northern Mexico — coastlines fade south -->
-          <g mask="url(#mxFade)" fill="none" stroke-linejoin="round">
-            <path d="M14.5,43.2 L16.4,47.3 L20.1,54.1 L28.0,64.6 L29.1,65.3 L24.2,57.1 L21.4,50.3 L19.4,45.7 L23.9,52.5 L28.3,58.7 L34.7,64.6 L36.9,70.5" stroke="rgba(255,255,255,0.18)" stroke-width="1" vector-effect="non-scaling-stroke"/>
-            <path d="M51.8,58.4 L50.7,63.2 L51.6,68.4 L53.7,73.0" stroke="rgba(255,255,255,0.18)" stroke-width="1" vector-effect="non-scaling-stroke"/>
-            <!-- Cross-border hand-off from Laredo (partner network, via FLS) -->
-            <path d="M47.5,54.6 L44.2,60.2" stroke="rgba(74,144,217,0.75)" stroke-width="1.4" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>
-          </g>
+          <!-- Mexico — simplified mainland silhouette, border zone blends into the US line, partner region reads at full weight -->
+          <defs>
+            <linearGradient id="mxBorderGrad" x1="0" y1="43" x2="0" y2="50" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#fff" stop-opacity="0.35"/>
+              <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+            </linearGradient>
+            <mask id="mxBorderBlend">
+              <rect x="0" y="0" width="110" height="43" fill="#fff" fill-opacity="0.35"/>
+              <rect x="0" y="43" width="110" height="7" fill="url(#mxBorderGrad)"/>
+              <rect x="0" y="50" width="110" height="47" fill="#fff"/>
+            </mask>
+          </defs>
+          <path mask="url(#mxBorderBlend)" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.16)" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"
+            d="M14.5,43.2 L18.0,46.4 L21.7,51.0 L25.8,55.8 L29.4,59.8 L32.5,63.0 L34.8,66.0 L36.6,69.4 L38.6,72.6 L41.6,75.2 L45.2,76.7 L48.5,76.2 L51.8,74.8 L54.0,73.2 L52.8,69.0 L50.6,66.6 L49.0,62.0 L46.2,58.8 L49.4,55.6 L51.2,58.2 L47.5,54.6 L44.2,49.6 L38.6,46.6 L30.6,44.3 L22.4,43.3 Z"/>
+
+          <!-- Cross-border hand-off from Laredo (partner network, via FLS) -->
+          <path d="M47.5,54.6 L44.6,59.8" fill="none" stroke="rgba(74,144,217,0.75)" stroke-width="1.4" stroke-dasharray="2 2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
 
           <!-- TX + OK home territory -->
           <path d="M34.5,45.0 L41.0,44.6 L41.0,33.2 L56.7,33.2 L57.0,41.0 L58.2,49.1 L56.5,50.7 L52.2,54.1 L51.8,58.4 L47.5,54.6 L44.7,50.3 L40.3,51.0 L37.5,47.8 Z"
@@ -645,31 +627,76 @@ a{color:inherit;text-decoration:none;}
           <!-- Primary nodes -->
           <circle cx="51.3" cy="36.6" r="2.0" fill="#4A90D9" opacity="0.22"/>
           <circle cx="51.3" cy="36.6" r="1.0" fill="#4A90D9" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="49.2" y="36.2" text-anchor="end" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">OKLAHOMA CITY</text>
+          <text class="op-map-citylabel" x="49.2" y="35.4" text-anchor="end" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">OKLAHOMA CITY</text>
           <circle cx="52.2" cy="42.5" r="2.0" fill="#4A90D9" opacity="0.22"/>
           <circle cx="52.2" cy="42.5" r="1.0" fill="#4A90D9" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="51.0" y="44.8" text-anchor="end" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">DFW</text>
+          <text class="op-map-citylabel" x="53.4" y="42.0" font-size="2.0" font-family="monospace" fill="#E8EEF6" letter-spacing="0.08em">DFW</text>
           <!-- Secondary nodes -->
           <circle cx="54.2" cy="35.1" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="56.0" y="35.2" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">TULSA</text>
+          <text class="op-map-citylabel" x="56.0" y="34.4" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">TULSA</text>
           <circle cx="55.2" cy="49.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="57.2" y="50.2" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">HOUSTON</text>
+          <text class="op-map-citylabel" x="57.2" y="49.2" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">HOUSTON</text>
           <circle cx="49.4" cy="50.5" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="47.6" y="51.9" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">SAN ANTONIO</text>
+          <line class="op-map-citylabel" x1="49.4" y1="50.5" x2="44.6" y2="48.9" stroke="rgba(255,255,255,0.3)" stroke-width="0.25" vector-effect="non-scaling-stroke"/>
+          <text class="op-map-citylabel" x="43.9" y="48.6" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">SAN ANTONIO</text>
           <circle cx="50.9" cy="48.4" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="49.3" y="47.9" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">AUSTIN</text>
+          <line class="op-map-citylabel" x1="50.9" y1="48.4" x2="52.3" y2="46.0" stroke="rgba(255,255,255,0.3)" stroke-width="0.25" vector-effect="non-scaling-stroke"/>
+          <text class="op-map-citylabel" x="52.6" y="45.4" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">AUSTIN</text>
           <circle cx="42.7" cy="44.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="41.7" y="43.6" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">MIDLAND</text>
+          <text class="op-map-citylabel" x="41.7" y="43.6" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">MIDLAND</text>
           <!-- Route endpoints -->
           <circle cx="65.2" cy="37.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="67.0" y="38.2" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">MEMPHIS</text>
+          <text class="op-map-citylabel" x="67.0" y="37.1" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">MEMPHIS</text>
           <circle cx="47.5" cy="54.6" r="0.8" fill="rgba(255,255,255,0.85)" stroke="#050A12" stroke-width="0.2" vector-effect="non-scaling-stroke"/>
-          <text x="45.9" y="55.8" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">LAREDO</text>
+          <line class="op-map-citylabel" x1="47.5" y1="54.6" x2="43.0" y2="57.4" stroke="rgba(255,255,255,0.3)" stroke-width="0.25" vector-effect="non-scaling-stroke"/>
+          <text class="op-map-citylabel" x="42.4" y="58.0" text-anchor="end" font-size="2.0" font-family="monospace" fill="rgba(255,255,255,0.5)" letter-spacing="0.08em">LAREDO</text>
+
+          <!-- Partner markers — separate, quieter layer; painted last so hover labels sit above lines/nodes -->
+          <g class="op-partners-layer" font-family="monospace" letter-spacing="0.06em">
+            <g class="op-partner-marker" tabindex="0" role="img" aria-label="New Mexico partner: DA Transport">
+              <path d="M34.2,35.9 L36.0,37.7 L34.2,39.5 L32.4,37.7 Z" fill="rgba(74,144,217,0.16)" stroke="rgba(156,196,238,0.85)" stroke-width="0.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              <g class="op-marker-label">
+                <rect x="29.2" y="30.4" width="21" height="4.6" rx="1" fill="#0B1D2D" stroke="rgba(156,196,238,0.5)" stroke-width="0.25"/>
+                <text x="39.7" y="33.35" text-anchor="middle" font-size="1.9" fill="#E8EEF6">DA Transport</text>
+              </g>
+            </g>
+            <g class="op-partner-marker" tabindex="0" role="img" aria-label="California partners: Evolution, International Transport, Moreno Brothers">
+              <path d="M12.6,38.0 L14.4,39.8 L12.6,41.6 L10.8,39.8 Z" fill="rgba(74,144,217,0.16)" stroke="rgba(156,196,238,0.85)" stroke-width="0.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              <g class="op-marker-label">
+                <rect x="1.0" y="24.6" width="31" height="12" rx="1" fill="#0B1D2D" stroke="rgba(156,196,238,0.5)" stroke-width="0.25"/>
+                <text x="16.5" y="29.15" text-anchor="middle" font-size="1.9" fill="#E8EEF6">Evolution</text>
+                <text x="16.5" y="32.65" text-anchor="middle" font-size="1.9" fill="#E8EEF6">Int'l Transport</text>
+                <text x="16.5" y="36.15" text-anchor="middle" font-size="1.9" fill="#E8EEF6">Moreno Brothers</text>
+              </g>
+            </g>
+            <g class="op-partner-marker" tabindex="0" role="img" aria-label="Texas partner: FLS Express">
+              <path d="M61.5,55.9 L63.3,57.7 L61.5,59.5 L59.7,57.7 Z" fill="rgba(74,144,217,0.16)" stroke="rgba(156,196,238,0.85)" stroke-width="0.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              <g class="op-marker-label">
+                <rect x="65.0" y="55.4" width="20" height="4.6" rx="1" fill="#0B1D2D" stroke="rgba(156,196,238,0.5)" stroke-width="0.25"/>
+                <text x="75.0" y="58.35" text-anchor="middle" font-size="1.9" fill="#E8EEF6">FLS Express</text>
+              </g>
+            </g>
+            <g class="op-partner-marker" tabindex="0" role="img" aria-label="Jalisco, Mexico partner: Odal">
+              <path d="M40.4,68.2 L42.2,70.0 L40.4,71.8 L38.6,70.0 Z" fill="rgba(74,144,217,0.16)" stroke="rgba(156,196,238,0.85)" stroke-width="0.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              <g class="op-marker-label">
+                <rect x="24.4" y="70.9" width="14" height="4.6" rx="1" fill="#0B1D2D" stroke="rgba(156,196,238,0.5)" stroke-width="0.25"/>
+                <text x="31.4" y="73.85" text-anchor="middle" font-size="1.9" fill="#E8EEF6">Odal</text>
+              </g>
+            </g>
+            <g class="op-partner-marker" tabindex="0" role="img" aria-label="Estado de México, Mexico partner: Olior">
+              <path d="M47.2,71.4 L49.0,73.2 L47.2,75.0 L45.4,73.2 Z" fill="rgba(74,144,217,0.16)" stroke="rgba(156,196,238,0.85)" stroke-width="0.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+              <g class="op-marker-label">
+                <rect x="50.7" y="70.9" width="14" height="4.6" rx="1" fill="#0B1D2D" stroke="rgba(156,196,238,0.5)" stroke-width="0.25"/>
+                <text x="57.7" y="73.85" text-anchor="middle" font-size="1.9" fill="#E8EEF6">Olior</text>
+              </g>
+            </g>
+          </g>
         </svg>
         <div class="op-lanes-legend">
           <span><i style="background:#4A90D9"></i>Primary corridor</span>
           <span><i style="background:rgba(255,255,255,.5)"></i>Active lanes</span>
           <span><i style="width:16px;height:2px;border-radius:1px;background:repeating-linear-gradient(90deg,rgba(74,144,217,.85) 0 4px,transparent 4px 7px)"></i>Partner · cross-border</span>
+          <span><i class="op-legend-diamond"></i>Partner location</span>
         </div>
       </div>
       <div class="op-lanes-table">
@@ -706,6 +733,25 @@ a{color:inherit;text-decoration:none;}
           <span class="op-lanes-row-equip">Cross-border dry van</span>
           <span class="op-lanes-row-status">Partner</span>
         </div>
+      </div>
+    </div>
+    <div class="op-partner-groups">
+      <div class="op-partner-group">
+        <div class="op-partner-group-h">United States</div>
+        <ul class="op-partner-chips">
+          <li>DA Transport · New Mexico, US</li>
+          <li>Evolution · California, US</li>
+          <li>FLS Express · Texas, US</li>
+          <li>International Transport · California, US</li>
+          <li>Moreno Brothers · California, US</li>
+        </ul>
+      </div>
+      <div class="op-partner-group">
+        <div class="op-partner-group-h">Mexico</div>
+        <ul class="op-partner-chips">
+          <li>Odal · Jalisco, MX</li>
+          <li>Olior · Estado de México, MX</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -747,28 +793,28 @@ a{color:inherit;text-decoration:none;}
 <!-- QUOTE FORM -->
 <section class="op-quote" id="quote">
   <div class="op-wrap">
-    <div class="op-section-head" style="max-width:100%;margin-bottom:56px">
+    <div class="op-section-head" style="max-width:100%;margin-bottom:32px">
       <span class="op-eyebrow">Request a quote</span>
       <h2 class="op-h2">Tell us about your load.</h2>
       <p class="op-section-sub">Lane, equipment, weight, pickup window. One reply from the ops desk — no broker queue, no chasing it down on Monday morning.</p>
     </div>
-    <div class="op-quote-grid">
-      <aside class="op-quote-info">
-        <div class="op-quote-info-list">
-          <div class="op-quote-info-row">
-            <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3.1a2 2 0 0 1 2 1.7 12.7 12.7 0 0 0 .7 2.8 2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5 12.7 12.7 0 0 0 2.8.7 2 2 0 0 1 1.7 2z"/></svg></span>
-            <div><div class="op-quote-info-h">Ops desk</div><div class="op-quote-info-v op-quote-info-v-mono">+1 (972) 476-1988</div></div>
-          </div>
-          <div class="op-quote-info-row">
-            <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-            <div><div class="op-quote-info-h">Email</div><div class="op-quote-info-v">carriers@flogalhq.com</div></div>
-          </div>
-          <div class="op-quote-info-row">
-            <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-7.6-8-13a8 8 0 1 1 16 0c0 5.4-8 13-8 13z"/><circle cx="12" cy="8" r="2.5"/></svg></span>
-            <div><div class="op-quote-info-h">Coverage</div><div class="op-quote-info-v">Serving Oklahoma and Texas.</div></div>
-          </div>
-        </div>
-      </aside>
+    <div class="op-quote-contact-row">
+      <div class="op-quote-info-row">
+        <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3.1a2 2 0 0 1 2 1.7 12.7 12.7 0 0 0 .7 2.8 2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5 12.7 12.7 0 0 0 2.8.7 2 2 0 0 1 1.7 2z"/></svg></span>
+        <span class="op-quote-info-v op-quote-info-v-mono">+1 (972) 476-1988</span>
+      </div>
+      <span class="op-quote-contact-div" aria-hidden="true"></span>
+      <div class="op-quote-info-row">
+        <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        <span class="op-quote-info-v">carriers@flogalhq.com</span>
+      </div>
+      <span class="op-quote-contact-div" aria-hidden="true"></span>
+      <div class="op-quote-info-row">
+        <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-7.6-8-13a8 8 0 1 1 16 0c0 5.4-8 13-8 13z"/><circle cx="12" cy="8" r="2.5"/></svg></span>
+        <span class="op-quote-info-v">Serving Oklahoma and Texas.</span>
+      </div>
+    </div>
+    <div class="op-quote-formwrap">
       <form class="op-form" id="carrierForm" onsubmit="submitCarrierQuote(event)">
         <div class="op-form-row">
           <div class="op-form-field"><label class="op-form-lab">First Name</label><input id="cr-first" class="op-form-input" placeholder="Pat"></div>
@@ -792,7 +838,7 @@ a{color:inherit;text-decoration:none;}
         </div>
         <div class="op-form-row-1" style="display:flex;align-items:flex-start;gap:10px;">
           <input type="checkbox" id="sms-consent" style="margin-top:3px;width:16px;height:16px;flex:none;">
-          <label for="sms-consent" style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:normal;line-height:1.5;color:var(--op-fg-faint);">I agree to receive non-marketing customer-care texts from Flogal Holdings LLC (Flogal) about this inquiry and related business communications. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. SMS consent is optional and is not required to submit an inquiry or purchase services. <a href="https://www.flogalhq.com/privacy" style="color:var(--op-blue-strong);text-decoration:underline;">Privacy Policy</a> &middot; <a href="https://www.flogalhq.com/sms-terms" style="color:var(--op-blue-strong);text-decoration:underline;">SMS Terms</a></label>
+          <label for="sms-consent" style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:normal;line-height:1.5;color:var(--op-fg-faint);">Text me about this inquiry (optional). Msg &amp; data rates may apply. Reply STOP to opt out. <details style="display:inline;"><summary style="display:inline;cursor:pointer;color:var(--op-blue-strong);text-decoration:underline;">Details</summary><span style="display:block;margin-top:6px;">I agree to receive non-marketing customer-care texts from Flogal Holdings LLC (Flogal) about this inquiry and related business communications. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. SMS consent is optional and is not required to submit an inquiry or purchase services. <a href="https://www.flogalhq.com/privacy" style="color:var(--op-blue-strong);text-decoration:underline;">Privacy Policy</a> &middot; <a href="https://www.flogalhq.com/sms-terms" style="color:var(--op-blue-strong);text-decoration:underline;">SMS Terms</a></span></details></label>
         </div>
         <div class="op-form-row">
           <div class="op-form-field"><label class="op-form-lab">Origin</label><input id="cr-origin" class="op-form-input" placeholder="City, State"></div>
