@@ -26,3 +26,9 @@
   form lives on. A mismatched source silently corrupts lead attribution.
 - Design tokens: per-site changes go in that site's tokens.css --accent
   override only. Never edit brand.css for a single-site change.
+  - Never delete an existing @media query, fallback, or @supports block because it
+  looks redundant against a new spec. Report it and leave it. Removal requires
+  an explicit instruction in the prompt.
+- Tap-to-reveal on a tabindex element: pair :focus for the behavior with
+  :focus-visible for the ring, and keep an @media (hover:none) static fallback.
+  :focus-visible alone under-triggers on touch.

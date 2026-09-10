@@ -39,7 +39,7 @@
 .footer-social a{display:inline-flex;color:rgba(255,255,255,.45);transition:color 150ms;cursor:default;}
 .footer-social a:hover{color:#A8B8C8;}
 .footer-social svg{width:18px;height:18px;display:block;}
-.footer-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
+.footer-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:32px;}
 .footer-col{display:flex;flex-direction:column;gap:10px;}
 .footer-col-h{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:white;margin-bottom:4px;}
 .footer-col a{font-size:13px;color:rgba(255,255,255,.48);text-decoration:none;transition:color 150ms,text-decoration-color 150ms;}
