@@ -106,7 +106,7 @@ Flogal Holdings LLC, using the name Flogal, operates a customer-care text messag
 
 We do not send marketing or promotional text messages. This program does not send bulk messages or automated alerts.
 
-You may opt in by affirmatively agreeing when a representative asks, or by selecting the optional SMS box on a website form. We identify the sender and purpose and keep a record of consent. Text consent is optional and is not required to submit an inquiry or to purchase services.
+You may opt in by affirmatively agreeing when a Flogal representative asks for permission by phone or in person, or by selecting the optional SMS box on a website form. We identify the sender and purpose and keep a record of consent. Text consent is optional and is not required to submit an inquiry or to purchase services.
 
 #### Frequency and cost
 

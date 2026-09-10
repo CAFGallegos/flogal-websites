@@ -471,6 +471,7 @@ img{display:block;}
       </div>
       <div class="field"><label>Company</label><input id="ab-co" type="text" placeholder="Company or Institution"></div>
       <div class="field"><label>Email</label><input id="ab-em" type="email" placeholder="john@institution.com"></div>
+      <div class="field"><label>Phone</label><input id="ab-phone" type="tel" placeholder="+1 (555) 000-0000"></div>
       <div class="field">
         <label>Inquiry Type</label>
         <select id="ab-iq">
@@ -493,6 +494,10 @@ img{display:block;}
           <option value="phone">Phone</option>
           <option value="text">Text</option>
         </select>
+      </div>
+      <div class="field" style="flex-direction:row;align-items:flex-start;gap:10px;">
+        <input type="checkbox" id="sms-consent" style="margin-top:3px;width:16px;height:16px;flex:none;">
+        <label for="sms-consent" style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:normal;line-height:1.5;color:var(--muted);">I agree to receive non-marketing customer-care texts from Flogal Holdings LLC (Flogal) about this inquiry and related business communications. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. SMS consent is optional and is not required to submit an inquiry or purchase services. <a href="https://www.flogalhq.com/privacy" style="color:var(--blue);text-decoration:underline;">Privacy Policy</a> &middot; <a href="https://www.flogalhq.com/sms-terms" style="color:var(--blue);text-decoration:underline;">SMS Terms</a></label>
       </div>
       <button type="submit" class="form-btn" id="abSubmitBtn">Send Message →</button>
       <div id="abFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:4px;"></div>
@@ -648,6 +653,7 @@ async function sub(e) {
     last_name:         document.getElementById('ab-ln').value.trim() || null,
     company:           document.getElementById('ab-co').value.trim() || null,
     email:             document.getElementById('ab-em').value.trim(),
+    phone:             document.getElementById('ab-phone').value.trim() || null,
     inquiry_type:      document.getElementById('ab-iq').value || null,
     message:           document.getElementById('ab-ms').value.trim() || null,
     preferred_contact: document.getElementById('ab-pc').value || null,
@@ -655,6 +661,8 @@ async function sub(e) {
     status:            'new',
     source:            'hq',
     submitted_at:      new Date().toISOString(),
+    sms_consent:        document.getElementById('sms-consent').checked,
+    sms_consent_source: window.location.pathname,
   };
   const { error } = await _sb.from('inquiries').insert(payload);
   if (error) {

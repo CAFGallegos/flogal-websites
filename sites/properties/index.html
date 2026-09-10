@@ -561,6 +561,10 @@ button{font-family:inherit;}
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Email *</label><input id="pr-email" type="email" required style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="you@company.com"></div>
         <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Phone</label><input id="pr-phone" type="tel" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="+1 (555) 000-0000"></div>
       </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <input type="checkbox" id="sms-consent" style="margin-top:3px;width:16px;height:16px;flex:none;">
+        <label for="sms-consent" style="font-size:12px;font-weight:400;line-height:1.5;color:#4A5563;">I agree to receive non-marketing customer-care texts from Flogal Holdings LLC (Flogal) about this inquiry and related business communications. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. SMS consent is optional and is not required to submit an inquiry or purchase services. <a href="https://www.flogalhq.com/privacy" style="color:#1E4B8F;text-decoration:underline;">Privacy Policy</a> &middot; <a href="https://www.flogalhq.com/sms-terms" style="color:#1E4B8F;text-decoration:underline;">SMS Terms</a></label>
+      </div>
       <div><label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Preferred Contact</label>
         <select id="pr-preferred" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
           <option value="">Select…</option>
@@ -655,6 +659,8 @@ async function submitPropInquiry(e) {
     status:            'new',
     source:            'properties',
     submitted_at:      new Date().toISOString(),
+    sms_consent:        document.getElementById('sms-consent').checked,
+    sms_consent_source: window.location.pathname,
   };
   const { error } = await _sb.from('inquiries').insert(payload);
   if (error) {

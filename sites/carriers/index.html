@@ -793,6 +793,10 @@ a{color:inherit;text-decoration:none;}
           <div class="op-form-field"><label class="op-form-lab">Email</label><input id="cr-email" type="email" class="op-form-input" placeholder="pat@brazos.co"></div>
           <div class="op-form-field"><label class="op-form-lab">Phone</label><input id="cr-phone" class="op-form-input" placeholder="+1 (903) 555-0173"></div>
         </div>
+        <div class="op-form-row-1" style="display:flex;align-items:flex-start;gap:10px;">
+          <input type="checkbox" id="sms-consent" style="margin-top:3px;width:16px;height:16px;flex:none;">
+          <label for="sms-consent" style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:normal;line-height:1.5;color:var(--op-fg-faint);">I agree to receive non-marketing customer-care texts from Flogal Holdings LLC (Flogal) about this inquiry and related business communications. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. SMS consent is optional and is not required to submit an inquiry or purchase services. <a href="https://www.flogalhq.com/privacy" style="color:var(--op-blue-strong);text-decoration:underline;">Privacy Policy</a> &middot; <a href="https://www.flogalhq.com/sms-terms" style="color:var(--op-blue-strong);text-decoration:underline;">SMS Terms</a></label>
+        </div>
         <div class="op-form-row">
           <div class="op-form-field"><label class="op-form-lab">Origin</label><input id="cr-origin" class="op-form-input" placeholder="Dallas, TX 75207"></div>
           <div class="op-form-field"><label class="op-form-lab">Destination</label><input id="cr-dest" class="op-form-input" placeholder="Oklahoma City, OK 73108"></div>
@@ -992,6 +996,8 @@ async function submitCarrierQuote(e) {
     status:             'new',
     source:             'carriers',
     submitted_at:       new Date().toISOString(),
+    sms_consent:        document.getElementById('sms-consent').checked,
+    sms_consent_source: window.location.pathname,
   };
   const { error } = await _sb.from('inquiries').insert(payload);
   if (error) {
