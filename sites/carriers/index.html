@@ -185,29 +185,23 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- Active lanes -------------------------------------------------- */
 .op-lanes{padding:96px 0;}
-.op-lanes-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:stretch;}
-.op-lanes-map{position:relative;background:var(--op-night-surface);border:1px solid var(--op-night-rule);border-radius:14px;padding:28px;aspect-ratio:110/97;overflow:hidden;--op-fg-dim:var(--op-night-fg-dim);}
-.op-lanes-map svg{width:100%;height:100%;display:block;}
-.op-lanes-legend{position:absolute;left:24px;bottom:20px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-fg-dim);}
+.op-lanes-map{background:var(--op-night-surface);border:1px solid var(--op-night-rule);border-radius:14px;padding:28px;--op-fg-dim:var(--op-night-fg-dim);--op-fg-faint:var(--op-night-fg-faint);}
+.op-lanes-map-canvas{position:relative;aspect-ratio:110/97;overflow:hidden;}
+.op-lanes-map-canvas svg{width:100%;height:100%;display:block;}
+.op-lanes-panel-footer{margin-top:24px;padding-top:20px;border-top:1px solid var(--op-night-rule);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 28px;}
+.op-lanes-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-fg-dim);}
 .op-lanes-legend span{display:inline-flex;align-items:center;gap:7px;}
 .op-lanes-legend i{width:8px;height:8px;border-radius:50%;display:inline-block;}
 .op-legend-diamond{width:8px;height:8px;border-radius:0;background:rgba(74,144,217,.16);border:1px solid rgba(156,196,238,.85);transform:rotate(45deg);}
+.op-lanes-contact{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px;font-size:13px;}
+.op-lanes-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.op-lanes-cta-lead{font-size:11px;color:var(--op-fg-faint);letter-spacing:.04em;}
 .op-partner-marker{cursor:default;}
 .op-partner-marker path{transition:fill 140ms,stroke 140ms;}
 .op-partner-marker:hover path,.op-partner-marker:focus path{fill:rgba(74,144,217,.4);stroke:#9CC4EE;}
 .op-partner-marker .op-marker-label{opacity:0;pointer-events:none;transition:opacity 140ms;}
 .op-partner-marker:hover .op-marker-label,.op-partner-marker:focus .op-marker-label{opacity:1;}
 .op-partner-marker:focus-visible path{stroke:#9CC4EE;stroke-width:0.9;}
-.op-lanes-table{background:var(--op-surface);border:1px solid var(--op-rule);border-radius:14px;overflow:hidden;}
-.op-lanes-table-h{padding:16px 24px;background:var(--op-blue-soft);border-bottom:1px solid var(--op-blue-line);display:flex;justify-content:space-between;align-items:baseline;}
-.op-lanes-row{display:grid;grid-template-columns:1.4fr 1fr .8fr;align-items:center;padding:14px 24px;border-bottom:1px solid var(--op-rule);font-size:13px;gap:12px;}
-.op-lanes-row:last-child{border-bottom:0;}
-.op-lanes-row.is-primary{background:var(--op-blue-soft);}
-.op-lanes-row-name{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--op-fg);}
-.op-lanes-row-name::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--op-blue);}
-.op-lanes-row.is-primary .op-lanes-row-name::before{background:var(--op-blue-strong);box-shadow:0 0 0 4px rgba(74,144,217,.18);}
-.op-lanes-row-equip{color:var(--op-fg-dim);font-size:12.5px;}
-.op-lanes-row-status{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--op-blue-strong);}
 /* ---- Corridor map lane motion (§4.2) -------------------------------- */
 .lane{stroke-dasharray:6 94;stroke-dashoffset:100;animation:lane-run 16s linear infinite;}
 .lane-primary{animation-duration:12s;}
@@ -289,7 +283,7 @@ a{color:inherit;text-decoration:none;}
 /* ---- Responsive --------------------------------------------------- */
 @media(max-width:1080px){
   .op-wrap{padding:0 28px;}
-  .op-stats-inner,.op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-lanes-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .op-stats-inner,.op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid{grid-template-columns:repeat(2,1fr)!important;}
   .op-stat{border-right:0;border-bottom:1px solid var(--op-rule);}
   .op-form-row{grid-template-columns:1fr;}
   .op-partner-cta-inner{grid-template-columns:1fr;}
@@ -303,7 +297,7 @@ a{color:inherit;text-decoration:none;}
   .op-hero{padding:72px 0 64px;}
   .op-hero-title{font-size:48px;}
   .op-hero-actions{flex-direction:column;align-items:stretch;gap:12px;}
-  .op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid,.op-lanes-grid{grid-template-columns:1fr!important;}
+  .op-why-grid,.op-fleet-grid,.op-equip-grid,.op-how-grid{grid-template-columns:1fr!important;}
   .op-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 
   /* Full-screen night panel (spec §1.2/§15) */
@@ -320,9 +314,9 @@ a{color:inherit;text-decoration:none;}
   .op-quote-contact-row{flex-direction:column;align-items:flex-start;gap:12px;}
   .op-quote-contact-div{display:none;}
   .op-lanes-map .op-map-citylabel{display:none;}
-  .op-lanes-legend{position:static;margin-top:16px;gap:6px 14px;}
-  .op-lanes-map{padding:20px;aspect-ratio:auto;overflow:visible;}
-  .op-lanes-map svg{height:auto;}
+  .op-lanes-map{padding:20px;}
+  .op-lanes-panel-footer{flex-direction:column;align-items:flex-start;gap:16px;}
+  .op-lanes-legend{gap:6px 14px;}
 }
 @media (prefers-reduced-motion: reduce){
   .op-nav-toggle-bar{transition:none;}
@@ -576,8 +570,16 @@ a{color:inherit;text-decoration:none;}
       <h2 class="op-h2">Built around the TX–OK corridor — extended by partners we know.</h2>
       <p class="op-section-sub">Our owned capacity runs densely on the Dallas–Oklahoma City spine, with secondary lanes feeding in from Houston, San Antonio, and West Texas. Beyond that, a vetted network of U.S. and Mexico carrier partners extends our reach into the lower 48 and cross-border — the same accountability standard, both directions.</p>
     </div>
-    <div class="op-lanes-grid">
-      <div class="op-lanes-map">
+    <!-- Corridor lanes (for E2 — render as routes on the map):
+         Dallas/Fort Worth <-> Oklahoma City · Flatbed, dry van, bulk · PRIMARY
+         Houston <-> Tulsa               · Flatbed, heavy haul · ACTIVE
+         San Antonio <-> Austin          · Bulk, aggregate     · ACTIVE
+         Midland-Odessa <-> Dallas       · Flatbed, hot-shot   · ACTIVE
+         Dallas <-> Memphis              · Dry van             · SPOT
+         Houston <-> Laredo (via FLS)    · Cross-border dry van · PARTNER
+    -->
+    <div class="op-lanes-map">
+      <div class="op-lanes-map-canvas">
         <svg viewBox="0 0 110 97" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Map of owned TX–OK corridor lanes and partner carrier locations across the U.S. and Mexico">
           <!-- Continental US — simplified silhouette (border segment San Diego→Brownsville doubles as US–MX line) -->
           <path d="M0.6,6.0 L0.9,20.1 L1.1,25.7 L4.8,31.7 L8.2,38.7 L14.5,43.2 L19.4,43.0 L26.1,46.2 L34.5,45.0 L37.5,47.8 L40.3,51.0 L44.7,50.3 L47.5,54.6 L51.8,58.4 L52.2,54.1 L56.5,50.7 L62.4,51.0 L67.1,51.2 L69.0,48.7 L74.8,49.8 L78.9,54.6 L81.8,60.0 L83.5,57.5 L83.0,52.5 L81.5,48.0 L82.4,44.4 L86.7,40.3 L92.5,37.1 L91.5,32.8 L93.2,29.2 L95.1,25.1 L102.5,22.6 L105.3,16.7 L108.3,15.5 L104.0,9.6 L99.7,15.1 L92.7,15.5 L89.9,18.7 L85.7,19.8 L79.4,22.6 L78.5,19.8 L77.4,13.3 L75.1,11.7 L69.0,7.8 L61.5,11.0 L55.5,6.0 Z"
@@ -692,49 +694,29 @@ a{color:inherit;text-decoration:none;}
             </g>
           </g>
         </svg>
+      </div>
+      <div class="op-lanes-panel-footer">
         <div class="op-lanes-legend">
           <span><i style="background:#4A90D9"></i>Primary corridor</span>
           <span><i style="background:rgba(255,255,255,.5)"></i>Active lanes</span>
           <span><i style="width:16px;height:2px;border-radius:1px;background:repeating-linear-gradient(90deg,rgba(74,144,217,.85) 0 4px,transparent 4px 7px)"></i>Partner · cross-border</span>
           <span><i class="op-legend-diamond"></i>Partner location</span>
         </div>
-      </div>
-      <div class="op-lanes-table">
-        <div class="op-lanes-table-h">
-          <span class="op-eyebrow">Corridor lanes</span>
+        <div class="op-lanes-contact">
+          <span class="op-quote-info-v op-quote-info-v-mono">+1 (972) 476-1988</span>
+          <span class="op-quote-contact-div" aria-hidden="true"></span>
+          <span class="op-quote-info-v">carriers@flogalhq.com</span>
         </div>
-        <div class="op-lanes-row is-primary">
-          <span class="op-lanes-row-name">Dallas / Fort Worth ↔ Oklahoma City</span>
-          <span class="op-lanes-row-equip">Flatbed · dry van · bulk</span>
-          <span class="op-lanes-row-status">Primary</span>
-        </div>
-        <div class="op-lanes-row">
-          <span class="op-lanes-row-name">Houston ↔ Tulsa</span>
-          <span class="op-lanes-row-equip">Flatbed · heavy haul</span>
-          <span class="op-lanes-row-status">Active</span>
-        </div>
-        <div class="op-lanes-row">
-          <span class="op-lanes-row-name">San Antonio ↔ Austin</span>
-          <span class="op-lanes-row-equip">Bulk · aggregate</span>
-          <span class="op-lanes-row-status">Active</span>
-        </div>
-        <div class="op-lanes-row">
-          <span class="op-lanes-row-name">Midland-Odessa ↔ Dallas</span>
-          <span class="op-lanes-row-equip">Flatbed · hot-shot</span>
-          <span class="op-lanes-row-status">Active</span>
-        </div>
-        <div class="op-lanes-row">
-          <span class="op-lanes-row-name">Dallas ↔ Memphis</span>
-          <span class="op-lanes-row-equip">Dry van</span>
-          <span class="op-lanes-row-status">Spot</span>
-        </div>
-        <div class="op-lanes-row">
-          <span class="op-lanes-row-name">Houston ↔ Laredo (via FLS)</span>
-          <span class="op-lanes-row-equip">Cross-border dry van</span>
-          <span class="op-lanes-row-status">Partner</span>
+        <div class="op-lanes-cta">
+          <span class="op-lanes-cta-lead">One reply from the ops desk — no broker queue.</span>
+          <button type="button" class="op-btn op-btn-blue">Request a Quote</button>
         </div>
       </div>
     </div>
+    <!-- For E3 — modal heading + sub-line (moved from the deleted Request a Quote section):
+         "Tell us about your load."
+         "Lane, equipment, weight, pickup window. One reply from the ops desk — no broker queue, no chasing it down on Monday morning."
+    -->
     <div class="op-partner-groups">
       <div class="op-partner-group">
         <div class="op-partner-group-h">United States</div>
@@ -785,92 +767,6 @@ a{color:inherit;text-decoration:none;}
         <span class="op-step-n">04</span>
         <h4 class="op-step-h">Settle</h4>
         <p class="op-step-p">One clean invoice, accessorials itemized line by line.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QUOTE FORM -->
-<section class="op-quote" id="quote">
-  <div class="op-wrap">
-    <div class="op-section-head" style="max-width:100%;margin-bottom:32px">
-      <span class="op-eyebrow">Request a quote</span>
-      <h2 class="op-h2">Tell us about your load.</h2>
-      <p class="op-section-sub">Lane, equipment, weight, pickup window. One reply from the ops desk — no broker queue, no chasing it down on Monday morning.</p>
-    </div>
-    <div class="op-quote-contact-row">
-      <div class="op-quote-info-row">
-        <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V20a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3.1a2 2 0 0 1 2 1.7 12.7 12.7 0 0 0 .7 2.8 2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5 12.7 12.7 0 0 0 2.8.7 2 2 0 0 1 1.7 2z"/></svg></span>
-        <span class="op-quote-info-v op-quote-info-v-mono">+1 (972) 476-1988</span>
-      </div>
-      <span class="op-quote-contact-div" aria-hidden="true"></span>
-      <div class="op-quote-info-row">
-        <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-        <span class="op-quote-info-v">carriers@flogalhq.com</span>
-      </div>
-      <span class="op-quote-contact-div" aria-hidden="true"></span>
-      <div class="op-quote-info-row">
-        <span class="op-quote-info-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-7.6-8-13a8 8 0 1 1 16 0c0 5.4-8 13-8 13z"/><circle cx="12" cy="8" r="2.5"/></svg></span>
-        <span class="op-quote-info-v">Serving Oklahoma and Texas.</span>
-      </div>
-    </div>
-    <div class="op-quote-formwrap">
-      <form class="op-form" id="carrierForm" onsubmit="submitCarrierQuote(event)">
-        <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">First Name</label><input id="cr-first" class="op-form-input" placeholder="Pat"></div>
-          <div class="op-form-field"><label class="op-form-lab">Last Name</label><input id="cr-last" class="op-form-input" placeholder="Hernandez"></div>
-        </div>
-        <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">Company</label><input id="cr-company" class="op-form-input" placeholder="Brazos Aggregate Holdings"></div>
-          <div class="op-form-field">
-            <label class="op-form-lab">Preferred Contact</label>
-            <select id="cr-preferred" class="op-form-select">
-              <option value="">Select…</option>
-              <option value="email">Email</option>
-              <option value="phone">Phone</option>
-              <option value="text">Text</option>
-            </select>
-          </div>
-        </div>
-        <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">Email</label><input id="cr-email" type="email" class="op-form-input" placeholder="pat@brazos.co"></div>
-          <div class="op-form-field"><label class="op-form-lab">Phone</label><input id="cr-phone" class="op-form-input" placeholder="Phone number"></div>
-        </div>
-        <div class="op-form-row-1" style="display:flex;align-items:flex-start;gap:10px;">
-          <input type="checkbox" id="sms-consent" style="margin-top:3px;width:16px;height:16px;flex:none;">
-          <label for="sms-consent" style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:normal;line-height:1.5;color:var(--op-fg-faint);">Text me about this inquiry (optional). Msg &amp; data rates may apply. Reply STOP to opt out. <details style="display:inline;"><summary style="display:inline;cursor:pointer;color:var(--op-blue-strong);text-decoration:underline;">Details</summary><span style="display:block;margin-top:6px;">I agree to receive non-marketing customer-care texts from Flogal Holdings LLC (Flogal) about this inquiry and related business communications. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. SMS consent is optional and is not required to submit an inquiry or purchase services. <a href="https://www.flogalhq.com/privacy" style="color:var(--op-blue-strong);text-decoration:underline;">Privacy Policy</a> &middot; <a href="https://www.flogalhq.com/sms-terms" style="color:var(--op-blue-strong);text-decoration:underline;">SMS Terms</a></span></details></label>
-        </div>
-        <div class="op-form-row">
-          <div class="op-form-field"><label class="op-form-lab">Origin</label><input id="cr-origin" class="op-form-input" placeholder="City, State"></div>
-          <div class="op-form-field"><label class="op-form-lab">Destination</label><input id="cr-dest" class="op-form-input" placeholder="Oklahoma City, OK 73108"></div>
-        </div>
-        <div class="op-form-row">
-          <div class="op-form-field">
-            <label class="op-form-lab">Equipment</label>
-            <select id="cr-equip" class="op-form-select">
-              <option>Flatbed · 53'</option>
-              <option>Dry van · 53'</option>
-              <option>Heavy haul · RGN</option>
-              <option>Bulk · end-dump</option>
-              <option>Pneumatic · dry bulk</option>
-              <option>Expedited · hot-shot</option>
-              <option>Other / not sure</option>
-            </select>
-          </div>
-          <div class="op-form-field"><label class="op-form-lab">Pickup window</label><input id="cr-pickup" class="op-form-input" placeholder="Tue 5/26 · 0700–1100 CT"></div>
-        </div>
-        <div class="op-form-row-1">
-          <div class="op-form-field"><label class="op-form-lab">Load details</label><textarea id="cr-details" class="op-form-textarea" placeholder="Commodity, weight, dimensions, accessorial needs, delivery window, special instructions."></textarea></div>
-        </div>
-        <div class="op-form-actions">
-          <button type="submit" id="crSubmitBtn" class="op-btn op-btn-blue">Request a Quote →</button>
-          <span class="op-form-disclaimer">No broker markup</span>
-        </div>
-        <div id="crFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:8px;"></div>
-      </form>
-      <div id="crFormSuccess" style="display:none;padding:32px 0;color:white;">
-        <div style="font-weight:700;font-size:20px;margin-bottom:8px;">Quote request received.</div>
-        <div style="font-size:14px;opacity:.75;line-height:1.55;">Thanks — we've got your request and our dispatch team will follow up.</div>
       </div>
     </div>
   </div>
