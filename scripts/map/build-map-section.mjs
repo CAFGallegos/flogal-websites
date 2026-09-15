@@ -446,7 +446,7 @@ const CSS = `/* ---- Network & active lanes: map -------------------------------
 .op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;margin-left:auto;}
 .op-lanes-cta-lead{font-size:11.5px;color:${T.dim};text-align:right;max-width:214px;line-height:1.45;}
 .op-lanes-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;
-  margin-top:34px;padding-top:22px;border-top:1px solid ${T.rule};}
+  margin-top:34px;padding-top:22px;border-top:1px solid var(--op-rule);}
 .op-lanes-contact{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;}
 .op-lanes-contact a{text-decoration:none;color:${T.blueStrong};font-size:14px;}
 .op-lanes-contact a:hover{color:#9CC4EE;}

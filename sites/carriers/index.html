@@ -79,7 +79,7 @@ body{background:var(--op-bg);color:var(--op-fg);font-family:var(--font-sans);-we
 a{color:inherit;text-decoration:none;}
 
 .op-wrap{max-width:var(--op-max);margin:0 auto;padding:0 40px;}
-#about,#equipment,#fleet,#lanes,#quote{scroll-margin-top:88px;}
+#about,#equipment,#fleet,#lanes{scroll-margin-top:88px;}
 
 .op-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--op-blue-strong);}
 .op-eyebrow::before{content:'';width:22px;height:1px;background:var(--op-blue);display:inline-block;}
@@ -185,7 +185,7 @@ a{color:inherit;text-decoration:none;}
 .op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;margin-left:auto;}
 .op-lanes-cta-lead{font-size:11.5px;color:var(--op-night-fg-dim);text-align:right;max-width:214px;line-height:1.45;}
 .op-lanes-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;
-  margin-top:34px;padding-top:22px;border-top:1px solid var(--op-night-rule);}
+  margin-top:34px;padding-top:22px;border-top:1px solid var(--op-rule);}
 .op-lanes-contact{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;}
 .op-lanes-contact a{text-decoration:none;color:var(--op-night-blue-strong);font-size:14px;}
 .op-lanes-contact a:hover{color:#9CC4EE;}
@@ -549,11 +549,11 @@ a{color:inherit;text-decoration:none;}
       <li><a href="https://sales.flogalhq.com">Sales</a></li>
       <li><a href="https://properties.flogalhq.com">Properties</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#quote">Contact</a></li>
+      <li><a href="https://flogalhq.com/careers/">Careers</a></li>
     </ul>
     <div class="op-nav-actions">
       <a class="op-nav-login" href="portal/login.html">Partner Login</a>
-      <a class="op-nav-cta" href="#quote">Request a Quote</a>
+      <a class="op-nav-cta" href="#" onclick="openCarrierModal();return false;">Request a Quote</a>
     </div>
     <button class="op-nav-toggle" id="opNavToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="opMobileNav">
       <span class="op-nav-toggle-bar"></span>
@@ -568,10 +568,10 @@ a{color:inherit;text-decoration:none;}
     <li><a href="https://sales.flogalhq.com">Sales</a></li>
     <li><a href="https://properties.flogalhq.com">Properties</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#quote">Contact</a></li>
+    <li><a href="https://flogalhq.com/careers/">Careers</a></li>
   </ul>
   <a href="portal/login.html" class="op-mobile-nav-login">Partner Login</a>
-  <a href="#quote" class="op-mobile-nav-cta">Request a Quote</a>
+  <a href="#" class="op-mobile-nav-cta" onclick="openCarrierModal();return false;">Request a Quote</a>
 </div>
 
 <!-- HERO -->
@@ -585,7 +585,7 @@ a{color:inherit;text-decoration:none;}
     </h1>
     <p class="op-hero-sub">Flogal Carriers runs asset-based hauling on the Oklahoma–Texas corridor through fleets we operate, extended by a vetted partner network across the U.S. and into Mexico.</p>
     <div class="op-hero-actions">
-      <a href="#quote" class="op-btn op-btn-blue">Request a Quote →</a>
+      <a href="#" class="op-btn op-btn-blue" onclick="openCarrierModal();return false;">Request a Quote →</a>
       <a href="#lanes" class="op-btn op-btn-ghost">View active lanes</a>
     </div>
   </div>

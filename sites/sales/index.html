@@ -382,7 +382,7 @@ button{font-family:var(--font-sans);}
       <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
       <li><a href="https://properties.flogalhq.com">Properties</a></li>
       <li><a href="#inventory">Inventory</a></li>
-      <li><a href="#quote-modal" id="navContactLink">Contact</a></li>
+      <li><a href="https://flogalhq.com/careers/">Careers</a></li>
     </ul>
     <a class="sl-cta" href="#quote-modal" id="btnNavQuote">Request a Quote &#8594;</a>
     <button class="sl-nav-toggle" id="slNavToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="slMobileNav">
@@ -398,7 +398,7 @@ button{font-family:var(--font-sans);}
     <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
     <li><a href="https://properties.flogalhq.com">Properties</a></li>
     <li><a href="#inventory">Inventory</a></li>
-    <li><a href="#quote-modal" id="mobileNavContactLink">Contact</a></li>
+    <li><a href="https://flogalhq.com/careers/">Careers</a></li>
   </ul>
   <a class="sl-mobile-nav-cta" href="#quote-modal" id="btnMobileNavQuote">Request a Quote &#8594;</a>
 </div>
@@ -1120,15 +1120,7 @@ document.getElementById('btnNavQuote').addEventListener('click', e => {
   e.preventDefault();
   openQuoteModal(null);
 });
-document.getElementById('navContactLink').addEventListener('click', e => {
-  e.preventDefault();
-  openQuoteModal(null);
-});
 document.getElementById('btnMobileNavQuote').addEventListener('click', e => {
-  e.preventDefault();
-  openQuoteModal(null);
-});
-document.getElementById('mobileNavContactLink').addEventListener('click', e => {
   e.preventDefault();
   openQuoteModal(null);
 });
