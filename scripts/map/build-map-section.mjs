@@ -65,6 +65,34 @@ const CITY_SIDE = {
   'Houston': 'r', 'Midland': 'l', 'Laredo': 'l', 'El Paso': 'l', 'Memphis': 'r',
 };
 
+// Rest state always shows region + count (never a partner name — see callout
+// markup below). US entries drop the country suffix ("California"); MX
+// entries keep it ("Jalisco, MX") since that is the only country marker at
+// rest. Shared by the SVG markup and the per-id CSS sizing rules so the two
+// can never drift.
+function regionAtRest(place) { return place.replace(/, US$/, ''); }
+function pluralCarrier(n) { return `${n} carrier${n === 1 ? '' : 's'}`; }
+function calloutMetrics(p) {
+  const a = CALLOUT[p.id];
+  const head = regionAtRest(p.place);
+  const sub = pluralCarrier(p.names.length);
+  // +30, not +26: the "N carrier(s)" rest-state sub line is new (the
+  // original box widths were only ever measured against longer strings —
+  // full place names, partner names) and it was tight enough at +26 to wrap
+  // "1 CARRIER" inside the CSS flex box (unlike non-wrapping SVG <text>,
+  // this is real HTML layout now — see the button/foreignObject rewrite).
+  const wC = Math.max(head.length * 8.4, sub.length * 6.6) + 30;
+  const wE = Math.max(...p.names.map(n => n.length * 8.4), p.place.length * 6.6) + 30;
+  const hE = p.names.length * 20 + 34;
+  const maxW = Math.max(wC, wE);
+  const fx = a.side === 'l' ? a.x - maxW : a.x;
+  const fy = a.y - hE / 2;
+  const tie = a.side === 'l' ? a.x : a.x + wC;
+  return { id: p.id, a, head, sub, wC, wE, hE, maxW, fx, fy, tie };
+}
+const CALLOUT_METRICS = PARTNERS.map(calloutMetrics);
+const CALLOUT_BY_ID = Object.fromEntries(CALLOUT_METRICS.map(m => [m.id, m]));
+
 function laneGeom(l) {
   const [x1, y1] = C[l.a], [x2, y2] = C[l.b];
   const mx = (x1 + x2) / 2 + (y2 - y1) * l.bow;
@@ -94,6 +122,15 @@ function css() {
   });
   LANES.forEach(l => o.push(`.sec:has(.t-${l.id}:hover) .v-${l.id},.sec:has(.t-${l.id}:focus) .v-${l.id}{stroke-width:3.4;stroke-opacity:1;filter:drop-shadow(0 0 6px rgba(74,144,217,.65));}`));
   PARTNERS.forEach(p => o.push(`.sec:has(.t-${p.id}:hover) .v-${p.id},.sec:has(.t-${p.id}:focus) .v-${p.id}{stroke-opacity:1;stroke-width:2.4;filter:drop-shadow(0 0 7px rgba(74,144,217,.7));}`));
+  // callout button size: rest (region + count) vs. press (name list). Both
+  // states must come from a class, not inline style — inline style always
+  // beats a class selector's specificity, :focus included, so a focus rule
+  // could never have overridden a width/height set inline on the button.
+  // Width on focus uses maxW (max of rest/expanded), not the raw expanded
+  // width: a short single partner name (e.g. "Odal") in a long-named region
+  // ("Jalisco, MX") can measure narrower than the rest-state region label,
+  // and the box must only ever grow on press, never shrink.
+  CALLOUT_METRICS.forEach(m => o.push(`.t-${m.id}{width:${m.wC}px;height:42px;}\n.t-${m.id}:focus{width:${m.maxW}px;height:${m.hE}px;}`));
   // map -> index: hovering the map lights the matching row
 
   // territory + county detail only when the focus is inside the corridor
@@ -161,32 +198,31 @@ function mapSvg() {
   }).join('');
 
   // ---- partner callouts (static: leader lines stay true because nothing moves)
+  // Rest state is always region + count — never a partner name (see
+  // calloutMetrics). The label itself is a real HTML <button> in a
+  // <foreignObject>: focus (not hover) reveals the partner name(s), and a
+  // real button is reliably focusable by keyboard and by touch, unlike an
+  // SVG <g tabindex>. The old marker hit-circle stays, hover-only, purely to
+  // glow the diamond on the map — it carries no tabindex, so it cannot open
+  // the callout.
   const callouts = PARTNERS.map(p => {
     const [mx2, my2] = PR[p.key];
-    const a = CALLOUT[p.id];
-    const one = p.names.length === 1;
-    const head = one ? p.names[0] : `${p.place.replace(/, (US|MX)$/, '')}`;
-    const sub = one ? p.place : `${p.names.length} carriers`;
-    const wC = Math.max(head.length * 8.4, sub.length * 6.6) + 26;
-    const wE = Math.max(...p.names.map(n => n.length * 8.4), p.place.length * 6.6) + 26;
-    const hE = p.names.length * 20 + 34;
-    const bx = a.side === 'l' ? a.x - wC : a.x;
-    const bxE = a.side === 'l' ? a.x - wE : a.x;
-    const tie = a.side === 'l' ? a.x : a.x + wC;
-    const tieE = a.side === 'l' ? a.x : a.x + wE;
-    return `<g class="co co-${p.id} tgt tp t-${p.id}" tabindex="0" role="button" aria-label="${p.names.join(', ')} — ${p.place}">
+    const m = CALLOUT_BY_ID[p.id];
+    const { a, head, sub, hE, maxW, fx, fy, tie } = m;
+    const justify = a.side === 'l' ? 'flex-end' : 'flex-start';
+    const ariaLabel = `${p.names.join(', ')} — ${p.place}`;
+    return `<g class="co">
 <path class="tie" d="M${tie},${a.y} L${(tie + mx2) / 2},${a.y} L${mx2},${my2}" fill="none" stroke="#9CC4EE" stroke-opacity=".3" stroke-width="1" vector-effect="non-scaling-stroke"/>
-<circle cx="${mx2}" cy="${my2}" r="14" fill="transparent"/>
-<g class="co-c">
-  <rect x="${bx}" y="${a.y - 21}" width="${wC}" height="42" rx="7" fill="#0C1B2B" fill-opacity=".9" stroke="#9CC4EE" stroke-opacity=".3" stroke-width="1" vector-effect="non-scaling-stroke"/>
-  <text x="${bx + 13}" y="${a.y - 2}" font-family="${FONT}" font-size="13.5" font-weight="600" fill="#E8EEF6">${head}</text>
-  <text x="${bx + 13}" y="${a.y + 14}" font-family="${MONO}" font-size="10" letter-spacing=".06em" fill="#5F7491">${sub.toUpperCase()}</text>
-</g>
-<g class="co-e">
-  <rect x="${bxE}" y="${a.y - hE / 2}" width="${wE}" height="${hE}" rx="7" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".55" stroke-width="1" vector-effect="non-scaling-stroke"/>
-  ${p.names.map((n, i) => `<text x="${bxE + 13}" y="${a.y - hE / 2 + 25 + i * 20}" font-family="${FONT}" font-size="13.5" font-weight="600" fill="#E8EEF6">${n}</text>`).join('')}
-  <text x="${bxE + 13}" y="${a.y - hE / 2 + 25 + p.names.length * 20 + 2}" font-family="${MONO}" font-size="10" letter-spacing=".06em" fill="#5F7491">${p.place.toUpperCase()}</text>
-</g></g>`;
+<circle class="tgt tp t-${p.id}" cx="${mx2}" cy="${my2}" r="14" fill="transparent"/>
+<foreignObject x="${fx}" y="${fy}" width="${maxW}" height="${hE}" style="overflow:visible">
+<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:${justify}">
+<button class="co-btn tgt tp t-${p.id}" id="coBtn-${p.id}" aria-label="${ariaLabel}">
+<span class="co-c"><span>${head}</span><span>${sub.toUpperCase()}</span></span>
+<span class="co-e">${p.names.map(n => `<span>${n}</span>`).join('')}<span>${p.place.toUpperCase()}</span></span>
+</button>
+</div>
+</foreignObject>
+</g>`;
   }).join('');
 
   // ---- static hit layer + cards (never transforms)
@@ -251,11 +287,11 @@ const CSSBODY_RAW = `
 .terr,.dco,.dcity{opacity:var(--terr);transition:opacity var(--mv) var(--ez) var(--dl);}
 .rest,.vhq,.pool{transition:opacity var(--mv) var(--ez) var(--dl);}
 .sec:has(.tgt:not(.tp):hover) .pool,.sec:has(.tgt:not(.tp):focus) .pool,
-.sec:has(.co:focus) .pool{opacity:0;}
+.sec:has(.co-btn:focus) .pool{opacity:0;}
 .sec:has(.tgt:not(.tp):hover) .rest,.sec:has(.tgt:not(.tp):focus) .rest,
-.sec:has(.co:focus) .rest,
+.sec:has(.co-btn:focus) .rest,
 .sec:has(.tgt:not(.tp):hover) .vhq,.sec:has(.tgt:not(.tp):focus) .vhq,
-.sec:has(.co:focus) .vhq{opacity:0;}
+.sec:has(.co-btn:focus) .vhq{opacity:0;}
 .sec:has(.tgt:hover) .zhint,.sec:has(.tgt:focus) .zhint{opacity:0;}
 .ln,.dia{transition:stroke-width var(--ui) var(--ez),stroke-opacity var(--ui) var(--ez),filter var(--ui) var(--ez);}
 .hits .tgt{cursor:pointer;outline:none;}
@@ -263,18 +299,35 @@ const CSSBODY_RAW = `
 .zhint{position:absolute;right:26px;bottom:20px;display:inline-flex;align-items:center;gap:8px;
   font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
   color:${T.faint};transition:opacity var(--ui) var(--ez) var(--dl);pointer-events:none;}
-.co{cursor:pointer;outline:none;}
-.co,.co-c,.co-e{transition:opacity var(--ui) var(--ez);}
+.co{transition:opacity var(--ui) var(--ez);}
+/* Real button so it is reliably keyboard- and touch-focusable (an SVG
+   <g tabindex> is not, on iOS — see the mobile note below). Sizing (rest vs.
+   press) is class-driven, generated per partner in css(); see that comment
+   for why it can't be inline style. */
+.co-btn{all:unset;box-sizing:border-box;position:relative;display:block;cursor:pointer;outline:none;
+  background:rgba(12,27,43,.9);border:1px solid rgba(156,196,238,.3);border-radius:7px;overflow:hidden;
+  transition:width var(--ui) var(--ez),height var(--ui) var(--ez),background var(--ui) var(--ez),border-color var(--ui) var(--ez);}
+.co-btn:focus{background:rgba(12,27,43,.98);border-color:rgba(156,196,238,.55);}
+.co-c,.co-e{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:4px;padding:0 13px;transition:opacity var(--ui) var(--ez);}
+.co-e{opacity:0;justify-content:flex-start;padding-top:12px;gap:5px;}
+.co-btn:focus .co-c{opacity:0;}
+.co-btn:focus .co-e{opacity:1;}
+/* nowrap: the box width is a generator-side character-count estimate (see
+   calloutMetrics), not a measurement — nowrap+the button's own
+   overflow:hidden means a future underestimate clips a line cleanly
+   instead of wrapping it and breaking the two-line layout. */
+.co-c span,.co-e span{white-space:nowrap;}
+.co-c span:first-child,.co-e span:not(:last-child){font-family:${FONT};font-size:13.5px;font-weight:600;color:${LIT.fg};line-height:1.25;}
+.co-c span:last-child,.co-e span:last-child{font-family:${MONO};font-size:10px;letter-spacing:.06em;color:#5F7491;}
 .tie{transition:opacity var(--ui) var(--ez),stroke-opacity var(--ui) var(--ez);}
-.co-e{opacity:0;}
-.co:hover .co-c,.co:focus .co-c{opacity:0;}
-.co:hover .co-e,.co:focus .co-e{opacity:1;}
-.co:hover .tie,.co:focus .tie{stroke-opacity:.75;}
+/* hover is a subtle highlight only (the diamond glow, below) — press is what
+   reveals a name, via :focus above, never :hover */
+.co:has(.co-btn:hover) .tie,.co:has(.co-btn:focus) .tie{stroke-opacity:.75;}
 .callouts{transition:opacity var(--ui) var(--ez) var(--dl);}
 /* a zoom to anything on the map invalidates the leader lines, so they leave */
 .sec:has(.tgt:not(.tp):hover) .callouts,.sec:has(.tgt:not(.tp):focus) .callouts,
-.sec:has(.co:focus) .co:not(:focus){opacity:0;}
-.co:focus .tie{opacity:0;}
+.sec:has(.co-btn:focus) .co:not(:has(.co-btn:focus)){opacity:0;}
+.co:has(.co-btn:focus) .tie{opacity:0;}
 @media (prefers-reduced-motion:reduce){.sec{--mv:0ms;--ui:0ms;--dl:0ms;}.zoomable{transition:none;}}
 `;
 
@@ -285,7 +338,7 @@ const RENAME = {
   sec: 'op-lanes', stage: 'opm-stage', zoomable: 'opm-zoom', viz: 'opm-viz', hits: 'opm-hits',
   terr: 'opm-terr', dco: 'opm-dco', dcity: 'opm-dcity', rest: 'opm-rest', vhq: 'opm-vhq',
   pool: 'opm-pool', ln: 'opm-ln', dia: 'opm-dia', tgt: 'opm-tgt', tp: 'opm-tp',
-  card: 'opm-card', co: 'opm-co', 'co-c': 'opm-co-c', 'co-e': 'opm-co-e',
+  card: 'opm-card', co: 'opm-co', 'co-btn': 'opm-co-btn', 'co-c': 'opm-co-c', 'co-e': 'opm-co-e',
   tie: 'opm-tie', callouts: 'opm-callouts', zhint: 'opm-zhint', relief: 'opm-relief',
 };
 function rename(str) {
@@ -330,7 +383,6 @@ ${groups.join('\n')}
 
 const SECTION = `<section class="op-lanes" id="lanes">
   <div class="op-wrap">
-   <div class="op-lanes-frame">
 
     <div class="op-lanes-head">
       <div class="op-lanes-head-copy">
@@ -339,7 +391,7 @@ const SECTION = `<section class="op-lanes" id="lanes">
         <p class="op-section-sub">Our owned capacity runs densely on the Dallas–Oklahoma City spine, with secondary lanes feeding in from Houston, San Antonio, and West Texas. Beyond that, a vetted network of U.S. and Mexico carrier partners extends our reach.</p>
       </div>
       <div class="op-lanes-head-cta">
-        <button type="button" class="op-btn op-btn-blue">Request a Quote</button>
+        <button type="button" id="crQuoteTriggerBtn" class="op-btn op-btn-blue" onclick="openCarrierModal()">Request a Quote</button>
         <span class="op-lanes-cta-lead">One reply from the ops desk — no broker queue.</span>
       </div>
     </div>
@@ -360,14 +412,12 @@ ${partnerList()}
       <span class="op-lanes-count">Seven partner carriers · five states · two countries</span>
     </div>
 
-   </div>
   </div>
 </section>`;
 
 const CSSBODY = CSSBODY_RAW + "\n" + css();
 const CSS = `/* ---- Network & active lanes: map ----------------------------------- */
 .op-lanes{padding:96px 0;}
-.op-lanes-frame{border:1px solid ${T.rule};border-radius:2px;padding:44px 44px 36px;}
 .relief{opacity:.92;mix-blend-mode:screen;}
 .op-lanes-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:56px;margin-bottom:34px;}
 .op-lanes-head-copy{max-width:63ch;display:flex;flex-direction:column;gap:14px;flex:1 1 auto;}
@@ -392,7 +442,6 @@ ${CSSBODY}
    hidden above the breakpoint, never removed. */
 .op-lanes-partners{display:none;}
 @media(max-width:860px){
-  .op-lanes-frame{padding:20px 20px 24px;}
   .op-lanes-head{flex-direction:column;align-items:stretch;gap:20px;margin-bottom:24px;}
   .op-lanes-head-cta{align-items:stretch;margin-left:0;}
   .op-lanes-head-cta .op-btn{width:100%;justify-content:center;min-height:48px;}
