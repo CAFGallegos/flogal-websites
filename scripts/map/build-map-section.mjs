@@ -42,6 +42,9 @@ const CITY_STATE = {
   'El Paso': 'Texas', 'Memphis': 'Tennessee',
 };
 const CITY_LONG = { 'DFW': 'Dallas–Fort Worth', 'Midland': 'Midland–Odessa' };
+// Callouts abbreviate to fit the map; the plain list has room for the full name.
+const NAME_LONG = { "Int'l Transport": 'International Transport' };
+const COUNTRY = { US: 'United States', MX: 'Mexico' };
 const C2_SIDE = {
   'Norman': 'r', 'Lawton': 'l', 'Ardmore': 'r', 'Enid': 'l', 'Amarillo': 'l',
   'Lubbock': 'l', 'Abilene': 'l', 'Waco': 'r', 'Tyler': 'r', 'Wichita Falls': 'l',
@@ -263,7 +266,6 @@ const CSSBODY_RAW = `
 .sec:has(.tgt:not(.tp):hover) .callouts,.sec:has(.tgt:not(.tp):focus) .callouts,
 .sec:has(.co:focus) .co:not(:focus){opacity:0;}
 .co:focus .tie{opacity:0;}
-;}
 @media (prefers-reduced-motion:reduce){.zoomable{transition:none;}}
 `;
 
@@ -297,6 +299,26 @@ function rename(str) {
   return out;
 }
 
+// ---- partner list (phone) ---------------------------------------------
+// The one list of partner names in the markup. It is in the DOM at every width
+// and only shown below the site breakpoint, where the callouts are hidden.
+function partnerList() {
+  const groups = Object.keys(COUNTRY).map(cc => {
+    const rows = PARTNERS.filter(p => p.place.endsWith(`, ${cc}`)).flatMap(p =>
+      p.names.map(n => `      <li class="op-lanes-partner"><span class="op-lanes-partner-name">${NAME_LONG[n] || n}</span><span class="op-lanes-partner-place">${p.place.replace(/, (US|MX)$/, '')}</span></li>`));
+    return `    <div class="op-lanes-partners-group">
+      <span class="op-lanes-partners-country">${COUNTRY[cc]}</span>
+      <ul class="op-lanes-partners-list">
+${rows.join('\n')}
+      </ul>
+    </div>`;
+  });
+  return `    <div class="op-lanes-partners">
+      <span class="op-lanes-partners-h">Partner network</span>
+${groups.join('\n')}
+    </div>`;
+}
+
 const SECTION = `<section class="op-lanes" id="lanes">
   <div class="op-wrap">
    <div class="op-lanes-frame">
@@ -318,6 +340,8 @@ ${mapSvg()}
       <div class="opm-zhint">Hover a lane, a city or a partner · click to hold</div>
     </div>
 
+${partnerList()}
+
     <div class="op-lanes-foot">
       <div class="op-lanes-contact">
         <a href="tel:+19724761988" class="op-lanes-tel">+1 (972) 476-1988</a>
@@ -336,9 +360,9 @@ const CSS = `/* ---- Network & active lanes: map -------------------------------
 .op-lanes{padding:96px 0;}
 .op-lanes-frame{border:1px solid ${T.rule};border-radius:2px;padding:44px 44px 36px;}
 .relief{opacity:.92;mix-blend-mode:screen;}
-.op-lanes-head{display:flex;align-items:flex-end;justify-content:space-between;gap:56px;margin-bottom:34px;}
+.op-lanes-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:56px;margin-bottom:34px;}
 .op-lanes-head-copy{max-width:63ch;display:flex;flex-direction:column;gap:14px;flex:1 1 auto;}
-.op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;}
+.op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;margin-left:auto;}
 .op-lanes-cta-lead{font-size:11.5px;color:${T.dim};text-align:right;max-width:214px;line-height:1.45;}
 .op-lanes-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;
   margin-top:34px;padding-top:22px;border-top:1px solid ${T.rule};}
@@ -353,6 +377,36 @@ ${CSSBODY}
 
 /* Without :has() the map is a static silhouette with compact callouts —
    no zoom, no expansion. That is an acceptable floor, not a broken page. */
+
+/* ---- Phone (site breakpoint: 860px, see brand.css) ----------------- */
+/* The partner list is the only markup that exists for this width; it is
+   hidden above the breakpoint, never removed. */
+.op-lanes-partners{display:none;}
+@media(max-width:860px){
+  .op-lanes-frame{padding:20px 20px 24px;}
+  .op-lanes-head{flex-direction:column;align-items:stretch;gap:20px;margin-bottom:24px;}
+  .op-lanes-head-cta{align-items:stretch;margin-left:0;}
+  .op-lanes-head-cta .op-btn{width:100%;justify-content:center;min-height:48px;}
+  .op-lanes-cta-lead{text-align:left;max-width:none;}
+  /* Same map, same layers, scaled to the column: height follows the 1200x750
+     viewBox instead of a fixed number, so there is no letterbox at any width. */
+  .stage{height:auto;aspect-ratio:1200/750;}
+  /* Zoom is hover/focus-driven; a tap on an SVG group yields neither reliably
+     on iOS. The hit layer (targets, callouts, cards) is removed, so nothing can
+     be hovered or focused and no :has() rule above can match. */
+  .hits,.zhint{display:none;}
+  .rest text{display:none;}
+  .op-lanes-partners{display:block;margin-top:24px;}
+  .op-lanes-partners-h{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${T.faint};margin-bottom:14px;}
+  .op-lanes-partners-group+.op-lanes-partners-group{margin-top:20px;}
+  .op-lanes-partners-country{display:block;font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:${T.faint};margin-bottom:6px;}
+  .op-lanes-partners-list{list-style:none;margin:0;padding:0;}
+  .op-lanes-partner{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid ${T.rule};}
+  .op-lanes-partner-name{font-size:13.5px;font-weight:600;color:var(--op-fg);}
+  .op-lanes-partner-place{font-family:${MONO};font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:${T.faint};white-space:nowrap;}
+  .op-lanes-foot{flex-direction:column;align-items:flex-start;gap:14px;margin-top:24px;}
+  .op-lanes-contact{flex-direction:column;gap:8px;}
+}
 `;
 
 fs.writeFileSync('_map-section.html', rename(SECTION));

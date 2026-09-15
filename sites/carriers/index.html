@@ -181,9 +181,9 @@ a{color:inherit;text-decoration:none;}
 .op-lanes{padding:96px 0;}
 .op-lanes-frame{border:1px solid var(--op-night-rule);border-radius:2px;padding:44px 44px 36px;}
 .opm-relief{opacity:.92;mix-blend-mode:screen;}
-.op-lanes-head{display:flex;align-items:flex-end;justify-content:space-between;gap:56px;margin-bottom:34px;}
+.op-lanes-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:56px;margin-bottom:34px;}
 .op-lanes-head-copy{max-width:63ch;display:flex;flex-direction:column;gap:14px;flex:1 1 auto;}
-.op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;}
+.op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;margin-left:auto;}
 .op-lanes-cta-lead{font-size:11.5px;color:var(--op-night-fg-dim);text-align:right;max-width:214px;line-height:1.45;}
 .op-lanes-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;
   margin-top:34px;padding-top:22px;border-top:1px solid var(--op-night-rule);}
@@ -228,7 +228,6 @@ a{color:inherit;text-decoration:none;}
 .op-lanes:has(.opm-tgt:not(.opm-tp):hover) .opm-callouts,.op-lanes:has(.opm-tgt:not(.opm-tp):focus) .opm-callouts,
 .op-lanes:has(.opm-co:focus) .opm-co:not(:focus){opacity:0;}
 .opm-co:focus .opm-tie{opacity:0;}
-;}
 @media (prefers-reduced-motion:reduce){.opm-zoom{transition:none;}}
 
 .op-lanes:has(.opm-t-l1:hover) .opm-zoom,.op-lanes:has(.opm-t-l1:focus) .opm-zoom{transform:translate(-1334.5px,-916.6px) scale(3.20);}
@@ -303,6 +302,36 @@ a{color:inherit;text-decoration:none;}
 
 /* Without :has() the map is a static silhouette with compact callouts —
    no zoom, no expansion. That is an acceptable floor, not a broken page. */
+
+/* ---- Phone (site breakpoint: 860px, see brand.css) ----------------- */
+/* The partner list is the only markup that exists for this width; it is
+   hidden above the breakpoint, never removed. */
+.op-lanes-partners{display:none;}
+@media(max-width:860px){
+  .op-lanes-frame{padding:20px 20px 24px;}
+  .op-lanes-head{flex-direction:column;align-items:stretch;gap:20px;margin-bottom:24px;}
+  .op-lanes-head-cta{align-items:stretch;margin-left:0;}
+  .op-lanes-head-cta .op-btn{width:100%;justify-content:center;min-height:48px;}
+  .op-lanes-cta-lead{text-align:left;max-width:none;}
+  /* Same map, same layers, scaled to the column: height follows the 1200x750
+     viewBox instead of a fixed number, so there is no letterbox at any width. */
+  .opm-stage{height:auto;aspect-ratio:1200/750;}
+  /* Zoom is hover/focus-driven; a tap on an SVG group yields neither reliably
+     on iOS. The hit layer (targets, callouts, cards) is removed, so nothing can
+     be hovered or focused and no :has() rule above can match. */
+  .opm-hits,.opm-zhint{display:none;}
+  .opm-rest text{display:none;}
+  .op-lanes-partners{display:block;margin-top:24px;}
+  .op-lanes-partners-h{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--op-night-fg-faint);margin-bottom:14px;}
+  .op-lanes-partners-group+.op-lanes-partners-group{margin-top:20px;}
+  .op-lanes-partners-country{display:block;font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--op-night-fg-faint);margin-bottom:6px;}
+  .op-lanes-partners-list{list-style:none;margin:0;padding:0;}
+  .op-lanes-partner{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--op-night-rule);}
+  .op-lanes-partner-name{font-size:13.5px;font-weight:600;color:var(--op-fg);}
+  .op-lanes-partner-place{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--op-night-fg-faint);white-space:nowrap;}
+  .op-lanes-foot{flex-direction:column;align-items:flex-start;gap:14px;margin-top:24px;}
+  .op-lanes-contact{flex-direction:column;gap:8px;}
+}
 
 /* ---- How we operate ----------------------------------------------- */
 .op-how{padding:96px 0;background:var(--op-surface);border-top:1px solid var(--op-rule);border-bottom:1px solid var(--op-rule);}
@@ -737,6 +766,27 @@ a{color:inherit;text-decoration:none;}
 </g></g></g><g class="opm-card opm-card-l1"><rect x="24" y="24" width="289.3" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Dallas–Fort Worth · Oklahoma City</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Flatbed, dry van, bulk</text></g><g class="opm-card opm-card-l2"><rect x="24" y="24" width="143.5" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Houston · Tulsa</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Flatbed, heavy haul</text></g><g class="opm-card opm-card-l3"><rect x="24" y="24" width="184" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">San Antonio · Austin</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Bulk, aggregate</text></g><g class="opm-card opm-card-l4"><rect x="24" y="24" width="208.29999999999998" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Midland–Odessa · Dallas</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Flatbed, hot-shot</text></g><g class="opm-card opm-card-l5"><rect x="24" y="24" width="151.6" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Dallas · Memphis</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Dry van</text></g><g class="opm-card opm-card-l6"><rect x="24" y="24" width="229.9" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Houston · Laredo</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Cross-border dry van, via partner</text></g><g class="opm-card opm-card-p0"><rect x="24" y="24" width="119.19999999999999" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">DA Transport</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">New Mexico, US</text></g><g class="opm-card opm-card-p1"><rect x="24" y="24" width="143.5" height="95" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Evolution</text><text x="35" y="68" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Int'l Transport</text><text x="35" y="87" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Moreno Brothers</text><text x="35" y="106" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">California, US</text></g><g class="opm-card opm-card-p2"><rect x="24" y="24" width="111.1" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">FLS Express</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas, US</text></g><g class="opm-card opm-card-p3"><rect x="24" y="24" width="91.3" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Odal</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Jalisco, MX</text></g><g class="opm-card opm-card-p4"><rect x="24" y="24" width="148" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Olior</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Estado de México, MX</text></g><g class="opm-card opm-card-c0"><rect x="24" y="24" width="143.5" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Flogal Holdings</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Oklahoma City, OK</text></g><g class="opm-card opm-card-c1"><rect x="24" y="24" width="72.4" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Tulsa</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Oklahoma</text></g><g class="opm-card opm-card-c2"><rect x="24" y="24" width="159.7" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Dallas–Fort Worth</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas</text></g><g class="opm-card opm-card-c3"><rect x="24" y="24" width="70.6" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Austin</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas</text></g><g class="opm-card opm-card-c4"><rect x="24" y="24" width="111.1" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">San Antonio</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas</text></g><g class="opm-card opm-card-c5"><rect x="24" y="24" width="78.69999999999999" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Houston</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas</text></g><g class="opm-card opm-card-c6"><rect x="24" y="24" width="135.39999999999998" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Midland–Odessa</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas</text></g><g class="opm-card opm-card-c7"><rect x="24" y="24" width="70.6" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Laredo</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas</text></g><g class="opm-card opm-card-c8"><rect x="24" y="24" width="78.69999999999999" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">El Paso</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Texas</text></g><g class="opm-card opm-card-c9"><rect x="24" y="24" width="78.69999999999999" height="57" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/><text x="35" y="49" font-family="var(--font-sans)" font-size="13" font-weight="600" fill="#E8EEF6">Memphis</text><text x="35" y="68" font-family="var(--font-mono)" font-size="10.5" font-weight="500" fill="#94A6BD" letter-spacing=".05em">Tennessee</text></g>
 </svg>
       <div class="opm-zhint">Hover a lane, a city or a partner · click to hold</div>
+    </div>
+
+    <div class="op-lanes-partners">
+      <span class="op-lanes-partners-h">Partner network</span>
+    <div class="op-lanes-partners-group">
+      <span class="op-lanes-partners-country">United States</span>
+      <ul class="op-lanes-partners-list">
+      <li class="op-lanes-partner"><span class="op-lanes-partner-name">DA Transport</span><span class="op-lanes-partner-place">New Mexico</span></li>
+      <li class="op-lanes-partner"><span class="op-lanes-partner-name">Evolution</span><span class="op-lanes-partner-place">California</span></li>
+      <li class="op-lanes-partner"><span class="op-lanes-partner-name">International Transport</span><span class="op-lanes-partner-place">California</span></li>
+      <li class="op-lanes-partner"><span class="op-lanes-partner-name">Moreno Brothers</span><span class="op-lanes-partner-place">California</span></li>
+      <li class="op-lanes-partner"><span class="op-lanes-partner-name">FLS Express</span><span class="op-lanes-partner-place">Texas</span></li>
+      </ul>
+    </div>
+    <div class="op-lanes-partners-group">
+      <span class="op-lanes-partners-country">Mexico</span>
+      <ul class="op-lanes-partners-list">
+      <li class="op-lanes-partner"><span class="op-lanes-partner-name">Odal</span><span class="op-lanes-partner-place">Jalisco</span></li>
+      <li class="op-lanes-partner"><span class="op-lanes-partner-name">Olior</span><span class="op-lanes-partner-place">Estado de México</span></li>
+      </ul>
+    </div>
     </div>
 
     <div class="op-lanes-foot">
