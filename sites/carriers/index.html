@@ -441,6 +441,9 @@ a{color:inherit;text-decoration:none;}
   .op-quote-contact-row{flex-direction:column;align-items:flex-start;gap:12px;}
   .op-quote-contact-div{display:none;}
 }
+@media(max-width:480px){
+  .modal-frow{grid-template-columns:1fr!important;}
+}
 @media (prefers-reduced-motion: reduce){
   .op-nav-toggle-bar{transition:none;}
 }
@@ -697,7 +700,7 @@ a{color:inherit;text-decoration:none;}
         <p class="op-section-sub">Our owned capacity runs densely on the Dallas–Oklahoma City spine, with secondary lanes feeding in from Houston, San Antonio, and West Texas. Beyond that, a vetted network of U.S. and Mexico carrier partners extends our reach.</p>
       </div>
       <div class="op-lanes-head-cta">
-        <button type="button" class="op-btn op-btn-blue">Request a Quote</button>
+        <button type="button" id="crQuoteTriggerBtn" class="op-btn op-btn-blue" onclick="openCarrierModal()">Request a Quote</button>
         <span class="op-lanes-cta-lead">One reply from the ops desk — no broker queue.</span>
       </div>
     </div>
@@ -946,6 +949,96 @@ a{color:inherit;text-decoration:none;}
   </div>
 </footer>
 
+<!-- QUOTE REQUEST MODAL -->
+<div id="crOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;overflow-y:auto;">
+  <div style="background:white;border-radius:12px;width:100%;max-width:520px;max-height:calc(100vh - 40px);margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);display:flex;flex-direction:column;">
+    <div style="background:var(--flogal-navy);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Carriers</div>
+        <div style="color:white;font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-.01em;">Tell us about your load.</div>
+      </div>
+      <button onclick="closeCarrierModal()" style="background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;">&#215;</button>
+    </div>
+    <form id="carrierForm" onsubmit="submitCarrierQuote(event)" style="padding:24px 28px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;">
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">First Name *</label>
+          <input id="cr-first" required style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="First name">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Last Name *</label>
+          <input id="cr-last" required style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Last name">
+        </div>
+      </div>
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Company</label>
+          <input id="cr-company" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Company name">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Preferred Contact</label>
+          <select id="cr-preferred" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;background:white;">
+            <option value="">Select…</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="text">Text</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Email *</label>
+          <input id="cr-email" type="email" required style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="you@company.com">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Phone</label>
+          <input id="cr-phone" type="tel" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="Phone number">
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;">
+        <input type="checkbox" id="sms-consent" style="margin-top:3px;width:16px;height:16px;flex:none;">
+        <label for="sms-consent" style="font-size:12px;font-weight:400;line-height:1.5;color:#4A5563;">Text me about this inquiry (optional). Msg &amp; data rates may apply. Reply STOP to opt out. <details style="display:inline;"><summary style="display:inline;cursor:pointer;color:#1E4B8F;text-decoration:underline;">Details</summary><span style="display:block;margin-top:6px;">I agree to receive non-marketing customer-care texts from Flogal Holdings LLC (Flogal) about this inquiry and related business communications. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. SMS consent is optional and is not required to submit an inquiry or purchase services. <a href="https://www.flogalhq.com/privacy" style="color:#1E4B8F;text-decoration:underline;">Privacy Policy</a> &middot; <a href="https://www.flogalhq.com/sms-terms" style="color:#1E4B8F;text-decoration:underline;">SMS Terms</a></span></details></label>
+      </div>
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Pickup City / State</label>
+          <input id="cr-origin" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="e.g. Dallas, TX">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Delivery City / State</label>
+          <input id="cr-dest" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="e.g. Tulsa, OK">
+        </div>
+      </div>
+      <div class="modal-frow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Equipment</label>
+          <input id="cr-equip" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="e.g. Flatbed, dry van">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Weight</label>
+          <input id="cr-weight" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="e.g. 42,000 lbs">
+        </div>
+      </div>
+      <div>
+        <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Pickup Window</label>
+        <input id="cr-pickup" style="width:100%;height:44px;padding:0 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;" placeholder="e.g. This week, flexible">
+      </div>
+      <div>
+        <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4A5563;margin-bottom:5px;">Message</label>
+        <textarea id="cr-details" rows="3" style="width:100%;min-height:88px;padding:10px 12px;border:1.5px solid #C6CFDA;border-radius:6px;font:inherit;font-size:13px;resize:vertical;" placeholder="Load details, special requirements, or questions…"></textarea>
+      </div>
+      <div id="crFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;"></div>
+      <button type="submit" id="crSubmitBtn" style="background:var(--accent);color:var(--flogal-navy);border:0;cursor:pointer;font:inherit;font-weight:700;font-size:14px;min-height:48px;padding:12px 20px;border-radius:6px;letter-spacing:.01em;">Send Request &#8594;</button>
+    </form>
+    <div id="crFormSuccess" style="display:none;padding:40px 28px;text-align:center;">
+      <div style="font-size:42px;margin-bottom:14px;">&#10003;</div>
+      <div style="font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--flogal-navy);margin-bottom:8px;">Request sent!</div>
+      <div style="font-size:14px;color:#4A5563;line-height:1.55;">Our ops desk will follow up within one business day.</div>
+      <button onclick="closeCarrierModal()" style="margin-top:20px;background:var(--flogal-navy);color:white;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:13px;padding:10px 20px;border-radius:6px;">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- MOBILE NAV TOGGLE -->
 <script>
 (function(){
@@ -979,6 +1072,29 @@ const _sb = supabase.createClient(
   'https://uzbpsppeihazicmngqqq.supabase.co',
   'sb_publishable_mvaPLoqMDnDVMoYCC0GpSw_mJL4bGJ3'
 );
+
+let crLastTrigger = null;
+
+function openCarrierModal() {
+  crLastTrigger = document.activeElement;
+  document.getElementById('carrierForm').reset();
+  document.getElementById('carrierForm').style.display = 'flex';
+  document.getElementById('crFormSuccess').style.display = 'none';
+  document.getElementById('crFormError').style.display = 'none';
+  document.getElementById('crOverlay').style.display = 'flex';
+}
+function closeCarrierModal() {
+  document.getElementById('crOverlay').style.display = 'none';
+  if (crLastTrigger && typeof crLastTrigger.focus === 'function') crLastTrigger.focus();
+  crLastTrigger = null;
+}
+document.getElementById('crOverlay').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('crOverlay')) closeCarrierModal();
+});
+window.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('crOverlay').style.display !== 'none') closeCarrierModal();
+});
+
 async function submitCarrierQuote(e) {
   e.preventDefault();
   const btn = document.getElementById('crSubmitBtn');
@@ -986,13 +1102,15 @@ async function submitCarrierQuote(e) {
   btn.textContent = 'Sending…';
   const origin  = document.getElementById('cr-origin').value.trim();
   const dest    = document.getElementById('cr-dest').value.trim();
-  const equip   = document.getElementById('cr-equip').value;
+  const equip   = document.getElementById('cr-equip').value.trim();
+  const weight  = document.getElementById('cr-weight').value.trim();
   const pickup  = document.getElementById('cr-pickup').value.trim();
   const details = document.getElementById('cr-details').value.trim();
   const msgParts = [
     origin  ? 'Origin: ' + origin : '',
     dest    ? 'Destination: ' + dest : '',
     equip   ? 'Equipment: ' + equip : '',
+    weight  ? 'Weight: ' + weight : '',
     pickup  ? 'Pickup: ' + pickup : '',
     details || '',
   ].filter(Boolean);
@@ -1018,12 +1136,14 @@ async function submitCarrierQuote(e) {
     const errEl = document.getElementById('crFormError');
     errEl.textContent = 'Something went wrong — please email carriers@flogalhq.com directly.';
     errEl.style.display = 'block';
-    btn.textContent = 'Request a Quote →';
+    btn.textContent = 'Send Request →';
     btn.disabled = false;
     return;
   }
   document.getElementById('carrierForm').style.display = 'none';
   document.getElementById('crFormSuccess').style.display = 'block';
+  btn.textContent = 'Send Request →';
+  btn.disabled = false;
 }
 </script>
 </body>
