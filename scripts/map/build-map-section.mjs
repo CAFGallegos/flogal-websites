@@ -52,11 +52,13 @@ const C2_SIDE = {
 };
 // label anchor for each partner, in viewBox units, plus which side the text runs
 const CALLOUT = {
-  p1: { x: 46, y: 262, side: 'r' },   // California
-  p0: { x: 46, y: 372, side: 'r' },   // New Mexico
-  p2: { x: 46, y: 482, side: 'r' },   // Texas / FLS
-  p3: { x: 46, y: 592, side: 'r' },   // Jalisco
-  p4: { x: 46, y: 690, side: 'r' },   // Estado de Mexico
+  // stacked in marker order, each near its marker's latitude so leader lines
+  // stay short and never cross; spacing leaves room for the expanded card
+  p1: { x: 46, y: 262, side: 'r' },   // California      (marker y 269)
+  p0: { x: 46, y: 350, side: 'r' },   // New Mexico      (marker y 338)
+  p2: { x: 46, y: 460, side: 'r' },   // Texas / FLS     (marker y 423)
+  p3: { x: 46, y: 600, side: 'r' },   // Jalisco         (marker y 616)
+  p4: { x: 46, y: 690, side: 'r' },   // Estado de Mexico (marker y 642)
 };
 const CITY_SIDE = {
   'Oklahoma City': 'l', 'Tulsa': 'r', 'DFW': 'r', 'Austin': 'l', 'San Antonio': 'l',
@@ -87,7 +89,8 @@ function css() {
     o.push(isP
       ? `.sec:has(.t-${f.id}:focus) .zoomable{transform:translate(${tx}px,${ty}px) scale(${f.s.toFixed(2)});}`
       : `.sec:has(.t-${f.id}:hover) .zoomable,.sec:has(.t-${f.id}:focus) .zoomable{transform:translate(${tx}px,${ty}px) scale(${f.s.toFixed(2)});}`);
-    if (!isP) o.push(`.sec:has(.t-${f.id}:hover) .card-${f.id},.sec:has(.t-${f.id}:focus) .card-${f.id}{opacity:1;}`);
+    // the card lands with the end of the move, and leaves at once
+    if (!isP) o.push(`.sec:has(.t-${f.id}:hover) .card-${f.id},.sec:has(.t-${f.id}:focus) .card-${f.id}{opacity:1;transition-delay:calc(var(--mv) - var(--ui));}`);
   });
   LANES.forEach(l => o.push(`.sec:has(.t-${l.id}:hover) .v-${l.id},.sec:has(.t-${l.id}:focus) .v-${l.id}{stroke-width:3.4;stroke-opacity:1;filter:drop-shadow(0 0 6px rgba(74,144,217,.65));}`));
   PARTNERS.forEach(p => o.push(`.sec:has(.t-${p.id}:hover) .v-${p.id},.sec:has(.t-${p.id}:focus) .v-${p.id}{stroke-opacity:1;stroke-width:2.4;filter:drop-shadow(0 0 7px rgba(74,144,217,.7));}`));
@@ -129,7 +132,7 @@ function mapSvg() {
     : '';
   const land = RELIEF
     ? `<g filter="url(#coast)">${P.landNA.map((d, i) => `<use href="#opm-landp${i}" fill="#17293D" stroke="#17293D" stroke-width=".7" vector-effect="non-scaling-stroke"/>`).join('')}</g>`
-    : `<g filter="url(#coast)">${P.landNA.map(d => `<path d="${d}" fill="#17293D" stroke="#17293D" stroke-width=".7" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
+    : `<g>${P.landNA.map(d => `<path d="${d}" fill="#17293D" stroke="#17293D" stroke-width=".7" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
   const terr = `<g class="terr">${P.states.filter(s => HI.has(s.name)).map(s =>
     `<path d="${s.d}" fill="rgba(74,144,217,.16)" stroke="#9CC4EE" stroke-opacity=".34" stroke-width="1" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
   const counties = `<g class="dco">${P.counties.map(d =>
@@ -204,7 +207,7 @@ function mapSvg() {
   ].join('');
 
   return `<svg class="viz" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" role="img" aria-label="Flogal owned corridor and partner network across North America">
-<defs><filter id="coast" x="-8%" y="-8%" width="116%" height="116%"><feDropShadow dx="0" dy="0" stdDeviation="2.2" flood-color="#9CC4EE" flood-opacity=".4"/></filter><radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4A90D9" stop-opacity=".2"/><stop offset="1" stop-color="#4A90D9" stop-opacity="0"/></radialGradient></defs>
+<defs><radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4A90D9" stop-opacity=".2"/><stop offset="1" stop-color="#4A90D9" stop-opacity="0"/></radialGradient></defs>
 <defs>${landClip}</defs>
 <g class="zoomable">${land}${relief}<ellipse class="pool" cx="${C['DFW'][0] - 6}" cy="${(C['DFW'][1] + C['Oklahoma City'][1]) / 2}" rx="116" ry="96" fill="url(#pool)"/>${terr}${counties}${zoomNodes}${laneV}${hq}${restNodes}${partnerV}</g>
 </svg>
@@ -233,15 +236,20 @@ function groupHead(t) {
 
 
 const CSSBODY_RAW = `
-.sec{--terr:0;}
-.stage{position:relative;width:100%;height:672px;overflow:hidden;background:transparent;
-  -webkit-mask-image:radial-gradient(118% 122% at 50% 50%,#000 50%,rgba(0,0,0,.8) 74%,transparent 97%);
-  mask-image:radial-gradient(118% 122% at 50% 50%,#000 50%,rgba(0,0,0,.8) 74%,transparent 97%);}
+/* Motion is one system: --mv is the move (zoom, county/label reveal, overview
+   fade, all in step), --ui is chrome (callouts, cards, hint, lane highlight),
+   one easing for both. --dl holds the exit for a beat so crossing the gap
+   between two adjacent targets re-aims instead of starting to zoom out. */
+.sec{--terr:0;--mv:700ms;--ui:200ms;--ez:cubic-bezier(.4,0,.2,1);--dl:100ms;}
+.sec:has(.tgt:hover),.sec:has(.tgt:focus){--dl:0ms;}
+/* No edge mask: at rest the silhouette ends at real borders, and zoomed the
+   stage is a framed map panel. A vignette soft enough not to read as a
+   spotlight does nothing; one strong enough to soften the panel is fog. */
+.stage{position:relative;width:100%;height:672px;overflow:hidden;background:transparent;}
 .zoomable{transform-box:view-box;transform-origin:0 0;will-change:transform;
-  transition:transform 1080ms cubic-bezier(.2,.9,.24,1);}
-.terr,.dco,.dcity{opacity:var(--terr);transition:opacity 620ms ease 280ms;}
-.dco,.dcity{transition-delay:360ms;}
-.rest,.vhq,.pool{transition:opacity 280ms ease;}
+  transition:transform var(--mv) var(--ez) var(--dl);}
+.terr,.dco,.dcity{opacity:var(--terr);transition:opacity var(--mv) var(--ez) var(--dl);}
+.rest,.vhq,.pool{transition:opacity var(--mv) var(--ez) var(--dl);}
 .sec:has(.tgt:not(.tp):hover) .pool,.sec:has(.tgt:not(.tp):focus) .pool,
 .sec:has(.co:focus) .pool{opacity:0;}
 .sec:has(.tgt:not(.tp):hover) .rest,.sec:has(.tgt:not(.tp):focus) .rest,
@@ -249,24 +257,25 @@ const CSSBODY_RAW = `
 .sec:has(.tgt:not(.tp):hover) .vhq,.sec:has(.tgt:not(.tp):focus) .vhq,
 .sec:has(.co:focus) .vhq{opacity:0;}
 .sec:has(.tgt:hover) .zhint,.sec:has(.tgt:focus) .zhint{opacity:0;}
-.ln,.dia{transition:stroke-width 280ms,stroke-opacity 280ms,filter 280ms;}
+.ln,.dia{transition:stroke-width var(--ui) var(--ez),stroke-opacity var(--ui) var(--ez),filter var(--ui) var(--ez);}
 .hits .tgt{cursor:pointer;outline:none;}
-.card{opacity:0;transition:opacity 260ms ease 440ms;pointer-events:none;}
+.card{opacity:0;transition:opacity var(--ui) var(--ez) var(--dl);pointer-events:none;}
 .zhint{position:absolute;right:26px;bottom:20px;display:inline-flex;align-items:center;gap:8px;
   font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:${T.faint};transition:opacity 300ms;pointer-events:none;}
+  color:${T.faint};transition:opacity var(--ui) var(--ez) var(--dl);pointer-events:none;}
 .co{cursor:pointer;outline:none;}
-.co,.co-c,.co-e,.tie{transition:opacity 240ms ease;}
+.co,.co-c,.co-e{transition:opacity var(--ui) var(--ez);}
+.tie{transition:opacity var(--ui) var(--ez),stroke-opacity var(--ui) var(--ez);}
 .co-e{opacity:0;}
 .co:hover .co-c,.co:focus .co-c{opacity:0;}
 .co:hover .co-e,.co:focus .co-e{opacity:1;}
 .co:hover .tie,.co:focus .tie{stroke-opacity:.75;}
-.callouts{transition:opacity 300ms ease;}
+.callouts{transition:opacity var(--ui) var(--ez) var(--dl);}
 /* a zoom to anything on the map invalidates the leader lines, so they leave */
 .sec:has(.tgt:not(.tp):hover) .callouts,.sec:has(.tgt:not(.tp):focus) .callouts,
 .sec:has(.co:focus) .co:not(:focus){opacity:0;}
 .co:focus .tie{opacity:0;}
-@media (prefers-reduced-motion:reduce){.zoomable{transition:none;}}
+@media (prefers-reduced-motion:reduce){.sec{--mv:0ms;--ui:0ms;--dl:0ms;}.zoomable{transition:none;}}
 `;
 
 // ---------------------------------------------------------------- emit

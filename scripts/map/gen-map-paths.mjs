@@ -9,7 +9,7 @@
 // the city list or the partner list changes.
 import fs from 'fs';
 import * as d3 from 'd3-geo';
-import { feature } from 'topojson-client';
+import { feature, merge } from 'topojson-client';
 
 const usTopo = JSON.parse(fs.readFileSync('node_modules/us-atlas/states-10m.json'));
 const worldTopo = JSON.parse(fs.readFileSync('node_modules/world-atlas/countries-50m.json'));
@@ -19,15 +19,21 @@ const coTopo = JSON.parse(fs.readFileSync('node_modules/us-atlas/counties-10m.js
 const allCounties = feature(coTopo, coTopo.objects.counties).features;
 // OK = state fips 40, TX = 48 (county ids are 5-digit, first 2 = state)
 const okTxCounties = allCounties.filter(f => f.id && (String(f.id).startsWith('40') || String(f.id).startsWith('48')));
-const landTopo = JSON.parse(fs.readFileSync('node_modules/world-atlas/land-50m.json'));
-const land = feature(landTopo, landTopo.objects.land);
 const countries = feature(worldTopo, worldTopo.objects.countries).features;
 const mexico = countries.find(c => c.properties.name === 'Mexico');
-const canada = countries.find(c => c.properties.name === 'Canada');
-const natTopo = JSON.parse(fs.readFileSync('node_modules/us-atlas/nation-10m.json'));
-const usNation = feature(natTopo, natTopo.objects.nation);
-const NA_NAMES = ['Canada','Mexico','Guatemala','Belize','Honduras','El Salvador','Nicaragua','Costa Rica','Panama','Cuba'];
-const naCountries = countries.filter(c => NA_NAMES.includes(c.properties.name));
+// The map is the United States and Mexico, nothing else: the US–Canada border
+// is the top edge and Mexico's southern border is the bottom edge. Drawing the
+// rest of the continent made the frame a dark rectangle cut mid-land.
+// Lower 48 (+DC) only, dissolved into one shape. us-atlas's `states` object also
+// carries Alaska (02), Hawaii (15) and the territories (FIPS 60–78: Samoa, Guam,
+// Marianas, Puerto Rico, Virgin Islands). Those are islands to this story, and a
+// fit that includes Guam and Samoa spans the globe and collapses the map.
+const lower48 = merge(usTopo, usTopo.objects.states.geometries.filter(g => {
+  const id = String(g.id).padStart(2, '0');
+  return +id <= 56 && id !== '02' && id !== '15';
+}));
+const LAND = [lower48, mexico];
+const LAND_FC = { type: 'FeatureCollection', features: LAND.map(g => g.type === 'Feature' ? g : { type: 'Feature', geometry: g }) };
 
 const CITIES = {
   'Oklahoma City': [-97.5164, 35.4676],
@@ -59,7 +65,11 @@ const PARTNERS = {
   'Estado de Mexico': [-99.63, 19.35],
 };
 
-function makeFrame({ bounds, width, height, pad }) {
+// `left` reserves a rail on the left of the frame (the partner callouts live
+// there) so the land is fitted into the remaining width, not under them.
+// `fit`, when given, is the geometry the projection is fitted to instead of the
+// ring — the land itself, so the frame is as tight as the countries' outline.
+function makeFrame({ bounds, width, height, pad, left = 0, fit = null }) {
   const [[w, s], [e, n]] = bounds;
   // Clockwise ring, densified. A counter-clockwise ring is read by d3 as the
   // complement of the box (the rest of the globe) and fitExtent silently
@@ -72,7 +82,7 @@ function makeFrame({ bounds, width, height, pad }) {
   for (let i = 0; i <= N; i++) ring.push([e - (e - w) * i / N, s]);
   const frameBox = { type: 'Polygon', coordinates: [ring] };
   const proj = d3.geoConicEqualArea().parallels([22, 38]).rotate([101, 0]);
-  proj.fitExtent([[pad, pad], [width - pad, height - pad]], frameBox);
+  proj.fitExtent([[pad + left, pad], [width - pad, height - pad]], fit || frameBox);
   proj.clipExtent([[-70, -70], [width + 70, height + 70]]);
   return { proj, path: d3.geoPath(proj), bounds };
 }
@@ -84,7 +94,7 @@ function inFrame(f, bounds) {
 }
 
 const FRAMES = {
-  reach: makeFrame({ bounds: [[-134, 15], [-62, 53]], width: 1200, height: 750, pad: 20 }),
+  reach: makeFrame({ bounds: d3.geoBounds(LAND_FC), fit: LAND_FC, width: 1200, height: 750, pad: 20, left: 200 }),
   corridor: makeFrame({ bounds: [[-107, 25.8], [-93.3, 37.2]], width: 520, height: 470, pad: 16 }),
 };
 
@@ -95,10 +105,7 @@ for (const [name, F] of Object.entries(FRAMES)) {
     .filter(f => inFrame(f, F.bounds))
     .map(f => ({ name: f.properties.name, d: R(F.path(f)) }))
     .filter(f => f.d);
-  const mx = R(F.path(mexico));
-  const ca = R(F.path(canada));
-  const land_ = R(F.path(land));
-  const landNA = [usNation, ...naCountries].map(f => R(F.path(f))).filter(Boolean);
+  const landNA = LAND.map(f => R(F.path(f))).filter(Boolean);
   const cities = Object.fromEntries(
     Object.entries(CITIES).map(([k, v]) => [k, F.proj(v).map(n => +n.toFixed(1))])
   );
@@ -109,10 +116,11 @@ for (const [name, F] of Object.entries(FRAMES)) {
     Object.entries(CITIES2).map(([k, v]) => [k, F.proj(v).map(n => +n.toFixed(1))])
   );
   const counties = okTxCounties.map(f => R(F.path(f))).filter(Boolean);
-  out[name] = { states, mexico: mx, canada: ca, land: land_, landNA, cities, cities2, partners, counties };
-  console.log(`${name}: ${counties.length} counties, ${states.length} states, mexico ${mx ? mx.length : 0}b, total ${(states.reduce((a, b) => a + b.d.length, 0) / 1024).toFixed(1)}KB`);
+  out[name] = { states, landNA, cities, cities2, partners, counties };
+  console.log(`${name}: ${counties.length} counties, ${states.length} states, land ${(landNA.join('').length / 1024).toFixed(1)}KB, states ${(states.reduce((a, b) => a + b.d.length, 0) / 1024).toFixed(1)}KB`);
   console.log('   ' + states.map(s => s.name).join(', '));
 }
 fs.writeFileSync('paths.json', JSON.stringify(out));
 console.log('OKC reach:', out.reach.cities['Oklahoma City'], ' corridor:', out.corridor.cities['Oklahoma City']);
 console.log('Jalisco reach:', out.reach.partners['Jalisco']);
+console.log('reach bounds (lon/lat of the land):', JSON.stringify(FRAMES.reach.bounds.map(p => p.map(n => +n.toFixed(1)))));
