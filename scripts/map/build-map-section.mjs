@@ -106,7 +106,17 @@ LANES.forEach(l => { const g = laneGeom(l); FOCUS.push({ id: l.id, cx: g.cx, cy:
 PARTNERS.forEach(p => FOCUS.push({ id: p.id, cx: PR[p.key][0], cy: PR[p.key][1], s: 2.3 }));
 Object.keys(C).forEach((n, i) => FOCUS.push({ id: `c${i}`, cx: C[n][0], cy: C[n][1], s: n === 'Oklahoma City' ? 3.1 : 2.9 }));
 
-const CORRIDOR_IDS = [...LANES.map(l => l.id), ...Object.keys(C).map((n, i) => `c${i}`)];
+// Drives --terr (state lines + OK/TX counties + small-town labels). Lanes and
+// cities reveal on hover OR focus — hovering one also zooms the map there, so
+// the terrain detail is only ever shown already-zoomed-in. Partners are
+// focus-only: focusing Jalisco or Estado de México must reveal Mexican state
+// lines at that zoom, same as a lane/city reveals US ones, but partners
+// deliberately do NOT zoom on hover (hover there is a highlight only — see
+// the callout CSS). If partner hover also set --terr, the overview would
+// paint the OK/TX fill, counties and every state line unzoomed, since the
+// map never moved to make room for them.
+const CORRIDOR_HOVER_IDS = [...LANES.map(l => l.id), ...Object.keys(C).map((n, i) => `c${i}`)];
+const CORRIDOR_FOCUS_ONLY_IDS = PARTNERS.map(p => p.id);
 
 function css() {
   const o = [];
@@ -134,7 +144,10 @@ function css() {
   // map -> index: hovering the map lights the matching row
 
   // territory + county detail only when the focus is inside the corridor
-  const corr = CORRIDOR_IDS.map(id => `.sec:has(.t-${id}:hover),.sec:has(.t-${id}:focus)`).join(',');
+  const corr = [
+    ...CORRIDOR_HOVER_IDS.map(id => `.sec:has(.t-${id}:hover),.sec:has(.t-${id}:focus)`),
+    ...CORRIDOR_FOCUS_ONLY_IDS.map(id => `.sec:has(.t-${id}:focus)`),
+  ].join(',');
   o.push(`${corr}{--terr:1;}`);
   Object.keys(C).forEach((n, i) => o.push(
     `.sec:has(.t-c${i}:hover) .z-c${i} circle,.sec:has(.t-c${i}:focus) .z-c${i} circle{fill:${T.blueLt};}
@@ -172,6 +185,15 @@ function mapSvg() {
     : `<g>${P.landNA.map(d => `<path d="${d}" fill="#17293D" stroke="#17293D" stroke-width=".7" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
   const terr = `<g class="terr">${P.states.filter(s => HI.has(s.name)).map(s =>
     `<path d="${s.d}" fill="rgba(74,144,217,.16)" stroke="#9CC4EE" stroke-opacity=".34" stroke-width="1" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
+  // State-line tier: every other US state plus every Mexican state, one shared
+  // style — medium weight, between the OK/TX counties (lightest) and the
+  // coastline (heaviest). OK/TX are excluded: they already carry the filled
+  // `terr` highlight above (Flogal's owned corridor), which is a different,
+  // pre-existing idea (owned territory) from this new "state line" tier — MX
+  // states are context, not something Flogal claims, so they get outline only,
+  // never that fill. Values were picked by looking at the rendered zoom.
+  const adm1 = `<g class="adm1">${[...P.states.filter(s => !HI.has(s.name)), ...P.mxstates].map(s =>
+    `<path d="${s.d}" fill="none" stroke="#9CC4EE" stroke-opacity=".4" stroke-width=".9" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
   const counties = `<g class="dco">${P.counties.map(d =>
     `<path d="${d}" fill="none" stroke="#9CC4EE" stroke-width=".5" stroke-opacity=".3" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
 
@@ -245,7 +267,7 @@ function mapSvg() {
   return `<svg class="viz" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" role="img" aria-label="Flogal owned corridor and partner network across North America">
 <defs><radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4A90D9" stop-opacity=".2"/><stop offset="1" stop-color="#4A90D9" stop-opacity="0"/></radialGradient></defs>
 <defs>${landClip}</defs>
-<g class="zoomable">${land}${relief}<ellipse class="pool" cx="${C['DFW'][0] - 6}" cy="${(C['DFW'][1] + C['Oklahoma City'][1]) / 2}" rx="116" ry="96" fill="url(#pool)"/>${terr}${counties}${zoomNodes}${laneV}${hq}${restNodes}${partnerV}</g>
+<g class="zoomable">${land}${relief}<ellipse class="pool" cx="${C['DFW'][0] - 6}" cy="${(C['DFW'][1] + C['Oklahoma City'][1]) / 2}" rx="116" ry="96" fill="url(#pool)"/>${terr}${adm1}${counties}${zoomNodes}${laneV}${hq}${restNodes}${partnerV}</g>
 </svg>
 <svg class="hits" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%">
 ${laneH}${cityH}${partnerH}<g class="callouts">${callouts}</g>${cards}
@@ -284,7 +306,7 @@ const CSSBODY_RAW = `
 .stage{position:relative;width:100%;height:672px;overflow:hidden;background:transparent;}
 .zoomable{transform-box:view-box;transform-origin:0 0;will-change:transform;
   transition:transform var(--mv) var(--ez) var(--dl);}
-.terr,.dco,.dcity{opacity:var(--terr);transition:opacity var(--mv) var(--ez) var(--dl);}
+.terr,.adm1,.dco,.dcity{opacity:var(--terr);transition:opacity var(--mv) var(--ez) var(--dl);}
 .rest,.vhq,.pool{transition:opacity var(--mv) var(--ez) var(--dl);}
 .sec:has(.tgt:not(.tp):hover) .pool,.sec:has(.tgt:not(.tp):focus) .pool,
 .sec:has(.co-btn:focus) .pool{opacity:0;}
@@ -336,7 +358,7 @@ const CSSBODY_RAW = `
 // .op-lanes so nothing here can reach the rest of the site.
 const RENAME = {
   sec: 'op-lanes', stage: 'opm-stage', zoomable: 'opm-zoom', viz: 'opm-viz', hits: 'opm-hits',
-  terr: 'opm-terr', dco: 'opm-dco', dcity: 'opm-dcity', rest: 'opm-rest', vhq: 'opm-vhq',
+  terr: 'opm-terr', adm1: 'opm-adm1', dco: 'opm-dco', dcity: 'opm-dcity', rest: 'opm-rest', vhq: 'opm-vhq',
   pool: 'opm-pool', ln: 'opm-ln', dia: 'opm-dia', tgt: 'opm-tgt', tp: 'opm-tp',
   card: 'opm-card', co: 'opm-co', 'co-btn': 'opm-co-btn', 'co-c': 'opm-co-c', 'co-e': 'opm-co-e',
   tie: 'opm-tie', callouts: 'opm-callouts', zhint: 'opm-zhint', relief: 'opm-relief',

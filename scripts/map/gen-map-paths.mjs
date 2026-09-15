@@ -2,25 +2,106 @@
 // Regenerates paths.json (projected map geometry) from public-domain atlases.
 // Requires packages that are NOT installed in this repo. To run:
 //   mkdir -p /tmp/flogal-map && cd /tmp/flogal-map
-//   npm init -y && npm i d3-geo topojson-client us-atlas world-atlas
+//   npm init -y && npm i d3-geo topojson-client topojson-server topojson-simplify us-atlas world-atlas
 //   cp <repo>/scripts/map/gen-map-paths.mjs . && node gen-map-paths.mjs
 //   cp paths.json <repo>/scripts/map/
 // paths.json is already committed, so you only need this if the frame,
 // the city list or the partner list changes.
+//
+// Mexican state lines additionally require the Natural Earth admin-1 file
+// (ne_10m_admin_1_states_provinces.geojson, public domain), read from an
+// absolute path outside the repo — it stays there, it is not gitignored,
+// it must never be copied in. If it isn't at GEOJSON_PATH, stop; don't
+// substitute a different atlas.
+//
+// That file ships at full float precision with no topology — every vertex of
+// every one of Mexico's 32 states goes out over the wire as-is. us-atlas's US
+// states are already a quantized, arc-shared TopoJSON (that's the whole
+// reason us-atlas exists), which is why 50 US states cost less than 32 raw
+// Mexican ones. MX_SIMPLIFY_WEIGHT runs the same kind of pass — topojson-server
+// to build a topology, topojson-simplify's presimplify()+simplify() to drop
+// low-weight (Visvalingam–Whyatt) vertices — before projecting. The threshold
+// was picked by rendering the Jalisco and Estado de México zooms (the only
+// place this layer is ever seen) and choosing the most aggressive value with
+// no visible faceting on the coastline; see DONE summary for the comparison.
 import fs from 'fs';
 import * as d3 from 'd3-geo';
 import { feature, merge } from 'topojson-client';
+import { topology } from 'topojson-server';
+import { presimplify, simplify } from 'topojson-simplify';
+
+const MX_SIMPLIFY_WEIGHT = 0.01;
+const US_SIMPLIFY_WEIGHT = 0.1;
+const HI = new Set(['Oklahoma', 'Texas']);
+
+const GEOJSON_PATH = '/home/flogal_dev/geodata/ne_10m_admin_1_states_provinces.geojson';
 
 const usTopo = JSON.parse(fs.readFileSync('node_modules/us-atlas/states-10m.json'));
 const worldTopo = JSON.parse(fs.readFileSync('node_modules/world-atlas/countries-50m.json'));
 
-const usStates = feature(usTopo, usTopo.objects.states).features;
+// us-atlas states-10m.json is already a quantized, arc-shared TopoJSON — that
+// alone made 50 states cheaper than 32 raw-GeoJSON Mexican ones (see header).
+// But "cheaper than raw GeoJSON" isn't the same as "cheap": the 48 states
+// that aren't Oklahoma/Texas render as their own line-hierarchy tier now (see
+// build-map-section.mjs's `adm1`), and at full precision that tier alone was
+// ~104 KB — the actual reason the page blew its budget was never just
+// Mexico. Simplifying it the same way (presimplify + simplify) costs nothing
+// visible: US state borders are mostly straight survey lines, not coastline,
+// and even the wiggliest one in this frame (the Mississippi River border) is
+// indistinguishable from full precision through Oklahoma/Texas's own terr
+// highlight — where that highlight is Flogal's owned corridor, though, it
+// gets no simplification at all: OK+TX are pulled from `usStatesRaw` (full
+// precision) and spliced back in below, unsimplified, so the corridor-city
+// zoom's own boundary is pixel-identical to before this pass.
+const usStatesRaw = feature(usTopo, usTopo.objects.states).features;
+const usTopoSimplified = simplify(presimplify(JSON.parse(JSON.stringify(usTopo))), US_SIMPLIFY_WEIGHT);
+const usStatesSimplified = feature(usTopoSimplified, usTopoSimplified.objects.states).features;
+const usStates = [
+  ...usStatesRaw.filter(f => HI.has(f.properties.name)),
+  ...usStatesSimplified.filter(f => !HI.has(f.properties.name)),
+];
+{
+  const rawKB = JSON.stringify(usStatesRaw.map(f => f.geometry)).length / 1024;
+  const mixedKB = JSON.stringify(usStates.map(f => f.geometry)).length / 1024;
+  console.log(`US states simplified (weight ${US_SIMPLIFY_WEIGHT}, OK+TX excluded/kept full precision): ${rawKB.toFixed(1)}KB -> ${mixedKB.toFixed(1)}KB raw GeoJSON, ${usStates.length} states kept.`);
+}
+
 const coTopo = JSON.parse(fs.readFileSync('node_modules/us-atlas/counties-10m.json'));
 const allCounties = feature(coTopo, coTopo.objects.counties).features;
 // OK = state fips 40, TX = 48 (county ids are 5-digit, first 2 = state)
 const okTxCounties = allCounties.filter(f => f.id && (String(f.id).startsWith('40') || String(f.id).startsWith('48')));
 const countries = feature(worldTopo, worldTopo.objects.countries).features;
 const mexico = countries.find(c => c.properties.name === 'Mexico');
+
+// Mexican state lines. This file is admin-1 for the ENTIRE WORLD — every
+// state, province, oblast and prefecture on Earth — so the filter is checked
+// against the data, not assumed: adm0_a3, admin and iso_a2 all agree on the
+// same 33 Mexico features. One of those 33 is a name-less "MEX-99 (Mexico
+// minor island)" catch-all (area_sqkm 0, woe_id -99) — exactly the kind of
+// stray geometry that wrecked a fit once before (us-atlas's states object
+// carrying Guam and American Samoa). Requiring a real name drops it and
+// leaves the 32 real states.
+if (!fs.existsSync(GEOJSON_PATH)) {
+  console.error(`Mexico admin-1 source not found at ${GEOJSON_PATH} — stopping, not substituting another atlas.`);
+  process.exit(1);
+}
+const admin1 = JSON.parse(fs.readFileSync(GEOJSON_PATH, 'utf8')).features;
+const mxStateFeaturesRaw = admin1.filter(f => f.properties.adm0_a3 === 'MEX' && f.properties.name);
+console.log(`Mexico admin-1: ${admin1.filter(f => f.properties.adm0_a3 === 'MEX').length} raw features -> ${mxStateFeaturesRaw.length} named states.`);
+
+// Simplify before projecting (see header). Quantization (1e5) only affects
+// the intermediate integer grid topojson-server delta-encodes against — it
+// is not the final coordinate precision, which is still the 1dp R() rounding
+// applied later, same as every other layer.
+const mxTopoPre = presimplify(topology({ mx: { type: 'FeatureCollection', features: mxStateFeaturesRaw } }, 1e5));
+const mxTopoSimplified = simplify(mxTopoPre, MX_SIMPLIFY_WEIGHT);
+const mxStateFeatures = feature(mxTopoSimplified, mxTopoSimplified.objects.mx).features;
+{
+  const rawKB = JSON.stringify(mxStateFeaturesRaw.map(f => f.geometry)).length / 1024;
+  const simplifiedKB = JSON.stringify(mxStateFeatures.map(f => f.geometry)).length / 1024;
+  console.log(`Mexico geometry simplified (weight ${MX_SIMPLIFY_WEIGHT}): ${rawKB.toFixed(1)}KB -> ${simplifiedKB.toFixed(1)}KB raw GeoJSON, ${mxStateFeatures.length} states kept.`);
+}
+
 // The map is the United States and Mexico, nothing else: the US–Canada border
 // is the top edge and Mexico's southern border is the bottom edge. Drawing the
 // rest of the continent made the frame a dark rectangle cut mid-land.
@@ -65,6 +146,21 @@ const PARTNERS = {
   'Estado de Mexico': [-99.63, 19.35],
 };
 
+// Sanity check, before anything downstream trusts this data: the Jalisco and
+// Estado de México partner markers (unprojected, both in lon/lat — this file
+// uses the same lower-left-origin decimal-degree convention as PARTNERS, so
+// no reprojection needed to compare them) must fall inside their own named
+// state polygon. In this dataset "Estado de México" is just "México".
+for (const [markerKey, stateName] of [['Jalisco', 'Jalisco'], ['Estado de Mexico', 'México']]) {
+  const f = mxStateFeatures.find(s => s.properties.name === stateName);
+  const contains = f ? d3.geoContains(f, PARTNERS[markerKey]) : false;
+  console.log(`${stateName} polygon contains ${markerKey} partner marker: ${contains}`);
+  if (!contains) {
+    console.error(`${stateName} containment check FAILED — refusing to trust the projection. Stopping.`);
+    process.exit(1);
+  }
+}
+
 // `left` reserves a rail on the left of the frame (the partner callouts live
 // there) so the land is fitted into the remaining width, not under them.
 // `fit`, when given, is the geometry the projection is fitted to instead of the
@@ -105,6 +201,10 @@ for (const [name, F] of Object.entries(FRAMES)) {
     .filter(f => inFrame(f, F.bounds))
     .map(f => ({ name: f.properties.name, d: R(F.path(f)) }))
     .filter(f => f.d);
+  const mxstates = mxStateFeatures
+    .filter(f => inFrame(f, F.bounds))
+    .map(f => ({ name: f.properties.name, d: R(F.path(f)) }))
+    .filter(f => f.d);
   const landNA = LAND.map(f => R(F.path(f))).filter(Boolean);
   const cities = Object.fromEntries(
     Object.entries(CITIES).map(([k, v]) => [k, F.proj(v).map(n => +n.toFixed(1))])
@@ -116,9 +216,10 @@ for (const [name, F] of Object.entries(FRAMES)) {
     Object.entries(CITIES2).map(([k, v]) => [k, F.proj(v).map(n => +n.toFixed(1))])
   );
   const counties = okTxCounties.map(f => R(F.path(f))).filter(Boolean);
-  out[name] = { states, landNA, cities, cities2, partners, counties };
-  console.log(`${name}: ${counties.length} counties, ${states.length} states, land ${(landNA.join('').length / 1024).toFixed(1)}KB, states ${(states.reduce((a, b) => a + b.d.length, 0) / 1024).toFixed(1)}KB`);
-  console.log('   ' + states.map(s => s.name).join(', '));
+  out[name] = { states, mxstates, landNA, cities, cities2, partners, counties };
+  console.log(`${name}: ${counties.length} counties, ${states.length} states, ${mxstates.length} mxstates, land ${(landNA.join('').length / 1024).toFixed(1)}KB, states ${(states.reduce((a, b) => a + b.d.length, 0) / 1024).toFixed(1)}KB, mxstates ${(mxstates.reduce((a, b) => a + b.d.length, 0) / 1024).toFixed(1)}KB`);
+  console.log('   states: ' + states.map(s => s.name).join(', '));
+  console.log('   mxstates: ' + mxstates.map(s => s.name).join(', '));
 }
 fs.writeFileSync('paths.json', JSON.stringify(out));
 console.log('OKC reach:', out.reach.cities['Oklahoma City'], ' corridor:', out.corridor.cities['Oklahoma City']);
