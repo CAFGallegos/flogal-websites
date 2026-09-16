@@ -179,7 +179,6 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- Network & active lanes: map ----------------------------------- */
 .op-lanes{padding:96px 0;}
-.opm-relief{opacity:.92;mix-blend-mode:screen;}
 .op-lanes-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:56px;margin-bottom:34px;}
 .op-lanes-head-copy{max-width:63ch;display:flex;flex-direction:column;gap:14px;flex:1 1 auto;}
 .op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;margin-left:auto;}
@@ -1106,6 +1105,18 @@ document.getElementById('crOverlay').addEventListener('click', function(e) {
 });
 window.addEventListener('keydown', function(e) {
   if (e.key === 'Escape' && document.getElementById('crOverlay').style.display !== 'none') closeCarrierModal();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (location.hash === '#quote') {
+    crLastTrigger = document.querySelector('.op-nav-cta');
+    openCarrierModal();
+    setTimeout(function() {
+      const firstInput = document.getElementById('cr-first');
+      if (firstInput) firstInput.focus();
+    }, 0);
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
 });
 
 async function submitCarrierQuote(e) {

@@ -1,11 +1,13 @@
 // Builds the carriers map section from scripts/map/paths.json.
-// Run:  cd scripts/map && node build-map-section.mjs            (no relief plate)
-//       cd scripts/map && node build-map-section.mjs --relief   (with relief plate)
+// Run:  cd scripts/map && node build-map-section.mjs            (with relief plate)
+//       cd scripts/map && node build-map-section.mjs --no-relief (without relief plate)
 // Emits _map-section.html and _map-section.css next to itself. Those two files
 // are scratch output to paste into the page and the stylesheet — do not ship them.
 // No dependencies. Pure node.
 import fs from 'fs';
 const P = JSON.parse(fs.readFileSync('paths.json', 'utf8')).reach;
+
+const RELIEF_OPACITY = 0.20;
 
 // CSS uses the repo's tokens; SVG presentation attributes keep literals because
 // var() in an SVG attribute is not reliable across the browsers this site supports.
@@ -152,6 +154,7 @@ function css() {
   Object.keys(C).forEach((n, i) => o.push(
     `.sec:has(.t-c${i}:hover) .z-c${i} circle,.sec:has(.t-c${i}:focus) .z-c${i} circle{fill:${T.blueLt};}
 .sec:has(.t-c${i}:hover) .z-c${i} text,.sec:has(.t-c${i}:focus) .z-c${i} text{fill:${T.fg};}`));
+  if (RELIEF) o.push(`.opm-relief{opacity:${RELIEF_OPACITY};mix-blend-mode:multiply;}`);
   return o.join('\n');
 }
 
@@ -168,7 +171,7 @@ function card(id, lines) {
   return `<g class="card card-${id}"><rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="6" fill="#0C1B2B" fill-opacity=".98" stroke="#9CC4EE" stroke-opacity=".38" stroke-width="1" vector-effect="non-scaling-stroke"/>${txt}</g>`;
 }
 
-const RELIEF = process.argv.includes('--relief');
+const RELIEF = !process.argv.includes('--no-relief');
 function mapSvg() {
   // The land silhouette is ~140 KB of path data. Emit it ONCE.
   // Without --relief: drawn directly, no clip path, no <image>, no dead asset ref.
@@ -178,7 +181,7 @@ function mapSvg() {
     ? `<clipPath id="opm-landclip">${P.landNA.map((d, i) => `<path id="opm-landp${i}" d="${d}"/>`).join('')}</clipPath>`
     : '';
   const relief = RELIEF
-    ? `<image class="relief" href="assets/carriers-relief.webp" x="0" y="0" width="${VW}" height="${VH}" preserveAspectRatio="none" clip-path="url(#opm-landclip)"/>`
+    ? `<image class="opm-relief" href="assets/carriers-relief.webp" x="0" y="0" width="${VW}" height="${VH}" preserveAspectRatio="none" clip-path="url(#opm-landclip)"/>`
     : '';
   const land = RELIEF
     ? `<g filter="url(#coast)">${P.landNA.map((d, i) => `<use href="#opm-landp${i}" fill="#17293D" stroke="#17293D" stroke-width=".7" vector-effect="non-scaling-stroke"/>`).join('')}</g>`
@@ -440,7 +443,6 @@ ${partnerList()}
 const CSSBODY = CSSBODY_RAW + "\n" + css();
 const CSS = `/* ---- Network & active lanes: map ----------------------------------- */
 .op-lanes{padding:96px 0;}
-.relief{opacity:.92;mix-blend-mode:screen;}
 .op-lanes-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:56px;margin-bottom:34px;}
 .op-lanes-head-copy{max-width:63ch;display:flex;flex-direction:column;gap:14px;flex:1 1 auto;}
 .op-lanes-head-cta{display:flex;flex-direction:column;align-items:flex-end;gap:11px;flex:0 0 auto;margin-left:auto;}

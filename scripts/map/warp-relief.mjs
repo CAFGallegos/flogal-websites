@@ -15,6 +15,7 @@
 import fs from 'fs';
 import { PNG } from 'pngjs';
 import * as d3 from 'd3-geo';
+import { feature, merge } from 'topojson-client';
 
 const args = process.argv.slice(2);
 const src = args[0];
@@ -30,9 +31,7 @@ const OUT = opt('out', 'relief.png');
 const SCALE = Number(opt('scale', 2));
 const TONE = opt('tone', 'dark');
 
-// must match gen-map-paths.mjs exactly
-const BOUNDS = [[-134, 15], [-62, 53]];
-const VW = 1200, VH = 750, PAD = 20;
+const VW = 1200, VH = 750, PAD = 20, LEFT = 200;
 
 const W = Math.round(VW * SCALE), H = Math.round(VH * SCALE);
 
@@ -44,11 +43,23 @@ if (Math.abs(ratio - 2) > 0.02) {
   process.exit(1);
 }
 
+// Load the same land geometry as gen-map-paths.mjs to fit the projection identically
+const usTopo = JSON.parse(fs.readFileSync('node_modules/us-atlas/states-10m.json'));
+const worldTopo = JSON.parse(fs.readFileSync('node_modules/world-atlas/countries-50m.json'));
+const lower48 = merge(usTopo, usTopo.objects.states.geometries.filter(g => {
+  const id = String(g.id).padStart(2, '0');
+  return +id <= 56 && id !== '02' && id !== '15';
+}));
+const mexico = feature(worldTopo, worldTopo.objects.countries).features.find(c => c.properties.name === 'Mexico');
+const LAND = [lower48, mexico];
+const LAND_FC = { type: 'FeatureCollection', features: LAND.map(g => g.type === 'Feature' ? g : { type: 'Feature', geometry: g }) };
+
 // same frame construction as the geometry generator, including the clockwise
 // densified ring — a counter-clockwise ring makes d3 fit the whole globe
 function frameProjection() {
-  const [[w, s], [e, n]] = BOUNDS;
   const ring = [];
+  const bounds = d3.geoBounds(LAND_FC);
+  const [[w, s], [e, n]] = bounds;
   const N = 40;
   for (let i = 0; i <= N; i++) ring.push([w, s + (n - s) * i / N]);
   for (let i = 0; i <= N; i++) ring.push([w + (e - w) * i / N, n]);
@@ -56,7 +67,7 @@ function frameProjection() {
   for (let i = 0; i <= N; i++) ring.push([e - (e - w) * i / N, s]);
   const box = { type: 'Polygon', coordinates: [ring] };
   const proj = d3.geoConicEqualArea().parallels([22, 38]).rotate([101, 0]);
-  proj.fitExtent([[PAD * SCALE, PAD * SCALE], [W - PAD * SCALE, H - PAD * SCALE]], box);
+  proj.fitExtent([[PAD * SCALE + LEFT * SCALE, PAD * SCALE], [W - PAD * SCALE, H - PAD * SCALE]], LAND_FC);
   return proj;
 }
 const proj = frameProjection();
