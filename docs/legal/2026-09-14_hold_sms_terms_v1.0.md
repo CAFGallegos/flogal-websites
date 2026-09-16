@@ -4,11 +4,11 @@
 
 #### 1. Program description
 
-Flogal Holdings, LLC and its affiliated companies ("Flogal") send text messages to customers, prospective customers, vendors, and business contacts about inquiries, quotes, scheduling, dispatch, loads, deliveries, equipment, properties, invoices, and other ongoing business communications.
+Flogal Holdings LLC and its affiliated companies ("Flogal") send text messages to customers, prospective customers, vendors, and business contacts about inquiries, quotes, scheduling, dispatch, loads, deliveries, equipment, properties, invoices, and other ongoing business communications.
 
 This is a conversational and customer-care messaging program. It is not a marketing or promotional program, and we do not send marketing or promotional text messages.
 
-Our messages are sent from **(212) 210-7960**. Messages from any other number are not part of this program.
+Our messages are sent from **(212) 210-7960** and **(972) 476-1988**. Messages from any other number are not part of this program.
 
 #### 2. How we obtain your consent
 
@@ -58,4 +58,4 @@ Your information is handled in accordance with our [Privacy Policy](/privacy). W
 
 #### 10. Contact
 
-Flogal Holdings, LLC · PO Box 890213, Oklahoma City, OK 73189 · (972) 476-1988 · privacy@flogalhq.com
+Flogal Holdings LLC · PO Box 890213, Oklahoma City, OK 73189 · (972) 476-1988 · privacy@flogalhq.com

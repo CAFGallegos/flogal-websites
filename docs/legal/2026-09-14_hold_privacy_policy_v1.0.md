@@ -4,17 +4,17 @@
 
 #### 1. Who we are
 
-This Privacy Policy is issued by **Flogal Holdings, LLC**, an Oklahoma limited liability company ("Flogal," "we," "us"), on its own behalf and on behalf of **Flogal Leasing, LLC** and **Flogal Properties, LLC**, in each case with respect to that company's own collection and use of personal information.
+This Privacy Policy is issued by **Flogal Holdings LLC**, an Oklahoma limited liability company ("Flogal," "we," "us"), on its own behalf and on behalf of **Flogal Leasing LLC** and **Flogal Properties LLC**, in each case with respect to that company's own collection and use of personal information.
 
 Each Flogal company is a separate legal entity. This policy is published as a single document for the reader's convenience. It does not create, and may not be construed as evidence of, any agency, partnership, joint venture, common enterprise, or joint or several liability among them. Where this policy says "Flogal," it means the entity that collected your information. If you want to know which entity holds information about you, contact us and we will tell you.
 
-Flogal Holdings, LLC · PO Box 890213, Oklahoma City, OK 73189 · (972) 476-1988 · privacy@flogalhq.com
+Flogal Holdings LLC · PO Box 890213, Oklahoma City, OK 73189 · (972) 476-1988 · privacy@flogalhq.com
 
 #### 2. What this policy covers
 
 (a) Our public websites: flogalhq.com, carriers.flogalhq.com, sales.flogalhq.com, and properties.flogalhq.com.
 
-(b) **Flogal Apps** (apps.flogalhq.com and the Flogal Apps mobile application), our internal operations platform. Flogal Holdings, LLC operates the platform for its own personnel and administers it on behalf of affiliated companies that use it.
+(b) **Flogal Apps** (apps.flogalhq.com and the Flogal Apps mobile application), our internal operations platform. Flogal Holdings LLC operates the platform for its own personnel and administers it on behalf of affiliated companies that use it.
 
 (c) **Services to other businesses.** We may provide technology, administrative, implementation, evaluation, or related services to other businesses. When another business authorizes us to operate or evaluate systems on its behalf, we may process information relating to that business, its operations, and its personnel as necessary to provide those services. In those circumstances, that business remains responsible for its own information and may provide its own notices or policies concerning it.
 
@@ -92,4 +92,4 @@ We may update this policy. The version number and effective date at the top show
 
 #### 12. Contact
 
-Flogal Holdings, LLC · PO Box 890213, Oklahoma City, OK 73189 · (972) 476-1988 · privacy@flogalhq.com
+Flogal Holdings LLC · PO Box 890213, Oklahoma City, OK 73189 · (972) 476-1988 · privacy@flogalhq.com
