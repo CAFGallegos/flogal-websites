@@ -7,7 +7,17 @@
 import fs from 'fs';
 const P = JSON.parse(fs.readFileSync('paths.json', 'utf8')).reach;
 
-const RELIEF_OPACITY = 0.20;
+// screen, not multiply: the plate is a light-gray terrain image and the base
+// silhouette is near-black navy (#17293D) — multiply can only darken, which on
+// an already-dark base is indistinguishable from the flat fill. Screen only
+// lightens, so the relief actually shows up.
+// Opacity rides --terr (0 at rest, 1 zoomed), inverted: prominent at overview
+// where the flat silhouette needs the texture to read as terrain, receding
+// once the zoom brings in state lines, counties, city labels and the detail
+// card that the relief must not compete with.
+const RELIEF_BLEND = 'screen';
+const RELIEF_OPACITY_REST = 0.45;
+const RELIEF_OPACITY_ZOOM = 0.15;
 
 // CSS uses the repo's tokens; SVG presentation attributes keep literals because
 // var() in an SVG attribute is not reliable across the browsers this site supports.
@@ -154,7 +164,7 @@ function css() {
   Object.keys(C).forEach((n, i) => o.push(
     `.sec:has(.t-c${i}:hover) .z-c${i} circle,.sec:has(.t-c${i}:focus) .z-c${i} circle{fill:${T.blueLt};}
 .sec:has(.t-c${i}:hover) .z-c${i} text,.sec:has(.t-c${i}:focus) .z-c${i} text{fill:${T.fg};}`));
-  if (RELIEF) o.push(`.opm-relief{opacity:${RELIEF_OPACITY};mix-blend-mode:multiply;}`);
+  if (RELIEF) o.push(`.opm-relief{mix-blend-mode:${RELIEF_BLEND};opacity:calc(${RELIEF_OPACITY_REST} - (${RELIEF_OPACITY_REST} - ${RELIEF_OPACITY_ZOOM}) * var(--terr));}`);
   return o.join('\n');
 }
 
