@@ -16,7 +16,7 @@ const P = JSON.parse(fs.readFileSync('paths.json', 'utf8')).reach;
 // once the zoom brings in state lines, counties, city labels and the detail
 // card that the relief must not compete with.
 const RELIEF_BLEND = 'screen';
-const RELIEF_OPACITY_REST = 0.45;
+const RELIEF_OPACITY_REST = 0.75;
 const RELIEF_OPACITY_ZOOM = 0.15;
 
 // CSS uses the repo's tokens; SVG presentation attributes keep literals because
