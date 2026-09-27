@@ -632,7 +632,7 @@ button{font-family:var(--font-sans);}
     <div class="sl-footer-bottom">
       <span class="sl-footer-domains">flogalhq.com · carriers.flogalhq.com · sales.flogalhq.com · properties.flogalhq.com</span>
       <span class="sl-footer-copy">&#169; 2026 FLOGAL Holdings, LLC</span>
-      <a class="sl-staff-link" href="https://admin.flogalhq.com/login.html">Staff Login</a>
+      <a class="sl-staff-link" href="https://admin.flogalhq.com">Staff Login</a>
     </div>
   </div>
 </footer>
@@ -774,9 +774,9 @@ const COND_TAG = {
 (async () => {
   try {
     const { data, error } = await sb
-      .from('inventory')
+      .from('public_sales_listings')
       .select('*')
-      .eq('status', 'active')
+      .order('published_at', { ascending: false, nullsFirst: false })
       .order('created_at', { ascending: false });
     console.log('[inventory fetch]', { rowCount: data?.length, error });
     if (error) throw error;
@@ -946,7 +946,8 @@ function renderGrid() {
     const tag = COND_TAG[u.condition];
     const aidx = allInventory.indexOf(u);
     const photos = parsePhotos(u.photos);
-    const heroUrl = photos[0] || null;
+    const thumbs = parsePhotos(u.thumbs);
+    const heroUrl = thumbs[0] || photos[0] || null;
     return `<button class="sl-tile${String(aidx) === selectedId ? ' is-selected' : ''}" data-id="${aidx}" data-idx="${aidx}">
       <div class="sl-tile-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
         ${heroUrl ? `<img src="${heroUrl}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">` : `<span class="sl-tile-emoji">${viz.emoji}</span>`}

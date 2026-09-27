@@ -238,6 +238,8 @@ data). Migration path when triggered: the endpoint/logic lands in flogal-apps;
 the website keeps its static shell and calls the endpoint client-side. This
 repo never gains a build step, server code, or secrets, and the per-site
 Vercel root model is untouched because dynamism stays in fetch calls.
+2026-09: admin portal crossed trigger (3) (photo uploads) → moved to
+flogal-apps `/sales`; sales.flogalhq.com reads `public_sales_listings`.
 
 REASONING:
 - The pattern already works in production: sales/index.html renders inventory

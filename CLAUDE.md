@@ -56,7 +56,7 @@ styles.css (role-based, JS-swapped) and does not link tokens.css.
 flogalhq: index, about/ · sales: index (+ inventory.json) · properties: index
 carriers: index, aggregate-hauling/, equipment-transport/, portal/ (mock
 dashboard, ~27 inert buttons BY DESIGN), portal/login
-admin: login (default route via rewrite), dashboard
+admin: redirect → apps.flogalhq.com/staff (internal front door; static portal retired 2026-09; folder pending archive)
 
 ## Verification loop (green = done; run after EVERY task)
 `node scripts/check-links.mjs`        broken internal links/assets, empty
