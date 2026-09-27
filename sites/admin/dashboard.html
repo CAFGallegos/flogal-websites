@@ -632,10 +632,10 @@ function renderInventory() {
           <td class="right price">${fmtPrice(r.price)}</td>
           <td><span class="ad-pill ${s.cls}">${s.lbl}</span></td>
           <td class="right"><div class="actions">
-            <button class="ad-btn ad-btn-ghost ad-btn-sm" type="button" onclick="openDrawerEdit('${r.id}')">Edit</button>
+            <button class="ad-btn ad-btn-ghost ad-btn-sm" type="button" data-action="edit" data-stock="${esc(r.stock_number)}">Edit</button>
             ${r.status === 'sold'
               ? '<button class="ad-btn ad-btn-ghost ad-btn-sm" type="button" disabled style="opacity:.45;cursor:default;">Sold</button>'
-              : `<button class="ad-btn ad-btn-ghost ad-btn-sm" type="button" onclick="markSold('${r.id}')">Mark Sold</button>`}
+              : `<button class="ad-btn ad-btn-ghost ad-btn-sm" type="button" data-action="sold" data-stock="${esc(r.stock_number)}">Mark Sold</button>`}
           </div></td>
         </tr>`;
       }).join('')
@@ -697,7 +697,7 @@ async function saveInquiryField(id, field, value) {
   const update = {};
   update[field] = value || null;
   const { error } = await sb.from('inquiries').update(update).eq('id', id);
-  if (error) console.error('[FLOGAL] saveInquiryField error:', field, error);
+  if (error) { console.error('[FLOGAL] saveInquiryField error:', field, error); alert('Could not save ' + field + ': ' + error.message); }
 }
 
 function renderInquirySection(tbodyId, source, searchId, filterStatusId) {
@@ -787,14 +787,17 @@ function updateKPIs() {
 }
 
 // ── ACTIONS ───────────────────────────────────────────────────────────────
-async function markSold(id) {
-  await sb.from('inventory').update({ status:'sold', updated_at: new Date().toISOString() }).eq('id', id);
+async function markSold(stock) {
+  // updated_at is maintained by a DB trigger — do not send it.
+  const { error } = await sb.from('inventory').update({ status:'sold' }).eq('stock_number', stock);
+  if (error) { alert('Could not mark sold: ' + error.message); return; }
   await loadInventory();
 }
 
 async function markReplied(id) {
   const now = new Date().toISOString();
-  await sb.from('inquiries').update({ status:'replied', replied_at: now }).eq('id', id);
+  const { error } = await sb.from('inquiries').update({ status:'replied', replied_at: now }).eq('id', id);
+  if (error) { alert('Could not mark replied: ' + error.message); return; }
   await loadInquiries();
 }
 
@@ -838,6 +841,7 @@ function closeDrawer() {
   drawer.setAttribute('aria-hidden','true');
   const _fid = document.getElementById('f-unit-id');
   _fid.value = ''; _fid.defaultValue = '';
+  document.getElementById('f-stock').disabled = false;
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];
@@ -864,16 +868,18 @@ window.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer();
   dz.addEventListener('drop',      e => { e.preventDefault(); e.stopPropagation(); dz.classList.remove('is-drag-over'); handleFiles(e.dataTransfer.files); });
 })();
 
-function openDrawerEdit(id) {
-  const unit = inventory.find(u => String(u.id) === String(id));
+function openDrawerEdit(stock) {
+  const unit = inventory.find(u => String(u.stock_number) === String(stock));
   if (!unit) return;
   const _fid = document.getElementById('f-unit-id');
-  _fid.value = String(unit.id); _fid.defaultValue = String(unit.id);
+  _fid.value = String(unit.stock_number); _fid.defaultValue = String(unit.stock_number);
   pendingFiles = [];
   pendingPreviews.forEach(u => URL.revokeObjectURL(u));
   pendingPreviews = [];
-  existingPhotos  = Array.isArray(unit.photos) ? [...unit.photos] : [];
-  document.getElementById('f-stock').value   = unit.stock_number    || '';
+  existingPhotos  = parsePhotos(unit.photos);
+  const _stock = document.getElementById('f-stock');
+  _stock.value    = unit.stock_number || '';
+  _stock.disabled = true;   // primary key + photo folder name — not editable
   document.getElementById('f-type').value    = unit.type            || '';
   document.getElementById('f-year').value    = unit.year            || '';
   document.getElementById('f-make').value    = unit.make            || '';
@@ -891,11 +897,20 @@ function openDrawerEdit(id) {
   document.getElementById('f-wb').value      = unit.wheelbase       || '';
   document.getElementById('f-dot').value     = unit.dot_inspection  || '';
   document.getElementById('f-title').value   = unit.title_status    || 'Clean · in hand';
-  document.getElementById('drawerSub').textContent       = 'Editing · ' + (unit.stock_number || unit.id);
+  document.getElementById('drawerSub').textContent       = 'Editing · ' + (unit.stock_number || '');
   document.getElementById('drawerH').textContent         = 'Edit Equipment Unit';
   document.getElementById('drawerSubmitBtn').textContent = 'Save Changes';
   renderPhotoPreview();
   openDrawer();
+}
+
+// photos is a TEXT column holding a JSON array; PostgREST hands it back as a string.
+function parsePhotos(val) {
+  if (Array.isArray(val)) return val;
+  if (typeof val === 'string' && val) {
+    try { return JSON.parse(val); } catch { return []; }
+  }
+  return [];
 }
 
 function toInt(val) {
@@ -936,7 +951,7 @@ async function removeExistingPhoto(index) {
   }
   existingPhotos.splice(index, 1);
   const _uid = document.getElementById('f-unit-id').value.trim();
-  if (_uid) await sb.from('inventory').update({ photos: existingPhotos }).eq('id', _uid);
+  if (_uid) await sb.from('inventory').update({ photos: JSON.stringify(existingPhotos) }).eq('stock_number', _uid);
   renderPhotoPreview();
 }
 
@@ -976,7 +991,7 @@ async function submitUnitForm() {
     lease_eligible:  document.getElementById('f-lease').checked,
     condition:       document.getElementById('f-cond').value,
     location:        document.getElementById('f-loc').value.trim(),
-    vin:             document.getElementById('f-vin').value.trim(),
+    vin:             document.getElementById('f-vin').value.trim() || null,
     axle_config:     document.getElementById('f-axle').value.trim(),
     wheelbase:       toInt(document.getElementById('f-wb').value),
     dot_inspection:  document.getElementById('f-dot').value || null,
@@ -1010,11 +1025,13 @@ async function submitUnitForm() {
   } else {
     statusEl.style.color = ''; statusEl.textContent = '';
   }
-  payload.photos = [...existingPhotos, ...uploadedUrls];
+  payload.photos = JSON.stringify([...existingPhotos, ...uploadedUrls]);
 
   let error;
   if (unitId) {
-    ({ error } = await sb.from('inventory').update(payload).eq('id', unitId));
+    const updates = { ...payload };
+    delete updates.stock_number;   // PK + photo folder — never rewritten on edit
+    ({ error } = await sb.from('inventory').update(updates).eq('stock_number', unitId));
   } else {
     payload.status = 'active';
     ({ error } = await sb.from('inventory').insert(payload));
@@ -1046,6 +1063,17 @@ document.getElementById('btnExportCSV').addEventListener('click', () => {
 document.getElementById('signOutBtn').addEventListener('click', async () => {
   await sb.auth.signOut();
   window.location.href = 'login.html';
+});
+
+// ── INVENTORY ROW ACTIONS ─────────────────────────────────────────────────
+// Delegated: stock numbers may contain spaces/quotes, so they never go into inline JS.
+document.getElementById('inventoryBody').addEventListener('click', e => {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+  const stock = btn.getAttribute('data-stock');
+  if (!stock) return;
+  if (btn.dataset.action === 'edit')      openDrawerEdit(stock);
+  else if (btn.dataset.action === 'sold') markSold(stock);
 });
 
 // ── SEARCH / FILTER (inventory) ───────────────────────────────────────────
