@@ -22,7 +22,9 @@ This policy does not cover information governed by a separate written agreement 
 
 #### 3. Information we collect
 
-**From visitors to our websites.** What you submit through a contact, quote, or inquiry form — name, company, email address, phone number, and the contents of your message — and standard technical information your browser sends, such as IP address, browser type, and pages visited. We do not use advertising or analytics trackers.
+**From visitors to our websites.** What you submit through a contact, quote, or inquiry form — name, company, email address, phone number, and the contents of your message — and standard technical information your browser sends, such as IP address, browser type, and pages visited.
+
+**Website analytics.** We use a cookieless analytics service provided by our website host to understand how our websites are used, such as how many people visit, which pages they view, which site referred them, their general location (country, state, city), and their device and browser type. It does not use cookies, does not track you across other websites, and gives us aggregate statistics only. We do not use it to identify you. We do not use advertising trackers, advertising pixels, or session-recording tools. Because we do not track visitors across websites, we do not respond differently to browser Do Not Track signals.
 
 **From customers, vendors, and business contacts.** Contact details for the people we do business with, and records of loads, shipments, equipment, properties, invoices, payments, and related correspondence.
 

@@ -8,7 +8,7 @@ Flogal Holdings LLC and its affiliated companies ("Flogal") send text messages t
 
 This is a conversational and customer-care messaging program. It is not a marketing or promotional program, and we do not send marketing or promotional text messages.
 
-Our messages are sent from **(212) 210-7960** and **(972) 476-1988**. Messages from any other number are not part of this program.
+Our messages are sent from **(212) 210-7960**. Messages from any other number are not part of this program.
 
 #### 2. How we obtain your consent
 
@@ -59,3 +59,15 @@ Your information is handled in accordance with our [Privacy Policy](/privacy). W
 #### 10. Contact
 
 Flogal Holdings LLC · PO Box 890213, Oklahoma City, OK 73189 · (972) 476-1988 · privacy@flogalhq.com
+
+---
+
+**Form consent checkbox label (version 1.0) — every phone-collecting form, all sites. Unchecked, optional. Consent is by checking, never by submitting.**
+
+> ☐ Yes, Flogal may text me at this number about my inquiry. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Texting consent is optional and not required to submit this form. See our [Privacy Policy](/privacy) and [SMS Terms](/sms-terms).
+
+**Auto-replies (configured in the messaging provider on (212) 210-7960, the only sending number). A STOP or HELP text received at any other Flogal number is handled by a person: the opt-out is honored the same way, and no automated reply is sent from that number.**
+
+*HELP:* `Flogal: For help call (972) 476-1988 or email privacy@flogalhq.com. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out.`
+
+*STOP (once, then silence):* `Flogal: You are opted out and will receive no further texts from Flogal. For help call (972) 476-1988.`
