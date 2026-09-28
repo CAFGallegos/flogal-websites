@@ -39,8 +39,15 @@ const LANES = [
   { id: 'l3', a: 'San Antonio', b: 'Austin', bow: 0, k: 'a', label: 'San Antonio · Austin', note: 'Bulk, aggregate', tag: 'Active' },
   { id: 'l4', a: 'Midland', b: 'DFW', bow: -.06, k: 'a', label: 'Midland–Odessa · Dallas', note: 'Flatbed, hot-shot', tag: 'Active' },
   { id: 'l5', a: 'DFW', b: 'Memphis', bow: -.06, k: 'a', label: 'Dallas · Memphis', note: 'Dry van', tag: 'Spot' },
+  { id: 'l6', a: 'Houston', b: 'Laredo', bow: .07, k: 'x', label: 'Houston · Laredo', note: 'Cross-border dry van, via partner', tag: 'Partner' },
 ];
-const PARTNERS = [];
+const PARTNERS = [
+  { id: 'p0', key: 'New Mexico', names: ['DA Transport'], place: 'New Mexico, US' },
+  { id: 'p1', key: 'California', names: ['Evolution', "Int'l Transport", 'Moreno Brothers'], place: 'California, US' },
+  { id: 'p2', key: 'Texas', names: ['FLS Express'], place: 'Texas, US' },
+  { id: 'p3', key: 'Jalisco', names: ['Odal'], place: 'Jalisco, MX' },
+  { id: 'p4', key: 'Estado de Mexico', names: ['Olior'], place: 'Estado de México, MX' },
+];
 const CITY_STATE = {
   'Oklahoma City': 'Oklahoma', 'Tulsa': 'Oklahoma', 'DFW': 'Texas', 'Austin': 'Texas',
   'San Antonio': 'Texas', 'Houston': 'Texas', 'Midland': 'Texas', 'Laredo': 'Texas',
@@ -56,7 +63,15 @@ const C2_SIDE = {
   'Corpus Christi': 'r', 'McAllen': 'l', 'Texarkana': 'r', 'Killeen': 'l',
 };
 // label anchor for each partner, in viewBox units, plus which side the text runs
-const CALLOUT = {};
+const CALLOUT = {
+  // stacked in marker order, each near its marker's latitude so leader lines
+  // stay short and never cross; spacing leaves room for the expanded card
+  p1: { x: 46, y: 262, side: 'r' },   // California      (marker y 269)
+  p0: { x: 46, y: 350, side: 'r' },   // New Mexico      (marker y 338)
+  p2: { x: 46, y: 460, side: 'r' },   // Texas / FLS     (marker y 423)
+  p3: { x: 46, y: 600, side: 'r' },   // Jalisco         (marker y 616)
+  p4: { x: 46, y: 690, side: 'r' },   // Estado de Mexico (marker y 642)
+};
 const CITY_SIDE = {
   'Oklahoma City': 'l', 'Tulsa': 'r', 'DFW': 'r', 'Austin': 'l', 'San Antonio': 'l',
   'Houston': 'r', 'Midland': 'l', 'Laredo': 'l', 'El Paso': 'l', 'Memphis': 'r',
@@ -262,7 +277,7 @@ function mapSvg() {
       : [{ t: CITY_LONG[n] || n }, { t: CITY_STATE[n], sm: true }])),
   ].join('');
 
-  return `<svg class="viz" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" role="img" aria-label="Flogal owned corridor across North America">
+  return `<svg class="viz" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" role="img" aria-label="Flogal owned corridor and partner network across North America">
 <defs><radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4A90D9" stop-opacity=".2"/><stop offset="1" stop-color="#4A90D9" stop-opacity="0"/></radialGradient></defs>
 <defs>${landClip}</defs>
 <g class="zoomable">${land}${relief}<ellipse class="pool" cx="${C['DFW'][0] - 6}" cy="${(C['DFW'][1] + C['Oklahoma City'][1]) / 2}" rx="116" ry="96" fill="url(#pool)"/>${terr}${adm1}${counties}${zoomNodes}${laneV}${hq}${restNodes}${partnerV}</g>
@@ -407,8 +422,8 @@ const SECTION = `<section class="op-lanes" id="lanes">
     <div class="op-lanes-head">
       <div class="op-lanes-head-copy">
         <span class="op-eyebrow">Network &amp; active lanes</span>
-        <h2 class="op-h2">Built around the TX–OK corridor.</h2>
-        <p class="op-section-sub">Our owned capacity runs densely on the Dallas–Oklahoma City spine, with secondary lanes feeding in from Houston, San Antonio, and West Texas.</p>
+        <h2 class="op-h2">Built around the TX–OK corridor — extended by partners we know.</h2>
+        <p class="op-section-sub">Our owned capacity runs densely on the Dallas–Oklahoma City spine, with secondary lanes feeding in from Houston, San Antonio, and West Texas. Beyond that, a vetted network of U.S. and Mexico carrier partners extends our reach.</p>
       </div>
       <div class="op-lanes-head-cta">
         <button type="button" id="crQuoteTriggerBtn" class="op-btn op-btn-blue" onclick="openCarrierModal()">Request a Quote</button>
@@ -418,8 +433,10 @@ const SECTION = `<section class="op-lanes" id="lanes">
 
     <div class="opm-stage">
 ${mapSvg()}
-      <div class="opm-zhint">Hover a lane or a city · click to hold</div>
+      <div class="opm-zhint">Hover a lane, a city or a partner · click to hold</div>
     </div>
+
+${partnerList()}
 
     <div class="op-lanes-foot">
       <div class="op-lanes-contact">
@@ -427,6 +444,7 @@ ${mapSvg()}
         <a href="mailto:carriers@flogalhq.com">carriers@flogalhq.com</a>
         <span class="op-lanes-serving">Serving Oklahoma and Texas.</span>
       </div>
+      <span class="op-lanes-count">Seven partner carriers · five states · two countries</span>
     </div>
 
   </div>
