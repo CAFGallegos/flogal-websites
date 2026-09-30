@@ -185,6 +185,7 @@ button{font-family:var(--font-sans);}
 .sl-drawer-id{position:absolute;left:16px;top:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,.78);background:rgba(0,0,0,.32);padding:4px 9px;border-radius:3px;}
 .sl-drawer-emoji{font-size:80px;filter:grayscale(.4) brightness(.85);}
 .sl-drawer-photo-meta{position:absolute;left:0;right:0;bottom:0;padding:18px 16px 10px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;color:rgba(255,255,255,.78);background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));}
+.sl-drawer-caption{padding:10px 16px 0;font-size:12px;line-height:1.45;color:var(--fg-muted);}
 .sl-drawer-body{padding:20px 22px 28px;display:flex;flex-direction:column;gap:22px;flex:1;min-height:0;overflow-y:auto;}
 .sl-drawer-yr{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-700);}
 .sl-drawer-name{margin:4px 0 0;font-family:var(--font-display);font-weight:700;font-size:26px;letter-spacing:-0.02em;line-height:1.1;color:var(--flogal-navy);}
@@ -642,7 +643,10 @@ button{font-family:var(--font-sans);}
 <div id="lbOverlay" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.92);align-items:center;justify-content:center;">
   <button id="lbClose" aria-label="Close" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:40px;height:40px;border-radius:50%;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>
   <button id="lbPrev" aria-label="Previous photo" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:48px;height:48px;border-radius:50%;font-size:30px;display:none;align-items:center;justify-content:center;line-height:1;">&#8249;</button>
-  <img id="lbImg" alt="Unit photo" decoding="async" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;display:block;user-select:none;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px;max-width:90vw;max-height:90vh;">
+    <img id="lbImg" alt="Unit photo" decoding="async" style="max-width:90vw;max-height:80vh;object-fit:contain;border-radius:4px;display:block;user-select:none;">
+    <div id="lbCaption" style="display:none;color:rgba(255,255,255,.85);font-size:12px;line-height:1.4;text-align:center;padding:0 16px;"></div>
+  </div>
   <button id="lbNext" aria-label="Next photo" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:48px;height:48px;border-radius:50%;font-size:30px;display:none;align-items:center;justify-content:center;line-height:1;">&#8250;</button>
   <div id="lbDots" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:6px;"></div>
 </div>
@@ -837,25 +841,48 @@ function parsePhotos(val) {
   return [];
 }
 
-function buildPhotoBlock(u, photos, idx, aidx) {
+// Captions are free-form DB text; escape before it lands in innerHTML or an
+// attribute (title, alt). textContent assignments don't need this.
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// photo_items (jsonb: [{url, thumb, caption, slot_key}]) when present and
+// non-empty, else falls back to the plain photos array with null captions.
+// A listing's caption is null for extras and legacy photos, so this is a
+// no-behavior-change fallback for anything shot before the caption checklist.
+function unitPhotoItems(u) {
+  const items = parsePhotos(u.photo_items);
+  if (items.length) return items.map(it => ({ url: it.url, caption: it.caption || null }));
+  return parsePhotos(u.photos).map(url => ({ url, caption: null }));
+}
+
+function buildPhotoBlock(u, items, idx, aidx) {
   const viz = TYPE_VIZ[u.type] || { hue:'#1a2a3f', emoji:'📦' };
   const uid = String(aidx ?? 0);
-  const url = photos[idx] || null;
-  const multi = photos.length > 1;
+  const item = items[idx] || null;
+  const url = item ? item.url : null;
+  const multi = items.length > 1;
   const arrowSt = 'position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:0;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:22px;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;';
   const dots = multi
     ? `<div style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:2;">${
-        photos.map((_, i) => `<span style="width:7px;height:7px;border-radius:50%;background:${i===idx?'rgba(255,255,255,.95)':'rgba(255,255,255,.35)'};display:inline-block;flex:none;transition:background 150ms;"></span>`).join('')
+        items.map((it, i) => `<span title="${escHtml(it.caption || '')}" style="width:7px;height:7px;border-radius:50%;background:${i===idx?'rgba(255,255,255,.95)':'rgba(255,255,255,.35)'};display:inline-block;flex:none;transition:background 150ms;"></span>`).join('')
       }</div>`
     : '';
-  return `<div id="drawerPhotoBlock" class="sl-drawer-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
-    ${url ? `<img src="${url}" alt="" onclick="openLightboxByIdx(${aidx ?? 0},${idx})" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in;">` : `<span class="sl-drawer-emoji">${viz.emoji}</span>`}
-    <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">&times;</button>
-    <span class="sl-drawer-id">${u.stock_number || uid}</span>
-    <div class="sl-drawer-photo-meta">${u.type || ''}</div>
-    ${multi ? `<button onclick="stepCarousel(-1)" style="${arrowSt}left:10px;">&#8249;</button>` : ''}
-    ${multi ? `<button onclick="stepCarousel(1)" style="${arrowSt}right:10px;">&#8250;</button>` : ''}
-    ${dots}
+  const caption = item && item.caption
+    ? `<div class="sl-drawer-caption">${escHtml(item.caption)}</div>`
+    : '';
+  return `<div id="drawerPhotoBlock">
+    <div class="sl-drawer-photo" style="background:linear-gradient(135deg,${viz.hue},#050a12)">
+      ${url ? `<img src="${url}" alt="${escHtml(item?.caption || '')}" onclick="openLightboxByIdx(${aidx ?? 0},${idx})" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in;">` : `<span class="sl-drawer-emoji">${viz.emoji}</span>`}
+      <button class="sl-drawer-close" onclick="closeDrawer()" aria-label="Close">&times;</button>
+      <span class="sl-drawer-id">${u.stock_number || uid}</span>
+      <div class="sl-drawer-photo-meta">${u.type || ''}</div>
+      ${multi ? `<button onclick="stepCarousel(-1)" style="${arrowSt}left:10px;">&#8249;</button>` : ''}
+      ${multi ? `<button onclick="stepCarousel(1)" style="${arrowSt}right:10px;">&#8250;</button>` : ''}
+      ${dots}
+    </div>
+    ${caption}
   </div>`;
 }
 
@@ -863,18 +890,18 @@ function stepCarousel(delta) {
   const _i = parseInt(selectedId, 10);
   const u = (!isNaN(_i) && allInventory[_i]) ? allInventory[_i] : null;
   if (!u) return;
-  const photos = parsePhotos(u.photos);
-  if (photos.length < 2) return;
-  drawerPhotoIdx = (drawerPhotoIdx + delta + photos.length) % photos.length;
+  const items = unitPhotoItems(u);
+  if (items.length < 2) return;
+  drawerPhotoIdx = (drawerPhotoIdx + delta + items.length) % items.length;
   const block = document.getElementById('drawerPhotoBlock');
-  if (block) block.outerHTML = buildPhotoBlock(u, photos, drawerPhotoIdx, _i);
+  if (block) block.outerHTML = buildPhotoBlock(u, items, drawerPhotoIdx, _i);
 }
 
 function openLightboxByIdx(aidx, startIdx) {
   const unit = allInventory[aidx];
   if (!unit) return;
-  const photos = parsePhotos(unit.photos);
-  if (photos.length > 0) openLightbox(photos, startIdx || 0);
+  const items = unitPhotoItems(unit);
+  if (items.length > 0) openLightbox(items, startIdx || 0);
 }
 
 function openLightboxForUnit(uid, startIdx) {
@@ -884,12 +911,12 @@ function openLightboxForUnit(uid, startIdx) {
     if (!isNaN(idx) && allInventory[idx]) unit = allInventory[idx];
   }
   if (!unit) return;
-  const photos = parsePhotos(unit.photos);
-  if (photos.length > 0) openLightbox(photos, startIdx || 0);
+  const items = unitPhotoItems(unit);
+  if (items.length > 0) openLightbox(items, startIdx || 0);
 }
 
-function openLightbox(photos, startIdx) {
-  lbPhotos = photos;
+function openLightbox(items, startIdx) {
+  lbPhotos = items;
   lbIdx    = startIdx || 0;
   _renderLb();
   const ov = document.getElementById('lbOverlay');
@@ -906,13 +933,22 @@ function closeLightbox() {
 }
 
 function _renderLb() {
-  document.getElementById('lbImg').src = lbPhotos[lbIdx] || '';
+  const item = lbPhotos[lbIdx] || null;
+  document.getElementById('lbImg').src = item ? item.url : '';
+  const capEl = document.getElementById('lbCaption');
+  if (item && item.caption) {
+    capEl.textContent = item.caption;
+    capEl.style.display = 'block';
+  } else {
+    capEl.textContent = '';
+    capEl.style.display = 'none';
+  }
   const multi = lbPhotos.length > 1;
   document.getElementById('lbPrev').style.display = multi ? 'flex' : 'none';
   document.getElementById('lbNext').style.display = multi ? 'flex' : 'none';
   document.getElementById('lbDots').innerHTML = multi
-    ? lbPhotos.map((_, i) =>
-        `<span onclick="lbGoTo(${i})" style="width:8px;height:8px;border-radius:50%;background:${i===lbIdx?'white':'rgba(255,255,255,.4)'};display:inline-block;cursor:pointer;transition:background 150ms;"></span>`
+    ? lbPhotos.map((it, i) =>
+        `<span onclick="lbGoTo(${i})" title="${escHtml(it.caption || '')}" style="width:8px;height:8px;border-radius:50%;background:${i===lbIdx?'white':'rgba(255,255,255,.4)'};display:inline-block;cursor:pointer;transition:background 150ms;"></span>`
       ).join('')
     : '';
 }
@@ -996,9 +1032,9 @@ function renderDrawer(id) {
     ['Location',      u.location],
   ].filter(([, v]) => v != null && v !== '');
 
-  const drawerPhotos = parsePhotos(u.photos);
+  const drawerPhotoItems = unitPhotoItems(u);
   document.getElementById('detailDrawer').innerHTML = `
-    ${buildPhotoBlock(u, drawerPhotos, 0, _i)}
+    ${buildPhotoBlock(u, drawerPhotoItems, 0, _i)}
     <div class="sl-drawer-body">
       <div>
         <div class="sl-drawer-yr">${u.year || ''} &middot; ${u.make || ''}</div>
@@ -1113,8 +1149,8 @@ document.getElementById('inventoryGrid').addEventListener('click', e => {
   if (e.target.closest('.sl-tile-photo')) {
     const unit = allInventory[parseInt(id, 10)];
     if (unit) {
-      const photos = parsePhotos(unit.photos);
-      if (photos.length > 0) openLightbox(photos, 0);
+      const items = unitPhotoItems(unit);
+      if (items.length > 0) openLightbox(items, 0);
     }
   }
 });
