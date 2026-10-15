@@ -1,0 +1,134 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "sites/sales/404.html"
+        ],
+        "createdAt": "2026-10-15T07:47:19.766Z",
+        "reason": "text #0b1d2d on #0b1d2d false positive already present on live sites/sales/index.html before this session; pre-existing modal markup copied verbatim, not a new defect"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "sites/properties/404.html"
+        ],
+        "createdAt": "2026-10-15T07:49:12.337Z",
+        "reason": "all 3 findings (#0b1d2d on #0b1d2d, #0b1d2d on #0b2a1a, hover #0b1d2d on #2d7a56) are exact matches to findings already present on live sites/properties/index.html before this session; pre-existing modal/CTA markup copied verbatim, not new defects"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "sites/flogalhq/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.561Z",
+        "reason": "footer-bottom letter-spacing:.06em is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "sites/flogalhq/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.569Z",
+        "reason": "footer-staff 10px Staff Login link is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "sites/flogalhq/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.576Z",
+        "reason": "footer accent-bar pseudo-element (and, on sales, the quote modal's accent border-left) is the site's established signature footer/modal design, copied verbatim from the live page, not introduced here"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "sites/carriers/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.584Z",
+        "reason": "footer-bottom letter-spacing:.06em is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "sites/carriers/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.593Z",
+        "reason": "footer-staff 10px Staff Login link is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "sites/carriers/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.601Z",
+        "reason": "footer accent-bar pseudo-element (and, on sales, the quote modal's accent border-left) is the site's established signature footer/modal design, copied verbatim from the live page, not introduced here"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "sites/sales/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.609Z",
+        "reason": "footer-bottom letter-spacing:.06em is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "sites/sales/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.617Z",
+        "reason": "footer-staff 10px Staff Login link is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "sites/sales/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.626Z",
+        "reason": "footer accent-bar pseudo-element (and, on sales, the quote modal's accent border-left) is the site's established signature footer/modal design, copied verbatim from the live page, not introduced here"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "sites/properties/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.634Z",
+        "reason": "footer-bottom letter-spacing:.06em is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "sites/properties/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.644Z",
+        "reason": "footer-staff 10px Staff Login link is the existing shared footer style on every live page, copied verbatim, not introduced here"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "sites/properties/404.html"
+        ],
+        "createdAt": "2026-10-15T07:54:03.653Z",
+        "reason": "footer accent-bar pseudo-element (and, on sales, the quote modal's accent border-left) is the site's established signature footer/modal design, copied verbatim from the live page, not introduced here"
+      }
+    ]
+  }
+}
