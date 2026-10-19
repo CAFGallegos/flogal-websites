@@ -53,7 +53,7 @@ brand.css for a single-site change. admin implements accent natively in
 styles.css (role-based, JS-swapped) and does not link tokens.css.
 
 ## Page map (update this list when pages change)
-flogalhq: index, about/ · sales: index (+ inventory.json) · properties: index
+flogalhq: index, about/ (its 404.html lives at REPO ROOT, intentionally public; see Serving model) · sales: index (+ inventory.json) · properties: index
 carriers: index, aggregate-hauling/, equipment-transport/, portal/ (mock
 dashboard, ~27 inert buttons BY DESIGN), portal/login
 admin: redirect → apps.flogalhq.com/staff (internal front door; static portal retired 2026-09; folder pending archive)
