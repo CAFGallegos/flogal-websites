@@ -791,9 +791,17 @@ const COND_TAG = {
     if (allInventory.length) {
       // ?unit=<stock_number> deep link; falls back to the first tile.
       const wanted = (new URLSearchParams(location.search).get('unit') || '').trim().toLowerCase();
-      const found  = wanted
-        ? allInventory.findIndex(u => String(u.stock_number || '').trim().toLowerCase() === wanted)
+      const norm   = v => String(v || '').trim().toLowerCase();
+      let found = wanted
+        ? allInventory.findIndex(u => norm(u.stock_number) === wanted)
         : -1;
+      // Old (renumbered) links: former_stock_numbers may be absent or null.
+      if (wanted && found < 0) {
+        found = allInventory.findIndex(u => Array.isArray(u.former_stock_numbers) &&
+          u.former_stock_numbers.some(f => norm(f) === wanted));
+        // Arrived on an old number: put the CURRENT one in the address bar.
+        if (found >= 0 && allInventory[found].stock_number) setUnitParam(allInventory[found].stock_number);
+      }
       selectedId = String(found >= 0 ? found : 0);
     }
     renderGrid();
