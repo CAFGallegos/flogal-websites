@@ -12,8 +12,14 @@
 <meta property="og:url" content="https://www.flogalhq.com/">
 <meta property="og:image" content="https://www.flogalhq.com/shared/logos/flogal-symbol-tricolor.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link rel="preload" href="../../shared/css/brand.css" as="style">
+<link rel="preload" href="../../shared/fonts/Satoshi-Bold.otf" as="font" type="font/otf" crossorigin>
+<link rel="preload" href="../../shared/fonts/Satoshi-Regular.otf" as="font" type="font/otf" crossorigin>
 <link rel="stylesheet" href="../../shared/css/tokens.css">
 <link rel="stylesheet" href="../../shared/css/flogalhq-shell.css">
+<script>document.documentElement.classList.add('faq-js');</script>
 <style>
 @font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'Satoshi';src:url('../../shared/fonts/Satoshi-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
@@ -161,6 +167,8 @@ a{color:inherit;text-decoration:none;}
 .faq-item:first-child{border-top:1px solid var(--hairline);}
 .faq-q{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 8px;letter-spacing:-.005em;}
 .faq-a{font-size:15px;line-height:1.65;color:var(--fg-muted);margin:0;max-width:62ch;}
+.faq-btn{all:unset;display:block;width:100%;cursor:default;}
+.faq-btn:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 3px rgba(168,184,200,.35);border-radius:4px;}
 
 /* ---- GROWTH MODEL (dark) ------------------------------------------ */
 .growth{position:relative;overflow:hidden;background:var(--night);padding:var(--sec-y-lg) 40px;}
@@ -234,13 +242,13 @@ a{color:inherit;text-decoration:none;}
   .footer-top{grid-template-columns:1fr;}
   .footer-nav{grid-template-columns:repeat(2,1fr);}
   .footer-inner{padding:0 20px;}
-  .hero-inner{padding:72px 20px 56px;}
+  .hero-inner{padding:20px 20px 36px;}
   .proof-grid{padding:0 20px;grid-template-columns:1fr;}
   .proof-card{border-left:0;padding:12px 0;border-top:1px solid rgba(255,255,255,.12);}
   .proof-card:first-child{border-top:0;padding-top:0;}
   .tri-band{grid-template-columns:1fr;padding:0 20px;gap:12px;}
   .tri-wrap{padding-bottom:48px;}
-  .svc-section,.tech-section,.faq-section,.growth,.contact{padding:64px 20px;}
+  .svc-section,.tech-section,.faq-section,.growth,.contact{padding:48px 20px;}
   .svc-grid,.growth-grid,.contact-inner{grid-template-columns:1fr;gap:40px;}
   .form-row{grid-template-columns:1fr;}
   .hero-actions{flex-direction:column;align-items:stretch;gap:12px;}
@@ -248,14 +256,67 @@ a{color:inherit;text-decoration:none;}
   /* T5 — photo canvas ends after hero copy at mobile; proof/division get
      their own solid night bands (translucent-over-photo cards don't read
      well at this width, see session notes). */
-  .hero-photo-layer{top:0;left:0;right:0;bottom:auto;height:560px;}
-  .hero-copy-zone{min-height:560px;}
-  .hero-bg img{object-position:78% 60%;}
+  /* Mobile pass (Nov 2026): stacked hero. The photo becomes its own 16:10
+     band under the nav (whole truck in frame); copy sits below on solid night. */
+  .hero-photo-layer{position:relative;inset:auto;height:min(62.5vw,240px);}
+  .hero-photo-layer::after{display:none;}
+  .hero-copy-zone{min-height:0;}
+  .hero-bg img{object-position:50% 66%;filter:none;}
   .has-js .hero-bg img{transform:none;transition:opacity 400ms var(--ease-out-soft);}
   .has-js .hero-bg.is-loaded img{transform:none;}
-  .hero-bottom-feather{background:linear-gradient(180deg,transparent 0%,transparent 70%,var(--night) 100%);}
-  .hero-veil{background:linear-gradient(180deg,rgba(5,10,18,.55) 0%,rgba(5,10,18,.62) 55%,rgba(5,10,18,.75) 100%);}
-  .hero-caption{display:none;}
+  .hero-bottom-feather{background:linear-gradient(180deg,transparent 0%,transparent 72%,var(--night) 100%);}
+  .hero-veil{display:none;}
+  .hero-caption{position:static;display:grid;justify-items:start;padding:0 20px 28px;}
+  .hero-caption-text,.hero-ai-note{font-size:12px;white-space:normal;text-align:left;text-shadow:none;}
+
+  /* B1 hero type */
+  .hero-title{font-size:37px;line-height:1.08;margin-bottom:16px;text-wrap:balance;}
+  .hero-sub{font-size:16px;line-height:1.55;margin-bottom:24px;}
+  .btn-outline{min-height:48px;justify-content:center;}
+
+  /* B3 headings + rhythm */
+  .h2{font-size:30px;text-wrap:balance;}
+  .growth-card{padding:22px;}
+  .growth-grid{gap:16px;}
+
+  /* B4 text floor: body 16, secondary 14, labels 12 with tighter tracking */
+  .svc-body,.growth-body,.faq-a,.contact-lead{font-size:16px;}
+  .growth-card-body{font-size:15px;}
+  .proof-body,.svc-link{font-size:14px;}
+  .tb-sub,.svc-tag,.cd-label,.field label{font-size:12px;letter-spacing:.12em;}
+  #sms-consent+label,#hqFormError{font-size:14px!important;}
+
+  /* B5 tap targets (hit area grows, visuals stay) */
+  .svc-link{display:inline-flex;align-items:center;min-height:44px;padding-top:0;align-self:flex-start;}
+  .cd-val{margin-bottom:8px;}
+  .cd-val a{display:inline-flex;align-items:center;min-height:44px;}
+
+  /* B6 FAQ accordion: initial state is CSS (item 1 open, 2-5 closed) */
+  .faq-item{padding:4px 0;}
+  .faq-q{margin:0;}
+  .faq-a{padding:0 0 18px;}
+  .faq-js .faq-btn{cursor:pointer;display:flex;align-items:center;min-height:48px;padding:10px 36px 10px 0;position:relative;box-sizing:border-box;}
+  .faq-js .faq-btn::after{content:'';position:absolute;right:8px;top:50%;width:8px;height:8px;border-right:2px solid var(--silver);border-bottom:2px solid var(--silver);transform:translateY(-30%) rotate(-135deg);transition:transform 200ms var(--ease-out-soft);}
+  .faq-js .faq-item:not(:first-child):not(.is-open) .faq-a,.faq-js .faq-item.is-closed .faq-a{display:none;}
+  .faq-js .faq-item:not(:first-child):not(.is-open) .faq-btn::after,.faq-js .faq-item.is-closed .faq-btn::after{transform:translateY(-70%) rotate(45deg);}
+
+  /* B7 form: 16px stops iOS focus-zoom; whole consent label is the tap target */
+  .field input,.field select,.field textarea{font-size:16px;}
+  #sms-consent+label{min-height:44px;margin-left:-26px;padding-left:26px;}
+
+  /* Nav + footer (identical block in shared/css/flogalhq-shell.css) */
+  .nav-brand{min-height:44px;}
+  .footer{padding-top:32px;}
+  .footer-top{gap:20px;padding-bottom:24px;}
+  .footer-tagline{margin-top:10px;}
+  .footer-social{gap:0;margin:1px 0 0 -13px;}
+  .footer-social a{padding:13px;}
+  .footer-nav{gap:8px 24px;}
+  .footer-col{gap:0;}
+  .footer-col-h{font-size:12px;letter-spacing:.12em;margin-bottom:0;}
+  .footer-col a{display:flex;align-items:center;min-height:44px;font-size:14px;}
+  .footer-bottom{padding:8px 0 12px;gap:4px 16px;font-size:12px;}
+  .footer-staff{display:inline-flex;align-items:center;min-height:44px;font-size:12px;}
 
   .proof-band{background:#0B1D2D;padding:24px 0;}
   .tri-wrap{background:var(--night);}
@@ -266,9 +327,10 @@ a{color:inherit;text-decoration:none;}
 }
 @media(max-width:480px){
   .proof-card{padding:10px 0;}
-  .footer-nav{grid-template-columns:1fr;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
 }
 @media(prefers-reduced-motion:reduce){
+  .faq-btn::after{transition:none!important;}
   .has-js .hero-bg img{transition:none!important;transform:none!important;opacity:1!important;}
   .has-js .hero-copy>*{animation:none!important;opacity:1!important;transform:none!important;}
 }
@@ -337,8 +399,8 @@ a{color:inherit;text-decoration:none;}
 <header class="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="/">
-      <img class="nav-symbol" src="../../shared/logos/flogal-symbol-tricolor.png" alt="">
-      <img class="nav-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
+      <img class="nav-symbol" src="../../shared/logos/flogal-symbol-tricolor.png" width="403" height="223" alt="">
+      <img class="nav-wm" src="../../shared/logos/flogal-wordmark-only-white.png" width="2884" height="690" alt="FLOGAL">
     </a>
     <ul class="nav-links">
       <li><a href="https://carriers.flogalhq.com">Carriers</a></li>
@@ -374,7 +436,10 @@ a{color:inherit;text-decoration:none;}
 <section class="hero">
   <div class="hero-photo-layer" aria-hidden="true">
     <div class="hero-bg" id="heroBg">
-      <img src="../../shared/photos/hero-truck-sunset.jpg" alt="">
+      <picture>
+        <source type="image/webp" srcset="../../shared/photos/hero-truck-sunset-640.webp 640w, ../../shared/photos/hero-truck-sunset-960.webp 960w, ../../shared/photos/hero-truck-sunset-1280.webp 1280w, ../../shared/photos/hero-truck-sunset-1536.webp 1536w" sizes="(min-width:861px) 1536px, 100vw">
+        <img src="../../shared/photos/hero-truck-sunset.jpg" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
+      </picture>
     </div>
     <div class="hero-bottom-feather"></div>
   </div>
@@ -398,17 +463,17 @@ a{color:inherit;text-decoration:none;}
   <div class="tri-wrap">
     <div class="tri-band">
       <a href="https://carriers.flogalhq.com" class="tb tb-blue">
-        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Move Freight</span><span class="tb-sub">Carriers</span></div>
         <span class="tb-arrow">→</span>
       </a>
       <a href="https://sales.flogalhq.com" class="tb tb-gold">
-        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Buy Equipment</span><span class="tb-sub">Sales Inventory</span></div>
         <span class="tb-arrow">→</span>
       </a>
       <a href="https://properties.flogalhq.com" class="tb tb-green">
-        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" alt="">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Real Estate</span><span class="tb-sub">Properties</span></div>
         <span class="tb-arrow">→</span>
       </a>
@@ -499,24 +564,24 @@ a{color:inherit;text-decoration:none;}
     <h2 class="h2">Common questions.</h2>
     <div class="faq-list">
       <div class="faq-item">
-        <h3 class="faq-q">What is Flogal?</h3>
-        <p class="faq-a">Flogal is an operator-funded freight platform. It builds and operates a group of freight-native companies (hauling, equipment sales and leasing, and industrial real estate) on a shared operating system.</p>
+        <h3 class="faq-q"><button class="faq-btn" type="button" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">What is Flogal?</button></h3>
+        <p class="faq-a" id="faq-a-1">Flogal is an operator-funded freight platform. It builds and operates a group of freight-native companies (hauling, equipment sales and leasing, and industrial real estate) on a shared operating system.</p>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">Is Flogal a carrier or a broker?</h3>
-        <p class="faq-a">Flogal operates asset-based carriers through fleets we run. It is not a freight broker.</p>
+        <h3 class="faq-q"><button class="faq-btn" type="button" id="faq-q-2" aria-expanded="true" aria-controls="faq-a-2">Is Flogal a carrier or a broker?</button></h3>
+        <p class="faq-a" id="faq-a-2">Flogal operates asset-based carriers through fleets we run. It is not a freight broker.</p>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">Where does Flogal operate?</h3>
-        <p class="faq-a">Flogal's freight operations run primarily on the Oklahoma–Texas corridor. The team also brings nationwide over-the-road and cross-border experience.</p>
+        <h3 class="faq-q"><button class="faq-btn" type="button" id="faq-q-3" aria-expanded="true" aria-controls="faq-a-3">Where does Flogal operate?</button></h3>
+        <p class="faq-a" id="faq-a-3">Flogal's freight operations run primarily on the Oklahoma–Texas corridor. The team also brings nationwide over-the-road and cross-border experience.</p>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">What is Flogal Technologies?</h3>
-        <p class="faq-a">Flogal Technologies is Flogal's internal operating system for maintenance, dispatch, payroll, and per-truck P&amp;L. It runs Flogal's own companies; it is not sold as software.</p>
+        <h3 class="faq-q"><button class="faq-btn" type="button" id="faq-q-4" aria-expanded="true" aria-controls="faq-a-4">What is Flogal Technologies?</button></h3>
+        <p class="faq-a" id="faq-a-4">Flogal Technologies is Flogal's internal operating system for maintenance, dispatch, payroll, and per-truck P&amp;L. It runs Flogal's own companies; it is not sold as software.</p>
       </div>
       <div class="faq-item">
-        <h3 class="faq-q">Does Flogal acquire companies?</h3>
-        <p class="faq-a">Yes. Flogal partners with and acquires freight businesses, fleets, and freight-oriented assets that fit its platform. Sellers and operators can reach out through the contact form.</p>
+        <h3 class="faq-q"><button class="faq-btn" type="button" id="faq-q-5" aria-expanded="true" aria-controls="faq-a-5">Does Flogal acquire companies?</button></h3>
+        <p class="faq-a" id="faq-a-5">Yes. Flogal partners with and acquires freight businesses, fleets, and freight-oriented assets that fit its platform. Sellers and operators can reach out through the contact form.</p>
       </div>
     </div>
   </div>
@@ -535,12 +600,12 @@ a{color:inherit;text-decoration:none;}
     </div>
     <form class="form" id="hqForm" onsubmit="submitHqInquiry(event)">
       <div class="form-row">
-        <div class="field"><label for="fn">First Name</label><input id="fn" placeholder="John"></div>
-        <div class="field"><label for="ln">Last Name</label><input id="ln" placeholder="Smith"></div>
+        <div class="field"><label for="fn">First Name</label><input id="fn" placeholder="John" autocomplete="given-name"></div>
+        <div class="field"><label for="ln">Last Name</label><input id="ln" placeholder="Smith" autocomplete="family-name"></div>
       </div>
-      <div class="field"><label for="co">Company</label><input id="co" placeholder="Company Name"></div>
-      <div class="field"><label for="em">Email</label><input id="em" type="email" placeholder="john@companyname.com"></div>
-      <div class="field"><label for="hq-phone">Phone</label><input id="hq-phone" type="tel" placeholder="Phone number"></div>
+      <div class="field"><label for="co">Company</label><input id="co" placeholder="Company Name" autocomplete="organization"></div>
+      <div class="field"><label for="em">Email</label><input id="em" type="email" placeholder="john@companyname.com" autocomplete="email" inputmode="email"></div>
+      <div class="field"><label for="hq-phone">Phone</label><input id="hq-phone" type="tel" placeholder="Phone number" autocomplete="tel" inputmode="tel"></div>
       <div class="field"><label for="iq">Inquiry Type</label>
         <select id="iq">
           <option value="">Select…</option>
@@ -581,8 +646,8 @@ a{color:inherit;text-decoration:none;}
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-lockup">
-          <img class="footer-symbol" src="../../shared/logos/flogal-symbol-tricolor.png" alt="">
-          <img class="footer-wm" src="../../shared/logos/flogal-wordmark-only-white.png" alt="FLOGAL">
+          <img class="footer-symbol" src="../../shared/logos/flogal-symbol-tricolor.png" width="403" height="223" alt="">
+          <img class="footer-wm" src="../../shared/logos/flogal-wordmark-only-white.png" width="2884" height="690" alt="FLOGAL">
         </div>
         <p class="footer-tagline">Asset-backed across the freight stack.</p>
         <div class="footer-social">
@@ -658,6 +723,32 @@ a{color:inherit;text-decoration:none;}
       btn.focus();
     }
   });
+})();
+</script>
+
+<!-- FAQ ACCORDION (phones only; initial open/closed state comes from CSS) -->
+<script>
+(function(){
+  var mq = window.matchMedia('(max-width:860px)');
+  var items = [].slice.call(document.querySelectorAll('.faq-item'));
+  function isOpen(item){ return getComputedStyle(item.querySelector('.faq-a')).display !== 'none'; }
+  // Desktop shows every answer, so the buttons step out of the tab order and drop their state.
+  function syncAria(){ items.forEach(function(item){
+    var btn = item.querySelector('.faq-btn');
+    if (mq.matches) { btn.removeAttribute('tabindex'); btn.setAttribute('aria-expanded', String(isOpen(item))); btn.setAttribute('aria-controls', item.querySelector('.faq-a').id); }
+    else { btn.tabIndex = -1; btn.removeAttribute('aria-expanded'); btn.removeAttribute('aria-controls'); }
+  }); }
+  items.forEach(function(item){
+    item.querySelector('.faq-btn').addEventListener('click', function(){
+      if (!mq.matches) return;
+      var open = isOpen(item);
+      item.classList.toggle('is-open', !open);
+      item.classList.toggle('is-closed', open);
+      syncAria();
+    });
+  });
+  if (mq.addEventListener) { mq.addEventListener('change', syncAria); } else if (mq.addListener) { mq.addListener(syncAria); }
+  syncAria();
 })();
 </script>
 
