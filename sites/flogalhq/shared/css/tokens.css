@@ -3,9 +3,9 @@
    type, spacing, radii, shadows) with one addition: --accent.
 
    Each site sets exactly one override —
-     :root{ --accent:#C9A84C; }   (sales   — gold,  see CLAUDE.md brand accents)
-     :root{ --accent:#4A90D9; }   (carriers — blue)
-     :root{ --accent:#4CAF7D; }   (properties — green)
+     :root{ --accent:#EFA01A; }   (sales   — gold,  see CLAUDE.md brand accents)
+     :root{ --accent:#0A72CF; }   (carriers — blue)
+     :root{ --accent:#068A44; }   (properties — green)
    — placed in the site's own inline <style> block, after this file is
    linked. admin/ already implements this pattern natively in styles.css
    (role-based --accent, swapped via JS) and does not link this file.

@@ -101,8 +101,8 @@ img{display:block;}
 
 /* Entity cards grid */
 .ent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--hair);}
-.ent-card{background:white;padding:24px 20px;position:relative;display:flex;flex-direction:column;gap:10px;border-top:3px solid;transition:box-shadow 180ms,transform 180ms;}
-.ent-card:hover{box-shadow:0 8px 24px rgba(11,29,45,.1);transform:translateY(-2px);}
+.ent-card{background:white;padding:24px 20px;position:relative;display:flex;flex-direction:column;gap:10px;border-top:3px solid;transition:box-shadow 180ms;}
+.ent-card:hover{box-shadow:0 8px 24px rgba(11,29,45,.1);}
 .ent-badge{display:inline-flex;align-items:center;gap:8px;}
 .ent-mark{height:36px;width:auto;flex:none;}
 .ent-name{font-weight:700;font-size:18px;color:var(--navy);letter-spacing:-.01em;line-height:1.2;margin-top:2px;}
@@ -190,11 +190,10 @@ img{display:block;}
 }
 :focus-visible{outline:none;box-shadow:0 0 0 3px rgba(168,184,200,.35);border-radius:4px;}
 </style>
-<link rel="icon" type="image/x-icon" href="../../../shared/favicons/flogalhq/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="../../../shared/favicons/flogalhq/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../../../shared/favicons/flogalhq/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../../../shared/favicons/flogalhq/apple-touch-icon.png">
-<link rel="icon" sizes="192x192" href="../../../shared/favicons/flogalhq/android-chrome-192x192.png">
+<link rel="icon" href="../favicon.ico?v=3" sizes="48x48">
+<link rel="icon" href="../icon.svg?v=3" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=3">
+<link rel="manifest" href="../site.webmanifest?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -303,32 +302,32 @@ img{display:block;}
 
       <!-- Entities -->
       <div class="ent-grid">
-        <div class="ent-card" style="border-top-color:#4A90D9;">
+        <div class="ent-card" style="border-top-color:#0A72CF;">
           <div class="ent-badge">
-            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-blue.png" alt="">
-            <span class="ent-type" style="color:#4A90D9;">Operating</span>
+            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-vivid-blue.png" alt="">
+            <span class="ent-type" style="color:#0A72CF;">Operating</span>
           </div>
           <div class="ent-name">Flogal Carriers</div>
           <div class="ent-desc">Asset-based freight and hauling, operated through fleets we run across Oklahoma and Texas.</div>
-          <a class="ent-link" style="color:#4A90D9;" href="https://carriers.flogalhq.com">Carriers →</a>
+          <a class="ent-link" style="color:#0A72CF;" href="https://carriers.flogalhq.com">Carriers →</a>
         </div>
-        <div class="ent-card" style="border-top-color:#C9A84C;">
+        <div class="ent-card" style="border-top-color:#EFA01A;">
           <div class="ent-badge">
-            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-gold.png" alt="">
-            <span class="ent-type" style="color:#C9A84C;">Equipment</span>
+            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-vivid-gold.png" alt="">
+            <span class="ent-type" style="color:var(--gold-700);">Equipment</span>
           </div>
           <div class="ent-name">Flogal Sales</div>
           <div class="ent-desc">Truck, trailer, and equipment sales and leasing.</div>
-          <a class="ent-link" style="color:#C9A84C;" href="https://sales.flogalhq.com">Inventory →</a>
+          <a class="ent-link" style="color:var(--gold-700);" href="https://sales.flogalhq.com">Inventory →</a>
         </div>
-        <div class="ent-card" style="border-top-color:#4CAF7D;">
+        <div class="ent-card" style="border-top-color:#068A44;">
           <div class="ent-badge">
-            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-green.png" alt="">
-            <span class="ent-type" style="color:#4CAF7D;">Real Estate</span>
+            <img class="ent-mark" src="../../../shared/logos/flogal-symbol-vivid-green.png" alt="">
+            <span class="ent-type" style="color:#017D3E;">Real Estate</span>
           </div>
           <div class="ent-name">Flogal Properties</div>
           <div class="ent-desc">Industrial real estate and freight-oriented land and facilities.</div>
-          <a class="ent-link" style="color:#4CAF7D;" href="https://properties.flogalhq.com">Properties →</a>
+          <a class="ent-link" style="color:#017D3E;" href="https://properties.flogalhq.com">Properties →</a>
         </div>
         <div class="ent-card" style="border-top-color:#0F172A;">
           <div class="ent-badge">

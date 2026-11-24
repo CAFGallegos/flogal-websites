@@ -169,8 +169,8 @@ without a build system? Where's the line before this needs tooling?
 DECISION: The two-layer system (brand.css = all shared tokens; tokens.css =
 thin @import + default `--accent`) scales to 8+ sites unchanged. Fix the one
 structural wrinkle: per-site accent overrides currently live in inline
-`<style>:root{--accent:...}</style>` blocks on each page (sales #C9A84C,
-carriers #4A90D9, properties #4CAF7D; flogalhq takes the navy default). Once
+`<style>:root{--accent:...}</style>` blocks on each page (sales #EFA01A,
+carriers #0A72CF, properties #068A44; flogalhq takes the navy default). Once
 §1's sync makes `sites/<name>/shared/` generated output, move each site's
 override into ONE site-owned file outside shared/ (`sites/<name>/site.css`,
 linked after tokens.css) so the sync never clobbers it and pages within a

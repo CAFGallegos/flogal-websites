@@ -26,7 +26,7 @@ const T = {
   fg: 'var(--op-night-fg)', dim: 'var(--op-night-fg-dim)', faint: 'var(--op-night-fg-faint)',
   blue: 'var(--accent)', blueStrong: 'var(--op-night-blue-strong)', blueLt: '#9CC4EE',
 };
-const LIT = { night: '#050A12', fg: '#E8EEF6', dim: '#94A6BD', blue: '#4A90D9', blueLt: '#9CC4EE' };
+const LIT = { night: '#050A12', fg: '#E8EEF6', dim: '#94A6BD', blue: '#0A72CF', blueLt: '#9CC4EE' };
 const FONT = 'var(--font-sans)';
 const MONO = 'var(--font-mono)';
 const HI = new Set(['Oklahoma', 'Texas']);
@@ -142,8 +142,8 @@ function css() {
     // the card lands with the end of the move, and leaves at once
     if (!isP) o.push(`.sec:has(.t-${f.id}:hover) .card-${f.id},.sec:has(.t-${f.id}:focus) .card-${f.id}{opacity:1;transition-delay:calc(var(--mv) - var(--ui));}`);
   });
-  LANES.forEach(l => o.push(`.sec:has(.t-${l.id}:hover) .v-${l.id},.sec:has(.t-${l.id}:focus) .v-${l.id}{stroke-width:3.4;stroke-opacity:1;filter:drop-shadow(0 0 6px rgba(74,144,217,.65));}`));
-  PARTNERS.forEach(p => o.push(`.sec:has(.t-${p.id}:hover) .v-${p.id},.sec:has(.t-${p.id}:focus) .v-${p.id}{stroke-opacity:1;stroke-width:2.4;filter:drop-shadow(0 0 7px rgba(74,144,217,.7));}`));
+  LANES.forEach(l => o.push(`.sec:has(.t-${l.id}:hover) .v-${l.id},.sec:has(.t-${l.id}:focus) .v-${l.id}{stroke-width:3.4;stroke-opacity:1;filter:drop-shadow(0 0 6px rgba(10,114,207,.65));}`));
+  PARTNERS.forEach(p => o.push(`.sec:has(.t-${p.id}:hover) .v-${p.id},.sec:has(.t-${p.id}:focus) .v-${p.id}{stroke-opacity:1;stroke-width:2.4;filter:drop-shadow(0 0 7px rgba(10,114,207,.7));}`));
   // callout button size: rest (region + count) vs. press (name list). Both
   // states must come from a class, not inline style — inline style always
   // beats a class selector's specificity, :focus included, so a focus rule
@@ -197,7 +197,7 @@ function mapSvg() {
     ? `<g filter="url(#coast)">${P.landNA.map((d, i) => `<use href="#opm-landp${i}" fill="#17293D" stroke="#17293D" stroke-width=".7" vector-effect="non-scaling-stroke"/>`).join('')}</g>`
     : `<g>${P.landNA.map(d => `<path d="${d}" fill="#17293D" stroke="#17293D" stroke-width=".7" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
   const terr = `<g class="terr">${P.states.filter(s => HI.has(s.name)).map(s =>
-    `<path d="${s.d}" fill="rgba(74,144,217,.16)" stroke="#9CC4EE" stroke-opacity=".34" stroke-width="1" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
+    `<path d="${s.d}" fill="rgba(10,114,207,.16)" stroke="#9CC4EE" stroke-opacity=".34" stroke-width="1" vector-effect="non-scaling-stroke"/>`).join('')}</g>`;
   // State-line tier: every other US state plus every Mexican state, one shared
   // style — medium weight, between the OK/TX counties (lightest) and the
   // coastline (heaviest). OK/TX are excluded: they already carry the filled
@@ -212,7 +212,7 @@ function mapSvg() {
 
   const laneV = LANES.map(l => {
     const g = laneGeom(l);
-    const st = l.k === 'p' ? LIT.blue : l.k === 'x' ? 'rgba(74,144,217,.78)' : 'rgba(232,238,246,.5)';
+    const st = l.k === 'p' ? LIT.blue : l.k === 'x' ? 'rgba(10,114,207,.78)' : 'rgba(232,238,246,.5)';
     return `<path class="ln v-${l.id}" d="${g.d}" fill="none" stroke="${st}" stroke-width="${l.k === 'p' ? 2.8 : 1.5}" stroke-linecap="round" vector-effect="non-scaling-stroke"${l.k === 'x' ? ' stroke-dasharray="5 5"' : ''}/>`;
   }).join('');
 
@@ -229,7 +229,7 @@ function mapSvg() {
 
   const partnerV = PARTNERS.map(p => {
     const [x, y] = PR[p.key], d = 6;
-    return `<path class="dia v-${p.id}" d="M${x},${y - d} L${x + d},${y} L${x},${y + d} L${x - d},${y} Z" fill="rgba(74,144,217,.2)" stroke="#9CC4EE" stroke-opacity=".72" stroke-width="1.3" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
+    return `<path class="dia v-${p.id}" d="M${x},${y - d} L${x + d},${y} L${x},${y + d} L${x - d},${y} Z" fill="rgba(10,114,207,.2)" stroke="#9CC4EE" stroke-opacity=".72" stroke-width="1.3" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`;
   }).join('');
 
   // ---- partner callouts (static: leader lines stay true because nothing moves)
@@ -278,7 +278,7 @@ function mapSvg() {
   ].join('');
 
   return `<svg class="viz" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" role="img" aria-label="Flogal owned corridor and partner network across North America">
-<defs><radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#4A90D9" stop-opacity=".2"/><stop offset="1" stop-color="#4A90D9" stop-opacity="0"/></radialGradient></defs>
+<defs><radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#0A72CF" stop-opacity=".2"/><stop offset="1" stop-color="#0A72CF" stop-opacity="0"/></radialGradient></defs>
 <defs>${landClip}</defs>
 <g class="zoomable">${land}${relief}<ellipse class="pool" cx="${C['DFW'][0] - 6}" cy="${(C['DFW'][1] + C['Oklahoma City'][1]) / 2}" rx="116" ry="96" fill="url(#pool)"/>${terr}${adm1}${counties}${zoomNodes}${laneV}${hq}${restNodes}${partnerV}</g>
 </svg>
@@ -292,7 +292,7 @@ const SWATCH = {
   p: `<i style="width:15px;height:3px;border-radius:2px;background:${T.blue};flex:0 0 auto"></i>`,
   a: `<i style="width:15px;height:2px;border-radius:2px;background:rgba(232,238,246,.42);flex:0 0 auto"></i>`,
   x: `<i style="width:15px;height:2px;border-radius:2px;flex:0 0 auto;background:repeating-linear-gradient(90deg,${T.blue} 0 4px,transparent 4px 7px)"></i>`,
-  d: `<i style="width:8px;height:8px;background:rgba(74,144,217,.2);border:1px solid ${T.blueLt};transform:rotate(45deg);flex:0 0 auto"></i>`,
+  d: `<i style="width:8px;height:8px;background:rgba(10,114,207,.2);border:1px solid ${T.blueLt};transform:rotate(45deg);flex:0 0 auto"></i>`,
 };
 function row(cls, swatch, name, meta) {
   return `<div class="row ${cls}" tabindex="0" role="button">
@@ -460,8 +460,8 @@ const CSS = `/* ---- Network & active lanes: map -------------------------------
 .op-lanes-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;
   margin-top:34px;padding-top:22px;border-top:1px solid var(--op-rule);}
 .op-lanes-contact{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;}
-.op-lanes-contact a{text-decoration:none;color:${T.blueStrong};font-size:14px;}
-.op-lanes-contact a:hover{color:#9CC4EE;}
+.op-lanes-contact a{text-decoration:none;color:var(--op-blue);font-size:14px;}
+.op-lanes-contact a:hover{color:var(--op-blue-strong);}
 .op-lanes-tel{font-family:${MONO};font-size:15px;font-weight:600;letter-spacing:.01em;}
 .op-lanes-serving{font-size:12.5px;color:${T.faint};}
 .op-lanes-count{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${T.faint};}

@@ -23,7 +23,7 @@
 
 /* ---- Tokens ---- */
 :root{
-  --accent:#4CAF7D; /* properties brand accent — see CLAUDE.md brand accents */
+  --accent:#068A44; /* properties brand accent — see CLAUDE.md brand accents */
   --flogal-green:#165E3A;
   --green-300:#5B9C7E;
   --green-400:#2D7A56;
@@ -66,7 +66,7 @@ button{font-family:inherit;}
 .pr-wm{height:23px;width:auto;display:block;flex:none;margin-top:-4px;}
 
 .pr-divider{width:1px;height:16px;background:rgba(255,255,255,.25);}
-.pr-sub-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:6px;}
+.pr-sub-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#38A169;margin-top:6px;}
 .pr-nav-links{display:flex;gap:28px;flex:1;margin-left:16px;align-items:center;}
 .pr-nav-link{font-size:13px;font-weight:500;color:rgba(255,255,255,.74);text-decoration:none;transition:color 150ms,text-decoration-color 150ms;}
 .pr-nav-link:hover{color:white;text-decoration:underline;text-underline-offset:4px;}
@@ -74,19 +74,19 @@ button{font-family:inherit;}
 #propSubmitBtn{outline:none;transition:filter 160ms,transform 160ms,box-shadow 160ms;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);}
 #propSubmitBtn:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 3px 8px rgba(5,10,18,.32),0 6px 18px rgba(5,10,18,.22);}
 #propSubmitBtn:active{filter:none;transform:translateY(0);box-shadow:inset 0 1px 2px rgba(5,10,18,.25),0 1px 2px rgba(5,10,18,.25);}
-#propSubmitBtn:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 3px rgba(76,175,125,.35);}
+#propSubmitBtn:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 2px #FFFFFF,0 0 0 4px #068A44;}
 .pr-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:6px;font-family:var(--font-sans);font-weight:700;font-size:13px;letter-spacing:.01em;text-decoration:none;background:transparent;color:white;border:1px solid rgba(255,255,255,.34);transition:all 160ms cubic-bezier(.2,.6,.2,1);white-space:nowrap;cursor:pointer;outline:none;}
 .pr-cta-btn:hover{background:white;color:var(--flogal-navy);border-color:white;transform:translateY(-1px);box-shadow:0 3px 8px rgba(5,10,18,.22);}
 .pr-cta-btn:active{transform:translateY(0);box-shadow:none;}
-.pr-cta-btn:focus-visible{box-shadow:0 0 0 3px rgba(76,175,125,.35);}
-.pr-cta-green{background:var(--accent);color:var(--flogal-navy) !important;border-color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);}
-.pr-cta-green:hover{background:var(--green-400) !important;border-color:var(--green-400) !important;transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 3px 8px rgba(5,10,18,.32),0 6px 18px rgba(5,10,18,.22);}
+.pr-cta-btn:focus-visible{box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #068A44;}
+.pr-cta-green{background:#017D3E;color:#fff !important;border-color:#017D3E;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);}
+.pr-cta-green:hover{background:#016B35 !important;border-color:#016B35 !important;transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 3px 8px rgba(5,10,18,.32),0 6px 18px rgba(5,10,18,.22);}
 .pr-cta-green:active{transform:translateY(0);box-shadow:inset 0 1px 2px rgba(5,10,18,.25),0 1px 2px rgba(5,10,18,.25);}
-.pr-cta-green:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 3px rgba(76,175,125,.35);}
+.pr-cta-green:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 2px #FFFFFF,0 0 0 4px #068A44;}
 .pr-cta-ghost{background:transparent;color:white;border-color:rgba(255,255,255,.28);}
 .pr-cta-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.48);color:white;transform:translateY(-1px);box-shadow:0 2px 6px rgba(5,10,18,.18);}
 .pr-cta-ghost:active{transform:translateY(0);box-shadow:none;}
-.pr-cta-ghost:focus-visible{box-shadow:0 0 0 3px rgba(76,175,125,.35);}
+.pr-cta-ghost:focus-visible{box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #068A44;}
 
 /* ---- Nav toggle (mobile) ---- */
 .pr-nav-toggle{display:none;position:relative;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;padding:0;margin-left:auto;background:transparent;border:0;cursor:pointer;flex:none;}
@@ -115,7 +115,7 @@ button{font-family:inherit;}
 
 /* ---- WHAT WE BUY ---- */
 .pr-h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-.02em;line-height:1.1;color:var(--flogal-navy);}
-.pr-section-eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+.pr-section-eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#017D3E;}
 .pr-buy{max-width:1440px;margin:0 auto;padding:96px 40px;}
 .pr-buy-inner{max-width:1440px;margin:0 auto;}
 .pr-buy-body{margin:16px 0 40px;font-size:16px;line-height:1.62;color:var(--fg-muted);max-width:var(--measure);}
@@ -212,8 +212,8 @@ button{font-family:inherit;}
   .pr-mobile-nav-links a{display:block;padding:12px 4px;font-size:20px;line-height:28px;font-weight:600;color:rgba(255,255,255,.92);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08);}
   .pr-mobile-nav-links a:hover{color:white;}
   .pr-mobile-nav-signin{display:block;padding:12px 4px;font-size:14px;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;}
-  .pr-mobile-nav-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:12px;padding:14px 24px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.01em;background:var(--accent);color:var(--flogal-navy);text-decoration:none;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);transition:box-shadow 150ms;}
-  .pr-mobile-nav-cta:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 3px rgba(76,175,125,.35);}
+  .pr-mobile-nav-cta{display:flex;align-items:center;justify-content:center;width:100%;margin-top:12px;padding:14px 24px;border-radius:6px;font-weight:700;font-size:15px;letter-spacing:.01em;background:#017D3E;color:#fff;text-decoration:none;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);transition:box-shadow 150ms;}
+  .pr-mobile-nav-cta:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 2px #FFFFFF,0 0 0 4px #068A44;}
 }
 @media(max-width:540px){
   .pr-type-grid{grid-template-columns:1fr;}
@@ -223,13 +223,12 @@ button{font-family:inherit;}
 @media (prefers-reduced-motion: reduce){
   .pr-nav-toggle-bar{transition:none;}
 }
-:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(76,175,125,.35);border-radius:4px;}
+:focus-visible{outline:none;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #068A44;border-radius:4px;}
 </style>
-<link rel="icon" type="image/x-icon" href="../../shared/favicons/properties/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="../../shared/favicons/properties/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../../shared/favicons/properties/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../../shared/favicons/properties/apple-touch-icon.png">
-<link rel="icon" sizes="192x192" href="../../shared/favicons/properties/android-chrome-192x192.png">
+<link rel="icon" href="favicon.ico?v=3" sizes="48x48">
+<link rel="icon" href="icon.svg?v=3" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+<link rel="manifest" href="site.webmanifest?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -535,7 +534,7 @@ button{font-family:inherit;}
   <div style="background:white;border-radius:12px;width:100%;max-width:480px;margin:20px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.28);">
     <div style="background:#0B2A1A;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;">
       <div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Properties</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#38A169;margin-bottom:4px;">Properties</div>
         <div id="propModalTitle" style="color:white;font-weight:700;font-size:20px;letter-spacing:-.01em;">Get in Touch</div>
       </div>
       <button onclick="closePropModal()" style="background:rgba(255,255,255,.12);border:0;cursor:pointer;color:white;width:36px;height:36px;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;">&#215;</button>

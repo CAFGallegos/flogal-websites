@@ -27,7 +27,7 @@
 
 /* ---- FOOTER ---- */
 .footer{position:relative;background:var(--night);padding:56px 0 0;}
-.footer::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:var(--footer-bar-h,4px);background:linear-gradient(90deg,#4A90D9 0%,#C9A84C 50%,#4CAF7D 100%);}
+.footer::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:var(--footer-bar-h,4px);background:linear-gradient(90deg,#0A72CF 0%,#EFA01A 50%,#068A44 100%);}
 .footer-inner{max-width:1440px;margin:0 auto;padding:0 40px;}
 .footer-top{display:grid;grid-template-columns:260px 1fr;gap:56px;padding-bottom:48px;}
 .footer-brand{display:flex;flex-direction:column;}

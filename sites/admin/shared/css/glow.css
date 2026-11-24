@@ -28,10 +28,10 @@
   border-radius: 17px;
   background: conic-gradient(
     from var(--glow-angle),
-    #4A90D9 0%,
-    #C9A84C 33%,
-    #4CAF7D 66%,
-    #4A90D9 100%
+    #0A72CF 0%,
+    #EFA01A 33%,
+    #068A44 66%,
+    #0A72CF 100%
   );
   animation: glow-spin 4s linear infinite;
   filter: blur(8px);

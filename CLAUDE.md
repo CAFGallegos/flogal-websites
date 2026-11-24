@@ -44,8 +44,8 @@ industrial/, rrtl/, or jd-hauling/.
   fonts.
 
 ## Brand accents (backgrounds/structure stay uniform; accent varies)
-flogalhq: tricolor symbol, white wordmark | sales: gold #C9A84C |
-carriers: blue #4A90D9 | properties: green #4CAF7D |
+flogalhq: tricolor symbol, white wordmark | sales: gold #EFA01A |
+carriers: blue #0A72CF | properties: green #068A44 |
 admin: navy #0F172A + silver #94A3B8.
 Per-site accent = ONE `:root{--accent:...}` override in the site's inline
 <style>, placed AFTER the shared/css/tokens.css link so it wins. Never edit

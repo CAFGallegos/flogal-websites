@@ -115,19 +115,17 @@ a{color:inherit;text-decoration:none;}
 /* ---- DIVISION LINKS ROW (glass accent cards over the photo road) -- */
 .tri-wrap{position:relative;padding:0 0 36px;}
 .tri-band{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.tb{display:flex;align-items:center;gap:16px;padding:22px 28px;min-height:88px;color:var(--navy);border:1px solid rgba(255,255,255,.18);transition:background-color 150ms,transform 150ms,box-shadow 150ms;border-radius:8px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);text-shadow:0 1px 2px rgba(255,255,255,.25);}
-.tb:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,10,18,.35);}
-.tb-blue{background-color:rgba(74,144,217,.67);}
-.tb-blue:hover{background-color:#4A90D9;}
-.tb-gold{background-color:rgba(201,168,76,.65);}
-.tb-gold:hover{background-color:#C9A84C;}
-.tb-green{background-color:rgba(76,175,125,.65);}
-.tb-green:hover{background-color:#4CAF7D;}
+/* Division cards: neutral navy surface, 3px vivid top border (border 1->3px, padding-top 22->20px: box and content position unchanged), vivid symbol + tag. Hover = border/shadow only. */
+.tb{display:flex;align-items:center;gap:16px;padding:20px 28px 22px;min-height:88px;color:white;background-color:var(--navy);border:1px solid rgba(255,255,255,.18);border-top:3px solid var(--tb-c);transition:border-color 150ms,box-shadow 150ms;border-radius:8px;}
+.tb:hover{box-shadow:0 8px 24px rgba(5,10,18,.35);border-color:rgba(255,255,255,.32);border-top-color:var(--tb-c);}
+.tb-blue{--tb-c:#0A72CF;--tb-t:#4594DB;}
+.tb-gold{--tb-c:#EFA01A;--tb-t:#EFA01A;}
+.tb-green{--tb-c:#068A44;--tb-t:#38A169;}
 .tb-mark{height:26px;width:auto;flex:none;}
 .tb-text{display:flex;flex-direction:column;gap:4px;}
 .tb-name{font-weight:700;font-size:20px;letter-spacing:-.01em;}
-.tb-sub{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;}
-.tb-arrow{margin-left:auto;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(11,29,45,.15);font-size:15px;}
+.tb-sub{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--tb-t);}
+.tb-arrow{margin-left:auto;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);font-size:15px;}
 
 /* ---- CREDIBILITY STRIP (thin fade-out tail of the hero scene) ----- */
 .proof-band{position:relative;padding:22px 0 26px;
@@ -168,7 +166,7 @@ a{color:inherit;text-decoration:none;}
 .faq-q{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 8px;letter-spacing:-.005em;}
 .faq-a{font-size:15px;line-height:1.65;color:var(--fg-muted);margin:0;max-width:62ch;}
 .faq-btn{all:unset;display:block;width:100%;cursor:default;}
-.faq-btn:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 3px rgba(168,184,200,.35);border-radius:4px;}
+.faq-btn:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #0A72CF;border-radius:4px;}
 
 /* ---- GROWTH MODEL (dark) ------------------------------------------ */
 .growth{position:relative;overflow:hidden;background:var(--night);padding:var(--sec-y-lg) 40px;}
@@ -213,7 +211,7 @@ a{color:inherit;text-decoration:none;}
 
 /* ---- FOOTER ---- */
 .footer{position:relative;background:var(--night);padding:56px 0 0;}
-.footer::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:var(--footer-bar-h,4px);background:linear-gradient(90deg,#4A90D9 0%,#C9A84C 50%,#4CAF7D 100%);}
+.footer::before{content:'';display:block;position:absolute;top:0;left:0;right:0;height:var(--footer-bar-h,4px);background:linear-gradient(90deg,#0A72CF 0%,#EFA01A 50%,#068A44 100%);}
 .footer-inner{max-width:1440px;margin:0 auto;padding:0 40px;}
 .footer-top{display:grid;grid-template-columns:260px 1fr;gap:56px;padding-bottom:48px;}
 .footer-brand{display:flex;flex-direction:column;}
@@ -321,10 +319,7 @@ a{color:inherit;text-decoration:none;}
 
   .proof-band{background:#0B1D2D;padding:24px 0;}
   .tri-wrap{background:var(--night);}
-  .tb{backdrop-filter:none;-webkit-backdrop-filter:none;border-color:transparent;}
-  .tb-blue{background:#4A90D9;}
-  .tb-gold{background:#C9A84C;}
-  .tb-green{background:#4CAF7D;}
+  .tb{border-color:transparent;border-top-color:var(--tb-c);}
 }
 @media(max-width:480px){
   .proof-card{padding:10px 0;}
@@ -337,11 +332,10 @@ a{color:inherit;text-decoration:none;}
 }
 :focus-visible{outline:none;box-shadow:0 0 0 3px rgba(168,184,200,.35);border-radius:4px;}
 </style>
-<link rel="icon" type="image/x-icon" href="../../shared/favicons/flogalhq/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="../../shared/favicons/flogalhq/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../../shared/favicons/flogalhq/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="../../shared/favicons/flogalhq/apple-touch-icon.png">
-<link rel="icon" sizes="192x192" href="../../shared/favicons/flogalhq/android-chrome-192x192.png">
+<link rel="icon" href="favicon.ico?v=3" sizes="48x48">
+<link rel="icon" href="icon.svg?v=3" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+<link rel="manifest" href="site.webmanifest?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -464,17 +458,17 @@ a{color:inherit;text-decoration:none;}
   <div class="tri-wrap">
     <div class="tri-band">
       <a href="https://carriers.flogalhq.com" class="tb tb-blue">
-        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" width="390" height="200" alt="">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-blue.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Move Freight</span><span class="tb-sub">Carriers</span></div>
         <span class="tb-arrow">→</span>
       </a>
       <a href="https://sales.flogalhq.com" class="tb tb-gold">
-        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" width="390" height="200" alt="">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-gold.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Buy Equipment</span><span class="tb-sub">Sales Inventory</span></div>
         <span class="tb-arrow">→</span>
       </a>
       <a href="https://properties.flogalhq.com" class="tb tb-green">
-        <img class="tb-mark" src="../../shared/logos/flogal-symbol-navy.png" width="390" height="200" alt="">
+        <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-green.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Real Estate</span><span class="tb-sub">Properties</span></div>
         <span class="tb-arrow">→</span>
       </a>
