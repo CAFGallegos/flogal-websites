@@ -1,0 +1,170 @@
+/* FLOGAL: one glass material (flogalhq.com pages)
+   Link AFTER the page's inline <style> so these rules win at equal specificity:
+     <link rel="stylesheet" href="{relative-path}/shared/css/glass.css">
+   An element that carries a glass class gets its fill, edge, radius, highlight,
+   shadow and blur from here. The page's own rule sets layout only.
+
+   .glass          full glass: blur + translucent fill + 1px edge + highlight + shadow.
+                   Only where busy content sits behind it. Never nest one inside another.
+   .glass-lite     no blur, no shadow: for flat backgrounds.
+   .on-light       light-background variant (use with .glass-lite).
+   .glass-primary  solid navy (primary button, holdco card).
+   .glass-ctl      button radius.
+   .glass--photo   full glass that sits over a photo (hero tiles, hero Contact us):
+                   lighter no-blur fallback, pale labels on phones.
+   .glass--blue | .glass--gold | .glass--green   division tint + ink. */
+
+:root{
+  /* The one blur, blur(16px) saturate(160%), is written out in each rule that uses it:
+     Safari 18 can drop a backdrop-filter whose value comes from var(). */
+  --glass-radius:14px;  --glass-radius-ctl:10px;   /* panels / buttons */
+  --glass-fill:rgba(11,29,45,.50);                 /* full glass over photo */
+  --glass-fill-bar:rgba(11,29,45,.72);             /* nav + mobile menu (text over any content) */
+  --glass-fill-photo-phone:rgba(11,29,45,.62);     /* hero tiles on phones */
+  --glass-fill-lite:rgba(255,255,255,.05);         /* glass-lite on flat dark */
+  --glass-fill-lite-light:rgba(255,255,255,.72);   /* glass-lite on flat light */
+  --glass-solid:rgba(11,29,45,.98);                /* no-blur fallback: bar, menu, overlays */
+  --glass-solid-lite:rgba(11,29,45,.96);  --glass-solid-light:#FFFFFF;   /* no-blur fallback: flat cards */
+  --glass-solid-photo:rgba(11,29,45,.85);          /* no-blur fallback over a photo: it stays faintly visible */
+  --glass-ink-blue:#4D9BE0;  --glass-ink-gold:#EFA01A;  --glass-ink-green:#3FAB72;   /* division inks on dark */
+  --glass-ink-pale-blue:#BCDAF3;  --glass-ink-pale-gold:#F8D8A0;  --glass-ink-pale-green:#9BD3B6;   /* phone labels over the photo */
+  --glass-border:rgba(255,255,255,.16);  --glass-border-hover:rgba(255,255,255,.28);
+  --glass-border-light:rgba(11,29,45,.12);  --glass-border-light-hover:rgba(11,29,45,.22);
+  --glass-highlight:inset 0 1px 0 rgba(255,255,255,.18);   /* the one highlight */
+  --glass-shadow:0 8px 24px rgba(5,10,18,.24);             /* the one shadow, full glass only */
+  --glass-tint:#FFFFFF;  --glass-tint-rest:0%;  --glass-tint-hover:6%;   /* neutral */
+  --glass-ink:currentColor;
+}
+.glass--blue {--glass-tint:#0A72CF;--glass-tint-rest:14%;--glass-tint-hover:18%;--glass-ink:var(--glass-ink-blue);}
+.glass--gold {--glass-tint:#EFA01A;--glass-tint-rest:14%;--glass-tint-hover:18%;--glass-ink:var(--glass-ink-gold);}
+.glass--green{--glass-tint:#068A44;--glass-tint-rest:14%;--glass-tint-hover:18%;--glass-ink:var(--glass-ink-green);}
+.on-light.glass--blue{--glass-ink:#0968BD;}
+.on-light.glass--gold{--glass-ink:#896713;}
+.on-light.glass--green{--glass-ink:#01783B;}
+/* On white the tint is a whisper: colour comes from the symbols and labels. */
+.on-light.glass--blue,.on-light.glass--gold,.on-light.glass--green{--glass-tint-rest:6%;}
+/* Phones: the tiles cross the bright part of the photo: deeper fill, pale labels. Hover keeps
+   the rest tint (only the edge brightens): a stronger tint drops gold and green under 4.5:1. */
+@media (max-width:860px){
+  .glass--photo.glass--blue,.glass--photo.glass--gold,.glass--photo.glass--green{--glass-fill:var(--glass-fill-photo-phone);--glass-tint-hover:14%;}
+  .glass--photo.glass--blue {--glass-ink:var(--glass-ink-pale-blue);}
+  .glass--photo.glass--gold {--glass-ink:var(--glass-ink-pale-gold);}
+  .glass--photo.glass--green{--glass-ink:var(--glass-ink-pale-green);}
+}
+
+/* ---- Material ------------------------------------------------------- */
+.glass,.glass-lite,.nav-cta,.mobile-nav-cta{
+  --_fill:var(--glass-fill); --_edge:var(--glass-border); --_a:var(--glass-tint-rest);
+  background-color:var(--_fill);
+  border:1px solid var(--_edge); border-radius:var(--glass-radius);
+  box-shadow:var(--glass-highlight);
+  transition:background-color 150ms,border-color 150ms;
+}
+/* Tint. Gated, because a var() declaration the browser cannot parse does not fall
+   back to the line above: it computes to transparent. */
+@supports (background-color:color-mix(in srgb,red 50%,blue)){
+  .glass,.glass-lite,.nav-cta,.mobile-nav-cta{background-color:color-mix(in srgb,var(--glass-tint) var(--_a),var(--_fill));}
+}
+.glass{-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);
+  box-shadow:var(--glass-highlight),var(--glass-shadow);}
+.glass-lite,.nav-cta,.mobile-nav-cta{--_fill:var(--glass-fill-lite);}
+.on-light{--_fill:var(--glass-fill-lite-light);--_edge:var(--glass-border-light);}
+.glass-primary{--_fill:#0B1D2D;--_edge:var(--glass-border);}   /* solid navy primary button / holdco card */
+.glass-ctl,.nav-cta,.mobile-nav-cta{border-radius:var(--glass-radius-ctl);}
+/* Phones: glass in the hero sits on flat night, so no blur. The pinned tiles turn it
+   back on (index.html, where that layout lives). */
+@media (max-width:860px){
+  .glass.glass--photo{-webkit-backdrop-filter:none;backdrop-filter:none;}
+}
+
+/* ---- States: hover = tint + border only; active returns to rest tint -- */
+/* border-color is restated: brand.css's a:hover{border-bottom-color} would otherwise outrank the edge. */
+a.glass:hover,button.glass:hover,a.glass-lite:hover,button.glass-lite:hover{--_a:var(--glass-tint-hover);--_edge:var(--glass-border-hover);border-color:var(--_edge);transform:none;}
+a.on-light:hover,button.on-light:hover{--_edge:var(--glass-border-light-hover);}
+a.glass:active,button.glass:active,a.glass-lite:active,button.glass-lite:active{--_a:var(--glass-tint-rest);transform:none;}
+/* Two-tone focus ring. Each element keeps its own radius (these rules come after
+   the pages' global :focus-visible{border-radius:4px}). */
+.glass:focus-visible,.glass-lite:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px;box-shadow:var(--glass-highlight),0 0 0 2px #0B1D2D;}
+.glass:focus-visible{box-shadow:var(--glass-highlight),0 0 0 2px #0B1D2D,var(--glass-shadow);}
+.on-light:focus-visible,.glass-primary:focus-visible{outline-color:#0A72CF;box-shadow:var(--glass-highlight),0 0 0 2px #FFFFFF;}
+.glass-lite:disabled,.glass-lite[aria-disabled="true"]{opacity:.6;cursor:not-allowed;}
+/* Disabled buttons do not answer the pointer: fill and edge stay at rest. */
+button.glass:disabled:hover,button.glass-lite:disabled:hover,
+a.glass[aria-disabled="true"]:hover,a.glass-lite[aria-disabled="true"]:hover{--_a:var(--glass-tint-rest);--_edge:var(--glass-border);}
+button.on-light:disabled:hover,a.on-light[aria-disabled="true"]:hover{--_edge:var(--glass-border-light);}
+/* Text links inside light panels: the pages' silver ring is under 3:1 on white. */
+.on-light a:focus-visible{outline:2px solid #0A72CF;outline-offset:2px;box-shadow:0 0 0 2px #FFFFFF;}
+
+/* ---- Shell: nav, mobile menu, nav buttons (by selector, no markup) --- */
+.nav,.mobile-nav{
+  --_fill:var(--glass-fill-bar);
+  background:var(--_fill);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);
+  border-radius:0;
+}
+.nav{border-bottom:1px solid var(--glass-border);}
+/* At the top of a page only the paper is behind the bar, which turns the glass
+   slate. A night strip the bar's height (64px + 1px edge) sits behind it there
+   and scrolls away with the page. A body background, not a z-index layer: brand.css
+   paints html and body, which would hide one. */
+body{background-image:linear-gradient(var(--night,#050A12),var(--night,#050A12));background-size:100% 65px;background-repeat:no-repeat;}
+.mobile-nav{border:1px solid var(--glass-border);border-top:0;}   /* the bar's hairline is its top edge */
+.nav-phone,.mobile-nav-phone{color:rgba(255,255,255,.78);}
+.mobile-nav-phone{min-height:44px;}   /* tap target: was 43px */
+/* The buttons sit inside glass, so they are glass-lite (never a second blur).
+   Rest recipe is shared above; states restate it to replace the shell's own. */
+.nav-cta:hover,.mobile-nav-cta:hover,.nav-cta:active,.mobile-nav-cta:active{
+  background-color:var(--_fill);border-color:var(--_edge);transform:none;box-shadow:var(--glass-highlight);}
+.nav-cta:hover,.mobile-nav-cta:hover{--_a:var(--glass-tint-hover);--_edge:var(--glass-border-hover);}
+.nav-cta:active,.mobile-nav-cta:active{--_a:var(--glass-tint-rest);}
+@supports (background-color:color-mix(in srgb,red 50%,blue)){
+  .nav-cta:hover,.mobile-nav-cta:hover,.nav-cta:active,.mobile-nav-cta:active{background-color:color-mix(in srgb,var(--glass-tint) var(--_a),var(--_fill));}
+}
+.nav-cta:focus-visible,.mobile-nav-cta:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px;box-shadow:var(--glass-highlight),0 0 0 2px #0B1D2D;}
+/* Same two-tone ring for the other bar and menu items (the pages' 35% silver ring is under 3:1). */
+.nav-brand:focus-visible,.nav-links a:focus-visible,.nav-phone:focus-visible,.nav-toggle:focus-visible,
+.mobile-nav-links a:focus-visible,.mobile-nav-phone:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px;box-shadow:0 0 0 2px #0B1D2D;}
+
+/* ---- Fallbacks ------------------------------------------------------ */
+/* Two triggers (no backdrop-filter, or reduced transparency), the same result:
+   surfaces over page text turn solid; glass over a photo keeps a faint view of it
+   and takes the full division inks again. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .glass,.nav,.mobile-nav{--_fill:var(--glass-solid);}
+  .glass-lite{--_fill:var(--glass-solid-lite);}
+  .glass--photo{--_fill:var(--glass-solid-photo);}
+  .glass--photo.glass--blue {--glass-ink:var(--glass-ink-blue);}
+  .glass--photo.glass--gold {--glass-ink:var(--glass-ink-gold);}
+  .glass--photo.glass--green{--glass-ink:var(--glass-ink-green);}
+  .on-light{--_fill:var(--glass-solid-light);}
+  .glass-primary{--_fill:#0B1D2D;}
+}
+@media (prefers-reduced-transparency:reduce){
+  .glass,.nav,.mobile-nav{--_fill:var(--glass-solid);}
+  .glass-lite{--_fill:var(--glass-solid-lite);}
+  .glass,.glass-lite,.nav,.mobile-nav,.tb.glass.glass--photo{-webkit-backdrop-filter:none;backdrop-filter:none;}
+  .glass--photo{--_fill:var(--glass-solid-photo);}
+  .glass--photo.glass--blue {--glass-ink:var(--glass-ink-blue);}
+  .glass--photo.glass--gold {--glass-ink:var(--glass-ink-gold);}
+  .glass--photo.glass--green{--glass-ink:var(--glass-ink-green);}
+  .on-light{--_fill:var(--glass-solid-light);}
+  .glass-primary{--_fill:#0B1D2D;}
+}
+/* Pinned phone hero in either fallback: the tiles cross the photo and no division
+   ink holds 4.5:1 at that fill, so those labels go white (the symbols keep the
+   colour). Same condition as the pinned layout on the home page. */
+@media (max-width:860px) and (prefers-reduced-motion:no-preference){
+  @supports (overflow:clip){
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .glass--photo.glass--blue,.glass--photo.glass--gold,.glass--photo.glass--green{--glass-ink:#FFFFFF;}
+    }
+  }
+}
+@media (prefers-reduced-transparency:reduce) and (max-width:860px) and (prefers-reduced-motion:no-preference){
+  @supports (overflow:clip){
+    .glass--photo.glass--blue,.glass--photo.glass--gold,.glass--photo.glass--green{--glass-ink:#FFFFFF;}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .glass,.glass-lite,.nav-cta,.mobile-nav-cta{transition:none;}
+}

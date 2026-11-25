@@ -86,6 +86,8 @@ a{color:inherit;text-decoration:none;}
 .has-js .hero-copy.is-revealed>*:nth-child(3){animation-delay:330ms;}
 .has-js .hero-copy.is-revealed>*:nth-child(4){animation-delay:420ms;}
 @keyframes hero-rise{to{opacity:1;transform:translateY(0);}}
+/* A finished transform/opacity animation still blocks backdrop-filter inside it: drop it. */
+.has-js .hero-copy.is-revealed>.is-done{animation:none;opacity:1;transform:none;}
 .hero-title{margin:0 0 22px;font-family:var(--font-display);font-weight:700;font-size:var(--t-display);line-height:1.05;letter-spacing:-.02em;color:white;}
 .hero-sub{font-size:var(--t-body-lg);line-height:1.6;max-width:480px;color:rgba(255,255,255,.78);margin:0 0 32px;}
 .hero-actions{display:flex;gap:12px;}
@@ -107,25 +109,18 @@ a{color:inherit;text-decoration:none;}
   .hero-caption-text,.hero-ai-note{grid-area:auto;opacity:1;}
   .hero-caption{row-gap:2px;}
 }
-.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:6px;font-size:14px;font-weight:600;color:white;border:1px solid rgba(168,184,200,.4);background:rgba(168,184,200,.1);backdrop-filter:blur(10px);transition:all 150ms;outline:none;}
-.btn-outline:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);transform:translateY(-1px);box-shadow:0 2px 6px rgba(5,10,18,.24);}
-.btn-outline:active{transform:translateY(0);box-shadow:none;}
-.btn-outline:focus-visible{box-shadow:0 0 0 3px rgba(168,184,200,.35);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;font-size:14px;font-weight:600;color:white;outline:none;}
 
-/* ---- DIVISION LINKS ROW (glass accent cards over the photo road) -- */
+/* ---- DIVISION LINKS ROW (glass tiles over the photo road) --------- */
 .tri-wrap{position:relative;padding:0 0 36px;}
 .tri-band{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-/* Division cards: neutral navy surface, 3px vivid top border (border 1->3px, padding-top 22->20px: box and content position unchanged), vivid symbol + tag. Hover = border/shadow only. */
-.tb{display:flex;align-items:center;gap:16px;padding:20px 28px 22px;min-height:88px;color:white;background-color:var(--navy);border:1px solid rgba(255,255,255,.18);border-top:3px solid var(--tb-c);transition:border-color 150ms,box-shadow 150ms;border-radius:8px;}
-.tb:hover{box-shadow:0 8px 24px rgba(5,10,18,.35);border-color:rgba(255,255,255,.32);border-top-color:var(--tb-c);}
-.tb-blue{--tb-c:#0A72CF;--tb-t:#4594DB;}
-.tb-gold{--tb-c:#EFA01A;--tb-t:#EFA01A;}
-.tb-green{--tb-c:#068A44;--tb-t:#38A169;}
+/* Material (fill, tint, edge, blur) comes from shared/css/glass.css; layout only here. */
+.tb{display:flex;align-items:center;gap:16px;padding:16px 24px;min-height:76px;color:white;}
 .tb-mark{height:26px;width:auto;flex:none;}
 .tb-text{display:flex;flex-direction:column;gap:4px;}
 .tb-name{font-weight:700;font-size:20px;letter-spacing:-.01em;}
-.tb-sub{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--tb-t);}
-.tb-arrow{margin-left:auto;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);font-size:15px;}
+.tb-sub{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--glass-ink);}
+.tb-arrow{margin-left:auto;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:15px;}
 
 /* ---- CREDIBILITY STRIP (thin fade-out tail of the hero scene) ----- */
 .proof-band{position:relative;padding:22px 0 26px;
@@ -144,12 +139,11 @@ a{color:inherit;text-decoration:none;}
 .eyebrow{font-size:var(--t-eyebrow);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--silver);}
 .h2{font-weight:700;font-size:var(--t-h2);letter-spacing:-.015em;line-height:1.15;color:var(--navy);margin:14px 0 0;}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.svc-card{background:white;border:1px solid var(--hairline);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:box-shadow 180ms,transform 180ms,border-color 180ms;}
-.svc-card:hover{box-shadow:0 8px 24px rgba(11,29,45,.1);transform:translateY(-2px);border-color:rgba(168,184,200,.8);}
-.svc-tag{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);}
+.svc-card{padding:28px;display:flex;flex-direction:column;gap:12px;}
+.svc-tag{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--glass-ink);}
 .svc-title{font-weight:700;font-size:22px;letter-spacing:-.01em;line-height:1.2;color:var(--navy);margin:0;}
 .svc-body{font-size:14px;line-height:1.6;color:var(--fg-muted);margin:0;}
-.svc-link{font-size:13px;font-weight:700;color:var(--silver);margin-top:auto;padding-top:8px;}
+.svc-link{font-size:13px;font-weight:700;color:var(--glass-ink);margin-top:auto;padding-top:8px;border-bottom:0;align-self:flex-start;}
 .svc-link:hover{text-decoration:underline;}
 
 /* ---- TECH ---------------------------------------------------------- */
@@ -160,13 +154,13 @@ a{color:inherit;text-decoration:none;}
 /* ---- FAQ ------------------------------------------------------------ */
 .faq-section{background:var(--paper);padding:var(--sec-y) 40px;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
 .faq-inner{max-width:900px;margin:0 auto;}
-.faq-list{margin-top:32px;display:flex;flex-direction:column;}
-.faq-item{padding:24px 0;border-bottom:1px solid var(--hairline);}
-.faq-item:first-child{border-top:1px solid var(--hairline);}
+.faq-list{margin-top:32px;display:flex;flex-direction:column;background-color:var(--glass-fill-lite-light);border:1px solid var(--glass-border-light);border-radius:var(--glass-radius);box-shadow:var(--glass-highlight);}
+.faq-item{padding:24px;border-bottom:1px solid var(--hairline);}
+.faq-item:last-child{border-bottom:0;}
 .faq-q{font-size:18px;font-weight:700;color:var(--navy);margin:0 0 8px;letter-spacing:-.005em;}
 .faq-a{font-size:15px;line-height:1.65;color:var(--fg-muted);margin:0;max-width:62ch;}
 .faq-btn{all:unset;display:block;width:100%;cursor:default;}
-.faq-btn:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 2px #FFFFFF,0 0 0 4px #0A72CF;border-radius:4px;}
+.faq-btn:focus-visible{outline:2px solid #0A72CF;outline-offset:1px;box-shadow:none;border-radius:4px;}
 
 /* ---- GROWTH MODEL (dark) ------------------------------------------ */
 .growth{position:relative;overflow:hidden;background:var(--night);padding:var(--sec-y-lg) 40px;}
@@ -181,13 +175,10 @@ a{color:inherit;text-decoration:none;}
 .growth-inner .h2{color:white;margin-top:14px;max-width:640px;}
 .growth-body{margin-top:24px;font-size:15px;line-height:1.7;color:rgba(255,255,255,.65);max-width:var(--measure);}
 .growth-grid{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.growth-card{background:rgba(168,184,200,.06);border:1px solid rgba(168,184,200,.16);border-radius:10px;padding:28px;}
+.growth-card{padding:28px;}
 .growth-card-title{font-weight:700;font-size:18px;color:white;margin-bottom:10px;letter-spacing:-.005em;}
 .growth-card-body{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.55);}
-.growth-cta{display:inline-flex;align-items:center;gap:8px;margin-top:40px;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:700;color:white;border:1px solid rgba(255,255,255,.42);transition:all 150ms;outline:none;}
-.growth-cta:hover{background:rgba(168,184,200,.22);border-color:rgba(168,184,200,.6);transform:translateY(-1px);box-shadow:0 2px 6px rgba(5,10,18,.24);}
-.growth-cta:active{transform:translateY(0);box-shadow:none;}
-.growth-cta:focus-visible{box-shadow:0 0 0 3px rgba(168,184,200,.35);}
+.growth-cta{display:inline-flex;align-items:center;gap:8px;margin-top:40px;padding:12px 24px;font-size:14px;font-weight:700;color:white;outline:none;}
 
 /* ---- CONTACT ----------------------------------------------------- */
 .contact{background:var(--paper);padding:var(--sec-y) 40px;}
@@ -196,7 +187,7 @@ a{color:inherit;text-decoration:none;}
 .contact-lead{font-size:15px;line-height:1.7;color:var(--fg-muted);max-width:400px;margin-bottom:40px;}
 .cd-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--silver);margin-bottom:4px;}
 .cd-val{font-size:15px;color:var(--navy);margin-bottom:24px;}
-.form{display:flex;flex-direction:column;gap:14px;}
+.form{display:flex;flex-direction:column;gap:14px;padding:28px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .field{display:flex;flex-direction:column;gap:5px;}
 .field label{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-muted);}
@@ -204,10 +195,7 @@ a{color:inherit;text-decoration:none;}
 .field textarea{background:white;border:1px solid var(--hairline);border-radius:6px;padding:10px 14px;font-family:'Satoshi',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border-color 140ms,box-shadow 140ms;width:100%;}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--silver);box-shadow:0 0 0 3px rgba(168,184,200,.18);}
 .field textarea{resize:vertical;min-height:110px;}
-.form-btn{background:var(--navy);color:white;border:none;padding:14px 24px;font-family:'Satoshi',sans-serif;font-size:15px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;align-self:flex-start;transition:background 150ms,transform 150ms,box-shadow 150ms;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);}
-.form-btn:hover{background:var(--navy-700);transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 3px 8px rgba(5,10,18,.32),0 6px 18px rgba(5,10,18,.22);}
-.form-btn:active{transform:translateY(0);box-shadow:inset 0 1px 2px rgba(5,10,18,.25),0 1px 2px rgba(5,10,18,.25);}
-.form-btn:focus-visible{box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18),0 0 0 3px rgba(168,184,200,.35);}
+.form-btn{color:white;padding:13px 23px;font-family:'Satoshi',sans-serif;font-size:15px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;align-self:flex-start;outline:none;}
 
 /* ---- FOOTER ---- */
 .footer{position:relative;background:var(--night);padding:56px 0 0;}
@@ -244,12 +232,12 @@ a{color:inherit;text-decoration:none;}
   .proof-grid{padding:0 20px;grid-template-columns:1fr;}
   .proof-card{border-left:0;padding:12px 0;border-top:1px solid rgba(255,255,255,.12);}
   .proof-card:first-child{border-top:0;padding-top:0;}
-  .tri-band{grid-template-columns:1fr;padding:0 20px;gap:12px;}
+  .tri-band{grid-template-columns:repeat(3,minmax(0,1fr));padding:0 20px;gap:8px;}
   .tri-wrap{padding-bottom:48px;}
   .svc-section,.tech-section,.faq-section,.growth,.contact{padding:48px 20px;}
   .svc-grid,.growth-grid,.contact-inner{grid-template-columns:1fr;gap:40px;}
   .form-row{grid-template-columns:1fr;}
-  .hero-actions{flex-direction:column;align-items:stretch;gap:12px;}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:12px;}
 
   /* T5 — photo canvas ends after hero copy at mobile; proof/division get
      their own solid night bands (translucent-over-photo cards don't read
@@ -258,24 +246,32 @@ a{color:inherit;text-decoration:none;}
      band under the nav (whole truck in frame); copy sits below on solid night. */
   .hero-photo-layer{position:relative;inset:auto;height:min(62.5vw,240px);}
   .hero-photo-layer::after{display:none;}
+  .hero-photo-layer::before{content:'';position:absolute;left:0;right:0;top:0;height:48px;z-index:1;pointer-events:none;background:linear-gradient(180deg,#081726,rgba(8,23,38,0));}
   .hero-copy-zone{min-height:0;display:flex;flex-direction:column;}
   .hero-bg img{object-position:50% 66%;filter:none;}
   .has-js .hero-bg img{transform:none;transition:opacity 400ms var(--ease-out-soft);}
   .has-js .hero-bg.is-loaded img{transform:none;}
   .hero-bottom-feather{background:linear-gradient(180deg,transparent 0%,transparent 72%,var(--night) 100%);}
   .hero-veil{display:none;}
-  /* Photo credit sits on the photo's faded bottom edge, right-aligned, below the truck */
-  .hero-caption{order:-1;position:relative;right:auto;bottom:auto;display:grid;justify-items:end;margin:-30px 0 0;padding:0 20px;}
-  .hero-caption-text,.hero-ai-note{font-size:12px;line-height:1.35;letter-spacing:.01em;white-space:normal;text-align:right;text-wrap:balance;}
+  /* Photo credit: one quiet line on the photo's faded bottom edge, right-aligned,
+     below the truck. Its own dark lip keeps it readable while it scrolls over the
+     pinned photo. No hover/focus swap at this width: both parts always show. */
+  .hero-caption{order:-1;position:relative;right:auto;bottom:auto;display:block;text-align:right;font-size:11px;line-height:1.35;margin:-34px 0 0;padding:16px 20px 6px;
+    background:linear-gradient(180deg,rgba(5,10,18,0) 0,rgba(5,10,18,.88) 14px,var(--night) 100%);}
+  .hero-caption-text,.hero-ai-note{display:inline;font-family:inherit;font-size:11px;font-weight:400;line-height:1.35;letter-spacing:normal;color:rgba(255,255,255,.62);text-shadow:none;white-space:normal;opacity:1;}
+  .hero-caption-text::after{content:"\00A0\00B7\0020";}
+  .hero-caption:hover .hero-caption-text,.hero-caption:focus .hero-caption-text{opacity:1;}
+  .hero-caption:hover .hero-ai-note,.hero-caption:focus .hero-ai-note{opacity:1;color:rgba(255,255,255,.62);}
 
   /* B1 hero type */
   .hero-title{font-size:37px;line-height:1.08;margin-bottom:16px;text-wrap:balance;}
   .hero-sub{font-size:16px;line-height:1.55;margin-bottom:24px;}
-  .btn-outline{min-height:48px;justify-content:center;}
+  .btn-outline{min-height:44px;justify-content:center;}
 
   /* B3 headings + rhythm */
   .h2{font-size:30px;text-wrap:balance;}
   .growth-card{padding:22px;}
+  .form{padding:20px;}
   .growth-grid{gap:16px;}
 
   /* B4 text floor: body 16, secondary 14, labels 12 with tighter tracking */
@@ -291,7 +287,7 @@ a{color:inherit;text-decoration:none;}
   .cd-val a{display:inline-flex;align-items:center;min-height:44px;}
 
   /* B6 FAQ accordion: initial state is CSS (item 1 open, 2-5 closed) */
-  .faq-item{padding:4px 0;}
+  .faq-item{padding:4px 16px;}
   .faq-q{margin:0;}
   .faq-a{padding:0 0 18px;}
   .faq-js .faq-btn{cursor:pointer;display:flex;align-items:center;min-height:48px;padding:10px 36px 10px 0;position:relative;box-sizing:border-box;}
@@ -319,7 +315,33 @@ a{color:inherit;text-decoration:none;}
 
   .proof-band{background:#0B1D2D;padding:24px 0;}
   .tri-wrap{background:var(--night);}
-  .tb{border-color:transparent;border-top-color:var(--tb-c);}
+  /* Three equal-height tiles in one row; symbols, titles and sub-labels each
+     share a line (grid stretch + top alignment + two reserved title lines). */
+  .tb{flex-direction:column;align-items:center;text-align:center;gap:8px;padding:14px 6px 12px;min-height:0;}
+  .tb-text{align-items:center;gap:3px;min-width:0;width:100%;}
+  .tb-name{font-size:14px;line-height:1.15;min-height:calc(2 * 1.15em);}
+  .tb-sub{font-size:12px;letter-spacing:.06em;line-height:1.25;}
+  .tb-mark{height:20px;}
+  .tb-arrow{display:none;}
+}
+/* Narrowest phones: below 340px the longest label (PROPERTIES) no longer fits an equal third. */
+@media (max-width:339px){
+  .tb{padding-inline:3px;}
+  .tb-sub{letter-spacing:.03em;}
+}
+/* Phone hero: the photo pins under the nav; the solid text block and the glass
+   tiles scroll up over it. Reduced motion or no overflow:clip = stacked layout. */
+@media (max-width:860px) and (prefers-reduced-motion:no-preference){
+  @supports (overflow:clip){
+    .hero{overflow:clip;}                               /* hidden would disable sticky */
+    .hero-photo-layer{position:sticky;top:64px;z-index:0;}
+    .hero-copy-zone,.tri-wrap,.proof-band{position:relative;z-index:1;}
+    .hero-inner{background:var(--night);}               /* solid backing: no text over the truck */
+    .tri-wrap{background:transparent;padding-top:20px;} /* the window onto the photo */
+    .tb.glass.glass--photo{-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+    /* e: the photo fades in from the text block above it instead of starting on a hard line */
+    .tri-wrap::before{content:'';position:absolute;left:0;right:0;top:0;height:48px;pointer-events:none;background:linear-gradient(180deg,var(--night),rgba(5,10,18,0));}
+  }
 }
 @media(max-width:480px){
   .proof-card{padding:10px 0;}
@@ -330,12 +352,16 @@ a{color:inherit;text-decoration:none;}
   .has-js .hero-bg img{transition:none!important;transform:none!important;opacity:1!important;}
   .has-js .hero-copy>*{animation:none!important;opacity:1!important;transform:none!important;}
 }
+@media (prefers-reduced-transparency:reduce){
+  .faq-list{background-color:var(--glass-solid-light);}
+}
 :focus-visible{outline:none;box-shadow:0 0 0 3px rgba(168,184,200,.35);border-radius:4px;}
 </style>
-<link rel="icon" href="favicon.ico?v=3" sizes="48x48">
-<link rel="icon" href="icon.svg?v=3" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
-<link rel="manifest" href="site.webmanifest?v=3">
+<link rel="stylesheet" href="../../shared/css/glass.css">
+<link rel="icon" href="favicon.ico?v=4" sizes="48x48">
+<link rel="icon" href="icon.svg?v=4" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+<link rel="manifest" href="site.webmanifest?v=4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -447,7 +473,7 @@ a{color:inherit;text-decoration:none;}
         <h1 class="hero-title">Freight-native companies,<br>run on one system<span style="color:rgba(168,184,200,.55);">.</span></h1>
         <p class="hero-sub">Flogal builds and operates freight companies (hauling, equipment, and industrial real estate) on a shared operating backbone we run ourselves. Founder-funded, freight-experienced, built for the long haul.</p>
         <div class="hero-actions">
-          <a href="#contact" class="btn-outline">Contact us →</a>
+          <a href="#contact" class="btn-outline glass glass-ctl glass--photo">Contact us →</a>
         </div>
       </div>
     </div>
@@ -457,17 +483,17 @@ a{color:inherit;text-decoration:none;}
   <!-- DIVISION LINKS ROW (glass cards over the photo's lower zone) -->
   <div class="tri-wrap">
     <div class="tri-band">
-      <a href="https://carriers.flogalhq.com" class="tb tb-blue">
+      <a href="https://carriers.flogalhq.com" class="tb tb-blue glass glass--photo glass--blue">
         <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-blue.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Move Freight</span><span class="tb-sub">Carriers</span></div>
         <span class="tb-arrow">→</span>
       </a>
-      <a href="https://sales.flogalhq.com" class="tb tb-gold">
+      <a href="https://sales.flogalhq.com" class="tb tb-gold glass glass--photo glass--gold">
         <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-gold.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Buy Equipment</span><span class="tb-sub">Sales Inventory</span></div>
         <span class="tb-arrow">→</span>
       </a>
-      <a href="https://properties.flogalhq.com" class="tb tb-green">
+      <a href="https://properties.flogalhq.com" class="tb tb-green glass glass--photo glass--green">
         <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-green.png" width="390" height="200" alt="">
         <div class="tb-text"><span class="tb-name">Real Estate</span><span class="tb-sub">Properties</span></div>
         <span class="tb-arrow">→</span>
@@ -498,19 +524,19 @@ a{color:inherit;text-decoration:none;}
     <h2 class="h2">Three freight-built companies, one backbone.</h2>
   </div>
   <div class="svc-grid">
-    <article class="svc-card">
+    <article class="svc-card glass-lite on-light glass--blue">
       <span class="svc-tag">CARRIERS</span>
       <h3 class="svc-title">Flogal Carriers</h3>
       <p class="svc-body">Asset-based hauling across Oklahoma and Texas, operated through fleets we run, with relationships across Texas and Mexico. Aggregate, end-dump, flatbed, and dry van freight on regional corridors.</p>
       <a class="svc-link" href="https://carriers.flogalhq.com">Go to Carriers →</a>
     </article>
-    <article class="svc-card">
+    <article class="svc-card glass-lite on-light glass--gold">
       <span class="svc-tag">SALES</span>
       <h3 class="svc-title">Flogal Sales</h3>
       <p class="svc-body">Trucks, trailers, and heavy equipment for sale and lease: inspected units, real specs, real prices.</p>
       <a class="svc-link" href="https://sales.flogalhq.com">Go to Inventory →</a>
     </article>
-    <article class="svc-card">
+    <article class="svc-card glass-lite on-light glass--green">
       <span class="svc-tag">PROPERTIES</span>
       <h3 class="svc-title">Flogal Properties</h3>
       <p class="svc-body">Industrial real estate built for freight: yards, terminals, and the land our operations run on.</p>
@@ -535,20 +561,20 @@ a{color:inherit;text-decoration:none;}
     <h2 class="h2">We build, partner, and acquire.</h2>
     <p class="growth-body">Flogal grows three ways: building freight companies from the ground up, partnering with operators who want real infrastructure behind them, and acquiring businesses and assets that fit the platform. Operating companies plug into shared maintenance, dispatch, payroll, and per-truck P&amp;L from day one, keeping what makes them work and gaining what they lacked.</p>
     <div class="growth-grid">
-      <div class="growth-card">
+      <div class="growth-card glass-lite">
         <div class="growth-card-title">Build</div>
         <div class="growth-card-body">We start freight-native companies on infrastructure that already runs, not from a blank page.</div>
       </div>
-      <div class="growth-card">
+      <div class="growth-card glass-lite">
         <div class="growth-card-title">Partner</div>
         <div class="growth-card-body">Operators keep their identity and customers; the platform carries the back office.</div>
       </div>
-      <div class="growth-card">
+      <div class="growth-card glass-lite">
         <div class="growth-card-title">Acquire</div>
         <div class="growth-card-body">If you're selling a fleet, freight business, or freight-oriented asset, we're a direct, structured counterparty with the ability to close.</div>
       </div>
     </div>
-    <a href="#contact" class="growth-cta">Start a Conversation →</a>
+    <a href="#contact" class="growth-cta glass-lite glass-ctl">Start a Conversation →</a>
   </div>
 </section>
 
@@ -593,7 +619,7 @@ a{color:inherit;text-decoration:none;}
       <div><div class="cd-label">Carriers</div><div class="cd-val"><a href="mailto:carriers@flogalhq.com">carriers@flogalhq.com</a></div></div>
       <div><div class="cd-label">Equipment</div><div class="cd-val"><a href="mailto:sales@flogalhq.com">sales@flogalhq.com</a></div></div>
     </div>
-    <form class="form" id="hqForm" onsubmit="submitHqInquiry(event)">
+    <form class="form glass-lite on-light" id="hqForm" onsubmit="submitHqInquiry(event)">
       <div class="form-row">
         <div class="field"><label for="fn">First Name</label><input id="fn" placeholder="John" autocomplete="given-name"></div>
         <div class="field"><label for="ln">Last Name</label><input id="ln" placeholder="Smith" autocomplete="family-name"></div>
@@ -625,7 +651,7 @@ a{color:inherit;text-decoration:none;}
         <input type="checkbox" id="sms-consent" style="margin-top:3px;width:16px;height:16px;flex:none;">
         <label for="sms-consent" style="font-size:12px;font-weight:400;text-transform:none;letter-spacing:normal;line-height:1.5;color:var(--fg-muted);">Yes, Flogal may text me at this number about my inquiry. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Texting consent is optional and not required to submit this form. See our <a href="https://www.flogalhq.com/privacy" style="color:var(--blue);text-decoration:underline;" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://www.flogalhq.com/sms-terms" style="color:var(--blue);text-decoration:underline;" target="_blank" rel="noopener">SMS Terms</a>.</label>
       </div>
-      <button class="form-btn" id="hqSubmitBtn" type="submit">Send Inquiry</button>
+      <button class="form-btn glass-lite glass-ctl glass-primary" id="hqSubmitBtn" type="submit">Send Inquiry</button>
       <div id="hqFormError" style="display:none;color:#e05a5a;font-size:12px;line-height:1.4;margin-top:4px;"></div>
     </form>
     <div id="hqFormSuccess" style="display:none;padding:24px 0;">
@@ -762,6 +788,9 @@ a{color:inherit;text-decoration:none;}
   function onImgLoad(){ bg.classList.add('is-loaded'); }
   if (img.complete) { onImgLoad(); } else { img.addEventListener('load', onImgLoad); }
 
+  if (copy) copy.addEventListener('animationend', function(e){
+    if (e.target.parentNode === copy) e.target.classList.add('is-done');
+  });
   setTimeout(function(){ if (copy) copy.classList.add('is-revealed'); }, reduceMotion ? 0 : 150);
 
   if (reduceMotion) return;

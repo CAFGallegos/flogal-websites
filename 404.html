@@ -13,11 +13,11 @@ body{font-family:'Satoshi',system-ui,-apple-system,sans-serif;}
 .notfound{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:28px;padding:80px 20px;}
 .notfound-logo{height:72px;width:auto;display:block;}
 .notfound-h1{margin:0;font-family:var(--font-display);font-weight:700;font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;color:var(--fg);}
-.notfound .form-btn{background:var(--flogal-navy);color:white;border:none;padding:14px 24px;font-family:'Satoshi',sans-serif;font-size:15px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border-radius:6px;display:inline-flex;text-decoration:none;transition:transform 150ms,box-shadow 150ms;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 1px 2px rgba(5,10,18,.30),0 2px 6px rgba(5,10,18,.18);}
-.notfound .form-btn:hover{transform:translateY(-1px);}
+.notfound .form-btn{color:white;padding:13px 23px;font-family:'Satoshi',sans-serif;font-size:15px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;text-decoration:none;outline:none;}
 .notfound-back{font-size:14px;color:var(--fg-muted);text-decoration:underline;text-underline-offset:3px;}
 .notfound-back:hover{color:var(--fg);}
 </style>
+<link rel="stylesheet" href="/shared/css/glass.css">
 </head>
 <body>
 
@@ -61,7 +61,7 @@ body{font-family:'Satoshi',system-ui,-apple-system,sans-serif;}
 <main class="notfound">
   <img class="notfound-logo" src="/shared/logos/flogal-symbol-tricolor.png" alt="">
   <h1 class="notfound-h1">Nothing at this address.</h1>
-  <a class="form-btn" href="/#contact">Contact</a>
+  <a class="form-btn glass-lite glass-ctl glass-primary" href="/#contact">Contact</a>
   <a class="notfound-back" href="/">Back to the home page</a>
 </main>
 
