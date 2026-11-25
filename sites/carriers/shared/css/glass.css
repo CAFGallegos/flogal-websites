@@ -10,9 +10,8 @@
    .on-light       light-background variant (use with .glass-lite).
    .glass-primary  solid navy (primary button, holdco card).
    .glass-ctl      button radius, lit top edge, sheen.
-   .glass--photo   smoked glass over a photo (hero tiles, hero Contact us): a thin
-                   night layer, dimmed inside the one blur, lit top edge, sheen.
-   .glass--chip    the same smoked glass for the photo note chip and its panel.
+   .glass--photo   clear glass over a photo (hero tiles, hero Contact us): a thin
+                   neutral layer, the blur, lit top edge, sheen; division tiles add a 3% tint.
    .glass--blue | .glass--gold | .glass--green   division tint + ink. */
 
 :root{
@@ -21,7 +20,7 @@
   --glass-radius:14px;  --glass-radius-ctl:10px;   /* panels / buttons */
   --glass-fill:rgba(11,29,45,.50);                 /* full glass over photo */
   --glass-fill-bar:rgba(11,29,45,.72);             /* nav + mobile menu (text over any content) */
-  --glass-fill-photo:rgba(5,10,18,.34);            /* smoked glass over the photo: neutral night, not navy */
+  --glass-fill-photo:rgba(5,10,18,.15);            /* clear glass over the photo: neutral, near zero */
   --glass-fill-lite:rgba(255,255,255,.05);         /* glass-lite on flat dark */
   --glass-fill-lite-light:rgba(255,255,255,.72);   /* glass-lite on flat light */
   --glass-solid:rgba(11,29,45,.98);                /* no-blur fallback: bar, menu, overlays */
@@ -47,17 +46,15 @@
 .on-light.glass--green{--glass-ink:#01783B;}
 /* On white the tint is a whisper: colour comes from the symbols and labels. */
 .on-light.glass--blue,.on-light.glass--gold,.on-light.glass--green{--glass-tint-rest:6%;}
-/* Over the photo the tint nearly disappears: colour comes from the symbol, the eyebrow,
-   the title and a faintly tinted top edge. */
-.glass--photo.glass--blue,.glass--photo.glass--gold,.glass--photo.glass--green{--glass-tint-rest:6%;--glass-tint-hover:9%;}
+/* Over the photo the tint is a trace (3%): colour comes from the symbol, the title and
+   a faintly tinted top edge. */
+.glass--photo.glass--blue,.glass--photo.glass--gold,.glass--photo.glass--green{--glass-tint-rest:3%;--glass-tint-hover:5%;}
 .glass--photo.glass--blue {--glass-title:var(--glass-ink-pale-blue);}
 .glass--photo.glass--gold {--glass-title:var(--glass-ink-pale-gold);}
 .glass--photo.glass--green{--glass-title:var(--glass-ink-pale-green);}
 /* Phones: the tiles cross the bright part of the photo, where vivid blue and green fall
-   under 4.5:1. Same hue, lifted just enough. Hover keeps the rest tint (only the edge
-   brightens): a stronger tint drops the eyebrows under 4.5:1. */
+   under 4.5:1. Same hue, lifted just enough. */
 @media (max-width:860px){
-  .glass--photo.glass--blue,.glass--photo.glass--gold,.glass--photo.glass--green{--glass-tint-hover:6%;}
   .glass--photo.glass--blue {--glass-ink:var(--glass-ink-mid-blue);}
   .glass--photo.glass--green{--glass-ink:var(--glass-ink-mid-green);}
 }
@@ -84,18 +81,12 @@
 
 /* ---- Lit edge, sheen and smoked glass -------------------------------- */
 /* Buttons and glass over the photo. The mobile menu's button is left as it was. */
-.glass--photo,.glass--chip,.glass-ctl,.nav-cta{--_lit:var(--glass-edge-lit);background-image:var(--glass-sheen);}
-.glass--photo,.glass--chip{--_fill:var(--glass-fill-photo);}
+.glass--photo,.glass-ctl,.nav-cta{--_lit:var(--glass-edge-lit);background-image:var(--glass-sheen);}
+.glass--photo{--_fill:var(--glass-fill-photo);}
 .glass-ctl.glass--photo{--_fill:var(--glass-fill-lite);}   /* a button on the photo carries no layer of its own */
 @supports (background-color:color-mix(in srgb,red 50%,blue)){
   .glass--photo.glass--blue,.glass--photo.glass--gold,.glass--photo.glass--green{--_lit:inset 0 1px 0 color-mix(in srgb,var(--glass-tint) 30%,rgba(255,255,255,.30));}
 }
-/* Where the thin layer is not enough (phones), the rest of the dark is brightness() inside
-   the same blur, so the photo keeps its colour and shapes. Desktop tiles sit on the dark
-   road and keep the plain blur. */
-.glass.glass--chip{-webkit-backdrop-filter:blur(16px) saturate(160%) brightness(.5);backdrop-filter:blur(16px) saturate(160%) brightness(.5);}
-/* The chip only ever sits on dark road, so it can be clearer than its panel. */
-.glass.glass-ctl.glass--chip{-webkit-backdrop-filter:blur(16px) saturate(160%) brightness(.75);backdrop-filter:blur(16px) saturate(160%) brightness(.75);}
 /* Phones: no blur of their own for hero buttons (they sit on the text scrim) or in the
    stacked layout (flat night). The pinned tiles turn it on (index.html). */
 @media (max-width:860px){
@@ -117,10 +108,10 @@ a.glass:active,button.glass:active,a.glass-lite:active,button.glass-lite:active{
 button.glass:disabled:hover,button.glass-lite:disabled:hover,
 a.glass[aria-disabled="true"]:hover,a.glass-lite[aria-disabled="true"]:hover{--_a:var(--glass-tint-rest);--_edge:var(--glass-border);}
 button.on-light:disabled:hover,a.on-light[aria-disabled="true"]:hover{--_edge:var(--glass-border-light);}
-/* Primary button (form submit): smoked navy glass, white text. Disabled turns pale with
-   muted dark text and loses the light, rather than fading the whole button, so it reads
-   as off and its text stays over 4.5:1. */
-.glass-primary.glass-ctl{--_fill:rgba(11,29,45,.66);--_edge:rgba(11,29,45,.40);}
+/* Primary button (form submit): solid navy, white text, lit top edge. Disabled turns pale
+   with muted dark text and loses the light, rather than fading the whole button, so it
+   reads as off and its text stays over 4.5:1. */
+.glass-primary.glass-ctl{--_fill:#0B1D2D;--_edge:rgba(11,29,45,.40);}
 button.glass-primary.glass-ctl:hover,a.glass-primary.glass-ctl:hover{--_edge:rgba(11,29,45,.62);}
 button.glass-primary.glass-ctl:active,a.glass-primary.glass-ctl:active{--_edge:rgba(11,29,45,.40);}
 button.glass-primary.glass-ctl:disabled,button.glass-primary.glass-ctl:disabled:hover{
@@ -166,7 +157,7 @@ body{background-image:linear-gradient(var(--night,#050A12),var(--night,#050A12))
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .glass,.nav,.mobile-nav{--_fill:var(--glass-solid);}
   .glass-lite{--_fill:var(--glass-solid-lite);}
-  .glass--photo,.glass--chip,.glass-ctl.glass--photo{--_fill:var(--glass-solid-photo);}
+  .glass--photo,.glass-ctl.glass--photo{--_fill:var(--glass-solid-photo);}
   .glass--photo.glass--blue {--glass-ink:var(--glass-ink-blue);}
   .glass--photo.glass--gold {--glass-ink:var(--glass-ink-gold);}
   .glass--photo.glass--green{--glass-ink:var(--glass-ink-green);}
@@ -177,8 +168,8 @@ body{background-image:linear-gradient(var(--night,#050A12),var(--night,#050A12))
 @media (prefers-reduced-transparency:reduce){
   .glass,.nav,.mobile-nav{--_fill:var(--glass-solid);}
   .glass-lite{--_fill:var(--glass-solid-lite);}
-  .glass,.glass-lite,.nav,.mobile-nav,.tb.glass.glass--photo,.glass.glass--photo,.glass.glass--chip,.glass.glass-ctl.glass--chip{-webkit-backdrop-filter:none;backdrop-filter:none;}
-  .glass--photo,.glass--chip,.glass-ctl.glass--photo{--_fill:var(--glass-solid-photo);}
+  .glass,.glass-lite,.nav,.mobile-nav,.tb.glass.glass--photo,.glass.glass--photo{-webkit-backdrop-filter:none;backdrop-filter:none;}
+  .glass--photo,.glass-ctl.glass--photo{--_fill:var(--glass-solid-photo);}
   .glass--photo.glass--blue {--glass-ink:var(--glass-ink-blue);}
   .glass--photo.glass--gold {--glass-ink:var(--glass-ink-gold);}
   .glass--photo.glass--green{--glass-ink:var(--glass-ink-green);}

@@ -112,7 +112,7 @@ a{color:inherit;text-decoration:none;}
 }
 .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;font-size:14px;font-weight:600;color:white;outline:none;}
 /* Phone-only photo note (markup in the photo layer). Desktop keeps the caption. */
-.hero-note-chip,.hero-note-panel{display:none;}
+.hero-note-label,.hero-note-panel{display:none;}
 
 /* ---- DIVISION LINKS ROW (glass tiles over the photo road) --------- */
 .tri-wrap{position:relative;padding:0 0 36px;}
@@ -121,7 +121,6 @@ a{color:inherit;text-decoration:none;}
 .tb{display:flex;align-items:center;gap:16px;padding:16px 24px;min-height:76px;color:white;}
 .tb-mark{height:26px;width:auto;flex:none;}
 .tb-text{display:flex;flex-direction:column;gap:3px;}
-.tb-sub{font-size:11px;font-weight:700;letter-spacing:.04em;line-height:1.25;text-transform:uppercase;color:var(--glass-ink);}
 .tb-name{font-weight:600;font-size:22px;letter-spacing:-.01em;line-height:1.2;color:var(--glass-title,white);}
 .tb-arrow{margin-left:auto;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:15px;}
 
@@ -282,8 +281,8 @@ a{color:inherit;text-decoration:none;}
   .hero-caption:hover .hero-ai-note,.hero-caption:focus .hero-ai-note{opacity:1;color:rgba(255,255,255,.62);}
 
   /* B1 hero type */
-  .hero-title{font-size:37px;line-height:1.08;margin-bottom:16px;text-wrap:balance;}
-  .hero-sub{font-size:16px;line-height:1.55;margin-bottom:24px;}
+  .hero-title{font-size:32px;line-height:1.08;margin-bottom:14px;text-wrap:balance;}
+  .hero-sub{font-size:15px;line-height:1.55;margin-bottom:22px;}
   .btn-outline{min-height:44px;justify-content:center;}
 
   /* B3 headings + rhythm */
@@ -335,26 +334,43 @@ a{color:inherit;text-decoration:none;}
   .tri-wrap{background:var(--night);}
   /* Three equal-height tiles in one row; symbols, titles and sub-labels each
      share a line (grid stretch + top alignment + two reserved title lines). */
-  .tb{flex-direction:column;align-items:center;text-align:center;gap:8px;padding:14px 6px 12px;min-height:0;}
+  .tb{flex-direction:column;align-items:center;text-align:center;gap:7px;padding:12px 4px 11px;min-height:0;container-type:inline-size;}
   .tb-text{align-items:center;gap:4px;min-width:0;width:100%;}
-  /* Eyebrows sit on the line above the title; titles share a top line. */
-  .tb-sub{display:flex;align-items:flex-end;justify-content:center;min-height:calc(2 * 1.25em);font-size:12px;letter-spacing:.02em;}
-  .tb-name{font-size:clamp(14px,4.4vw,16px);line-height:1.2;min-height:calc(2 * 1.2em);text-wrap:balance;}
-  .tb-mark{height:20px;}
+  /* One phrase per tile, on one line: the size follows the tile's width
+     ("Buy Equipment" is 6.75em wide), 11.5px to 15px. */
+  .tb-name{font-size:13px;font-size:clamp(11.5px,calc((100cqi - 8px) / 6.9),15px);line-height:1.2;white-space:nowrap;}
+  .tb-mark{height:18px;}
+  /* The hero link: a quiet text link that runs on from the paragraph, so it does not
+     compete with the three tiles and adds no height of its own. */
+  .hero-sub{display:inline;}
+  .hero-actions{display:inline;}   /* the space before it is the one in the markup */
+  .hero-actions .btn-outline.glass{--_fill:transparent;--_edge:transparent;--_lit:0 0 transparent;--glass-tint-hover:0%;
+    display:inline;white-space:nowrap;border-radius:4px;background-image:none;padding:12px 0;font-size:15px;font-weight:600;line-height:1.55;color:rgba(255,255,255,.92);
+    text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-decoration-thickness:1px;text-underline-offset:5px;
+    -webkit-backdrop-filter:none;backdrop-filter:none;transition:text-decoration-color 150ms;}
+  .hero-actions .btn-outline.glass:not(:focus-visible){box-shadow:none;}
+  .hero-actions .btn-outline.glass:hover{text-decoration-color:#FFFFFF;}
   .tb-arrow{display:none;}
 
   /* The photo fades into the proof strip's own colour: no line where they meet. */
   .tri-wrap::after{content:'';position:absolute;left:0;right:0;bottom:0;height:72px;pointer-events:none;background:linear-gradient(180deg,rgba(11,29,45,0),#0B1D2D);}
 
-  /* Photo note: a chip on the photo's lower right instead of the two-line caption.
-     Without JS the caption above stays. */
+  /* Photo note: one quiet line on the photo's lower right instead of the two-line
+     caption; it opens a small panel with the full credit. Without JS the caption stays. */
   .note-js .hero-caption{display:none;}
-  .note-js .hero-note-chip{display:inline-flex;align-items:center;gap:6px;position:absolute;right:12px;bottom:10px;z-index:2;height:28px;padding:0 10px;margin:0;font-family:inherit;font-size:12px;font-weight:500;line-height:1;color:white;cursor:pointer;outline:none;}
-  .hero-note-chip::after{content:'';position:absolute;left:-6px;right:-6px;top:-17px;bottom:-3px;}   /* 46px hit area, mostly upward */
-  .hero-note-chip svg{width:14px;height:14px;flex:none;}
-  .note-js .hero-note-panel:not([hidden]){display:block;position:absolute;right:12px;bottom:46px;z-index:2;width:max-content;max-width:min(272px,calc(100% - 24px));padding:12px 14px;font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.92);}
+  .note-js .hero-photo-layer{-webkit-tap-highlight-color:transparent;}   /* the whole photo is tappable */
+  .note-js .hero-note-label{display:inline-flex;align-items:center;gap:5px;position:absolute;right:14px;bottom:12px;z-index:1;margin:0;padding:0;background:none;border:0;border-radius:4px;
+    font-family:inherit;font-size:11px;font-weight:400;line-height:1;letter-spacing:.01em;color:rgba(255,255,255,.62);text-shadow:0 1px 2px rgba(5,10,18,.4);cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;}
+  .hero-note-label::after{content:'';position:absolute;left:-10px;right:-10px;top:-17px;bottom:-17px;}   /* 45px hit area */
+  .hero-note-label svg{width:11px;height:11px;flex:none;}
+  .hero-note-label:focus-visible{outline:2px solid #FFFFFF;outline-offset:3px;box-shadow:0 0 0 5px #0B1D2D;}
+  .note-js .hero-note-panel:not([hidden]){display:block;position:absolute;right:12px;bottom:40px;z-index:3;width:max-content;max-width:min(260px,calc(100% - 24px));padding:10px 12px;border-radius:10px;
+    font-size:12px;line-height:1.45;color:rgba(255,255,255,.92);background:rgba(5,10,18,.34);
+    -webkit-backdrop-filter:blur(16px) saturate(160%) brightness(.5);backdrop-filter:blur(16px) saturate(160%) brightness(.5);
+    opacity:1;transition:opacity 220ms var(--ease-out-soft);}
+  @starting-style{.note-js .hero-note-panel:not([hidden]){opacity:0;}}
   .hero-note-panel p{margin:0;font:inherit;line-height:inherit;color:inherit;}   /* brand.css styles bare p */
-  .hero-note-panel p+p{margin-top:6px;}
+  .hero-note-panel p+p{margin-top:5px;}
 }
 /* Narrowest phones: below 340px the longest label (PROPERTIES) no longer fits an equal third. */
 @media (max-width:339px){
@@ -372,44 +388,143 @@ a{color:inherit;text-decoration:none;}
     /* Without JS the photo fades in from that solid block instead of starting on a hard line. */
     html:not(.note-js) .tri-wrap::before{content:'';position:absolute;left:0;right:0;top:0;height:48px;pointer-events:none;background:linear-gradient(180deg,var(--night),rgba(5,10,18,0));}
     .tri-wrap{background:transparent;padding-top:20px;} /* the window onto the photo */
-    /* .45: the lowest dimming steps down until blue and gold eyebrows hold 4.5:1. */
-    .tb.glass.glass--photo{-webkit-backdrop-filter:blur(16px) saturate(160%) brightness(.45);backdrop-filter:blur(16px) saturate(160%) brightness(.45);}
-
-    /* The words ride over the photo on a frosted scrim. */
-    .note-js .hero-inner{background:transparent;}
-    .note-js .hero-inner::before{content:'';position:absolute;left:0;right:0;top:-20px;bottom:-16px;z-index:-1;pointer-events:none;
-      background:var(--glass-fill-photo);
-      -webkit-backdrop-filter:blur(16px) saturate(160%) brightness(.5);backdrop-filter:blur(16px) saturate(160%) brightness(.5);
-      -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 32px,#000 calc(100% - 48px),transparent 100%);
-      mask-image:linear-gradient(180deg,transparent 0,#000 32px,#000 calc(100% - 48px),transparent 100%);}
-    .note-js .hero-sub{color:rgba(255,255,255,.86);}
-    .note-js .hero-note-chip{bottom:22px;}              /* clear of the scrim's soft edge */
-    .note-js .hero-note-panel:not([hidden]){bottom:58px;}
-    /* Upright screens: a taller photo with the sun and whole truck in frame, running
-       behind the top of the words. The scrim's top edge starts under the wheels (that
-       line is .297 of the photo's height above its bottom). Short landscape screens keep
-       the 240px photo so the headline stays in view. */
+    .tb.glass.glass--photo{-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);}
+    /* Without JS, upright screens: a taller photo band with the sun and whole truck in frame. */
     @media (min-height:501px){
-      .hero-photo-layer{height:min(76.5vw,300px);}
-      .hero-bg img{object-position:61% 86%;}
-      .note-js .hero-copy-zone{margin-top:calc(51px - min(22.72vw,89.1px));}
-      .note-js .hero-note-chip{bottom:calc(min(22.72vw,89.1px) - 29px);}
-      .note-js .hero-note-panel:not([hidden]){bottom:calc(min(22.72vw,89.1px) + 7px);}
+      html:not(.note-js) .hero-photo-layer{height:min(76.5vw,300px);}
+      html:not(.note-js) .hero-bg img{object-position:61% 86%;}
+    }
+
+    /* With JS: the photo layer fills the screen under the nav and everything in the hero
+       scrolls over it. --ph is that height (lvh, so no gap opens when the browser bars
+       slide away). The photo is scaled to --ph and lifted by --crop, which cuts the sky
+       so the cab roof sits just under the nav and the words show on opening. Below the
+       photo the road continues in its own dark tone. The words start under the wheels
+       and the lane mark (.80 of the photo's height). */
+    .note-js .hero{--ph:calc(100vh - 64px);--pb:calc(.68 * var(--ph));--crop:calc(.42 * var(--pb) - 96px);}
+    @supports (height:100lvh){ .note-js .hero{--ph:calc(100lvh - 64px);} }
+    /* --pb: the photo is drawn at .68 of the layer's height, so the whole truck and some
+       sky show; --crop leaves about 96px of sky above the cab roof. */
+    .note-js .hero-photo-layer{height:var(--ph);background:#211F21;overflow:hidden;}   /* the drift never shows unscrimmed photo past the layer */
+    .note-js .hero-bg,.note-js .hero-bottom-feather{top:calc(-1 * var(--crop));bottom:auto;height:var(--pb);}
+    /* Below the photo, the same photo continues soft: a blurred, darkened copy fills the
+       layer (loaded only after the main photo, so it never competes with it), and the
+       sharp photo fades into it. */
+    .note-js .hero-photo-layer::before{top:0;bottom:0;height:auto;z-index:auto;background:none;transform:scale(1.12);filter:blur(22px) brightness(.4) saturate(1.15);}
+    .note-js .hero-photo-layer:has(.hero-bg.is-loaded)::before{background:url(../../shared/photos/hero-truck-sunset-640.webp) 58% 100%/cover no-repeat;}
+    .note-js .hero-bg{-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%);}
+    .note-js .hero-bg img{object-position:58% 50%;}
+    .note-js .hero-copy-zone{margin-top:calc(-1 * (var(--ph) - .80 * var(--pb) + var(--crop)));}
+    .note-js .hero-inner{background:transparent;padding-bottom:18px;}   /* Contact us is a link now: less air above the tiles */
+    /* Over the photo the eyebrow is white: the silver needs a near-black ground. */
+    .note-js .hero-copy .eyebrow{color:rgba(255,255,255,.9);}
+    .note-js .hero-sub{color:rgba(255,255,255,.86);}
+    /* At rest: only a light shade low on the photo, under the first lines of text
+       (.30: the lightest that holds 4.5:1 as the words start to climb), ending in the
+       road tone that continues below the photo. */
+    .note-js .hero-bottom-feather{background:linear-gradient(180deg,rgba(5,10,18,0) 0,rgba(5,10,18,0) 66%,rgba(5,10,18,.30) 80%,rgba(5,10,18,0) 100%);}
+    /* The scrim: one even layer over the whole photo (blur + darkening) that builds as
+       the page scrolls and the words climb over the truck. */
+    .note-js .hero-photo-layer::after{display:block;content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+      background:rgba(5,10,18,.4);-webkit-mask-image:none;mask-image:none;
+      -webkit-backdrop-filter:blur(18px) saturate(140%) brightness(.7);backdrop-filter:blur(18px) saturate(140%) brightness(.7);
+      opacity:0;animation:hero-scrim 1s linear both paused;animation-delay:calc(var(--scrim,0) * -1s);}
+    /* The label steps back as soon as the words start to climb, and the photo slowly
+       grows so it keeps moving under the page and fills it by the end (same timeline). */
+    .note-js .hero-note-label{animation:hero-note-out 1s linear both paused;animation-delay:calc(var(--scrim,0) * -1s);}
+    .note-js .hero-bg,.note-js .hero-bottom-feather{transform-origin:50% 0;animation:hero-drift 1s linear both paused;animation-delay:calc(var(--scrim,0) * -1s);}
+    @supports (animation-timeline:scroll()){
+      .note-js .hero-photo-layer::after,.note-js .hero-note-label,.note-js .hero-bg,.note-js .hero-bottom-feather{animation-timeline:scroll(root block);animation-range:0 calc(100vh - 64px);animation-delay:0s;animation-play-state:running;animation-duration:auto;}
+    }
+    /* The photo runs on behind the proof strip to the end of the hero. */
+    .note-js .proof-band{background:transparent;}
+    .note-js .proof-body{color:rgba(255,255,255,.72);}   /* over the photo, not flat navy */
+    .note-js .tri-wrap::after{display:none;}
+    /* The label sits just above the words, in the dark under the trailer (clear of the lane mark). */
+    .note-js .hero-note-label{bottom:calc(var(--ph) - .80 * var(--pb) + var(--crop) + .05 * var(--pb));}
+    .note-js .hero-note-panel:not([hidden]){bottom:calc(var(--ph) - .80 * var(--pb) + var(--crop) + .05 * var(--pb) + 26px);}
+    /* Landscape: the photo is sized by width, so the label keeps a fixed step above the words. */
+    @media (max-height:500px){
+      .note-js .hero-note-label{bottom:calc(var(--ph) - .80 * var(--pb) + var(--crop) + 32px);}
+      .note-js .hero-note-panel:not([hidden]){bottom:calc(var(--ph) - .80 * var(--pb) + var(--crop) + 58px);}
+    }
+    /* Landscape phones: the photo is cropped top and bottom by width already; no sky
+       lift, anchor it low so the truck sits above the words and the label stays on road. */
+    @media (max-height:500px){
+      .note-js .hero{--crop:0px;--pb:var(--ph);}
+      .note-js .hero-bg{-webkit-mask-image:none;mask-image:none;}   /* the photo fills the frame here: no soft copy below */
+      .note-js .hero-photo-layer::after{animation-name:hero-scrim-land;}
+      .note-js .hero-bg,.note-js .hero-bottom-feather{animation-name:hero-drift-land;}
+      .note-js .hero-photo-layer:has(.hero-bg.is-loaded)::before{background:none;}
+      .note-js .hero-bg img{object-position:58% 100%;}
     }
   }
 }
-/* Scrim fallbacks: no blur, or reduced transparency = a solid layer that still shows
-   the photo faintly. */
+@keyframes hero-note-out{
+  0%{opacity:1;}
+  7%{opacity:0;}
+  100%{opacity:0;}
+}
+/* The photo slowly grows from its top edge as the page scrolls, so by the proof strip
+   it fills the whole background. */
+@keyframes hero-drift{
+  0%{scale:1;}
+  20%{scale:1;}   /* held until the words have crossed the truck */
+  100%{scale:1.75;}
+}
+@keyframes hero-drift-land{
+  0%{scale:1;}
+  100%{scale:1.1;}
+}
+/* Eased: in quickly while the words cross the truck, then it settles at .84 of a light
+   layer so the photo stays visible down through the proof strip. */
+@keyframes hero-scrim{
+  0%{opacity:0;}
+  3%{opacity:.3;}
+  13%{opacity:.65;}
+  30%{opacity:.8;}
+  100%{opacity:.84;}
+}
+/* Short landscape screens: mostly bright sky behind the words, so it ends darker. */
+@keyframes hero-scrim-land{
+  0%{opacity:0;}
+  3%{opacity:.35;}
+  13%{opacity:.75;}
+  30%{opacity:.92;}
+  100%{opacity:.95;}
+}
+/* Photo note panel in either fallback, with or without reduced motion: solid. */
+@media (max-width:860px){
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .note-js .hero-note-panel:not([hidden]){background:var(--glass-solid-photo);}
+  }
+}
+@media (prefers-reduced-transparency:reduce) and (max-width:860px){
+  .note-js .hero-note-panel:not([hidden]){background:var(--glass-solid-photo);-webkit-backdrop-filter:none;backdrop-filter:none;}
+}
+/* Scrim fallbacks: no blur, or reduced transparency = a darker plain layer. Without the
+   blur the bright parts of the truck stay sharp, so it builds sooner. */
+@keyframes hero-scrim-plain{
+  0%{opacity:0;}
+  3%{opacity:.45;}
+  13%{opacity:.8;}
+  30%{opacity:.85;}
+  100%{opacity:.85;}
+}
 @media (max-width:860px) and (prefers-reduced-motion:no-preference){
   @supports (overflow:clip){
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-      .note-js .hero-inner::before{background:var(--glass-solid-photo);}
+      .note-js .hero-photo-layer::after{background:var(--glass-solid-photo);animation-name:hero-scrim-plain;}
+      @media (max-height:500px){ .note-js .hero-photo-layer::after{animation-name:hero-scrim-land;} }
+      .note-js .hero-note-panel:not([hidden]){background:var(--glass-solid-photo);}
     }
   }
 }
 @media (prefers-reduced-transparency:reduce) and (max-width:860px) and (prefers-reduced-motion:no-preference){
   @supports (overflow:clip){
-    .note-js .hero-inner::before{background:var(--glass-solid-photo);-webkit-backdrop-filter:none;backdrop-filter:none;}
+    .note-js .hero-photo-layer::after{background:var(--glass-solid-photo);-webkit-backdrop-filter:none;backdrop-filter:none;animation-name:hero-scrim-plain;}
+    @media (max-height:500px){ .note-js .hero-photo-layer::after{animation-name:hero-scrim-land;} }
+    .note-js .hero-note-panel:not([hidden]){background:var(--glass-solid-photo);-webkit-backdrop-filter:none;backdrop-filter:none;}
   }
 }
 @media(max-width:480px){
@@ -532,11 +647,11 @@ a{color:inherit;text-decoration:none;}
       </picture>
     </div>
     <div class="hero-bottom-feather"></div>
-    <button type="button" class="hero-note-chip glass glass-ctl glass--chip" id="heroNoteBtn" aria-expanded="false" aria-controls="heroNotePanel">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 7.5v3.5M8 5v.01"/></svg>
-      <span>Image note</span>
+    <button type="button" class="hero-note-label" id="heroNoteBtn" aria-label="I-35 corridor south, image note" aria-expanded="false" aria-controls="heroNotePanel">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 7.5v3.5M8 5v.01"/></svg>
+      <span>I-35 corridor south</span>
     </button>
-    <div class="hero-note-panel glass glass--chip" id="heroNotePanel" hidden></div>
+    <div class="hero-note-panel" id="heroNotePanel" hidden></div>
   </div>
 
   <div class="hero-copy-zone">
@@ -547,7 +662,7 @@ a{color:inherit;text-decoration:none;}
         <h1 class="hero-title">Freight-native companies,<br>run on one system<span style="color:rgba(168,184,200,.55);">.</span></h1>
         <p class="hero-sub">Flogal builds and operates freight companies (hauling, equipment, and industrial real estate) on a shared operating backbone we run ourselves. Founder-funded, freight-experienced, built for the long haul.</p>
         <div class="hero-actions">
-          <a href="#contact" class="btn-outline glass glass-ctl glass--photo">Contact us →</a>
+          <a href="#contact" class="btn-outline glass glass-ctl glass--photo">Join the Flogal group →</a>
         </div>
       </div>
     </div>
@@ -559,17 +674,17 @@ a{color:inherit;text-decoration:none;}
     <div class="tri-band">
       <a href="https://carriers.flogalhq.com" class="tb tb-blue glass glass--photo glass--blue">
         <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-blue.png" width="390" height="200" alt="">
-        <div class="tb-text"><span class="tb-sub">Carriers</span><span class="tb-name">Move Freight</span></div>
+        <div class="tb-text"><span class="tb-name">Move Freight</span></div>
         <span class="tb-arrow">→</span>
       </a>
       <a href="https://sales.flogalhq.com" class="tb tb-gold glass glass--photo glass--gold">
         <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-gold.png" width="390" height="200" alt="">
-        <div class="tb-text"><span class="tb-sub">Sales Inventory</span><span class="tb-name">Buy Equipment</span></div>
+        <div class="tb-text"><span class="tb-name">Buy Equipment</span></div>
         <span class="tb-arrow">→</span>
       </a>
       <a href="https://properties.flogalhq.com" class="tb tb-green glass glass--photo glass--green">
         <img class="tb-mark" src="../../shared/logos/flogal-symbol-vivid-green.png" width="390" height="200" alt="">
-        <div class="tb-text"><span class="tb-sub">Properties</span><span class="tb-name">Real Estate</span></div>
+        <div class="tb-text"><span class="tb-name">Real Estate</span></div>
         <span class="tb-arrow">→</span>
       </a>
     </div>
@@ -827,7 +942,8 @@ a{color:inherit;text-decoration:none;}
   var chip = document.getElementById('heroNoteBtn');
   var panel = document.getElementById('heroNotePanel');
   var caption = document.querySelector('.hero-caption');
-  if (!chip || !panel || !caption) return;
+  var photo = chip && chip.closest('.hero-photo-layer');
+  if (!chip || !panel || !caption || !photo) return;
   [].forEach.call(caption.querySelectorAll('span'), function(span){
     var line = document.createElement('p');
     line.textContent = span.textContent;
@@ -838,15 +954,22 @@ a{color:inherit;text-decoration:none;}
     chip.setAttribute('aria-expanded', String(open));
   }
   chip.addEventListener('click', function(){ setOpen(panel.hidden); });
+  // A tap anywhere on the photo does the same (phones, where the label shows).
+  photo.addEventListener('click', function(e){
+    if (chip.contains(e.target) || panel.contains(e.target) || getComputedStyle(chip).display === 'none' || window.scrollY > 56) return;
+    setOpen(panel.hidden);
+  });
   // Tabbing back to a chip the words have scrolled over: bring it into view.
   chip.addEventListener('focus', function(){
     var r = chip.getBoundingClientRect();
     var onTop = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
     if (chip.matches(':focus-visible') && !chip.contains(onTop)) window.scrollTo(0, 0);
   });
+  // Once the words climb over the photo the label has faded: close the panel with it.
+  window.addEventListener('scroll', function(){ if (!panel.hidden && window.scrollY > 56) setOpen(false); }, { passive: true });
   // pointerdown, not click: iOS does not send clicks from plain page areas.
   document.addEventListener('pointerdown', function(e){
-    if (!panel.hidden && !chip.contains(e.target) && !panel.contains(e.target)) setOpen(false);
+    if (!panel.hidden && !photo.contains(e.target)) setOpen(false);
   });
   document.addEventListener('keydown', function(e){
     if (e.key !== 'Escape' || panel.hidden) return;
@@ -854,6 +977,22 @@ a{color:inherit;text-decoration:none;}
     setOpen(false);
     if (wasHere) chip.focus();   // from elsewhere on the page, never pull the reader back up
   });
+})();
+</script>
+
+<!-- PHONE HERO SCRIM: browsers without scroll-driven animations get one variable -->
+<script>
+(function(){
+  if (window.CSS && CSS.supports('animation-timeline: scroll()')) return;
+  var layer = document.querySelector('.hero-photo-layer');
+  if (!layer) return;
+  var phone = window.matchMedia('(max-width:860px)');
+  var ticking = false;
+  function set(){ ticking = false; if (!phone.matches) return; layer.style.setProperty('--scrim', Math.min(Math.max(window.scrollY / (window.innerHeight - 64), 0), 1).toFixed(3)); }
+  function queue(){ if (!ticking) { ticking = true; requestAnimationFrame(set); } }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  set();
 })();
 </script>
 
