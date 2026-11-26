@@ -37,12 +37,13 @@
   --glass-shadow:0 8px 24px rgba(5,10,18,.24);             /* the one shadow, full glass only */
   --glass-tint:#FFFFFF;  --glass-tint-rest:0%;  --glass-tint-hover:6%;   /* neutral */
   --glass-ink:currentColor;
+  --glass-ink-light-gold:#896713;   /* gold that reads as small text on light */
 }
 .glass--blue {--glass-tint:#0A72CF;--glass-tint-rest:14%;--glass-tint-hover:18%;--glass-ink:var(--glass-ink-blue);}
 .glass--gold {--glass-tint:#EFA01A;--glass-tint-rest:14%;--glass-tint-hover:18%;--glass-ink:var(--glass-ink-gold);}
 .glass--green{--glass-tint:#068A44;--glass-tint-rest:14%;--glass-tint-hover:18%;--glass-ink:var(--glass-ink-green);}
 .on-light.glass--blue{--glass-ink:#0968BD;}
-.on-light.glass--gold{--glass-ink:#896713;}
+.on-light.glass--gold{--glass-ink:var(--glass-ink-light-gold);}
 .on-light.glass--green{--glass-ink:#01783B;}
 /* On white the tint is a whisper: colour comes from the symbols and labels. */
 .on-light.glass--blue,.on-light.glass--gold,.on-light.glass--green{--glass-tint-rest:6%;}
@@ -92,6 +93,16 @@
 @media (max-width:860px){
   .glass.glass--photo{-webkit-backdrop-filter:none;backdrop-filter:none;}
 }
+
+/* ---- Focus: one two-tone ring, 3:1 on light and on dark ------------- */
+/* Light: blue ring, white halo. Dark areas: white ring, navy halo. These sit before the
+   glass rules below so a glass element keeps its own lit edge and shadow. */
+:focus-visible{outline:2px solid #0A72CF;outline-offset:2px;box-shadow:0 0 0 2px #FFFFFF;}
+.footer :focus-visible,.growth :focus-visible,.thesis :focus-visible,.structure :focus-visible,
+.hero-caption:focus-visible{outline:2px solid #FFFFFF;box-shadow:0 0 0 2px #0B1D2D;}
+/* Fields in light panels: solid blue edge, 2px in all. */
+.on-light input:focus,.on-light select:focus,.on-light textarea:focus{border-color:#0A72CF;box-shadow:0 0 0 1px #0A72CF;}
+.on-light input[type="checkbox"]:focus-visible{outline:2px solid #0A72CF;outline-offset:2px;box-shadow:0 0 0 2px #FFFFFF;}
 
 /* ---- States: hover = tint + border only; active returns to rest tint -- */
 /* border-color is restated: brand.css's a:hover{border-bottom-color} would otherwise outrank the edge. */
@@ -149,6 +160,12 @@ body{background-image:linear-gradient(var(--night,#050A12),var(--night,#050A12))
 /* Same two-tone ring for the other bar and menu items (the pages' 35% silver ring is under 3:1). */
 .nav-brand:focus-visible,.nav-links a:focus-visible,.nav-phone:focus-visible,.nav-toggle:focus-visible,
 .mobile-nav-links a:focus-visible,.mobile-nav-phone:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px;box-shadow:0 0 0 2px #0B1D2D;}
+
+/* Narrow desktops: links, phone and Contact fit the bar without overflow. */
+@media (min-width:861px) and (max-width:1023px){
+  .nav-inner{padding:0 24px;gap:20px;}
+  .nav-links{gap:18px;}
+}
 
 /* ---- Fallbacks ------------------------------------------------------ */
 /* Two triggers (no backdrop-filter, or reduced transparency), the same result:

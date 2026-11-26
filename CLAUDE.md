@@ -68,6 +68,7 @@ site-isolation escapes — eyeball isolation when adding cross-folder hrefs
 (clamp fix queued).
 
 ## Deeper docs (read on demand, not auto-loaded)
+- docs/design-standard.md — approved visual standard (flogalhq reference); read before styling any site
 - sites/CLAUDE.md — site isolation, entity separation in copy, inquiry-form
   source tags, tokens rules (auto-loads when working under sites/)
 - docs/architecture/STRATEGY.md — durable architecture decisions + rejected
